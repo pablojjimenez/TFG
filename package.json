@@ -1,0 +1,15 @@
+{
+    "name": "TFG-PabloJj",
+    "version": "0.0.1",
+    "description": "TFG",
+    "main": "code/app.py",
+    "license": "GPL-3.0",
+    "directories": {
+        "doc": "doc",
+        "test": "src/test",
+        "src": "code/"
+    },
+    "scripts": {
+        "make-doc": "./latexdockercmd.sh pdflatex proyecto.tex"
+    }
+}
