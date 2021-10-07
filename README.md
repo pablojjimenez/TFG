@@ -1,8 +1,10 @@
 # Trabajo de Fin de Grado: *Computación y optimización en la nube: implementación de aplicaciones de datos abiertos en la nube*
----------
-### Autor: [👨🏻‍💻 Pablo Jiménez Jiménez](https://github.com/pablojj1808)
-### Tutor: [👨🏻‍💻 Juan Julian Merelo Guervos](https://github.com/JJ)
----------
+
+
+| Autor | Tutor |
+|:---:|:---:|
+| [Pablo Jiménez Jiménez](https://github.com/pablojj1808) | [Juan Julian Merelo Guervos](https://github.com/JJ) |
+
 
 
 ## Documentation section
@@ -27,6 +29,10 @@ Cleaning
 ```sh
 make
 ```
+
+## License
+
+This project is published by the [GNU General Public License v3](https://opensource.org/licenses/GPL-3.0)
 
 ------
 [Inspired by this template](https://github.com/JJ/plantilla-TFG-ETSIIT)
