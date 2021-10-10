@@ -7,11 +7,12 @@
 
 
 
-## Documentation section
-In `doc/` directory:
 
-### Using your own Texlive distribution
-You have to build the PDF file using a `TeXLive` distribution. Once it is installed you can execute the following commands:
+## Generación de documentación
+Dentro del directorio `doc/`:
+
+### Usando tu propia distribución Texlive
+Para construir tu PDF usando tu distribución `TeXLive` instalada sigue los siguientes comandos:
 
 ``` sh
 $ pdflatex proyecto.tex
@@ -19,20 +20,20 @@ $ bibtex proyecto
 $ make
 ```
 
-### Using Docker
-Use theses steps for compiling using docker image.
+### Usando una imagen Docker
+Ejecuta este comando en la terminal.
 ```sh
 ./latexdockercmd.sh pdflatex proyecto.tex
 ```
 
-Cleaning
+Para limpiar ficheros de compilación
 ```sh
 make
 ```
 
 ## License
 
-This project is published by the [GNU General Public License v3](https://opensource.org/licenses/GPL-3.0)
+Este proyecto está publicado bajo la licencia [GNU General Public License v3](https://opensource.org/licenses/GPL-3.0)
 
 ------
-[Inspired by this template](https://github.com/JJ/plantilla-TFG-ETSIIT)
+[Inspirado en esta plantilla](https://github.com/JJ/plantilla-TFG-ETSIIT)
