@@ -3,14 +3,12 @@ name: Build latex document
 on: push
 
 jobs:
-  generate-pdf:
+  build_latex:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Set up Git repository
         uses: actions/checkout@v2
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
         with:
-          fetch-depth: 0
-      - name: Install tools
-        run: sudo .github/workflows/latex.sh
-      - name: Generate pdf
-        run: ./generate_pdf.sh
+          root_file: doc/proyecto.tex
