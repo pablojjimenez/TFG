@@ -1,12 +1,9 @@
 name: Build latex document
 
-on:
-  push:
-    tags:
-      - '*'
+on: push
 
 jobs:
-  generate-cv:
+  generate-pdf:
     runs-on: ubuntu-latest
     steps:
       - name: Install tools
