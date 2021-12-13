@@ -7,6 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install tools
-        run: latex-install.sh
+        run: ./latex-install.sh
       - name: Generate pdf
         run: ./generate_pdf.sh
