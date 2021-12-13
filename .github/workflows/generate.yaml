@@ -1,4 +1,4 @@
-name: "Build latex document"
+name: Build latex document
 
 on:
   push:
