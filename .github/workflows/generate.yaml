@@ -1,12 +1,19 @@
-name: Build LaTeX document
-on: [push]
+name: "Build latex document"
+
+on:
+  push:
+    tags:
+      - '*'
+
 jobs:
-  build_latex:
+  generate-cv:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Git repository
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v2
         with:
-          root_file: doc/proyecto.tex
+          fetch-depth: 0
+      - name: Install tools
+        run: .github/workflows/latex-install.sh
+      - name: Generate pdf
+        run: ./generate_pdf.sh
