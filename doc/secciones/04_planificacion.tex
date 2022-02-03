@@ -1,56 +1,77 @@
 \chapter{Planificación}
-En este capítulo se comentará la planificación del proyecto y la metodología utilizada. 
-Desde que se produce la crisis del software en 1968 entre otras cosas por la poca eficacia que 
-tenía construir software, la metodología de trabajo a emplear se convierte en la clave para conseguir 
-el éxito a la hora de construir productos software. 
+En este capítulo detallaré todo lo relativo a la planificación y estimación del proyecto. 
 
-Un requisito fundamental a la hora de la implementación es usar una metodología que garantice la evolución 
-del código para ello as metodologías ágiles se postulan como la gran elección para la mayoría de proyectos 
-ya que son capaces de afrontar el principal problema que tienen los proyectos software en su concepción: la incertidumbre. 
+\section{Metodología utilizada}
+Desde que se empiezan a programar los primeros ordenadores en la historia, la programación siempre ha sido 
+minguneada y considerada bastante lejos de una actividad científica. Todo empezó a cambiar cuando los scipts
+permitían realizar cálculos como ninguna otra herramienta hasta el momento. Fue la matemática Margaret Hamilton 
+quien planteó por primera vez que los sistemas informáticos tenían que integrar tres componentes: hardware, 
+software y los usuarios que los iban a usar. Fue Margaret Hamiltonen, cuando se produce lo que conocemos como 
+crsis del software en 1968 quien acuñó en la \textit{NATO Software Engineering Conference} el termino Ingeniería 
+al proceso de creación de software. En ese momento donde parecía que crear software duradero y escalable en el tiempo 
+era misión imposible hizo que se invirtiera en investigación y se construyera conocimiento. Este conocimiento es lo que hoy 
+llamamos Ingeniería de Software: herramientas, técnicas de especificación y diseño que nos permiten especificar, 
+desarrollar, validar y evolucionar como en cualquier otra ingeniería.
+
+Las metodologías ágiles presentan una forma distinta de trabajar y organizarse, adapantandose a las condiciones 
+cambiantes que puedan surgir, aprovechando estos cambios para obtener ventajas. Con este tipo de metodologías 
+podemos dividir el trabajo en pequeás piezas de manera que podemos ir realizandolos de forma incremental.
 
 Se ha barajado utilizar una de las dos metodologías más empleadas en la industria: Scrum y eXtreme Programming. 
-
 eXtreme programming ha sido descartada por la imposibilidad de aplicación en términos de tiempo y recursos humanos. 
 Los roles y artefactos exigidos por esta metodología son indiscutiblemente para un equipo de desarrollo segmentado. 
-Sin embargo y en comparación con Scrum es una metodología muy enfocado en el proceso de desarrollo. Obliga a desarrollar 
-guiándose de pruebas (TDD), a programar en parejas y asegurar la calidad del código en todas las etapas.
+Sin embargo y en comparación con Scrum es una metodología muy enfocada en el proceso de desarrollo. Obliga a 
+desarrollar guiándose de pruebas, a programar en parejas y asegurar la calidad del código en todas las etapas.
 
-Scrum en cambio se muestra más flexible. Desde  el año 2001 en el que K. Schwaber y Mike Beedle publican el primer 
-libro sobre Scrum: "Agile Software Development with Scrum" esta metodología se ha convertido en la más utilizada 
-para el desarrollo de software. Siendo precisos y prudentes tampoco es posible aplicar propiamente dicho Scrum en este proyecto... 
-fundamentalmente por ser una persona a cargo de todo el proceso.
+Scrum en cambio se muestra más flexible. Desde  el año 2001 en el que K. Schwaber y Mike Beedle publican el 
+primer libro sobre Scrum: "Agile Software Development with Scrum" esta metodología se ha convertido en la 
+más utilizada para el desarrollo de software. Siendo precisos y prudentes tampoco es posible aplicar 
+propiamente dicho Scrum en este proyecto... fundamentalmente por ser una persona a cargo de todo el proceso.
 
-Por tanto, me he permitido crear mi propia metodología de desarrollo basándome en los tres valores fundamentales que ofrecen estas tecnologías:
+Por tanto, me he permitido crear mi propia metodología de desarrollo basándome en los tres valores fundamentales 
+que ofrecen estas tecnologías:
 \begin{itemize}
     \item \textbf{Transparencia}: en todo momento se ha de conocer en qué se está trabajando, que problemas se está teniendo y/o si 
     existe algún bloqueo asociado.
     \item \textbf{Inspección}: se ha de inspeccionar y no perder de vista el progreso para conseguir el objetivo. La 
-    trazabilidad del trabajo nos la ofrece el SCV (source control versioning) en nuestro caso GitHub con incorporación de funcionalidad por pull request.
+    trazabilidad del trabajo nos la ofrece el SCV (source control versioning) en nuestro caso GitHub con incorporación
+    de funcionalidad por pull request.
     \item \textbf{Adaptación}: poder reaccionar a tiempo a los cambios requeridos por los stakeholders.
 \end{itemize}
 
-\section{Metodología utilizada}
-Es necesario utilizar una metodología flexible a los cambios, donde la velocidad en la elaboración no se tenga en cuenta 
-pues no se van a programar planes de entrega ni tiene sentido el cálculo de la velocidad del equipo. Vamos  a centrarnos en la 
-capacidad de producir pequeños incrementos que aporten valor al producto final.
+Una buena forma de cumplir las características citadas anteriormente, es realizar el desarrollo guiado por pruebas, 
+lo que se conoce por TDD, \textit{Test Driven Development}. Al emplear esta metodología garantizamos la calidad 
+de lo programado, trasladamos los requisitos a las pruebas de forma que se convierten en la más fiable documentación.
+Además tener una gran cobertura de código testeado nos permite poder refactorizar con asiduedad y garantizarnos 
+no generarmucha deuda técnica.
+Como se ha comentado en otro capítulo de esta memoria, este trabajo quiere prestarle especial atención al 
+automatizaje de tareas y trabajos de infraestructura, la realización de un sistema que se integre continuamente 
+(CI) hace que se proteja siempre el PMV ya que es requisito indispensable para seguir añadiendo funcionalidad 
+que los test pasen lo que significa que se siguen manteniendo los requisitos anteriores al añadir nueva 
+funcionalidad.
 
-Centrándonos en la parte del desarrollo, he decidido realizar el desarrollo guiado por pruebas, 
-lo que se conoce por TDD, \textit{Test Drive Development.} Al emplear esta metodología garantizamos la calidad de 
-lo programado, trasladamos los requisitos a las pruebas de forma que se convierten en la más fiable documentación. 
-Además tener una gran cobertura de código testeado nos permite poder refactorizar con asiduedad y garantizarnos no generar
-mucha deuda técnica.
+\section{Herramientas}
+Para el contribuir con la segunda característica introspectiva citada anteriormente, necesitmaos no perder 
+de vista el progreso para conseguir el objetivo. Se ha recurrido a utlizar un sistema de control de versiones, 
+sin discusión alguna GIT ha sido la herramienta seleccionada. Se hace necesario una forja donde respaldar nuestro 
+código, GitHub ha sido la opción seleccionada para alojar el código y tener un registro de las issues y Pull Request. Estas
+características tambien las pueden servicios como GitLab. Pero las características premium de GitHub que ofrece una cuenta
+universitaria como los tableros Kanban, integración continua con GitHub Actions...
 
-Como se ha comentado en otro capítulo de esta memoria, este trabajo quiere prestarle especial atención al automatizaje 
-de tareas y trabajos de infraestructura, la realización de un sistema que se integre continuamente (CI) hace que se 
-proteja siempre el PMV ya que es requisito indispensable para seguir añadiendo funcionalidad que los test pasen lo que 
-significa que se siguen manteniendo los requisitos anteriores al añadir nueva funcionalidad.
+Haciendo uso de esta herramienta, de cada historia de usuario se han extraído issues o tareas a realizar. Los
+incrementos se han ido realizando por medio de Pull Request y cada una de estas lleva enlazada una o varias
+issues. Para tener una visión general del estado del proyecto se ha usado Projects.
 
-\section{Organización y herramienta}
-En el desarrollo del proyecto se ha utilizado fundamentalmente GitHub, el repositorio del proyecto se encuentra público 
-bajo licencia GPU. Esta plataforma posibilita un desarrollo cómodo gracias a la cantidad de herramientas que provee. Esto facilita mucho 
-la corrección al tutor, y a la colaboración externa de compañeros.
+\section{Temporización}
+[TODO: Añadir diagrama de Gantt]
 
-Nuestro producto puede verse descompuesto en un conjunto de hitos o milestones que se corresponden con estados finales de la aplicación. Estos milestones están formados
-por un conjunto de issues y es la forma empleada para desgranar un problema.
+\section{Estimación de costes}
+A partir de la información anterior en cuanto al tiempo invertido en el proyecto y en vista de los elementos necesarios
+para llevarlo a cabo podemos detallar los costes asociados que tendría la elaboración del proyecto.
 
-% TODO: añadir captura del tablero de milestones cuando haya suficientes issues
+\begin{itemize}
+    \item Nómina para el ingeniero junior.
+    \item MacBook Pro [amortizado 5 años]: 240€
+    \item Recursos software utilizados han sido gratuitos.
+    \item Recursos de despliegues han sido gratuitos.
+\end{itemize}
