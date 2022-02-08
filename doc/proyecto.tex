@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % \documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
-\documentclass[11pt, a4paper]{book}
+\documentclass[12pt, a4paper]{book}
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage[utf8]{inputenc}
 \usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
@@ -33,7 +33,7 @@
 \pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
 \fancyhead[L]{} % Empty left header
 \fancyhead[C]{} % Empty center header
-\fancyhead[R]{Me Llamo Así} % My name
+\fancyhead[R]{Pablo Jiménez Jiménez} % My name
 \fancyfoot[L]{} % Empty left footer
 \fancyfoot[C]{} % Empty center footer
 \fancyfoot[R]{\thepage} % Page numbering for right footer
@@ -47,16 +47,16 @@
 \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
 \setcounter{secnumdepth}{4}
 \usepackage[Lenny]{fncychap}
-
+\linespread{1.2}
 
 
 \begin{document}
 
 	% Plantilla portada UGR
-	\input{portada/portada}
+	\input{doc/portada/portada.tex}
 
 	% Plantilla prefacio UGR
-	\input{prefacios/prefacio}
+	\input{doc/prefacios/prefacio.tex}
 
 	% Índice de contenidos
 	\newpage
@@ -71,24 +71,24 @@
 	\newpage
 
 	% Introducción 
-	\input{secciones/01_introduccion}
+	\input{doc/secciones/01_introduccion.tex}
 
 	% Descripción del problema y hasta donde se llega
-	\input{secciones/02_descripcion}
+	\input{doc/secciones/02_descripcion.tex}
 
 	% Estado del arte
 	% 	1. Crítica al estado del arte
 	% 	2. Propuesta
-	\input{secciones/03_estado_del_arte}
+	\input{doc/secciones/03_estado_del_arte.tex}
 	
-	\input{secciones/04_planificacion}
+	\input{doc/secciones/04_planificacion.tex}
 
 	% Análisis del problema
 	% 1. Análisis de requisitos
 	% 2. Análisis de las soluciones
 	% 3. Solucion propuesta
 	% 4. Análisis de seguridad
-	\input{secciones/05_analisis}
+	\input{doc/secciones/05_analisis.tex}
 
 	% Desarrollo bajo sprints: 
 	% 	1. Permitir registros y login de usuarios
@@ -96,12 +96,12 @@
 	% 	3. Desarrollo del sistema de denuncias administrativas y accidentes
 	% 	4. Desarrollo del sistema de croquis
 	%   5. Instalación de la aplicación de manera automática
-	\input{secciones/06_implementacion}
+	\input{doc/secciones/06_implementacion.tex}
 
 	% Presupuesto
 
 	% Conclusiones
-	\input{secciones/07_conclusiones}
+	\input{doc/secciones/07_conclusiones.tex}
 
 	% Trabajos futuros
 

@@ -12,7 +12,7 @@
 *.cb2
 .*.lb
 .DS_Store
-
+.idea/
 ## Intermediate documents:
 *.dvi
 *.xdv
