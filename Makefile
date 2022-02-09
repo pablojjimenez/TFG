@@ -11,4 +11,4 @@ install-spell:
 order-dic:
 	./scripts/order_dico.py
 
-workflow-spell: install-spell spell
+workflow-spell: install-spell order-dic spell
