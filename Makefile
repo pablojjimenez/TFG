@@ -3,10 +3,10 @@ clean:
 	cd doc/ && rm -f tfg.toc tfg.out tfg.lot tfg.log tfg.lof tfg.ind tfg.ilg tfg.fls tfg.fdb_latexmk tfg.brf tfg.blg tfg.bbl tfg.idx
 # Corrector ortográfico
 spell:
-	bash ./scripts/spell-check.sh
+	bash ./scripts/spell_check.sh
 
 install-spell:
-	bash ./scripts/spell-install.sh
+	bash ./scripts/spell_install.sh
 
 order-dic:
 	./scripts/order_dico.py
