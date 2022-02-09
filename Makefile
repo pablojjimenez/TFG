@@ -9,6 +9,6 @@ install-spell:
 	bash ./scripts/spell_install.sh
 
 order-dic:
-	./scripts/order_dico.py
+	python ./scripts/order_dico.py
 
 workflow-spell: install-spell order-dic spell
