@@ -34,3 +34,6 @@ linkcolor
 urlcolor
 asiduedad
 UGR
+smartphone
+tablet
+smartwatch

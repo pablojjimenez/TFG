@@ -5,9 +5,9 @@ el mediante una solicitud de fusión o \textit{Pull Request}. También forma par
 
 \section{Motivación} 
 El tratamiento automático de la información por medio de técnicas matemáticas procesadas por un ordenador 
-ha cambiado la forma en la que nos organizamos, estudiamos y obtenemos conclusiones. La informática mejora 
-la vida de las personas sin duda alguna. Nos mejora la vida porque nos entretiene, porque nos facilita 
-tareas y porque nos salva. Siempre he creído que la evolución en nuestra calidad de vida pasa por un 
+ha cambiado la forma en la que nos organizamos, estudiamos y obtenemos conclusiones.
+
+Siempre he creído que la evolución en nuestra calidad de vida pasa por un
 conjunto de soluciones informáticas que han de colaborar entre ellas para obtener tal propósito. 
 En esta última década la recolección y almacenamiento de datos es una actividad transversal incesante 
 que sin un tratamiento científico no nos aporta valor. Por distintas cuestiones personales siempre he 
@@ -24,31 +24,73 @@ pandemia contra la que seguimos resistiendo.
     \label{fig:worst_f_value}
 \end{figure}
 
-Como podemos observar en la gráfica superior a pesar no estar exenta de movimientos sinusoidales 
-en la preocupación de los españoles en la sanidad siempre se muestra con una tendencia al alta 
-solo superada por el paro y problemas de índole económico. 
-Es evidente que la mejora del sistema sanitario es algo que nos concierne y repercute 
-directamente en todos nosotros.
+Como podemos observar en la gráfica superior a pesar no estar exenta de movimientos sinusoidales.
+En la preocupación de los españoles la sanidad siempre se muestra con una tendencia al alta
+solo superada por el paro y problemas relacionados de índole económico.
 
-La ideación de un sistema que utilice datos publicados por el INE\footnote{Instituto Nacional de Estadística} sobre las defunciones según 
-la causa de muerte para obtener un análisis inteligente que nos permita conocer, obtener y predecir
-como han avanzado este tipo de decesos a lo largo del tiempo puede suponer una pequeña mejora de 
-nuestro Sistema Nacional de Salud en materia de prevención y promoción de la salud. Es necesario que el 
-SNS sea capaz de realizar cribados preventivos más inteligentes mediante el conocimiento fáctico autogenerado.
+Como hemos podido ver la transparencia mantiene a la gente tranquila y a pesar de que estos datos
+sean accesibles para la población sin un tratamiento matemático ni visualización se hace difícil.
+
+\section{Usuarios}
+una de las herramientas que nos permiten definir el alcance y las necesidades de la aplicación es la creación de
+perfiles de personas ficticias, candidatos a utilizar el sistema en un futuro.
+
+De esta forma, podemos justificar los decisiones tomadas en aras de alcanzar el objetivo por parte de los usuarios
+interesados en el producto final. Vamos a tratar de crear tres personalidades lo más variopintas posibles en aras
+de enfocarnos más aún en el usuario y dotar de mayor calidad el resultado final, de modo que podamos abarcar por
+completo las necesidades de estos.
+
+\begin{table}[H]
+	\begin{center}
+		\begin{tabular}{| c | p{9cm} |}
+			\hline
+			Persona 1 &  \\ \hline
+\hline
+			\textbf{Nombre} & Carlos \\
+			\textbf{Edad} & 49 años \\
+			\textbf{Formación} & Periodista \\
+			\textbf{Personalidad} &
+			\begin{itemize}
+                \item Seguro de sí mismo
+                \item Motivador
+                \item Deportista
+            \end{itemize}
+			\\
+			\textbf{¿Cuál es su entorno?} &
+			\begin{itemize}
+                \item Sus amigos
+                \item Sus compañeros de trabajo
+                \item Su pareja
+            \end{itemize}
+			\\
+			\textbf{¿Qué dispositivos utiliza en su día a día?} &
+			\begin{itemize}
+                \item Un smartphone que le sirve entre otras cosas para grabar las entrevistas.
+                \item Un tablet que le sirve para llevar la documentación a las entrevistas y consultar diarios.
+                \item Un smartwatch.
+                \item Un ordenador de sobremesa en la oficina.
+            \end{itemize}
+			\\
+
+			\textbf{¿Cuál es su actitud hacía la tecnología?} &
+			\begin{itemize}
+                \item Atrevido.
+                \item Utiliza distintos sistemas operativos.
+                \item Soltura con aplicaciones ofimáticas.
+                \item Soltura navegando a través de internet.
+            \end{itemize}
+			\\
+
+			\hline
+		\end{tabular}
+		\caption{Historia de Usuario - Funcionamiento.}
+	\end{center}
+\end{table}
+
 
 \section{Objetivos}
-El principal objetivo de este Trabajo Fin de Grado consiste en obtener un sistema de análisis de datos que nos aporte
-información enriquecida sobre los datos publicados por el Instituto Nacional de Estadística sobre las causas de muerte. 
-Para conseguir el resultado final esperado debemos cumplir los siguientes objetivos:
-\begin{itemize}
-    \item Desarrollo de un modelo de datos que se adapte a los datos ofrecidos por el INE.
-    \item Diseño y creación de una interfaz de programación de aplicaciones que ofrezca los datos procesados y
-filtrados a petición de usuarios o aplicaciones de terceros.
-    \item Proveer de un punto de acceso visual para obtener gráficas y predicciones sobre los datos.
-\end{itemize}
-
-Una vez finalizado todo el proceso, además de haber obtenido la posibilidad de obtener la información 
-desde un punto de acceso. Abrimos la posibilidad a usuarios experimentados de poder usar esta API para 
-integrarla en sus soluciones o publicar los datos en los distintos formatos que nuestra API ofrece 
-siempre que se mantenga la licencia original de publicación.
-
+El objetivo principal de este proyecto es que el sistema sea capaz de darle a los usuarios la capacidad de conocer
+la evolución de las causas de muerte. Las causas de muerte son clasificadas según la Clasificación Internacional
+de Enfermedades y están clasificadas atendiendo a distintas variables. El sistema debe de atender a usuarios con
+necesidades distintas, para identificar estas necesidades se ha utilizado la herramienta de personas ficticias,
+como se ha explicado en la sección superior.
