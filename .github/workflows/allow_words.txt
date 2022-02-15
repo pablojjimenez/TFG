@@ -34,3 +34,5 @@ linkcolor
 urlcolor
 asiduedad
 UGR
+Arïadna
+tuplas
