@@ -35,4 +35,9 @@ urlcolor
 asiduedad
 UGR
 Arïadna
+Raziël
+Mïnerva
 tuplas
+CSV
+MoMo
+entregables
