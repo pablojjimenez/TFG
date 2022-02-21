@@ -1,2 +1,28 @@
-\chapter{Análisis del problema}
- 
+\chapter{Análisis de los datos disponibles}
+
+Los datos acerca de las defunciones son un componente fundamental en este trabajo sin
+el cual no podríamos construir nuestra solución. He necesitado obtener los datos recolectados
+durante años por distintas administraciones para usarlos.
+
+En primer lugar, me dirigí a la página sobre la iniciativa de datos abiertos del 
+Gobierno de España https://datos.gob.es/ la información que encontré relativa a las defunciones
+según causa de muerte son unas colecciones que recolecta anualmente el Instituto
+Nacional de Estadística. El formato disponible de descarga era CSV y las columnas de información
+propocionadas eran escasas, además solo ofrecen el número crudo de defunciones, dato que nos dificulta 
+a la hora de comparar las causas con otra comunidad autonóma pues es necesari tener en cuenta el valor significativo
+de la cifra sobre el número de habitantes. Además la clasificación de las enfermedades es muy genérica.
+
+Tras conocer la existencia de los servidores Arïadna y Raziël me puse en contacto con el Insituto de Salud Carlos
+III para obtener los datos de dominio público almacenado en esos servidores. En esta ocasión estas colecciones
+de datos si son completas, nos ofrecen datos normalizados 
+
+Las principales diferencias entre Arïadna y Raziël es que Arïadna no guarda informació acerca
+de los grupos de edades, solo nos ofrece el cómputo de la edad media, cómputo que conociendo
+los rangos de edades pdemos calcular nosotros. 
+Raziël no almacena la provincia que es algo que si hace Arïadna, me parece interesante guardar al menos
+los datos cuantificados ordenados por provincias por que puede ser útil para construir algunas soluciones.
+Finalmente también queremos añadir un campo a las causas de Raziël para almacenar la clasificación de las 
+enfermedades según el estándar CIE-10 que es algo que si posee Arïadna.
+
+\section{Modelización de los datos}
+Vamos a distinguir las siguientes entidades:
