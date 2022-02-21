@@ -60,6 +60,8 @@ Nos permite consultar información sobre las causas de defunción atendiendo a c
   \item Causa.
   \item Período, años.
   \item Sexo.
+  \item Comunidad Autónoma.
+  \item Provincia.
 \end{enumerate}
 
 Los indicadores pueden ser:
@@ -91,18 +93,28 @@ Los indicadores pueden ser:
 
 Los datos son ofrecidos mediante un mapa de España interactivo podemos observar también gráficas de todas las
 provincias y la media nacional así como una tabla con los datos. Esta página permite descargarse los datos pero
-únicamente en formato CSV y sólo 10 tuplas sobre las variables filtradas.
+únicamente en formato CSV y sólo de 10 tuplas en 10 tuplas sobre las variables filtradas. Lo que hizo que me pusiera en 
+contacto con el ISCIII si quería tener estos datos para trabajar.
 
 \subsubsection{Servidor Raziël}
-
-\subsubsection{Servidor Mïnerva}
+Es un servidor interactivo genera mapas y gráficas de España por comunidades autónomas, y tablas de datos que muestran 
+las diferencias en la mortalidad por diversas causas, desde el año 1980, de acuerdo con los criterios que de el usuario.
+Nos permite consultar información sobre las causas de defunción atendiendo a cuatro variables:
+\begin{enumerate}
+    \item Indicador.
+    \item Causa.
+    \item Período, años.
+    \item Sexo.
+    \item Grupo de edades.
+    \item Comunidad Autónoma.
+  \end{enumerate}
 
 
 \section{Mi propuesta ante el estado del arte}
-Sin perder de vista los objetivos y usuarios diana a utilizar este trabajo, ha sido muy útil contrastar la idea
-que tenía para mejorar la accesibilidad de estos datos con las soluciones implementadas ya por los
-organismos citados anteriormente.
-Las principales deficiencias encontradas y objetivo a subsanar son:
+Sin perder de vista los objetivos y usuarios diana a utilizar este trabajo, contrastar las idea
+que tenía con las existentes ha sido muy útil. Para mejorar la accesibilidad de estos datos con las soluciones implementadas 
+ya por los organismos citados anteriormente he recogido someramente los siguientes puntos en los que ha de guiarse la 
+solución. Las principales deficiencias encontradas y objetivo a subsanar son:
 \begin{itemize}
     \item Inexistencia de una API para que programadores y usuarios externos puedan obtener los datos
     de forma uniforma y utilizando protocolos actuales.
@@ -110,3 +122,8 @@ Las principales deficiencias encontradas y objetivo a subsanar son:
     \item Aplicaciones basadas en el modelo C/S que a cada cambio hace que se recarguen las páginas y pierdas
     la instantaneidad tan cómoda para consultar como varían los datos
 \end{itemize}
+
+De otra manera, si queremos consultar datos acerca de las provincias es necesario cambiarse de banco de datos o si quieres
+consultar las enfermdades clasificadas según CIE-10 con los grupos de edad es imposible pues estas informaciones
+se encuentran en servicios distintos. Voy a intentar unificar estas dos fuentes de forma que podamos obtener esta información
+desde un mismo servicio.
