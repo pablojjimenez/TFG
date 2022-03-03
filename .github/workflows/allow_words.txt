@@ -34,6 +34,11 @@ linkcolor
 urlcolor
 asiduedad
 UGR
+smartphone
+tablet
+smartwatch
+Proactiva
+frontend
 Arïadna
 Raziël
 Mïnerva

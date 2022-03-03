@@ -34,14 +34,14 @@ Vamos a tratar de crear tres personalidades lo más variopintas posibles en aras
 | ¿Qué dispositivos utiliza en su día a día? | Un portátil. Un smartphone. |
 | ¿Cuál es su actitud hacía la tecnología? | Perezosa.  Sabe programar. |
 
-| Nombre | Julia |
-| --- | --- |
-| Edad | 45 |
-| Profesión | Medica de familia. |
-| Personalidad | Aventurada. Protagonista. |
-| ¿Cuál es su entorno? | Sus familia. Sus padres. |
-| ¿Qué dispositivos utiliza en su día a día? |  Un ordenador de sobre mesa. Un smartphone. Un iPad que comparte con su marido. |
-| ¿Cuál es su actitud hacía la tecnología? | Limitada. Proactiva. |
+| Nombre | Isabel                                                                         |
+| --- |--------------------------------------------------------------------------------|
+| Edad | 45                                                                             |
+| Profesión | Medica de familia.                                                             |
+| Personalidad | Aventurada. Protagonista.                                                      |
+| ¿Cuál es su entorno? | Su familia. Sus padres.  Su trabajo                                            |
+| ¿Qué dispositivos utiliza en su día a día? | Un ordenador de sobre mesa. Un smartphone. Un iPad que comparte con su marido. |
+| ¿Cuál es su actitud hacía la tecnología? | Limitada. Proactiva.                                                           |
 
 ## Generación de documentación
 La documentación se entrega continuamente en las [Releases](https://github.com/pablojjimenez/TFG/releases/tag/0.0.1) del repositorio.
