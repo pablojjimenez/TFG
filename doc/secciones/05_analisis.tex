@@ -8,7 +8,7 @@ En primer lugar, me dirigí a la página sobre la iniciativa de \href{https://da
 la información que encontré relativa a las defunciones
 según causa de muerte son unas colecciones que recolecta anualmente el Instituto
 Nacional de Estadística. El formato disponible de descarga era CSV y las columnas de información
-propocionadas eran escasas, además solo ofrecían el número crudo de defunciones. Nos interesa que existieran
+proporcionadas eran escasas, además solo ofrecían el número crudo de defunciones. Nos interesa que existieran
 otras variables estadísticas como el número de defunciones por cada 100 000 habitantes. Además la clasificación de
 las enfermedades es escasa y genérica.
 
@@ -18,12 +18,12 @@ nos ofrece muchos tipos de enfermedades y nos ofrece datos normalizados: la tasa
 tasas ajustadas a la población europea entre otras.
 
 Las principales diferencias entre \textbf{Arïadna} y \textbf{Raziël} es que Arïadna no guarda informació acerca
-de los grupos de edades, solo nos ofrece el cómputo de la edad media. Este cómputo pdemos calcularlo nosotros conociendo
+de los grupos de edades, solo nos ofrece el cómputo de la edad media. Este cómputo podemos calcularlo nosotros conociendo
 los rangos de edad. Por tanto descarté Arïadna.
 Finalmente también queremos añadir un campo a las causas de Raziël para almacenar la clasificación de las 
 enfermedades según el estándar \gls{CIE-10} que es algo que si posee Arïadna.
 
 \section{Modelización de los datos}
 Nuestro conjunto de datos queda modelizado bajo la entidad \textbf{Raziel} que es la que almacena todas las variables
-diponibles por las que filtrar. El resto de entidades que componen el dominio del problema son: grupos de edad,
+disponibles por las que filtrar. El resto de entidades que componen el dominio del problema son: grupos de edad,
 Comunidad Autónoma, Enfermedad.
