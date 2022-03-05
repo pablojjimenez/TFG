@@ -1,21 +1,22 @@
-image: docker:latest
+name: "Back CI"
 
-stages:
-  - lint
-  - test
+on: push
 
-lint:
-  stage: lint
-  image: python:3.8-alpine
-  script:
-    - pip install flake8
-    - flake8 --statistics
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    stage: lint
+    image: python:3.8-alpine
+    script:
+      - pip install flake8
+      - flake8 --statistics
 
-test:
-  stage: test
-  image: python:3.8
-  before_script:
-  script:
-    - pip install virtualenv
-    - ./scripts/install_test.sh
-    - ./scripts/run_tests.sh
+  test:
+    runs-on: ubuntu-latest
+    stage: test
+    image: python:3.8
+    before_script:
+    script:
+      - pip install virtualenv
+      - ./scripts/install_test.sh
+      - ./scripts/run_tests.sh
