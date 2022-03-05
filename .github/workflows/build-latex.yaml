@@ -4,7 +4,10 @@ on:
   push:
     tags:
       - '*.*.*'
-    
+  pull_request:
+    branches:
+      - '**'
+
 jobs:
   build_latex:
     runs-on: ubuntu-latest
