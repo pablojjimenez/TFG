@@ -1,44 +1,32 @@
-from abc import ABC, abstractmethod
-from typing import Dict, Iterable
+from enum import Enum
+from typing import Dict
+
+from server.base_model import MyModel
 
 
-class MyModel(ABC):
-    """
-    Base father model for my problem to help some operations.
-     - it adds dynamic attrs from a json
-     - add `_dir()` method to get attr class representation
-    """
-    def __init__(self, data: Dict):
-        if data:
-            self._fill_attrs(data)
-
-    def _dir(self) -> Iterable[str]:
-        return list(
-            filter(lambda x: x[:1] != '_' and '_' not in x, self.__dir__())
-        )
-
-    def _fill_attrs(self, data: Dict):
-        for i in data.keys():
-            setattr(self, i, data.get(i))
-
-    @abstractmethod
-    def _fill(self, data: Dict):
-        pass
-
-    def __str__(self) -> str:
-        return str(vars(self))
-
-    def get_tuple(self):
-        return [str(getattr(self, i)) for i in self._dir()]
+class Sex(Enum):
+    MEN = 1
+    WOMEN = 2
 
 
 class Raziel(MyModel):
-    N_MANDATORY_ATTRS = 15
+    ALLOW_ATTRS = {'ANO': int, 'CAUSA': str, 'SX': Sex, 'CCAA': str,
+                   'GEDAD': str, 'DEFU': int, 'AVP': int,
+                   'CRUDA': float, 'TAVP': float, 'TAVPE': float,
+                   'EDAD': float, 'TASAE': float, 'TASAW': float,
+                   'TASAVPW': float}
 
     def __init__(self, data: Dict):
-        if len(data) < 15:
-            raise ValueError('Number of attrs incorrect to build a Raziel instance')
+        for key in data:
+            if key not in self._get_allowed_attrs():
+                raise ValueError('Attr is not allowed')
+            if not isinstance(data[key], Raziel.ALLOW_ATTRS.get(key)):
+                raise ValueError('Attr type is not allowed')
+
         super().__init__(data)
+
+    def _get_allowed_attrs(self):
+        return list(map(lambda x: x[0], Raziel.ALLOW_ATTRS.items()))
 
     def _fill(self, data: Dict):
         super()._fill_attrs(data)
