@@ -3,7 +3,7 @@ import pytest
 from server.raziel_model import Raziel
 
 
-class MyTestCase(object):
+class TestModel(object):
     DATA = {
         'id': 1,
         'ANO': 2022,
@@ -15,6 +15,7 @@ class MyTestCase(object):
         'AVP': 0,
         'CRUDA': 0,
         'TAVP': 0,
+        'TAVPE': 0,
         'EDAD': 2.5,
         'TASAE': 0,
         'TASAW': 0,
@@ -22,10 +23,10 @@ class MyTestCase(object):
     }
 
     def test_raziel_model_creation(self):
-        MyTestCase.DATA['TAVPE'] = 0
-        Raziel(MyTestCase.DATA)
-        assert True == True
+        Raziel(TestModel.DATA)
+        assert True
 
     def test_raziel_model_bad_creation(self):
+        TestModel.DATA.pop('TASAVPW')
         with pytest.raises(ValueError):
-            Raziel(MyTestCase.DATA)
+            Raziel(TestModel.DATA)
