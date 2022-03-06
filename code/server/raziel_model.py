@@ -9,10 +9,13 @@ class MyModel(ABC):
      - add `_dir()` method to get attr class representation
     """
     def __init__(self, data: Dict):
-        if data: self._fill_attrs(data)
+        if data:
+            self._fill_attrs(data)
 
     def _dir(self) -> Iterable[str]:
-        return list(filter(lambda x: x[:1] != '_' and '_' not in x, self.__dir__()))
+        return list(
+            filter(lambda x: x[:1] != '_' and '_' not in x, self.__dir__())
+        )
 
     def _fill_attrs(self, data: Dict):
         for i in data.keys():
