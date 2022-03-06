@@ -16,7 +16,7 @@ class TestModel(object):
         assert True
 
     def test_raziel_model_bad_creation(self):
-        TestModel.DATA.pop('TASAVPW')
+        TestModel.DATA['EDAD'] = 'edad'
         with pytest.raises(ValueError):
             Raziel(TestModel.DATA)
 
