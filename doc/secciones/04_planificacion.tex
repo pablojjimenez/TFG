@@ -58,12 +58,42 @@ código, GitHub ha sido la opción seleccionada para alojar el código y tener u
 características también las pueden servicios como GitLab. Pero las características premium de GitHub que ofrece una cuenta
 universitaria como los tableros Kanban, integración continua con GitHub Actions...
 
-Haciendo uso de esta herramienta, de cada historia de usuario se han extraído issues o tareas a realizar. Los
-incrementos se han ido realizando por medio de Pull Request y cada una de estas lleva enlazada una o varias
-issues. Para tener una visión general del estado del proyecto se ha usado Projects.
+Haciendo uso de esta herramienta, se han definido unas serie de milestones que agrupan historias de usuario e issues o tareas a realizar. Los
+incrementos en el trabajo se han ido realizando por medio de Pull Request y cada una de estas lleva enlazada una o varias
+issues. Para tener una visión general del estado del proyecto se ha usado la herramienta Projects integrada en GitHub.
+
+\subsection{Milestones}
+Los milestones hacen referencia al conjunto de productos minimamente viables que se van generando conforme se avanza en el
+desarrollo del proyecto. Un milestone está formado por un conjunto de issues, se entiende finalizado un milestone cuando se
+han contemplado todos los issues asociados. Los milestones creados se pueden observar en el repositorio de GitHub y son los siguientes:
+\begin{enumerate}
+    \item \textbf{Infraestructura}: desarrollo de la integración continua que compila la memoria y comprobador ortográfico más
+    historias de usuario iniciales.
+    \item \textbf{Modelo de datos}: definición de las clases que conforman el dominio del problema, atendiendo al estado
+    del arte. El PMV incluye también las redacciones pertinentes de los capitulos de la memoria y el pretexto a las decisiones
+    técnicas elegidas para implementar la solución.
+    \item \textbf{Interfaz de programación de aplicaciones}: es la estructura del modelo que representa la solución del problema
+    y todas las operaciones posibles a realizar con ellas. Supondrá la capa de abstracción para acceder a los datos y que pueda
+    ser utilizada por otros desarrolladores para construir aplicaciones con distintos objetivos.
+    \item \textbf{Frontend}: creación de un sistema web que permita consumir el API satisfaciendo las necesidades de mis usuarios ficticios.
+\end{enumerate}
+
+\subsection{Historias de usuario}
+Como estamos trabajando con una metodología de desarrollo ágil queremos expresar las necesidades reales del sistema para
+lograr la interacción del equipo de desarrollo con el usuario. Todas las historias de usuarios estan definidas en un milestone
+de trabajo y de ellas se genaran tareas específicas. La especificación de las historias de usuario e issues generadas a partir de ellas
+pueden verse con mayor detalle en el panel de \textbf{Issues} del repositorio de GitHub.
+\begin{figure}[]
+	\centering
+	\includegraphics[scale=0.5]{doc/logos/imgs/issues.png}
+	\caption{ \cite{rtve-cis}  Issues del TFG vistas desde el correspondiente \href{https://github.com/pablojjimenez/TFG/issues}{panel en GitHub}. }
+    \label{fig:worst_f_value}
+\end{figure}
 
 \section{Temporización}
 [TODO: Añadir diagrama de Gantt]
+
+\subsection{Cuantización de las horas empleadas}
 
 \section{Estimación de costes}
 A partir de la información anterior en cuanto al tiempo invertido en el proyecto y en vista de los elementos necesarios
