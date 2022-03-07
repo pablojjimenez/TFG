@@ -39,3 +39,7 @@ tablet
 smartwatch
 Proactiva
 frontend
+comprobador
+TFG
+Cuantización
+csv
