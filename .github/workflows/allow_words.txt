@@ -39,3 +39,8 @@ tablet
 smartwatch
 Proactiva
 frontend
+Arïadna
+CSV
+CIE
+Raziël
+Raziel
