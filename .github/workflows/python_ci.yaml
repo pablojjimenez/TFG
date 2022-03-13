@@ -12,6 +12,8 @@ jobs:
         run: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
       - name: Instala las dependencias
         run: poetry install
+      - name: add poetry to current shell
+        run: source $HOME/.poetry/env
       - name: Run lint task
         run: poetry run task lint
       - name: Run test task
