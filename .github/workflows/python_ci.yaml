@@ -13,7 +13,7 @@ jobs:
           pip install poetry
           poetry install
       - name: move to folder
-          run: cd code/
+        run: cd code/
       - name: Instala las dependencias
         run: poetry install
       - name: Run lint task
