@@ -9,9 +9,7 @@ jobs:
         with:
           python-version: '3.8'
       - name: Instala poetry
-        run: |
-          pip install poetry
-          poetry install
+        run: pip install poetry
       - name: move to folder
         run: cd code/
       - name: Instala las dependencias
