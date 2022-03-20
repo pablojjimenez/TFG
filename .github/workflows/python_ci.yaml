@@ -9,11 +9,11 @@ jobs:
         with:
           python-version: '3.8'
       - name: Instala poetry
-        run: curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-      - name: add poetry to current shell
-        run: source $HOME/.poetry/env
+        run: |
+          pip install poetry
+          poetry install
       - name: move to folder
-        run: cd code/
+          run: cd code/
       - name: Instala las dependencias
         run: poetry install
       - name: Run lint task
