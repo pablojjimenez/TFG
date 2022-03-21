@@ -13,8 +13,8 @@ jobs:
       - name: move to folder
         run: cd code/
       - name: Instala las dependencias
-        run: poetry install
-      - name: Run lint task
-        run: poetry run task lint
-      - name: Run test task
-        run: poetry run task test
+        run: |
+          cd code/
+          poetry install
+          poetry run lint
+          poetry run test
