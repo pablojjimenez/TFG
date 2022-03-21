@@ -16,5 +16,5 @@ jobs:
         run: |
           cd code/
           poetry install
-          poetry run lint
-          poetry run test
+          poetry run task lint
+          poetry run task test
