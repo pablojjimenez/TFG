@@ -11,7 +11,7 @@ class TestDisease(unittest.TestCase):
         self.data = Disease(id='hola', name='hola', cie=Cie(1, ''))
 
     def test_should_initialize_object_OK(self):
-        self.assertIsInstance(self.data, Disease)
+        self.assertIsInstance(self.data, str)
 
     def test_should_not_admit_change_cie(self):
         with self.assertRaises(NoCorrectTypeException):
