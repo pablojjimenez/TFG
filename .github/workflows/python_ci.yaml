@@ -7,11 +7,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: ['3.6', '3.7', '3.8', '3.9', '3.10']
       - name: Instala poetry
         run: pip install poetry
-      - name: move to folder
-        run: cd code/
       - name: Instala las dependencias
         run: |
           cd code/
