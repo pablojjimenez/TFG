@@ -1,0 +1,24 @@
+name: Python CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.6","3.7","3.8","3.9", "3.10"]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "${{ matrix.python-version }}"
+      - name: Install poetry
+        run: pip install poetry
+      - name: Install poetry dependencies
+        working-directory: ./code
+        run: poetry install
+      - name: Run lint
+        working-directory: ./code
+        run: poetry run task lint
+      - name: Run tests
+        working-directory: ./code
+        run: poetry run task test
