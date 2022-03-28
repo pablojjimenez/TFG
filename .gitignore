@@ -311,3 +311,4 @@ typings/
 *~
 
 package-lock.json
+app.log
