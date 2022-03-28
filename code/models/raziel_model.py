@@ -1,8 +1,7 @@
 from typing import Dict
 
 from models.disease_model import Disease
-from models.exceptions import InvalidIDException, NoAttributeException, \
-    NoCorrectTypeException
+from models.exceptions import NoAttributeException, NoCorrectTypeException
 from models.small_models import Sex, Ccaa, Gedad
 
 
@@ -11,8 +10,8 @@ class Raziel(object):
         'id': object,
         'ano': int,
         'causa': Disease,
-        'sexo': Sex,
-        'ccaas': Ccaa,
+        'sx': Sex,
+        'ccaa': Ccaa,
         'gedad': Gedad,
         'defu': int,
         'avp': int,
@@ -35,11 +34,10 @@ class Raziel(object):
                 )
 
         self.__dict__.update(data)
-
-        if data.get('id') is not None and data.get('id') > 0:
-            self.id = data.get('id')
+        if data.get('id') is None:
+            self.id = -1
         else:
-            raise InvalidIDException('Incorrect ID for Raziel object')
+            self.id = data.get('id')
 
     def _get_allowed_attrs(self):
         return list(map(lambda x: x[0], Raziel.ALLOW_ATTRS.items()))
