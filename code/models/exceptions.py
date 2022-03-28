@@ -6,8 +6,3 @@ class NoCorrectTypeException(Exception):
 class NoAttributeException(Exception):
     def __init__(self, sms):
         Exception.__init__(self, sms)
-
-
-class InvalidIDException(Exception):
-    def __init__(self, sms):
-        Exception.__init__(self, sms)
