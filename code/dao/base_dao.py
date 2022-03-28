@@ -17,7 +17,10 @@ class BaseDAO:
         self._cur = self._db.connection.cursor()
         self._table = table
 
-    def get_all(self, params: ListParams = {}):
+    def get_all(self, params: ListParams = None):
+        if params is None:
+            params = {}
+
         sql = "SELECT * FROM %s"
 
         sort = params.get('sort', '')
@@ -40,7 +43,12 @@ class BaseDAO:
         if limit != '':
             sql += f' limit {limit} '
             if page != '':
-                sql += f' OFFSET {page + 1} '
+                if page == 1:
+                    sql += ' OFFSET 0'
+                elif page == 2:
+                    sql += f' OFFSET {limit}'
+                else:
+                    sql += f' OFFSET {(page - 1) * limit} '
         sql = sql % self._table
 
         out = self._cur.execute(sql)

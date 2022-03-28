@@ -25,4 +25,3 @@ class TestGedadRepository(unittest.TestCase):
         self.assertEqual(len(data), 2)
         self.assertEqual(type(data[0]), Gedad)
         self.assertEqual(data[0], Gedad(id=99, description='Todas las edades'))
-

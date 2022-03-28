@@ -1,6 +1,5 @@
 import unittest
 
-from config.settings import get_settings
 from tests.base_dao_test import BaseDAOTest
 
 
@@ -60,6 +59,17 @@ class TestBaseDAO(unittest.TestCase):
         self.assertEqual(data[0][1], 99)
         self.assertEqual(data[1][1], 10)
 
+    def test_get_all_limit_sort_page_1(self):
+        params = {
+            'limit': 2,
+            'sort': '-id',
+            'page': 1
+        }
+        data = self.under_test.get_all(params)
+        self.assertEqual(len(data), 2)
+        self.assertEqual(data[0][1], 99)
+        self.assertEqual(data[1][1], 10)
+
     def test_get_all_limit_page(self):
         params = {
             'limit': 2,
@@ -69,9 +79,9 @@ class TestBaseDAO(unittest.TestCase):
         data = self.under_test.get_all(params)
         self.assertEqual(len(data), 2)
         self.assertEqual(data[0][1], 9)
-        self.assertEqual(data[0][2], 8)
+        self.assertEqual(data[1][1], 8)
 
-    def test_get_all_limit_page(self):
+    def test_get_all_limit_page_2(self):
         params = {
             'limit': 2,
             'sort': '-id',
@@ -81,6 +91,29 @@ class TestBaseDAO(unittest.TestCase):
         self.assertEqual(len(data), 2)
         self.assertEqual(data[0][1], 7)
         self.assertEqual(data[1][1], 6)
+
+    def test_get_all_limit_page_3(self):
+        params = {
+            'limit': 3,
+            'sort': '-id',
+            'page': 3
+        }
+        data = self.under_test.get_all(params)
+        self.assertEqual(len(data), 3)
+        self.assertEqual(data[0][1], 5)
+        self.assertEqual(data[1][1], 4)
+        self.assertEqual(data[2][1], 3)
+
+    def test_get_all_limit_page_3_2(self):
+        params = {
+            'limit': 3,
+            'sort': '-id',
+            'page': 4
+        }
+        data = self.under_test.get_all(params)
+        self.assertEqual(len(data), 2)
+        self.assertEqual(data[0][1], 2)
+        self.assertEqual(data[1][1], 1)
 
     def test_get_all_limit_page_query(self):
         params = {
@@ -92,7 +125,7 @@ class TestBaseDAO(unittest.TestCase):
         data = self.under_test.get_all(params)
         self.assertEqual(len(data), 0)
 
-    def test_get_all_limit_page_query(self):
+    def test_get_all_limit_page_query_2(self):
         params = {
             'sort': '-id',
             'query': 'id>1 and id<4'

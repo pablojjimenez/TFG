@@ -7,7 +7,7 @@ class GedadRepository(AbstractRepository):
     def __init__(self, manager):
         super().__init__(manager)
 
-    def get_all(self, params: ListParams = {}) -> list:
+    def get_all(self, params: ListParams = None) -> list:
         out = super().get_all(params)
         return list(map(lambda x: Gedad(id=x[1], description=x[2]), out))
 
