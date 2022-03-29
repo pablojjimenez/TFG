@@ -29,8 +29,3 @@ class Gedad:
 class Sex(Enum):
     MALE = 1
     FEMALE = 2
-
-
-class Order(Enum):
-    ASC = 1
-    DESC = 2
