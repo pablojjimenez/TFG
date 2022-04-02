@@ -44,3 +44,7 @@ CSV
 CIE
 Raziël
 Raziel
+comprobador
+TFG
+Cuantización
+csv
