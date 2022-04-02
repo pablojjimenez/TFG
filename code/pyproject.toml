@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pythonproject2"
+version = "0.1.0"
+description = ""
+authors = ["pablojjimenez <pablojjimenez0@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+taskipy = "^1.10.1"
+flake8 = "^4.0.1"
+flake8-bugbear = "^22.1.11"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+test = "python -m unittest tests/test_*.py"
+lint = "flake8 --statistics"

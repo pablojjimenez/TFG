@@ -1,3 +1,4 @@
+date,tarea, min_time
 date,github_id, min_time
 0102,14,15
 0102,usuarios,12
@@ -7,4 +8,5 @@ date,github_id, min_time
 0302,github,30
 0802,usuarios,260
 1002,capitulo 1 y 2,240
-0603,planificacion,260
+0603,planificacion,60
+1303,setup code,250
