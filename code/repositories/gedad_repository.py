@@ -1,6 +1,5 @@
-from dao.base_dao import ListParams
 from models.small_models import Gedad
-from repositories.abstract_repository import AbstractRepository
+from repositories.abstract_repository import AbstractRepository, ListParams
 
 
 class GedadRepository(AbstractRepository):

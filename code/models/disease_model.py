@@ -14,6 +14,6 @@ class Disease:
 
     @cie.setter
     def cie(self, value):
-        if not isinstance(value, Cie):
-            raise NoCorrectTypeException('Must be Cie object')
+        if not isinstance(value, Cie) and value is not None:
+            raise NoCorrectTypeException('Must be Cie object or None')
         self._cie = value
