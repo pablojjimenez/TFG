@@ -1,9 +1,6 @@
 name: Build latex document
 
 on:
-  push:
-    tags:
-      - '*.*.*'
   pull_request:
     branches:
       - '**'
