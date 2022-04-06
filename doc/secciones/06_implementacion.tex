@@ -11,7 +11,7 @@ En este tipo de arquitectura podemos diferenciar 3 elementos.
 Las entidades son aquellas clases que representan una entidad del dominio. Estas clases deben tener una estructura de datos que represente la información de la entidad y unas responsabilidades concretas. Se caracterizan porque tienen que ser consideradas iguales a otros objetos aún cuando cuando sus atributos difieren.
 
 \subsection{Value objects}
-Representan los coneptos que no tienen una entidad. Describen características por lo que solo nos interesan sus atributos.
+Representan los conceptos que no tienen una entidad. Describen características por lo que solo nos interesan sus atributos.
 Los value object representan elementos del modelo que se describen por el \textbf{qué} son, y no por \textbf{quién} o \textbf{cuál} son.
 
 \subsection{Servicios}
@@ -27,16 +27,16 @@ El lenguaje elegido ha sido \textbf{Python} los motivos de esta decisión son va
     \item Es un lenguaje interpretado, débilmente tipado y con una capacidad introspectiva muy alta que nos permite metaprogramar.
 \end{itemize}
 
-A la hora de realizar un proyecto software siempre es necesario utilizar bibiotecas y código implementado por otras personas para poder llegar más lejos. Todo esto es lo que llamamos dependencias. Muchos entornos de programación tienen gestores de dependencias que nos permiten instalar y gestionar estas dependencias cómodamente. En el entorno JavaScript tenemos \textit{npm} o \textit{yarn} que nos permite instalar dependencias de forma sencilla. Para la JVM el tradicional \textit{maven} es una buena opción o la mas moderna y potente \textit{Gradle}.
+A la hora de realizar un proyecto software siempre es necesario utilizar bibliotecas y código implementado por otras personas para poder llegar más lejos. Todo esto es lo que llamamos dependencias. Muchos entornos de programación tienen gestores de dependencias que nos permiten instalar y gestionar estas dependencias cómodamente. En el entorno JavaScript tenemos \textit{npm} o \textit{yarn} que nos permite instalar dependencias de forma sencilla. Para la JVM el tradicional \textit{maven} es una buena opción o la mas moderna y potente \textit{Gradle}.
 
 En Python se ha extendido el uso de \textbf{Poetry} que de forma muy parecida a \textit{npm} genera un fichero de configuración \textit{pyproject.toml} donde definimos las dependencias, las versiones y los paquetes de nuestro proyecto así como algunas tareas específicas para correr los tests o el lint fácilmente. Esto facilita enormemente la creación de entornos virtuales de prueba y de desarrollo tanto el local como por el CI.
 
 \section{Continuos Integration}
-Desde el inicio del trabajo se ha estado trabajando con un sistema ferreo de CI de forma que no se ha mezclado nunca nada que no haya superado los requisitos de diseño especificados. En el entorno de desarrollo se ha utilizado \textit{Github Actions} que es una herramienta de CI que nos permite realizar una integración continua de la misma forma que \textit{Travic CI} la elección de Github sobre Travis es por la rápidez del elegido e integración con la forja utilizada que como se ha especificado anteriormente es Github.
+Desde el inicio del trabajo se ha estado trabajando con un sistema férreo de CI de forma que no se ha mezclado nunca nada que no haya superado los requisitos de diseño especificados. En el entorno de desarrollo se ha utilizado \textit{Github Actions} que es una herramienta de CI que nos permite realizar una integración continua de la misma forma que \textit{Travis CI} la elección de Github sobre Travis es por la rapidez del elegido e integración con la forja utilizada que como se ha especificado anteriormente es Github.
 
 Para garantizar la \textbf{calidad de la memoria} se han implementado dos tipos de CI\footnote{Continuos Integration}: un revisor ortográfico y un revisor de estructura que compila el documento automáticamente y pública el PDF generado en las \href{https://github.com/pablojjimenez/TFG/releases}{\textit{releases} del repositorio.}
 
 Del mismo modo, para el \textbf{código} se han implementado otras dos CI que garantizan que cuando se introduce en la rama principal del repositorio código nuevo, éste garantiza unos estándares de calidad y que efectivamente el código es funcional por todas las versiones especificadas de Python. Por un lado, verificar el código fuente contra errores de programación (como "library imported but unused" y "Undefined name") y para verificar la complejidad ciclomática. Se ha utilizado la tecnología \cite{flake}\textbf{Flake8} por ser las más utilizada en el ecosistema.
-Por otro lado, se corre la \textit{suit} de tests de forma que se garantice que al añadir uno código no se rompe el existente. Se ha utilizado la librería \textit{Unittest} que se encuentra incluída en la libreria estandar de Python permite realizar aserciones, provee de muchas aserciones y permite organizar los tests de forma parecida a como lo hace jUnit en clases que llamamos \textit{suits} de tests.
+Por otro lado, se corre la \textit{suit} de tests de forma que se garantice que al añadir uno código no se rompe el existente. Se ha utilizado la librería \textit{Unittest} que se encuentra incluida en la biblioteca estándar de Python permite realizar aserciones, provee de muchas aserciones y permite organizar los tests de forma parecida a como lo hace jUnit en clases que llamamos \textit{suits} de tests.
 
 Todas estas comprobaciones se realizan para todas las versiones de Python en las que garantizamos que el software funciona.
