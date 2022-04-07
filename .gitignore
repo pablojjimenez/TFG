@@ -313,4 +313,4 @@ typings/
 app.log
 .idea/
 .vscode/
-.venv/
+__pycache__/
