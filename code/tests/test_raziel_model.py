@@ -1,8 +1,8 @@
 import unittest
 
 from models.disease_model import Disease
-from models.exceptions import InvalidIDException, NoAttributeException, \
-    NoCorrectTypeException
+from models.exceptions import NoAttributeException, NoCorrectTypeException, \
+    InvalidIDException
 from models.raziel_model import Raziel
 from models.small_models import Cie, Sex, Ccaa, Gedad
 
@@ -34,7 +34,7 @@ class TestRaziel(unittest.TestCase):
             Raziel({'attr_random': 23})
 
     def test_create_correct_raziel_object_from_json(self):
-        TestRaziel.JSON_DATA['id'] = 2
+        TestRaziel.JSON_DATA['id'] = 7
         raziel = Raziel(TestRaziel.JSON_DATA)
         self.assertIsInstance(raziel, Raziel)
 
@@ -50,9 +50,4 @@ class TestRaziel(unittest.TestCase):
 
     def test_create_correct_raziel_id_not_provided(self):
         with self.assertRaises(InvalidIDException):
-            Raziel(TestRaziel.JSON_DATA)
-
-    def test_create_incorrect_raziel_id(self):
-        with self.assertRaises(InvalidIDException):
-            TestRaziel.JSON_DATA['id'] = -1
             Raziel(TestRaziel.JSON_DATA)

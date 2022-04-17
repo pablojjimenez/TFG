@@ -310,4 +310,7 @@ typings/
 
 *~
 
-package-lock.json
+app.log
+.idea/
+.vscode/
+__pycache__/

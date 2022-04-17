@@ -15,4 +15,4 @@ class TestDisease(unittest.TestCase):
 
     def test_should_not_admit_change_cie(self):
         with self.assertRaises(NoCorrectTypeException):
-            self.data.cie = 10
+            Disease(id='hola', name='hola', cie=10)
