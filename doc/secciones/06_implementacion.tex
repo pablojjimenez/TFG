@@ -1,21 +1,6 @@
 \chapter{Desarrollo de la solución}
 A la hora de empezar con la Implementación de la solución, se debe tener en cuenta los requisitos del sistema de acuerdo con los usuarios diana.
 
-\section{Diseño de la solución}
-Para el diseño del software se ha utilizado el diseño dirigido por el dominio, DDD \textit{Domain Driven Design}. Este tipo de arquitectura introducida por Eric Evans \cite{ddd_book}: "Domain-Driven-Design - Tackling Complexity in the Hearth of Software, 2004" nos permite organizar el código de forma separada y organizada lo que nos permite poder realizar TDD correctamente por tener las distintas capas separadas y débilmente acopladas unas de las otras. La lógica de negocio reside en un único sitio y lo más cerca del dominio posible lo que nos permite cumplir los principios SOLID fácilmente y conseguimos un código abierto a su extensión pero cerrado a su modificación. 
-
-\subsection{DDD}
-En este tipo de arquitectura podemos diferenciar 3 elementos.
-
-\subsubsection{Entidad}
-Las entidades son aquellas clases que representan una entidad del dominio. Estas clases deben tener una estructura de datos que represente la información de la entidad y unas responsabilidades concretas. Se caracterizan porque tienen que ser consideradas iguales a otros objetos aún cuando cuando sus atributos difieren.
-
-\subsubsection{Value objects}
-Representan los conceptos que no tienen una entidad. Describen características por lo que solo nos interesan sus atributos.
-Los value object representan elementos del modelo que se describen por el \textbf{qué} son, y no por \textbf{quién} o \textbf{cuál} son.
-
-\subsubsection{Servicios}
-No tienen significado propio suponen la capa que representa las operaciones que no pertenecen conceptualmente a ningún objeto del dominio concreto.
 
 
 \section{Implementación}
