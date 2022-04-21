@@ -8,21 +8,21 @@ from models.small_models import Sex, Ccaa, Gedad
 
 class Raziel(object):
     ALLOW_ATTRS = {
-        'id': object,
         'ano': int,
         'causa': Disease,
         'sexo': Sex,
-        'ccaas': Ccaa,
+        'ccaa': Ccaa,
         'gedad': Gedad,
         'defu': int,
         'avp': int,
         'cruda': float,
         'tavp': float,
-        'tavpe': float,
         'edad': float,
         'tasae': float,
+        'tavpe': float,
         'tasaw': float,
-        'tasavpw': float
+        'tasavpw': float,
+        'id': int
     }
 
     def __init__(self, data: Dict):
@@ -31,7 +31,7 @@ class Raziel(object):
                 raise NoAttributeException('Attr is not allowed')
             if not isinstance(data[key], Raziel.ALLOW_ATTRS.get(key)):
                 raise NoCorrectTypeException(
-                    f'Type: {data[key]} is not {Raziel.ALLOW_ATTRS.get(key)}'
+                    f'Type: {data[key]} is not {Raziel.ALLOW_ATTRS.get(key)} for {key}'
                 )
 
         self.__dict__.update(data)
