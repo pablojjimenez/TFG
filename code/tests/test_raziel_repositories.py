@@ -31,7 +31,7 @@ class TestRazielRepo(unittest.TestCase):
         list_param = {
             'page': 1,
             'limit': 5
-        } 
+        }
         obj, tam = self.raziel_repo.get_all(list_param)
         self.assertEqual(tam, 5)
         self.assertEqual(len(obj), 5)
@@ -41,12 +41,12 @@ class TestRazielRepo(unittest.TestCase):
         list_param = {
             'page': 2,
             'limit': 5
-        } 
+        }
         obj, tam = self.raziel_repo.get_all(list_param)
         self.assertEqual(tam, len(obj))
         self.assertEqual(tam, 5)
         self.assertEqual(obj[0].id, 6)
-    
+
     def test_list_with_param_sort(self):
         list_param = {
             'sort': '-defu',
@@ -58,7 +58,7 @@ class TestRazielRepo(unittest.TestCase):
         self.assertEqual(tam, 5)
         self.assertEqual(obj[0].id, 11)
         self.assertEqual(obj[0].ano, 1980)
-    
+
     def test_list_with_param_sort2(self):
         list_param = {
             'sort': 'defu',
@@ -69,11 +69,11 @@ class TestRazielRepo(unittest.TestCase):
         self.assertEqual(tam, len(obj))
         self.assertEqual(tam, 5)
         self.assertEqual(obj[0].id, 16)
-    
+
     def test_list_with_query(self):
         list_param = {
             'query': {'ano': ('==', 1980), 'CAUSA': ('==', 1)}
-        } 
+        }
         obj, tam = self.raziel_repo.get_all(list_param)
         self.assertEqual(tam, 6)
         for o in obj:
@@ -91,4 +91,3 @@ class TestRazielRepo(unittest.TestCase):
         self.assertEqual(obj[0].id, 1)
         self.assertEqual(obj[1].id, 9)
         self.assertEqual(obj[2].id, 16)
-

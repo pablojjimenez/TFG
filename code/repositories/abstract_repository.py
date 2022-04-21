@@ -1,5 +1,4 @@
 import abc
-from smtplib import OLDSTYLE_AUTH
 import pandas as pd
 from typing import Optional, TypedDict
 
