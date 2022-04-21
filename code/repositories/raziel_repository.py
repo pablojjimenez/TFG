@@ -4,34 +4,37 @@ from models.raziel_model import Raziel
 
 
 class RazielRepository(AbstractRepository):
-    def __init__(self, dao_manager, disease_repo, ccaas_repo, gedades_repo):
-        super().__init__(dao_manager)
+    def __init__(self, name, disease_repo, ccaas_repo, gedades_repo):
+        super().__init__(name)
         self.ccaas_repo = ccaas_repo
         self.disease_repo = disease_repo
         self.gedades_repo = gedades_repo
 
     def _transform_to_model(self, tuple: tuple) -> object:
         params = {
-            'id': tuple[0],
-            'ano': tuple[1],
-            'causa': self.disease_repo.get_one(tuple[2]),
-            'sexo': Sex.MALE if tuple[3] == 1 else Sex.FEMALE,
-            'ccaas': self.ccaas_repo.get_one(tuple[4]),
-            'gedad': self.gedades_repo.get_one(tuple[5]),
-            'defu': tuple[6],
-            'avp': tuple[7],
-            'cruda': tuple[8],
-            'tavp': tuple[9],
-            'edad': tuple[10],
-            'tasae': tuple[11],
-            'tavpe': tuple[12],
-            'tasaw': tuple[13],
-            'tasavpw': tuple[14]
+            'ano': int(tuple[0]),
+            'causa': self.disease_repo.get_one(tuple[1]),
+            'sexo': Sex.MALE if tuple[2] == 1 else Sex.FEMALE,
+            'ccaa': self.ccaas_repo.get_one(tuple[3]),
+            'gedad': self.gedades_repo.get_one(tuple[4]),
+            'defu': int(tuple[5]),
+            'avp': int(tuple[6]),
+            'cruda': tuple[7],
+            'tavp': tuple[8],
+            'edad': tuple[9],
+            'tasae': tuple[10],
+            'tavpe': tuple[11],
+            'tasaw': tuple[12],
+            'tasavpw': tuple[13],
+            'id': int(tuple[14]),
         }
         return Raziel(params)
 
     def get_all(self, params: ListParams = None) -> (list, int):
-        return super().get_all(params)
+        data = super().get_all(params)
+        data_objs = list(map(self._transform_to_model, data))
+        return data_objs, len(data_objs)
 
     def get_one(self, id: int) -> object:
-        return super().get_one(id)
+        data = super().get_one('id', id)
+        return self._transform_to_model(data) if data else None
