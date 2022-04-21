@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pythonproject2"
+name = "TFG-API"
 version = "0.1.0"
 description = ""
 authors = ["pablojjimenez <pablojjimenez0@gmail.com>"]
@@ -8,6 +8,7 @@ authors = ["pablojjimenez <pablojjimenez0@gmail.com>"]
 python = "^3.8"
 pydantic = "^1.9.0"
 python-dotenv = "^0.20.0"
+pandas = "^1.4.2"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.10.1"
