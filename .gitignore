@@ -314,3 +314,4 @@ app.log
 .idea/
 .vscode/
 __pycache__/
+code/data

@@ -12,11 +12,11 @@ class TestRaziel(unittest.TestCase):
 
     def setUp(self):
         TestRaziel.JSON_DATA = {
-            'id': None,
+            'id': -1,
             'ano': 2020,
             'causa': Disease(2, 'reason', Cie(1, '')),
             'sexo': Sex.FEMALE,
-            'ccaas': Ccaa(1, ''),
+            'ccaa': Ccaa(1, ''),
             'gedad': Gedad(1, ''),
             'defu': 0,
             'avp': 0,
