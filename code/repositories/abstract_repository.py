@@ -8,6 +8,7 @@ class ListParams(TypedDict, total=False):
     query: Optional[TypedDict]
     page: Optional[int]
     limit: Optional[int]
+    group: Optional[str]
 
 
 class AbstractRepository(abc.ABC):
@@ -28,8 +29,11 @@ class AbstractRepository(abc.ABC):
         :param params: ListParams
         :return: (list, int) - list of objects and total number of objects
         """
+        out = self._filter_dataframe(params)
+        return out.values.tolist()
+
+    def _filter_dataframe(self, params):
         out = self.dataframe
-        is_list = False
         keys = params.keys()
         if 'query' in keys:
             self._check_query(params['query'])
@@ -41,12 +45,9 @@ class AbstractRepository(abc.ABC):
             out = out.sort_values(by=sort_by.upper(), ascending=asc)
         if 'limit' in keys:
             page = params['page'] if not params['page'] or params['page'] != 1 else 0
-            ini = page*params['limit'] - params['limit'] if page != 0 else 0
-            end = params['limit']*page if page != 0 else params['limit']
-            out = out.iloc[ini:end].values.tolist()
-            is_list = True
-        if not is_list:
-            out = out.values.tolist()
+            ini = page * params['limit'] - params['limit'] if page != 0 else 0
+            end = params['limit'] * page if page != 0 else params['limit']
+            out = out.iloc[ini:end]
         return out
 
     @abc.abstractmethod
