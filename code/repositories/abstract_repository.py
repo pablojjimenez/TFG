@@ -2,13 +2,14 @@ import abc
 import pandas as pd
 from typing import Optional, TypedDict
 
+from models.exceptions import NoCorrectColumnsException, IncorrectQueryException
+
 
 class ListParams(TypedDict, total=False):
     sort: Optional[str]
     query: Optional[TypedDict]
     page: Optional[int]
     limit: Optional[int]
-    group: Optional[str]
 
 
 class AbstractRepository(abc.ABC):
@@ -19,6 +20,18 @@ class AbstractRepository(abc.ABC):
         except FileNotFoundError:
             self.dataframe = pd.DataFrame()
 
+    def _check_query(self, query):
+        keys = query.keys()
+        keys = list(map(lambda x: x.upper(), keys))
+        allow = self.dataframe.columns.tolist()
+        for i in keys:
+            if i.upper() not in allow:
+                raise NoCorrectColumnsException(f'no colum {i}')
+
+        for key, value in query.items():
+            if value[0] not in ['<', '>', '==']:
+                raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==']")
+
     @abc.abstractmethod
     def get_all(self, params: ListParams = None) -> list:
         """
@@ -26,12 +39,12 @@ class AbstractRepository(abc.ABC):
         :param params: ListParams
         :return: list of objects and total number of objects
         """
-        out = self._filter_dataframe(params)
+        out = self.filter_dataframe(params)
         return out.values.tolist()
 
-    def _filter_dataframe(self, params):
+    def filter_dataframe(self, params):
         out = self.dataframe
-        keys = params.keys()
+        keys = params.keys() if params else []
         if 'query' in keys:
             self._check_query(params['query'])
             query = ' & '.join([f'{k.upper()}{v[0]}{v[1]}' for k, v in params['query'].items()])
