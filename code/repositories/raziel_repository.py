@@ -38,4 +38,3 @@ class RazielRepository(AbstractRepository):
     def get_one(self, id: int) -> object:
         data = super().get_one('id', id)
         return self._transform_to_model(data) if data else None
-

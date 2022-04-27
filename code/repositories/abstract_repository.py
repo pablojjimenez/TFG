@@ -28,7 +28,7 @@ class AbstractRepository(abc.ABC):
             if i.upper() not in allow:
                 raise NoCorrectColumnsException(f'no colum {i}')
 
-        for key, value in query.items():
+        for _, value in query.items():
             if value[0] not in ['<', '>', '==']:
                 raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==']")
 

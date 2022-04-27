@@ -1,4 +1,4 @@
-#from matplotlib import pyplot
+from matplotlib import pyplot
 
 from models.exceptions import NoCorrectColumnsException
 from repositories.abstract_repository import ListParams
@@ -12,17 +12,17 @@ class GraphicManager:
     def get_chart_by_two_vars(self, params: ListParams, var1: str, var2: str):
         df = self._prepare_dataframe(params, var1, var2)
         df.plot()
-        #pyplot.savefig('opt/get_chart_by_two_vars.png')
+        pyplot.savefig('opt/get_chart_by_two_vars.png')
 
     def get_pie_chart_by_two_vars(self, params: ListParams, var1: str, var2: str):
         df = self._prepare_dataframe(params, var1, var2)
         df.plot.pie()
-        #pyplot.savefig('opt/get_pie_chart_by_two_vars.png')
+        pyplot.savefig('opt/get_pie_chart_by_two_vars.png')
 
     def get_bar_chart_by_two_vars(self, params: ListParams, var1: str, var2: str):
         df = self._prepare_dataframe(params, var1, var2)
         df.plot.pie()
-        #pyplot.savefig('opt/get_bar_chart_by_two_vars.png')
+        pyplot.savefig('opt/get_bar_chart_by_two_vars.png')
 
     def _prepare_dataframe(self, params: ListParams, var1: str, var2: str):
         df = self.raziel_repo.filter_dataframe(params)
