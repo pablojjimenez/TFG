@@ -1,6 +1,7 @@
 import unittest
 
 from models.disease_model import Disease
+from models.exceptions import NoCorrectColumnsException, IncorrectQueryException
 from models.raziel_model import Raziel
 from models.small_models import Cie, Ccaa, Gedad
 from tests.mocks.mock_ccaa_repository import MockCcaaRepository
@@ -91,3 +92,23 @@ class TestRazielRepo(unittest.TestCase):
         self.assertEqual(obj[0].id, 1)
         self.assertEqual(obj[1].id, 9)
         self.assertEqual(obj[2].id, 16)
+
+    def test_valid_query_params(self):
+        list_param = {
+            'query': {'defu': ('>', 5)},
+        }
+        _, _ = self.raziel_repo.get_all(list_param)
+
+    def test_invalid_query_params1(self):
+        list_param = {
+            'query': {'def2u': ('>', 5)},
+        }
+        with self.assertRaises(NoCorrectColumnsException):
+            self.raziel_repo.get_all(list_param)
+
+    def test_invalid_query_params2(self):
+        list_param = {
+            'query': {'defu': ('o', 5)},
+        }
+        with self.assertRaises(IncorrectQueryException):
+            self.raziel_repo.get_all(list_param)
