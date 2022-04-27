@@ -19,15 +19,12 @@ class AbstractRepository(abc.ABC):
         except FileNotFoundError:
             self.dataframe = pd.DataFrame()
 
-    def _check_query(self, query):
-        pass
-
     @abc.abstractmethod
     def get_all(self, params: ListParams = None) -> list:
         """
         Get all objects from the database.
         :param params: ListParams
-        :return: (list, int) - list of objects and total number of objects
+        :return: list of objects and total number of objects
         """
         out = self._filter_dataframe(params)
         return out.values.tolist()
