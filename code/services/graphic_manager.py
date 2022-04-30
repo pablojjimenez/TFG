@@ -14,11 +14,6 @@ class GraphicManager:
         df.plot()
         pyplot.savefig('opt/get_chart_by_two_vars.png')
 
-    def get_pie_chart_by_two_vars(self, params: ListParams, var1: str, var2: str):
-        df = self._prepare_dataframe(params, var1, var2)
-        df.plot.pie()
-        pyplot.savefig('opt/get_pie_chart_by_two_vars.png')
-
     def get_bar_chart_by_two_vars(self, params: ListParams, var1: str, var2: str):
         df = self._prepare_dataframe(params, var1, var2)
         df.plot.pie()
