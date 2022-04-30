@@ -1,5 +1,7 @@
 import unittest
 
+import pandas
+
 from models.disease_model import Disease
 from models.exceptions import NoCorrectColumnsException, IncorrectQueryException
 from models.raziel_model import Raziel
@@ -112,3 +114,11 @@ class TestRazielRepo(unittest.TestCase):
         }
         with self.assertRaises(IncorrectQueryException):
             self.raziel_repo.get_all(list_param)
+
+    def test_prepare_dataframe(self):
+        obj = self.raziel_repo.prepare_and_gruping_dataframe(None, 'GEDAD', 'DEFU')
+        self.assertIsInstance(obj, pandas.Series)
+
+    def test_invalid_vars(self):
+        with self.assertRaises(NoCorrectColumnsException):
+            self.raziel_repo.prepare_and_gruping_dataframe(None, 'AAAA', 'B')
