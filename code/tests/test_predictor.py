@@ -19,6 +19,8 @@ class TestPredictor(unittest.TestCase):
         self.predict = PredictorManager(self.raziel_repo)
 
     def test_deaths_prediction(self):
-        self.predict.deaths_forecasting({
-            'query': {'GEDAD': ('==', 99),'causa': ('==', 999), 'CCAA': ('==', 99)}
-        }, 'ANO', 'DEFU')
+        df = self.predict.deaths_forecasting(None, 'ANO', 'DEFU')
+        self.assertEqual(len(df.columns.tolist()), 16)
+        expected_columns = ['ds', 'trend', 'yhat_lower', 'yhat_upper', 'trend_lower', 'trend_upper', 'additive_terms', 'additive_terms_lower', 'additive_terms_upper', 'yearly', 'yearly_lower', 'yearly_upper', 'multiplicative_terms', 'multiplicative_terms_lower', 'multiplicative_terms_upper', 'yhat']
+        for c in df.columns.tolist():
+            self.assertIn(c, expected_columns)

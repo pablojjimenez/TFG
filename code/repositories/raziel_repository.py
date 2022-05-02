@@ -46,7 +46,7 @@ class RazielRepository(AbstractRepository):
         cols = df.columns.tolist()
         for i in [6, 7, 8, 9, 10, 11, 12, 13, 14]:
             df = df.drop(labels=cols[i], axis=1)
-        df = df.groupby([var1])[var2].sum()
+        df = df.groupby([var1], as_index=False)[var2].sum()
         return df
 
     @staticmethod
