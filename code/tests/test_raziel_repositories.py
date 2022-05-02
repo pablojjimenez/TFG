@@ -117,7 +117,7 @@ class TestRazielRepo(unittest.TestCase):
 
     def test_prepare_dataframe(self):
         obj = self.raziel_repo.prepare_and_gruping_dataframe(None, 'GEDAD', 'DEFU')
-        self.assertIsInstance(obj, pandas.Series)
+        self.assertIsInstance(obj, pandas.DataFrame)
 
     def test_invalid_vars(self):
         with self.assertRaises(NoCorrectColumnsException):
