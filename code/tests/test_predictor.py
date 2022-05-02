@@ -21,6 +21,9 @@ class TestPredictor(unittest.TestCase):
     def test_deaths_prediction(self):
         df = self.predict.deaths_forecasting(None, 'ANO', 'DEFU')
         self.assertEqual(len(df.columns.tolist()), 16)
-        expected_columns = ['ds', 'trend', 'yhat_lower', 'yhat_upper', 'trend_lower', 'trend_upper', 'additive_terms', 'additive_terms_lower', 'additive_terms_upper', 'yearly', 'yearly_lower', 'yearly_upper', 'multiplicative_terms', 'multiplicative_terms_lower', 'multiplicative_terms_upper', 'yhat']
+        expected_columns = ['ds', 'trend', 'yhat_lower', 'yhat_upper', 'trend_lower', 'trend_upper',
+                            'additive_terms', 'additive_terms_lower', 'additive_terms_upper',
+                            'yearly', 'yearly_lower', 'yearly_upper', 'multiplicative_terms',
+                            'multiplicative_terms_lower', 'multiplicative_terms_upper', 'yhat']
         for c in df.columns.tolist():
             self.assertIn(c, expected_columns)
