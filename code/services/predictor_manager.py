@@ -1,4 +1,5 @@
 import pandas as pd
+from code.services.utils import assure_exists_directory
 from prophet import Prophet
 from matplotlib import pyplot
 from repositories.abstract_repository import ListParams
@@ -28,6 +29,7 @@ class PredictorManager:
         fcst = m.predict(future)
 
         m.plot(fcst)
+        assure_exists_directory('opt/')
         pyplot.savefig('opt/forecasting.png')
 
         return fcst
