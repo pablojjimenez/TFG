@@ -33,3 +33,15 @@ Como se ha descrito en anteriores capítulos de la memoria, los datos que maneja
 
 \subsubsection{Matplotlib}
 Es una biblioteca para crear todo tipo de gráficos, es muy utilizada en el ecosistema Python y además ha sido elegida por su compatibilidad con \textit{Pandas} que permite realizar gráficas a partir de objetos Dataframe propios de la biblioteca \textit{Pandas}
+
+\subsubsection{Prophet}
+Para realizar pequeñas predicciones basadas en series temporales he decidido utilizar la biblioteca Prophet que es open source y es mantenida por el equipo de Meta. Está disponible tanto en Python como en R. Su uso es muy simple y supone una herramienta muy potente cuando se disponen dataframes basados en columnas temporales. Sus principales características son las siguientes:
+\begin{itemize}
+\item Precisa y rápida: Los modelos se ajustan usando Stan, otra biblioteca de inferencia estadística bayesiana con estimación de verosimilitud penalizada.
+
+\item Automática: es capaz de reaccionar a faltas y anomalías en los datos.
+
+\item Pronósticos ajustables: permite configurar muchos parametros para modificar y ajustar los pronóstiocs agregando conocimiento del dominio.
+\end{itemize}
+
+Las características anteriores y su gran integración con los dataframes de Pandas han hecho que se elija esta opción sin duda alguna.
