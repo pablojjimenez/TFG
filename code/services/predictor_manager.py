@@ -1,5 +1,5 @@
 import pandas as pd
-from code.services.utils import assure_exists_directory
+from services.utils import assure_exists_directory
 from prophet import Prophet
 from matplotlib import pyplot
 from repositories.abstract_repository import ListParams

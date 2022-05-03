@@ -1,5 +1,5 @@
 from matplotlib import pyplot
-from code.services.utils import assure_exists_directory
+from services.utils import assure_exists_directory
 
 from repositories.abstract_repository import ListParams
 from repositories.raziel_repository import RazielRepository
