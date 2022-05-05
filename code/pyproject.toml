@@ -11,6 +11,8 @@ python-dotenv = "^0.20.0"
 pandas = "^1.4.2"
 matplotlib = "^3.5.1"
 prophet = "^1.0.1"
+fastapi = "^0.75.2"
+uvicorn = "^0.17.6"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.10.1"
@@ -24,3 +26,4 @@ build-backend = "poetry.core.masonry.api"
 [tool.taskipy.tasks]
 test = "python -m unittest tests/test_*.py"
 lint = "flake8 --statistics"
+serve = "uvicorn app:app --reload"
