@@ -31,7 +31,7 @@ class AbstractRepository(abc.ABC):
                 raise NoCorrectColumnsException(f'no colum {i}')
 
         for _, value in query.items():
-            for key, value2 in value.items():
+            for key, _ in value.items():
                 if key not in ['<', '>', '==']:
                     raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==']")
 
@@ -47,7 +47,6 @@ class AbstractRepository(abc.ABC):
 
     def filter_dataframe(self, params):
         out = self.dataframe
-        keys = params.keys() if params else []
         if params.get('query') is not None:
             self._check_query(params['query'])
             out = []

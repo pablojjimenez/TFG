@@ -59,7 +59,7 @@ class TestRazielRepo(unittest.TestCase):
         obj, tam = self.raziel_repo.get_all(list_param)
         self.assertEqual(tam, len(obj))
         self.assertEqual(tam, 5)
-        self.assertEqual(obj[0].id, 11)
+        self.assertEqual(obj[0].id, 3)
         self.assertEqual(obj[0].ano, 1980)
 
     def test_list_with_param_sort2(self):
@@ -71,11 +71,11 @@ class TestRazielRepo(unittest.TestCase):
         obj, tam = self.raziel_repo.get_all(list_param)
         self.assertEqual(tam, len(obj))
         self.assertEqual(tam, 5)
-        self.assertEqual(obj[0].id, 16)
+        self.assertEqual(obj[0].id, 1)
 
     def test_list_with_query(self):
         list_param = {
-            'query': {'ano': {'==', 1980}, 'CAUSA': {'==', 1}}
+            'query': {'ano': {'==': 1980}, 'CAUSA': {'==': 1}}
         }
         obj, tam = self.raziel_repo.get_all(list_param)
         self.assertEqual(tam, 6)
@@ -84,41 +84,41 @@ class TestRazielRepo(unittest.TestCase):
 
     def test_list_with_all_list_params(self):
         list_param = {
-            'query': {'defu': {'>', 5}},
+            'query': {'defu': {'>': 5}},
             'sort': 'cruda',
             'limit': 3,
             'page': 2
         }
         obj, tam = self.raziel_repo.get_all(list_param)
         self.assertEqual(tam, list_param['limit'])
-        self.assertEqual(obj[0].id, 1)
-        self.assertEqual(obj[1].id, 9)
-        self.assertEqual(obj[2].id, 16)
+        self.assertEqual(obj[0].id, 15)
+        self.assertEqual(obj[1].id, 14)
+        self.assertEqual(obj[2].id, 9)
 
     def test_valid_query_params(self):
         list_param = {
-            'query': {'defu': {'>', 5}},
+            'query': {'defu': {'>': 5}},
         }
         _, _ = self.raziel_repo.get_all(list_param)
 
     def test_invalid_query_params1(self):
         list_param = {
-            'query': {'def2u': {'>', 5}},
+            'query': {'def2u': {'>': 5}},
         }
         with self.assertRaises(NoCorrectColumnsException):
             self.raziel_repo.get_all(list_param)
 
     def test_invalid_query_params2(self):
         list_param = {
-            'query': {'defu': {'o', 5}},
+            'query': {'defu': {'o': 5}},
         }
         with self.assertRaises(IncorrectQueryException):
             self.raziel_repo.get_all(list_param)
 
     def test_prepare_dataframe(self):
-        obj = self.raziel_repo.prepare_and_gruping_dataframe(None, 'GEDAD', 'DEFU')
+        obj = self.raziel_repo.prepare_and_gruping_dataframe({}, 'GEDAD', 'DEFU')
         self.assertIsInstance(obj, pandas.DataFrame)
 
     def test_invalid_vars(self):
         with self.assertRaises(NoCorrectColumnsException):
-            self.raziel_repo.prepare_and_gruping_dataframe(None, 'AAAA', 'B')
+            self.raziel_repo.prepare_and_gruping_dataframe({}, 'AAAA', 'B')
