@@ -1,6 +1,8 @@
 import abc
 import pandas as pd
-from typing import Optional, TypedDict
+from typing import Optional
+
+from typing_extensions import TypedDict
 
 from models.exceptions import NoCorrectColumnsException, IncorrectQueryException
 
@@ -29,8 +31,9 @@ class AbstractRepository(abc.ABC):
                 raise NoCorrectColumnsException(f'no colum {i}')
 
         for _, value in query.items():
-            if value[0] not in ['<', '>', '==']:
-                raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==']")
+            for key, value2 in value.items():
+                if key not in ['<', '>', '==']:
+                    raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==']")
 
     @abc.abstractmethod
     def get_all(self, params: ListParams = None) -> list:
@@ -45,19 +48,23 @@ class AbstractRepository(abc.ABC):
     def filter_dataframe(self, params):
         out = self.dataframe
         keys = params.keys() if params else []
-        if 'query' in keys:
+        if params.get('query') is not None:
             self._check_query(params['query'])
-            query = ' & '.join([f'{k.upper()}{v[0]}{v[1]}' for k, v in params['query'].items()])
+            out = []
+            for k, v in list(params['query'].items()):
+                e = list(v.items())
+                out.append(f'{k.upper()}{e[0][0]}{e[0][1]}')
+            query = ' & '.join(out)
             out = self.dataframe.query(query)
-        if 'sort' in keys:
-            asc = params['sort'][0] == '-'
-            sort_by = params['sort'][1:] if asc else params['sort']
-            out = out.sort_values(by=sort_by.upper(), ascending=asc)
-        if 'limit' in keys:
-            page = params['page'] if not params['page'] or params['page'] != 1 else 0
+        if params.get('limit') is not None:
+            page = 0 if params['page'] is None or params['page'] == 1 else params['page']
             ini = page * params['limit'] - params['limit'] if page != 0 else 0
             end = params['limit'] * page if page != 0 else params['limit']
             out = out.iloc[ini:end]
+        if params.get('sort') is not None:
+            asc = params['sort'][0] == '-'
+            sort_by = params['sort'][1:] if asc else params['sort']
+            out = out.sort_values(by=sort_by.upper(), ascending=asc)
         return out
 
     @abc.abstractmethod

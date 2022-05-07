@@ -75,7 +75,7 @@ class TestRazielRepo(unittest.TestCase):
 
     def test_list_with_query(self):
         list_param = {
-            'query': {'ano': ('==', 1980), 'CAUSA': ('==', 1)}
+            'query': {'ano': {'==', 1980}, 'CAUSA': {'==', 1}}
         }
         obj, tam = self.raziel_repo.get_all(list_param)
         self.assertEqual(tam, 6)
@@ -84,7 +84,7 @@ class TestRazielRepo(unittest.TestCase):
 
     def test_list_with_all_list_params(self):
         list_param = {
-            'query': {'defu': ('>', 5)},
+            'query': {'defu': {'>', 5}},
             'sort': 'cruda',
             'limit': 3,
             'page': 2
@@ -97,20 +97,20 @@ class TestRazielRepo(unittest.TestCase):
 
     def test_valid_query_params(self):
         list_param = {
-            'query': {'defu': ('>', 5)},
+            'query': {'defu': {'>', 5}},
         }
         _, _ = self.raziel_repo.get_all(list_param)
 
     def test_invalid_query_params1(self):
         list_param = {
-            'query': {'def2u': ('>', 5)},
+            'query': {'def2u': {'>', 5}},
         }
         with self.assertRaises(NoCorrectColumnsException):
             self.raziel_repo.get_all(list_param)
 
     def test_invalid_query_params2(self):
         list_param = {
-            'query': {'defu': ('o', 5)},
+            'query': {'defu': {'o', 5}},
         }
         with self.assertRaises(IncorrectQueryException):
             self.raziel_repo.get_all(list_param)
