@@ -14,16 +14,8 @@ El objetivo es que el sistema sea capaz de darle al usuario la capacidad de cono
 ## Personas
 De esta forma, tanto por la parte del desarrollo como por la del interesado en el producto final, pueden no solo hacerse una mejor idea de los objetivos del mismo, sino también justificar su creación.
 
-Vamos a tratar de crear tres personalidades lo más variopintas posibles en aras de enfocarnos más aún en el usuario y dotar de mayor calidad el resultado final, de modo que podamos abarcar por completo el entorno de influencia del problema.
+Voy a tratar de crear tres personalidades lo más variopintas posibles en aras de enfocarnos más aún en el usuario y dotar de mayor calidad el resultado final, de modo que podamos abarcar por completo el entorno de influencia del problema.
 
-| Nombre | Carlos |
-| --- | --- |
-| Edad | 49 |
-| Profesión | Periodísta |
-| Personalidad | - Seguro de sí mismo. Motivador. Deportista. |
-| ¿Cuál es su entorno? | Sus amigos. Sus compañeros de trabajo. Su pareja. |
-| ¿Qué dispositivos utiliza en su día a día? | - Un smartphone que le sirve entre otras cosas para grabar las entrevistas. Un tablet que le sirve para llevar la documentación a las entrevistas y consultar diarios.Un smartwatch. Un ordenador de sobremesa en la oficina. |
-| ¿Cuál es su actitud hacía la tecnología? | Atrevido. Utiliza distintos sitemas operativos. Soltura con aplicaciones ofimáticas. Soltura navegando a través de internet. |
 
 | Nombre | Raquel |
 | --- | --- |
@@ -36,12 +28,12 @@ Vamos a tratar de crear tres personalidades lo más variopintas posibles en aras
 
 | Nombre | Isabel                                                                         |
 | --- |--------------------------------------------------------------------------------|
-| Edad | 45                                                                             |
-| Profesión | Medica de familia.                                                             |
+| Edad | 45                                                                           |
+| Profesión | Software engineer                                                       |
 | Personalidad | Aventurada. Protagonista.                                                      |
 | ¿Cuál es su entorno? | Su familia. Sus padres.  Su trabajo                                            |
-| ¿Qué dispositivos utiliza en su día a día? | Un ordenador de sobre mesa. Un smartphone. Un iPad que comparte con su marido. |
-| ¿Cuál es su actitud hacía la tecnología? | Limitada. Proactiva.                                                           |
+| ¿Qué dispositivos utiliza en su día a día? | Un ordenador de sobre mesa. Un smartphone.  |
+| ¿Cuál es su actitud hacía la tecnología? | Valiente. Proactiva.                                                           |
 
 ## Generación de documentación
 La documentación se entrega continuamente en las [Releases](https://github.com/pablojjimenez/TFG/releases/tag/0.0.1) del repositorio.
