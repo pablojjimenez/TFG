@@ -26,12 +26,12 @@ Voy a tratar de crear tres personalidades lo más variopintas posibles en aras d
 | ¿Qué dispositivos utiliza en su día a día? | Un portátil. Un smartphone. |
 | ¿Cuál es su actitud hacía la tecnología? | Perezosa.  Sabe programar. |
 
-| Nombre | Isabel                                                                         |
-| --- |--------------------------------------------------------------------------------|
+| Nombre | Isabel                                                                     |
+| --- |-------------------------------------------------------------------------------|
 | Edad | 45                                                                           |
-| Profesión | Software engineer                                                       |
-| Personalidad | Aventurada. Protagonista.                                                      |
-| ¿Cuál es su entorno? | Su familia. Sus padres.  Su trabajo                                            |
+| Profesión | Matemártica                                                             |
+| Personalidad | Aventurada. Protagonista.                                            |
+| ¿Cuál es su entorno? | Su familia. Sus padres.  Su trabajo.                         |
 | ¿Qué dispositivos utiliza en su día a día? | Un ordenador de sobre mesa. Un smartphone.  |
 | ¿Cuál es su actitud hacía la tecnología? | Valiente. Proactiva.                                                           |
 
