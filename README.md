@@ -9,7 +9,7 @@
 La motivación es facilitar los estudios sobre la evolución de las defunciones según causa de muerte aprovechando los datos públicos que se publican anualmente.
 
 ## Objetivos
-El objetivo es que el sistema sea capaz de darle al usuario la capacidad de conocer la evolución de las causas de muerte. Las causas de muerte son clasificadas según la Clasificación Internacional de Enfermedades y están clasificadas atendiendo a distintas variables. El sistema debe de atender a usuarios con necesidades distintas, para identificarlos se ha utilizado la herramienta de personas ficticias, candidatos a utilizar este software en un futuro.
+El objetivo es que el sistema sea capaz de darle al usuario la capacidad de conocer la evolución de las causas de muerte. De forma que se pueda consultar de forma sencilla los datos almacenados. Las causas de muerte están clasificadas según la Clasificación Internacional de Enfermedades y atendiendo a distintas variables. El sistema debe de atender a los usuarios diana de la app (candidatos a utilizar este software en un futuro), para identificarlos se ha utilizado la herramienta de personas ficticias.
 
 ## Personas
 De esta forma, tanto por la parte del desarrollo como por la del interesado en el producto final, pueden no solo hacerse una mejor idea de los objetivos del mismo, sino también justificar su creación.
