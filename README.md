@@ -29,7 +29,7 @@ Voy a tratar de crear tres personalidades lo más variopintas posibles en aras d
 | Nombre | Isabel                                                                     |
 | --- |-------------------------------------------------------------------------------|
 | Edad | 45                                                                           |
-| Profesión | Matemártica                                                             |
+| Profesión | Matemática                                                             |
 | Personalidad | Aventurada. Protagonista.                                            |
 | ¿Cuál es su entorno? | Su familia. Sus padres.  Su trabajo.                         |
 | ¿Qué dispositivos utiliza en su día a día? | Un ordenador de sobre mesa. Un smartphone.  |
