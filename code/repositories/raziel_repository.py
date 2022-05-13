@@ -37,7 +37,7 @@ class RazielRepository(AbstractRepository):
         return data_objs, len(data_objs)
 
     def get_one(self, id: int) -> object:
-        data = super().get_one('id', id)
+        data = super().get_one('ID', id)
         return self._transform_to_model(data) if data else None
 
     def prepare_and_gruping_dataframe(self, params: ListParams, var1: str, var2: str):
