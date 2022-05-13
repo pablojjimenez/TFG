@@ -24,6 +24,7 @@ def get_diseases(sort: str = None, query: str = None, page: int = None, limit: i
     """
     c = DiseaseRepository('data/diseases', CieRepository('data/cie'))
     p = transform_params(sort, query, page, limit)
+    print(p)
     objs, tam = c.get_all(p)
     return {
         'items': objs,
@@ -92,7 +93,9 @@ def get_ages_groups(sort: str = None, query: str = None, page: int = None, limit
     - `limit` limnite de elementos
     """
     c = GedadRepository('data/grupos_edad')
-    objs, tam = c.get_all(transform_params(sort, query, page, limit))
+    d = transform_params(sort, query, page, limit)
+    print(d)
+    objs, tam = c.get_all(d)
     return {
         'items': objs,
         'length': tam
@@ -124,7 +127,7 @@ def get_raziel_diseases(sort: str = None, query: str = None, page: int = None, l
 @router.get("/vars-meaning")
 def get_vars_meaning():
     c = VarsRepository('vars')
-    objs, tam = c.get_all(None)
+    objs, tam = c.get_all({})
     return {
         'items': objs,
         'length': tam
