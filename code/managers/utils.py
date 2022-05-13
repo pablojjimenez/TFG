@@ -18,4 +18,4 @@ def transform_params(sort: str = None, query: str = None, page: int = None, limi
         'sort': sort,
         'limit': limit,
         'page': page
-    } if sort is not None and query is not None and page is not None and limit is not None else {}
+    }
