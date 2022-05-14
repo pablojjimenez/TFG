@@ -18,7 +18,7 @@ class AbstractRepository(abc.ABC):
 
     def __init__(self, name):
         try:
-            self.dataframe = pd.read_csv(f"{name}.csv")
+            self.dataframe = pd.read_csv(f"data/{name}.csv")
         except FileNotFoundError:
             self.dataframe = pd.DataFrame()
 
@@ -47,6 +47,7 @@ class AbstractRepository(abc.ABC):
 
     def filter_dataframe(self, params):
         out = self.dataframe
+        params = params if params is not None else {}
         if params.get('query') is not None:
             self._check_query(params['query'])
             out = []

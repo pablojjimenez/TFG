@@ -127,7 +127,7 @@ def get_raziel_diseases(sort: str = None, query: str = None, page: int = None, l
 @router.get("/vars-meaning")
 def get_vars_meaning():
     c = VarsRepository('vars')
-    objs, tam = c.get_all({})
+    objs, tam = c.get_all()
     return {
         'items': objs,
         'length': tam

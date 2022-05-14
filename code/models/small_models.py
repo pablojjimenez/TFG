@@ -10,7 +10,7 @@ class Cie:
 
 @dataclass
 class Vars:
-    id_var: str
+    id: str
     description: str
 
 
