@@ -24,7 +24,6 @@ def get_diseases(sort: str = None, query: str = None, page: int = None, limit: i
     """
     c = DiseaseRepository('data/diseases', CieRepository('data/cie'))
     p = transform_params(sort, query, page, limit)
-    print(p)
     objs, tam = c.get_all(p)
     return {
         'items': objs,
