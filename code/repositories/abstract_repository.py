@@ -18,7 +18,7 @@ class AbstractRepository(abc.ABC):
 
     def __init__(self, name):
         try:
-            self.dataframe = pd.read_csv(f"data/{name}.csv")
+            self.dataframe = pd.read_csv(f"{name}.csv")
         except FileNotFoundError:
             self.dataframe = pd.DataFrame()
 

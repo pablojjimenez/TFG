@@ -13,8 +13,9 @@ def assure_exists_directory(directory: str):
 
 
 def transform_params(sort: str = None, query: str = None, page: int = None, limit: int = None):
+    query = json.loads(query) if query is not None else None
     return {
-        'query': json.loads(query),
+        'query': query,
         'sort': sort,
         'limit': limit,
         'page': page

@@ -67,7 +67,7 @@ def get_cies(sort: str = None, query: str = None, page: int = None, limit: int =
 
 
 @router.get("/cie")
-def get_cies(sort: str = None, query: str = None, page: int = None, limit: int = None):
+def get_cies(sort: str = None, query: str = None, page: int = 1, limit: int = 100):
     """
     Get all CIE diseases clasification.
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
@@ -93,9 +93,7 @@ def get_ages_groups(sort: str = None, query: str = None, page: int = None, limit
     - `limit` limnite de elementos
     """
     c = GedadRepository('data/grupos_edad')
-    d = transform_params(sort, query, page, limit)
-    print(d)
-    objs, tam = c.get_all(d)
+    objs, tam = c.get_all(transform_params(sort, query, page, limit))
     return {
         'items': objs,
         'length': tam
@@ -103,7 +101,7 @@ def get_ages_groups(sort: str = None, query: str = None, page: int = None, limit
 
 
 @router.get("/raziel")
-def get_raziel_diseases(sort: str = None, query: str = None, page: int = None, limit: int = None):
+def get_raziel_diseases(sort: str = None, query: str = None, page: int = 1, limit: int = 100):
     """
     Grupos de edad disponibles para clasificar.
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
@@ -117,7 +115,8 @@ def get_raziel_diseases(sort: str = None, query: str = None, page: int = None, l
         CcaaRepository('data/ccaas'),
         GedadRepository('data/grupos_edad')
     )
-    objs, tam = c.get_all(transform_params(sort, query, page, limit))
+    p = transform_params(sort, query, page, limit)
+    objs, tam = c.get_all(p)
     return {
         'items': objs,
         'length': tam
@@ -126,7 +125,7 @@ def get_raziel_diseases(sort: str = None, query: str = None, page: int = None, l
 
 @router.get("/vars-meaning")
 def get_vars_meaning():
-    c = VarsRepository('vars')
+    c = VarsRepository('data/vars')
     objs, tam = c.get_all()
     return {
         'items': objs,
