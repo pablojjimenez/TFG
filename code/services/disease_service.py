@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException
+from fastapi.exceptions import RequestValidationError
 
 from managers.utils import transform_params
 from repositories.ccaa_repository import CcaaRepository
@@ -12,7 +13,6 @@ router = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-
 @router.get("/diseases", status_code=200)
 def get_diseases(sort: str = None, query: str = None, page: int = None, limit: int = None):
     """
@@ -23,8 +23,11 @@ def get_diseases(sort: str = None, query: str = None, page: int = None, limit: i
     - `limit` limnite de elementos
     """
     c = DiseaseRepository('data/diseases', CieRepository('data/cie'))
-    p = transform_params(sort, query, page, limit)
-    objs, tam = c.get_all(p)
+    try:
+        p = transform_params(sort, query, page, limit)
+        objs, tam = c.get_all(p)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
     return {
         'items': objs,
         'length': tam
