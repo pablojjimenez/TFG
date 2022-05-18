@@ -18,7 +18,7 @@ class PredictorManager:
         :param var2: projection value
         :return: forecast dataframe
         """
-        df = self.raziel_repo.prepare_and_gruping_dataframe(params, var1, var2)
+        df = self.raziel_repo.prepare_and_grouping_dataframe(params, var1, var2)
         df = df.rename(columns={'DEFU': 'y', 'ANO': 'year'})
         df['y'][40] = df['y'].mean()  # to avoid the covid 19 peak
 

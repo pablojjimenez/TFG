@@ -40,7 +40,7 @@ class RazielRepository(AbstractRepository):
         data = super().get_one('id', id)
         return self._transform_to_model(data) if data else None
 
-    def prepare_and_gruping_dataframe(self, params: ListParams, var1: str, var2: str):
+    def prepare_and_grouping_dataframe(self, params: ListParams, var1: str, var2: str):
         df = self.filter_dataframe(params)
         self._check_params(df, var1, var2)
         cols = df.columns.tolist()
