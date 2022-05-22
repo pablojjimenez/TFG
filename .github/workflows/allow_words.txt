@@ -70,3 +70,5 @@ Dataframe
 Matplotlib
 dataframes
 bayesiana
+clustering
+scikit

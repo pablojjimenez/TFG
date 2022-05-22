@@ -1,7 +1,5 @@
 import unittest
 
-import pandas
-
 from models.disease_model import Disease
 from models.exceptions import NoCorrectColumnsException, IncorrectQueryException
 from models.raziel_model import Raziel

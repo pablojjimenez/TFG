@@ -1,4 +1,3 @@
-from models.exceptions import NoCorrectColumnsException
 from models.small_models import Sex
 from repositories.abstract_repository import AbstractRepository, ListParams
 from models.raziel_model import Raziel
@@ -40,11 +39,11 @@ class RazielRepository(AbstractRepository):
         data = super().get_one('ID', id)
         return self._transform_to_model(data) if data else None
 
-    def prepare_and_gruping_dataframe(self, params: ListParams, var1: str, var2: str):
+    def prepare_and_grouping_dataframe(self, params: ListParams, var1: str, var2: str):
         df = self.filter_dataframe(params)
         self._check_params(df, var1, var2)
         cols = df.columns.tolist()
-        for i in [6, 7, 8, 9, 10, 11, 12, 13, 14]:
+        for i in range(6, 14):
             df = df.drop(labels=cols[i], axis=1)
         df = df.groupby([var1], as_index=False)[var2].sum()
         return df

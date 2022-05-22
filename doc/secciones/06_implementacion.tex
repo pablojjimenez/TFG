@@ -35,13 +35,10 @@ Como se ha descrito en anteriores capítulos de la memoria, los datos que maneja
 Es una biblioteca para crear todo tipo de gráficos, es muy utilizada en el ecosistema Python y además ha sido elegida por su compatibilidad con \textit{Pandas} que permite realizar gráficas a partir de objetos Dataframe propios de la biblioteca \textit{Pandas}
 
 \subsubsection{Prophet}
-Para realizar pequeñas predicciones basadas en series temporales he decidido utilizar la biblioteca Prophet que es open source y es mantenida por el equipo de Meta. Está disponible tanto en Python como en R. Su uso es muy simple y supone una herramienta muy potente cuando se disponen dataframes basados en columnas temporales. Sus principales características son las siguientes:
-\begin{itemize}
-\item Precisa y rápida: Los modelos se ajustan usando Stan, otra biblioteca de inferencia estadística bayesiana con estimación de verosimilitud penalizada.
+Es necesario poder obtener predicciones basadas en series temporales. Busco que la predicción sea rápida. Sea automática de forma que no haya que configurar muchos parámetros y que el pronóstico que ofrece sea ajustable; esto es, que permita modificar y ajustar los pronósticos agregando conocimiento del dominio.
 
-\item Automática: es capaz de reaccionar a faltas y anomalías en los datos.
+La primera opción y más famosa en el lenguaje Python es scikit-learn, una biblioteca open source de machine learning que ofrece infinidad de algoritmos: de clasificación, regresión, clustering, selección de modelos, preprocesado...
 
-\item Pronósticos ajustables: permite configurar muchos parámetros para modificar y ajustar los pronósticos agregando conocimiento del dominio.
-\end{itemize}
+Por otro lado, tenemos Prophet una biblioteca open source para Python y R desarrollada por Meta. Sus posibilidades son mas limitadas que las que nos ofrece scikit-learn pero por el contrario es muy básica y sencilla tanto de instalar como de usar. Además, su funcionalidad es justo la que buscamos, poder realizar predicciones sobre series temporales.
 
-Las características anteriores y su gran integración con los dataframes de Pandas han hecho que se elija esta opción sin duda alguna.
+En Prophet, los modelos se ajustan usando Stan, otra biblioteca de inferencia estadística bayesiana con estimación de verosimilitud penalizada.
