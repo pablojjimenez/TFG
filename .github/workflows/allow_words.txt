@@ -68,3 +68,7 @@ HUs
 HU
 Dataframe
 Matplotlib
+dataframes
+bayesiana
+clustering
+scikit

@@ -33,3 +33,12 @@ Como se ha descrito en anteriores capítulos de la memoria, los datos que maneja
 
 \subsubsection{Matplotlib}
 Es una biblioteca para crear todo tipo de gráficos, es muy utilizada en el ecosistema Python y además ha sido elegida por su compatibilidad con \textit{Pandas} que permite realizar gráficas a partir de objetos Dataframe propios de la biblioteca \textit{Pandas}
+
+\subsubsection{Prophet}
+Es necesario poder obtener predicciones basadas en series temporales. Busco que la predicción sea rápida. Sea automática de forma que no haya que configurar muchos parámetros y que el pronóstico que ofrece sea ajustable; esto es, que permita modificar y ajustar los pronósticos agregando conocimiento del dominio.
+
+La primera opción y más famosa en el lenguaje Python es scikit-learn, una biblioteca open source de machine learning que ofrece infinidad de algoritmos: de clasificación, regresión, clustering, selección de modelos, preprocesado...
+
+Por otro lado, tenemos Prophet una biblioteca open source para Python y R desarrollada por Meta. Sus posibilidades son mas limitadas que las que nos ofrece scikit-learn pero por el contrario es muy básica y sencilla tanto de instalar como de usar. Además, su funcionalidad es justo la que buscamos, poder realizar predicciones sobre series temporales.
+
+En Prophet, los modelos se ajustan usando Stan, otra biblioteca de inferencia estadística bayesiana con estimación de verosimilitud penalizada.
