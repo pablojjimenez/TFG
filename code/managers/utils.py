@@ -1,5 +1,5 @@
-import json
 import os
+from typing import Dict
 
 
 def assure_exists_directory(directory: str):
@@ -12,8 +12,7 @@ def assure_exists_directory(directory: str):
         os.makedirs(directory, exist_ok=False)
 
 
-def transform_params(sort: str = None, query: str = None, page: int = None, limit: int = None):
-    query = json.loads(query) if query is not None else None
+def transform_params(query: Dict[str, Dict[str, str]], sort: str = None, page: int = None, limit: int = None):
     return {
         'query': query,
         'sort': sort,
