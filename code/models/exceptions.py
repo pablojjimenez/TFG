@@ -20,5 +20,5 @@ class NoCorrectColumnsException(Exception):
 
 class IncorrectQueryException(Exception):
     def __init__(self, sms):
-        sms += "\nexample of use: '{'gedad': ('==', 99), 'causa': ('==', 999), 'ccaa': ('==', 99)}'"
+        sms += ". example of use: '{'gedad': ('==', 99), 'causa': ('==', 999), 'ccaa': ('==', 99)}'"
         Exception.__init__(self, sms)
