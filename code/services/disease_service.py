@@ -1,5 +1,8 @@
+from json import JSONDecodeError
 from fastapi import APIRouter, HTTPException
 from fastapi.exceptions import RequestValidationError
+from pydantic import BaseModel
+from typing import Union, Dict
 
 from managers.utils import transform_params
 from repositories.ccaa_repository import CcaaRepository
@@ -9,12 +12,15 @@ from repositories.gedad_repository import GedadRepository
 from repositories.raziel_repository import RazielRepository
 from repositories.vars_repository import VarsRepository
 
-router = APIRouter(
+dataRouter = APIRouter(
     responses={404: {"description": "Not found"}}
 )
 
-@router.get("/diseases", status_code=200)
-def get_diseases(sort: str = None, query: str = None, page: int = None, limit: int = None):
+class QueryModel(BaseModel):
+    query: Union[Dict[str, str], None]
+
+@dataRouter.get("/diseases", status_code=200)
+def get_diseases(query: QueryModel = None, sort: str = None, page: int = None, limit: int = None):
     """
     Get all disease atendiendo al siguiente orden
     - `sort` propiedad por la que ordenar `'-propiedad'` sentido descendiente
@@ -23,18 +29,20 @@ def get_diseases(sort: str = None, query: str = None, page: int = None, limit: i
     - `limit` limnite de elementos
     """
     c = DiseaseRepository('data/diseases', CieRepository('data/cie'))
+    
     try:
-        p = transform_params(sort, query, page, limit)
-        objs, tam = c.get_all(p)
-    except Exception as e:
+        print(query)
+    except JSONDecodeError:
         raise HTTPException(status_code=400, detail=str(e))
+
+    objs, tam = c.get_all(p)
     return {
         'items': objs,
         'length': tam
     }
 
 
-@router.get("/ccaas")
+@dataRouter.get("/ccaas")
 def get_ccaas(sort: str = None, query: str = None, page: int = None, limit: int = None):
     """
     Get all disease atendiendo al siguiente orden
@@ -44,14 +52,21 @@ def get_ccaas(sort: str = None, query: str = None, page: int = None, limit: int 
     - `limit` limnite de elementos
     """
     c = CcaaRepository('data/ccaas')
-    objs, tam = c.get_all(transform_params(sort, query, page, limit))
+
+    try:
+        p = transform_params(sort, query, page, limit)
+    except JSONDecodeError:
+        raise HTTPException(status_code=400, detail='Bad syntax for query json')
+    
+
+    objs, tam = c.get_all(p)
     return {
         'items': objs,
         'length': tam
     }
 
 
-@router.get("/cie")
+@dataRouter.get("/cie")
 def get_cies(sort: str = None, query: str = None, page: int = None, limit: int = None):
     """
     Get all CIE diseases clasification.
@@ -61,14 +76,20 @@ def get_cies(sort: str = None, query: str = None, page: int = None, limit: int =
     - `limit` limnite de elementos
     """
     c = CieRepository('data/cie')
-    objs, tam = c.get_all(transform_params(sort, query, page, limit))
+
+    try:
+        p = transform_params(sort, query, page, limit)
+        objs, tam = c.get_all(p)
+    except (JSONDecodeError, Exception):
+        raise HTTPException(status_code=400, detail='Bad syntax for query json')
+
     return {
         'items': objs,
         'length': tam
     }
 
 
-@router.get("/cie")
+@dataRouter.get("/cie")
 def get_cies(sort: str = None, query: str = None, page: int = 1, limit: int = 100):
     """
     Get all CIE diseases clasification.
@@ -78,31 +99,41 @@ def get_cies(sort: str = None, query: str = None, page: int = 1, limit: int = 10
     - `limit` limnite de elementos
     """
     c = CieRepository('data/cie')
-    objs, tam = c.get_all(transform_params(sort, query, page, limit))
+    try:
+        p = transform_params(sort, query, page, limit)
+    except JSONDecodeError or Exception:
+        raise HTTPException(status_code=400, detail='Bad syntax for query json')
+    
+    objs, tam = c.get_all(p)
     return {
         'items': objs,
         'length': tam
     }
 
 
-@router.get("/ages-groups")
+@dataRouter.get("/ages-groups")
 def get_ages_groups(sort: str = None, query: str = None, page: int = None, limit: int = None):
     """
-    Grupos de edad disponibles para clasificar.
+    Grupos de edad disponibles para clasificar. Por defecto se devuelven 100 entradas.
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
     - `query` formato de la query: `{'def2u': ('>', 5)}`,
     - `page` numero de la pagina solicitada
     - `limit` limnite de elementos
     """
     c = GedadRepository('data/grupos_edad')
-    objs, tam = c.get_all(transform_params(sort, query, page, limit))
+    try:
+        p = transform_params(sort, query, page, limit)
+    except JSONDecodeError:
+        raise HTTPException(status_code=400, detail='Bad syntax for query json')
+    
+    objs, tam = c.get_all(p)
     return {
         'items': objs,
         'length': tam
     }
 
 
-@router.get("/raziel")
+@dataRouter.get("/raziel")
 def get_raziel_diseases(sort: str = None, query: str = None, page: int = 1, limit: int = 100):
     """
     Grupos de edad disponibles para clasificar.
@@ -117,7 +148,11 @@ def get_raziel_diseases(sort: str = None, query: str = None, page: int = 1, limi
         CcaaRepository('data/ccaas'),
         GedadRepository('data/grupos_edad')
     )
-    p = transform_params(sort, query, page, limit)
+    try:
+        p = transform_params(sort, query, page, limit)
+    except JSONDecodeError or Exception:
+        raise HTTPException(status_code=400, detail='Bad syntax for query json')
+    
     objs, tam = c.get_all(p)
     return {
         'items': objs,
@@ -125,7 +160,7 @@ def get_raziel_diseases(sort: str = None, query: str = None, page: int = 1, limi
     }
 
 
-@router.get("/vars-meaning")
+@dataRouter.get("/vars-meaning")
 def get_vars_meaning():
     c = VarsRepository('data/vars')
     objs, tam = c.get_all()

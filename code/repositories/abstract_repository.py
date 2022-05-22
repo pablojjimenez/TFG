@@ -17,10 +17,10 @@ class ListParams(TypedDict, total=False):
 class AbstractRepository(abc.ABC):
 
     def __init__(self, name):
-        try:
-            self.dataframe = pd.read_csv(f"{name}.csv")
-        except FileNotFoundError:
-            self.dataframe = pd.DataFrame()
+        #try:
+        self.dataframe = pd.read_csv(f"{name}.csv")        
+        #except FileNotFoundError:
+            # self.dataframe = pd.DataFrame()
 
     def _check_query(self, query):
         keys = query.keys()
