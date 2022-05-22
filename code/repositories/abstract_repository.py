@@ -4,7 +4,7 @@ from typing import Optional
 
 from typing_extensions import TypedDict
 
-from models.exceptions import NoCorrectColumnsException, IncorrectQueryException
+from models.exceptions import NoCorrectColumnsException, IncorrectQueryException, DataIsNotAvaible
 
 
 class ListParams(TypedDict, total=False):
@@ -17,10 +17,10 @@ class ListParams(TypedDict, total=False):
 class AbstractRepository(abc.ABC):
 
     def __init__(self, name):
-        #try:
-        self.dataframe = pd.read_csv(f"{name}.csv")        
-        #except FileNotFoundError:
-            # self.dataframe = pd.DataFrame()
+        try:
+            self.dataframe = pd.read_csv(f"{name}.csv")
+        except FileNotFoundError:
+            raise DataIsNotAvaible()
 
     def _check_query(self, query):
         keys = query.keys()

@@ -22,3 +22,8 @@ class IncorrectQueryException(Exception):
     def __init__(self, sms):
         sms += ". example of use: '{'gedad': ('==', 99), 'causa': ('==', 999), 'ccaa': ('==', 99)}'"
         Exception.__init__(self, sms)
+
+
+class DataIsNotAvaible(Exception):
+    def __init__(self, sms):
+        Exception.__init__(self, "Data files are not available")
