@@ -20,7 +20,7 @@ class AbstractRepository(abc.ABC):
         try:
             self.dataframe = pd.read_csv(f"{name}.csv")
         except FileNotFoundError:
-            raise DataIsNotAvaible()
+            raise DataIsNotAvaible(name)
 
     def _check_query(self, query):
         keys = query.keys()
