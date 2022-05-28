@@ -1,12 +1,12 @@
 from fastapi import FastAPI
 
 from starlette.requests import Request
-from fastapi.exceptions import RequestValidationError
-from fastapi.exceptions import StarletteHTTPException, HTTPException
+from fastapi.exceptions import HTTPException
 from starlette.responses import Response, JSONResponse
 
 from services.disease_service import dataRouter
 from services.managers_service import managersRouter
+
 
 class validation_exception_handler:
     def __call__(self, request: Request, ex: Exception) -> Response:
