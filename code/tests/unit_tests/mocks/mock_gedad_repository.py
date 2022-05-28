@@ -1,10 +1,10 @@
 from repositories.abstract_repository import ListParams
-from repositories.disease_reopsitory import DiseaseRepository
+from repositories.gedad_repository import GedadRepository
 
 
-class MockDiseaseRepository(DiseaseRepository):
-    def __init__(self, mock_cie_repo):
-        super().__init__('tests/mocks/data/diseases', mock_cie_repo)
+class MockGedadRepository(GedadRepository):
+    def __init__(self):
+        super().__init__('tests/unit_tests/mocks/data/grupos_edad')
 
     def get_all(self, params: ListParams = None) -> (list, int):
         return super().get_all(params)
