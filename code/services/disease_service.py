@@ -1,8 +1,5 @@
-from json import JSONDecodeError
 from fastapi import APIRouter, HTTPException
-from fastapi.exceptions import RequestValidationError
-from pydantic import BaseModel
-from typing import Union, Dict
+from typing import Dict
 
 from managers.utils import transform_params
 from models.exceptions import IncorrectQueryException, NoCorrectColumnsException
@@ -19,7 +16,8 @@ dataRouter = APIRouter(
 
 
 @dataRouter.post("/diseases", status_code=200)
-def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None, page: int = 1, limit: int = 100):
+def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+                 page: int = 1, limit: int = 100):
     """
     Get all disease atendiendo al siguiente orden
     - `sort` propiedad por la que ordenar `'-propiedad'` sentido descendiente
@@ -42,7 +40,8 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None, page
 
 
 @dataRouter.post("/ccaas")
-def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None, page: int = 1, limit: int = 100):
+def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+              page: int = 1, limit: int = 100):
     """
     Get all disease atendiendo al siguiente orden
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
@@ -65,30 +64,8 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None, page: i
 
 
 @dataRouter.post("/cie")
-def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None, page: int = 1, limit: int = 100):
-    """
-    Get all CIE diseases clasification.
-    - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
-    - `query` formato de la query: `{'def2u': ('>', 5)}`,
-    - `page` numero de la pagina solicitada
-    - `limit` limnite de elementos
-    """
-    c = CieRepository('data/cie')
-
-    try:
-        p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
-    except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    return {
-        'items': objs,
-        'length': tam
-    }
-
-
-@dataRouter.post("/cie")
-def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None, page: int = 1, limit: int = 100):
+def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+             page: int = 1, limit: int = 100):
     """
     Get all CIE diseases clasification.
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
@@ -111,7 +88,8 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None, page: in
 
 
 @dataRouter.post("/ages-groups")
-def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None, page: int = 1, limit: int = 100):
+def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+                    page: int = 1, limit: int = 100):
     """
     Grupos de edad disponibles para clasificar. Por defecto se devuelven 100 entradas.
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
@@ -134,7 +112,8 @@ def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None, p
 
 
 @dataRouter.post("/raziel")
-def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None, page: int = 1, limit: int = 100):
+def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+                        page: int = 1, limit: int = 100):
     """
     Grupos de edad disponibles para clasificar.
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente

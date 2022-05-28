@@ -25,5 +25,5 @@ class IncorrectQueryException(Exception):
 
 
 class DataIsNotAvaible(Exception):
-    def __init__(self, sms):
-        Exception.__init__(self, "Data files are not available")
+    def __init__(self, file_name):
+        Exception.__init__(self, f"Data files are not available, opening {file_name}")
