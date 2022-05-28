@@ -116,3 +116,10 @@ class TestRazielRepo:
     def test_invalid_vars(self, mock_raziel_repo):
         with pytest.raises(NoCorrectColumnsException):
             mock_raziel_repo.prepare_and_grouping_dataframe({}, 'AAAA', 'B')
+
+    def test_invalid_columns(self, mock_raziel_repo):
+        list_param = {
+            'query': {'fake': {'==': 5}},
+        }
+        with pytest.raises(NoCorrectColumnsException):
+            mock_raziel_repo.get_all(list_param)
