@@ -14,6 +14,7 @@ prophet = "^1.0.1"
 fastapi = "^0.75.2"
 uvicorn = "^0.17.6"
 fastapi-utils = "^0.2.1"
+pytest = "^7.1.2"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.10.1"
@@ -25,6 +26,6 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.taskipy.tasks]
-test = "python -m unittest tests/test_*.py"
+test = "pytest"
 lint = "flake8 --statistics"
 serve = "uvicorn app:app --reload"
