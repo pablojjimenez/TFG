@@ -4,7 +4,7 @@ from repositories.gedad_repository import GedadRepository
 
 class MockGedadRepository(GedadRepository):
     def __init__(self):
-        super().__init__('tests/unit_tests/mocks/data/grupos_edad')
+        super().__init__('tests/mocks/data/grupos_edad')
 
     def get_all(self, params: ListParams = None) -> (list, int):
         return super().get_all(params)
