@@ -32,7 +32,7 @@ class AbstractRepository(abc.ABC):
 
         for _, value in query.items():
             for key, _ in value.items():
-                if key not in ['<', '>', '==']:
+                if key not in ['<', '>', '==', '!=']:
                     raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==']")
 
     @abc.abstractmethod
