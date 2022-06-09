@@ -12,3 +12,10 @@ class TestDiseaseRepo:
         obj = mock_disease.get_one(1)
         assert isinstance(obj, Disease)
         assert isinstance(obj.cie, Cie)
+
+    def test_two_queries_over_same_var(self, mock_disease):
+        list_param = {
+            'query': {'id': {'>': 1, '<': 3}}
+        }
+        _, tam = mock_disease.get_all(list_param)
+        assert tam == 1
