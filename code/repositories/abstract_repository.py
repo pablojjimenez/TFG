@@ -46,15 +46,16 @@ class AbstractRepository(abc.ABC):
         return out.values.tolist()
 
     def filter_dataframe(self, params):
+        """
+        Filter dataframe
+        :param params: ListParams
+        :return: dataframe filtered
+        """
         out = self.dataframe
         params = params if params is not None else {}
         if params.get('query') is not None:
             self._check_query(params['query'])
-            out = []
-            for k, v in list(params['query'].items()):
-                e = list(v.items())
-                out.append(f'{k.upper()}{e[0][0]}{e[0][1]}')
-            query = ' & '.join(out)
+            query = self.generate_vector_query(params['query'])
             out = self.dataframe.query(query)
         if params.get('limit') is not None:
             page = 0 if params['page'] is None or params['page'] == 1 else params['page']
@@ -66,6 +67,25 @@ class AbstractRepository(abc.ABC):
             sort_by = params['sort'][1:] if asc else params['sort']
             out = out.sort_values(by=sort_by.upper(), ascending=asc)
         return out
+
+    @staticmethod
+    def generate_vector_query(query):
+        """
+        Generate str query to pandas
+        :param query: json  with the constraints
+        :return: the query in str
+        """
+        out = []
+        for k, v in list(query.items()):
+            e = list(v.items())
+            for element in e:
+                if element[1] == '' and element[0] == '==':
+                    out.append(f'{k.upper()}.isnull()')
+                elif element[1] == '' and element[0] == '!=':
+                    out.append(f'{k.upper()}.notnull()')
+                else:
+                    out.append(f'{k.upper()}{element[0]}{element[1]}')
+        return ' & '.join(out)
 
     @abc.abstractmethod
     def get_one(self, key: str, id) -> object:
