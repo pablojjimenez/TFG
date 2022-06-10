@@ -42,3 +42,39 @@ La primera opción y más famosa en el lenguaje Python es scikit-learn, una bibl
 Por otro lado, tenemos Prophet una biblioteca open source para Python y R desarrollada por Meta. Sus posibilidades son mas limitadas que las que nos ofrece scikit-learn pero por el contrario es muy básica y sencilla tanto de instalar como de usar. Además, su funcionalidad es justo la que buscamos, poder realizar predicciones sobre series temporales.
 
 En Prophet, los modelos se ajustan usando Stan, otra biblioteca de inferencia estadística bayesiana con estimación de verosimilitud penalizada.
+
+\subsubsection{FastAPI}
+En aras de que el usuario pueda utilizar estos servicios de forma agnóstica sin tener que descargarse el código fuente e incluirlo en su proyecto a modo de biblioteca. Algo que por otra parte, supondría una gran restricción ya que el lenguaje de programación tendría que ser Python.
+
+Para ello, se ha implementado una interfaz de comunicación REST. Como bien es sabido, los servicios restful se apoyan del estándar HTTP y por tanto, hereda sus conocidas características. REST es \textit{stateless} cada vez que utilizamos un recurso necesitamos ofrecerle toda la información identificativa pues carece de memoria, utiliza el formato JSON para el intercambio de datos y expone una serie de recursos o \textit{endpoints} que son las operaciones disponibles a realizar.
+
+En el universo Python existen dos grandes frameworks para construir servicios restful: Flask y FastAPI.
+Flask es un microframework, que dispone de multitud de complementos lo que te permite construir cualquier servicio configurando correctamente todos estos complementos. 
+
+FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según la documentación \footnote{https://fastapi.tiangolo.com} oficial se podría igual al rendimiento que ofrece NodeJS o Go. Además, nos permite por defecto programar de forma asíncrona (muy interesante cuando hay acceso a bases de datos) y nos proporciona de forma automática una documentación OpenAPI.
+
+La API de este software expone dos blueprints \footnote{Llamamos blueprint al conjunto de recursos que comparte el mismo prefijo de URI (Identificador de recursos uniforme)}
+
+\begin{itemize}
+    \item \textit{/data} Definido por el conjunto de recursos disponibles. Todos ellos aceptan los siguientes parámetros en la cabecera de las peticiones \codeword{sort} para ordenar los datos en base a algún campo, \codeword{limit} para limitar la cantidad de datos (por defecto se entregan limitados a 100 elementos), \codeword{page} para especificar la página.
+    Y la siguiente estructura JSON como cuerpo de la petición:
+    \begin{verbatim}
+        {
+            "ID": {
+                ">": 1,
+                "<": 3
+            },
+            "CIE": {
+                "==": ""
+            }
+        }
+    \end{verbatim}
+    En este caso estaríamos indicando que queremos los elementos cuyos IDs se encuentran en el rango ]1, 3[ y cuyo campo CIE es vacío. Los operadores válido son: \codeword{==}, \codeword{<}, \codeword{>}
+
+    \item \textit{/managers} Dispone de tres recursos. Uno para generar gráficos lineales (ver figura): requiere dos variables como parámetros en la cabecera, una para indicar la agrupación y otra para la suma, como cuerpo de la llamada podemos pasar una query con la estructura especificada anteriormente. Por último, tenemos dos recursos para obtener la predicción y la gráfica ajustada en el tiempo que indiquemos.
+\end{itemize}
+
+\subsubsection{Documentación de la API}
+Con la ayuda de los recursos que pone a nuestra disposición FastAPI, se ha implementado una especificación OpenAPI. Esta especificación define una serie de propiedades en un formato legible por una máquina (suele usarse el formato JSON o YAML).
+
+Gracias a eso podemos generar una documentación basada en HTML que nos permite conocer los recursos epuestos de la API, los argumentos y las estructuras de las respuestas esperadas. 

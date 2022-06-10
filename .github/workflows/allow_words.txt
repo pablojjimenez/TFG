@@ -72,3 +72,10 @@ dataframes
 bayesiana
 clustering
 scikit
+FastAPI
+JSON
+microframework
+NodeJS
+OpenAPI
+URI
+YAML

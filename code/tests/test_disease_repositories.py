@@ -1,23 +1,21 @@
-import unittest
-
 from models.disease_model import Disease
 from models.small_models import Cie
 
-from tests.mocks.mock_cie_repository import MockCieRepository
-from tests.mocks.mock_disease_repository import MockDiseaseRepository
 
+class TestDiseaseRepo:
+    def test_get_one_uncomplete_disease_object(self, mock_disease):
+        obj = mock_disease.get_one(2)
+        assert isinstance(obj, Disease)
+        assert obj.cie is None
 
-class TestDiseaseRepo(unittest.TestCase):
+    def test_get_one_complete_disease_object(self, mock_disease):
+        obj = mock_disease.get_one(1)
+        assert isinstance(obj, Disease)
+        assert isinstance(obj.cie, Cie)
 
-    def setUp(self):
-        self.raziel_repo = MockDiseaseRepository(MockCieRepository())
-
-    def test_get_one_uncomplete_disease_object(self):
-        obj = self.raziel_repo.get_one(2)
-        self.assertIsInstance(obj, Disease)
-        self.assertEqual(obj.cie, None)
-
-    def test_get_one_complete_disease_object(self):
-        obj = self.raziel_repo.get_one(1)
-        self.assertIsInstance(obj, Disease)
-        self.assertIsInstance(obj.cie, Cie)
+    def test_two_queries_over_same_var(self, mock_disease):
+        list_param = {
+            'query': {'id': {'>': 1, '<': 3}}
+        }
+        _, tam = mock_disease.get_all(list_param)
+        assert tam == 1

@@ -37,16 +37,17 @@ class RazielRepository(AbstractRepository):
         return data_objs, len(data_objs)
 
     def get_one(self, id: int) -> object:
-        data = super().get_one('id', id)
+        data = super().get_one('ID', id)
         return self._transform_to_model(data) if data else None
 
-    def prepare_and_grouping_dataframe(self, params: ListParams, var1: str, var2: str):
+    def prepare_and_grouping_dataframe(self, params: ListParams, var1: str, var2: str,
+                                       add_index=False):
         df = self.filter_dataframe(params)
         self._check_params(df, var1, var2)
         cols = df.columns.tolist()
-        for i in range(6, 14):
+        for i in range(6, 15):
             df = df.drop(labels=cols[i], axis=1)
-        df = df.groupby([var1], as_index=False)[var2].sum()
+        df = df.groupby([var1], as_index=add_index)[var2].sum()
         return df
 
     @staticmethod
