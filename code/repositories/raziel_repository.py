@@ -1,5 +1,4 @@
 from models.exceptions import NoCorrectColumnsException
-from models.small_models import Sex
 from repositories.abstract_repository import AbstractRepository, ListParams
 from models.raziel_model import Raziel
 
@@ -15,7 +14,7 @@ class RazielRepository(AbstractRepository):
         params = {
             'ano': int(tuple[0]),
             'causa': self.disease_repo.get_one(tuple[1]),
-            'sexo': Sex.MALE if tuple[2] == 1 else Sex.FEMALE,
+            'sexo': int(tuple[2]),
             'ccaa': self.ccaas_repo.get_one(tuple[3]),
             'gedad': self.gedades_repo.get_one(tuple[4]),
             'defu': int(tuple[5]),
@@ -31,10 +30,10 @@ class RazielRepository(AbstractRepository):
         }
         return Raziel(params)
 
-    def get_all(self, params: ListParams = None) -> (list, int):
-        data = super().get_all(params)
+    def get_all(self, params: ListParams = None) -> (list, int, int):
+        data, ori_tam = super().get_all(params)
         data_objs = list(map(self._transform_to_model, data))
-        return data_objs, len(data_objs)
+        return data_objs, len(data_objs), ori_tam
 
     def get_one(self, id: int) -> object:
         data = super().get_one('ID', id)
@@ -42,7 +41,7 @@ class RazielRepository(AbstractRepository):
 
     def prepare_and_grouping_dataframe(self, params: ListParams, var1: str, var2: str,
                                        add_index=False):
-        df = self.filter_dataframe(params)
+        df = self.filter_dataframe(params)[0]
         self._check_params(df, var1, var2)
         cols = df.columns.tolist()
         for i in range(6, 15):

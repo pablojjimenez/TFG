@@ -3,14 +3,14 @@ from typing import Dict
 from models.disease_model import Disease
 from models.exceptions import NoAttributeException, NoCorrectTypeException, \
     InvalidIDException
-from models.small_models import Sex, Ccaa, Gedad
+from models.small_models import Ccaa, Gedad
 
 
 class Raziel(object):
     ALLOW_ATTRS = {
         'ano': int,
         'causa': Disease,
-        'sexo': Sex,
+        'sexo': int,
         'ccaa': Ccaa,
         'gedad': Gedad,
         'defu': int,
