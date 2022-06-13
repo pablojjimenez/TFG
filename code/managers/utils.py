@@ -2,7 +2,7 @@ import os
 from typing import Dict
 
 
-def assure_exists_directory(directory: str):
+def ensure_directory_exists(directory: str):
     """
     Create directory if not exists
     :param directory: directory name

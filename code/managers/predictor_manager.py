@@ -2,7 +2,7 @@ import pandas as pd
 from prophet import Prophet
 from matplotlib import pyplot
 
-from managers.utils import assure_exists_directory
+from managers.utils import ensure_directory_exists
 from repositories.abstract_repository import ListParams
 from repositories.raziel_repository import RazielRepository
 
@@ -33,7 +33,7 @@ class PredictorManager:
         fcst = m.predict(future)
 
         m.plot(fcst)
-        assure_exists_directory('opt/')
+        ensure_directory_exists('opt/')
         pyplot.savefig('opt/forecasting.png')
 
         return fcst
