@@ -10,7 +10,7 @@ class Raziel(object):
     ALLOW_ATTRS = {
         'ano': int,
         'causa': Disease,
-        'sexo': int,
+        'sx': int,
         'ccaa': Ccaa,
         'gedad': Gedad,
         'defu': int,

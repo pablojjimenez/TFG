@@ -2,7 +2,7 @@ import strawberry
 
 from graphql_services.graph_types import MyReturnType, CCAAFilter, CcaaDTO, DiseasesFilter, DiseaseDTO, RazielFilter, \
     RazielDTO
-from managers.utils import remove_nulls_from_json, change_key_operators, transform_params
+from managers.utils import remove_nulls_from_json, change_key_operators, transform_params, simplify_complex_objects
 from repositories.ccaa_repository import CcaaRepository
 from repositories.cie_repository import CieRepository
 from repositories.disease_reopsitory import DiseaseRepository
@@ -39,10 +39,11 @@ class Mutation:
     def get_raziel(self, query: RazielFilter = None, sort: str = None,
                    page: int = None, limit: int = None) -> MyReturnType[RazielDTO]:
         params = Mutation.commpute_mutations_params(query, sort, page, limit)
+        print(params)
         raziel = RazielRepository(
             'data/raziel',
             DiseaseRepository('data/diseases', CieRepository('data/cie')),
             CcaaRepository('data/ccaas'),
             GedadRepository('data/grupos_edad')
-        ).get_all(params)
+        ).get_all(simplify_complex_objects(params))
         return MyReturnType[RazielDTO](raziel[0], raziel[1])

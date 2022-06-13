@@ -41,7 +41,7 @@ class GedadDTO:
 class RazielDTO:
     ano: int
     causa: DiseaseDTO
-    sexo: int
+    sx: int
     ccaa: CcaaDTO
     gedad: GedadDTO
     defu: int
@@ -126,7 +126,7 @@ class RazielFilter(Filter):
     id: typing.Optional[FilterOperators[int]] = None
     ano: typing.Optional[FilterOperators[int]] = None
     causa: typing.Optional[DiseasesFilter] = None
-    sexo: typing.Optional[FilterOperators[float]] = None
+    sx: typing.Optional[FilterOperators[float]] = None
     ccaa: typing.Optional[FilterOperators[int]] = None
     gedad: typing.Optional[FilterOperators[int]] = None
     defu: typing.Optional[FilterOperators[int]] = None
