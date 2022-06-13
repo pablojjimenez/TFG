@@ -15,6 +15,7 @@ fastapi = "^0.75.2"
 uvicorn = "^0.17.6"
 fastapi-utils = "^0.2.1"
 pytest = "^7.1.2"
+graphql-core = "^3.2.1"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.10.1"
