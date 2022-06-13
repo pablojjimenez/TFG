@@ -8,7 +8,7 @@ from managers.graphic_manager import GraphicManager
 from managers.predictor_manager import PredictorManager
 from repositories.ccaa_repository import CcaaRepository
 from repositories.cie_repository import CieRepository
-from repositories.disease_reopsitory import DiseaseRepository
+from repositories.disease_repository import DiseaseRepository
 from repositories.gedad_repository import GedadRepository
 from repositories.raziel_repository import RazielRepository
 
