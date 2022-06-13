@@ -88,6 +88,6 @@ class AbstractRepository(abc.ABC):
         return ' & '.join(out)
 
     @abc.abstractmethod
-    def get_one(self, key: str, id) -> object:
-        list = self.dataframe[self.dataframe[key] == id].values.tolist()
+    def get_one(self, id):
+        list = self.dataframe[self.dataframe['ID'] == id].values.tolist()
         return None if len(list) == 0 else list[0]

@@ -11,5 +11,5 @@ class VarsRepository(AbstractRepository):
         data_objs = list(map(lambda x: Vars(id=x[0], description=x[1]), obj))
         return data_objs, len(data_objs)
 
-    def get_one(self, id: int) -> object:
+    def get_one(self, id: int):
         return super().get_one(id)
