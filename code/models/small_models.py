@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from enum import Enum
 
 
 @dataclass
@@ -24,8 +23,3 @@ class Ccaa:
 class Gedad:
     id: str
     description: str
-
-
-class Sex(Enum):
-    MALE = 1
-    FEMALE = 2
