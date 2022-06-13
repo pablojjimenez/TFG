@@ -33,7 +33,7 @@ class AbstractRepository(abc.ABC):
         for _, value in query.items():
             for key, _ in value.items():
                 if key not in ['<', '>', '==', '!=']:
-                    raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==']")
+                    raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==', '!=']")
 
     @abc.abstractmethod
     def get_all(self, params: ListParams = None) -> list:
@@ -42,8 +42,8 @@ class AbstractRepository(abc.ABC):
         :param params: ListParams
         :return: list of objects and total number of objects
         """
-        out = self.filter_dataframe(params)
-        return out.values.tolist()
+        out, ori_tam = self.filter_dataframe(params)
+        return out.values.tolist(), ori_tam
 
     def filter_dataframe(self, params):
         """
@@ -52,6 +52,7 @@ class AbstractRepository(abc.ABC):
         :return: dataframe filtered
         """
         out = self.dataframe
+        tam_with_query = 0
         params = params if params is not None else {}
         if params.get('query') is not None:
             self._check_query(params['query'])
@@ -61,12 +62,13 @@ class AbstractRepository(abc.ABC):
             page = 0 if params['page'] is None or params['page'] == 1 else params['page']
             ini = page * params['limit'] - params['limit'] if page != 0 else 0
             end = params['limit'] * page if page != 0 else params['limit']
+            tam_with_query = int(self.dataframe.size)
             out = out.iloc[ini:end]
         if params.get('sort') is not None:
             asc = params['sort'][0] == '-'
             sort_by = params['sort'][1:] if asc else params['sort']
             out = out.sort_values(by=sort_by.upper(), ascending=asc)
-        return out
+        return out, tam_with_query
 
     @staticmethod
     def generate_vector_query(query):

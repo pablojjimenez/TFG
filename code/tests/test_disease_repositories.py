@@ -17,5 +17,5 @@ class TestDiseaseRepo:
         list_param = {
             'query': {'id': {'>': 1, '<': 3}}
         }
-        _, tam = mock_disease.get_all(list_param)
+        _, tam, _ = mock_disease.get_all(list_param)
         assert tam == 1

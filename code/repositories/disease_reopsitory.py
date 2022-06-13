@@ -9,10 +9,10 @@ class DiseaseRepository(AbstractRepository):
         super().__init__(name)
         self.cie_repo = cie_repo
 
-    def get_all(self, params: ListParams = None) -> Tuple[List[Disease], int]:
-        data = super().get_all(params)
+    def get_all(self, params: ListParams = None) -> Tuple[List[Disease], int, int]:
+        data, ori_tam = super().get_all(params)
         data_objs = list(map(lambda x: Disease(x[0], x[1], self.cie_repo.get_one(x[2])), data))
-        return data_objs, len(data)
+        return data_objs, len(data), ori_tam
 
     def get_one(self, id: int) -> object:
         data = super().get_one('ID', id)

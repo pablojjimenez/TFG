@@ -29,13 +29,14 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
 
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam, ori = c.get_all(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
     return {
         'items': objs,
-        'length': tam
+        'length': tam,
+        'original_size': ori
     }
 
 
@@ -53,13 +54,14 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
 
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam, ori = c.get_all(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
     return {
         'items': objs,
-        'length': tam
+        'length': tam,
+        'original_size': ori
     }
 
 
@@ -77,13 +79,14 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
 
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam, ori = c.get_all(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
     return {
         'items': objs,
-        'length': tam
+        'length': tam,
+        'original_size': ori
     }
 
 
@@ -101,13 +104,14 @@ def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
 
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam, ori = c.get_all(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
     return {
         'items': objs,
-        'length': tam
+        'length': tam,
+        'original_size': ori
     }
 
 
@@ -130,13 +134,14 @@ def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = Non
 
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam, ori = c.get_all(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
     return {
         'items': objs,
-        'length': tam
+        'length': tam,
+        'original_size': ori
     }
 
 

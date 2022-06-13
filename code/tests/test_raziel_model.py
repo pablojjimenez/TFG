@@ -3,14 +3,14 @@ import pytest
 from models.disease_model import Disease
 from models.exceptions import NoAttributeException, NoCorrectTypeException
 from models.raziel_model import Raziel
-from models.small_models import Cie, Sex, Ccaa, Gedad
+from models.small_models import Cie, Ccaa, Gedad
 
 
 class TestRaziel:
     JSON_DATA = {
         'ano': 2020,
         'causa': Disease(2, 'reason', Cie(1, '')),
-        'sexo': Sex.FEMALE,
+        'sexo': 1,
         'ccaa': Ccaa(1, ''),
         'gedad': Gedad(1, ''),
         'defu': 0,

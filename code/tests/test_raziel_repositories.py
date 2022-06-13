@@ -9,7 +9,7 @@ from models.small_models import Ccaa, Gedad
 
 class TestRazielRepo:
     def test_get_one_complete_raziel_object(self, mock_raziel_repo):
-        obj = mock_raziel_repo.get_all({
+        obj, _, _ = mock_raziel_repo.get_all({
             'query': {
                 'CRUDA': {
                     '==': '16.694258'
@@ -18,7 +18,7 @@ class TestRazielRepo:
             'page': 1,
             'limit': 1
         })
-        obj = obj[0][0]
+        obj = obj[0]
         assert isinstance(obj, Raziel)
         assert isinstance(obj.ccaa, Ccaa)
         assert isinstance(obj.causa, Disease)
@@ -29,7 +29,7 @@ class TestRazielRepo:
             'page': 1,
             'limit': 5
         }
-        obj, tam = mock_raziel_repo.get_all(list_param)
+        obj, tam, _ = mock_raziel_repo.get_all(list_param)
         assert tam == 5
         assert len(obj) == 5
         assert obj[0].id == 1
@@ -39,7 +39,7 @@ class TestRazielRepo:
             'page': 2,
             'limit': 5
         }
-        obj, tam = mock_raziel_repo.get_all(list_param)
+        obj, tam, _ = mock_raziel_repo.get_all(list_param)
         assert tam == len(obj)
         assert tam == 5
         assert obj[0].id == 6
@@ -50,7 +50,7 @@ class TestRazielRepo:
             'page': 1,
             'limit': 5
         }
-        obj, tam = mock_raziel_repo.get_all(list_param)
+        obj, tam, _ = mock_raziel_repo.get_all(list_param)
         assert tam == len(obj)
         assert tam == 5
         assert obj[0].id == 3
@@ -62,7 +62,7 @@ class TestRazielRepo:
             'page': 1,
             'limit': 5
         }
-        obj, tam = mock_raziel_repo.get_all(list_param)
+        obj, tam, _ = mock_raziel_repo.get_all(list_param)
         assert tam == len(obj)
         assert tam == 5
         assert obj[0].id == 1
@@ -71,7 +71,7 @@ class TestRazielRepo:
         list_param = {
             'query': {'ano': {'==': 1980}, 'CAUSA': {'==': 1}}
         }
-        obj, tam = mock_raziel_repo.get_all(list_param)
+        obj, tam, _ = mock_raziel_repo.get_all(list_param)
         assert tam == 6
         for o in obj:
             assert o.ano == 1980
@@ -83,7 +83,7 @@ class TestRazielRepo:
             'limit': 3,
             'page': 2
         }
-        obj, tam = mock_raziel_repo.get_all(list_param)
+        obj, tam, _ = mock_raziel_repo.get_all(list_param)
         assert tam == list_param['limit']
         assert obj[0].id == 15
         assert obj[1].id == 14
@@ -93,7 +93,7 @@ class TestRazielRepo:
         list_param = {
             'query': {'defu': {'>': 5}},
         }
-        _, _ = mock_raziel_repo.get_all(list_param)
+        _, _, _ = mock_raziel_repo.get_all(list_param)
 
     def test_invalid_query_params1(self, mock_raziel_repo):
         list_param = {

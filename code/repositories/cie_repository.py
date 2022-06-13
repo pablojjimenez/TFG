@@ -6,10 +6,10 @@ class CieRepository(AbstractRepository):
     def __init__(self, name):
         super().__init__(name)
 
-    def get_all(self, params: ListParams = None) -> (list, int):
-        data = super().get_all(params)
+    def get_all(self, params: ListParams = None) -> (list, int, int):
+        data, ori_tam = super().get_all(params)
         objs = list(map(lambda x: Cie(id=x[0], description=x[1]), data))
-        return objs, len(data)
+        return objs, len(data), ori_tam
 
     def get_one(self, id: str) -> object:
         data = super().get_one('ID', id)
