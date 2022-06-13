@@ -10,7 +10,7 @@ class TestRaziel:
     JSON_DATA = {
         'ano': 2020,
         'causa': Disease(2, 'reason', Cie(1, '')),
-        'sexo': 1,
+        'sx': 1,
         'ccaa': Ccaa(1, ''),
         'gedad': Gedad(1, ''),
         'defu': 0,

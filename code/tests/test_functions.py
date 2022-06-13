@@ -1,6 +1,6 @@
 from typing import Dict
 
-from managers.utils import transform_params, remove_nulls_from_json, change_key_operators
+from managers.utils import transform_params, remove_nulls_from_json, change_key_operators, simplify_complex_objects
 from repositories.abstract_repository import AbstractRepository
 
 
@@ -113,3 +113,13 @@ class TestAuxFunctions:
         data = {'id': {'eq': 1}, 'bb': {'gt': 3}, 'cc': {'lt': 9}}
         rtado = change_key_operators(data)
         assert rtado == {'id': {'==': 1}, 'bb': {'>': 3}, 'cc': {'<': 9}}
+
+    def test_simplify_complex_objects1(self):
+        data = {'query': {'id': {'==': 1}, 'causa': {'id':{'>': 3}}, 'gedad': {'id': {'>': 3}},}, 'sort': None, 'cc': {'lt': 9}}
+        rtado = simplify_complex_objects(data)
+        assert rtado == {'query': {'causa': {'>': 3}, 'gedad': {'>': 3}, 'id': {'==': 1}}}
+
+    def test_simplify_complex_objects2(self):
+        data = {'query': {'id': {'==': 1}, 'ccaa': {'id': {'>': 3}}}}
+        rtado = simplify_complex_objects(data)
+        assert rtado == {'query': {'ccaa': {'>': 3}, 'id': {'==': 1}}}

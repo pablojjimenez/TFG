@@ -34,6 +34,24 @@ def remove_nulls_from_json(data: dict):
     return dd
 
 
+def simplify_complex_objects(data):
+    """
+    This function remove 'causa', 'gedad' and 'ccaa' from json keys
+    if they exit
+    :param data: json
+    :return: cleaned json
+    """
+    dd = {'query': {}}
+    if data.get('query') is not None:
+        for k, v in data.get('query').items():
+            if k in ['causa', 'gedad', 'ccaa']:
+                new_values = data['query'][k]
+                dd['query'][k] = list(new_values.values())[0]
+            else:
+                dd['query'][k] = v
+    return dd
+
+
 def change_key_operators(data: dict):
     changes = {
         'eq': '==',
