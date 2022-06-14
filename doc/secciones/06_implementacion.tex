@@ -11,10 +11,10 @@ Un requisito fundamental expresado por los usuarios diana a utilizar este proyec
 
 
 \subsection{DDD}
-En este tipo de arquitectura donde diseñamos guiandonos por el dominio, podemos diferenciar tres elementos importantes.
+En este tipo de arquitectura donde diseñamos guiándonos por el dominio, podemos diferenciar tres elementos importantes.
 
 \subsubsection{Entidad}
-Las entidades son aquellas clases que representan una entidad del dominio. Estas clases deben tener una estructura de datos que represente la información de la entidad y unas responsabilidades concretas. Se caracterizan porque tienen que ser consideradas iguales a otros objetos aún cuando cuando sus atributos difieren. En las entidades se encuentran las restricciones del dominio, en ellas se realizan las validaciones de valor e integridad. Cualquier error o situación inválida hay que notificarsela al sistema mediante una excepción. 
+Las entidades son aquellas clases que representan una entidad del dominio. Estas clases deben tener una estructura de datos que represente la información de la entidad y unas responsabilidades concretas. Se caracterizan porque tienen que ser consideradas iguales a otros objetos aún cuando cuando sus atributos difieren. En las entidades se encuentran las restricciones del dominio, en ellas se realizan las validaciones de valor e integridad. Cualquier error o situación inválida hay que notificársela al sistema mediante una excepción. 
 
 Definir y diseñar los estados inválidos de las entidades y de la aplicación en general es un apartado fundamental que debemos de realizar con el mismo cuidado que con el que diseñamos las entidades.
 
@@ -32,13 +32,13 @@ No tienen significado propio suponen la capa que representa las operaciones que 
 En este proyecto, los servicios son el punto de entrada de las peticiones que le hace el usuario al sistema. Son también los encargados de arrancar todo el proceso de obtención de los datos.
 
 \subsubsection{Repositorios}
-Representan al conjunto de modelos y entidades. Se utilizan para almacenar u ofrecer los conjuntos de objetos. Suelen suponer una capa de abstracción sobre el sistema de almacenaje, ya sea una base de datos, unos ficheros en disco o inlcuo la invocación de otros servicios externos como puede ser un API. Esta parte es fundamental para poder modular y preparar las aplicaciones para cambiar de infraestructura sin tener que modificar el código de programación.
+Representan al conjunto de modelos y entidades. Se utilizan para almacenar u ofrecer los conjuntos de objetos. Suelen suponer una capa de abstracción sobre el sistema de almacenaje, ya sea una base de datos, unos ficheros en disco o incluso la invocación de otros servicios externos como puede ser un API. Esta parte es fundamental para poder modular y preparar las aplicaciones para cambiar de infraestructura sin tener que modificar el código de programación.
 
 En este proyecto hemos implementado este concepto haciendo uso de un \codeword{AbstractRepository} representado por una clase abstracta. Debido a que, semánticamente no tiene sentido poder utilizar este tipo de repositorio en sí mismo. Sin embargo, es usado de clase padre para el resto de repositorios porque impone a las clases que lo heredan una interfaz uniforme de métodos y abstrae lógicas comunes a este tipo de concepto.
 
 
 \subsection{Diagrama arquitectónico de la solución}
-A continuciación se puede ver un somero diagrama donde podemos observar la conexión entre los distintos componentes del sistema y la conexión con librerías y frameworks externos. 
+A continuación se puede ver un somero diagrama donde podemos observar la conexión entre los distintos componentes del sistema y la conexión con librerías y frameworks externos. 
 
 \begin{figure}[]
 	\centering	
