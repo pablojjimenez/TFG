@@ -1,3 +1,5 @@
+import uuid
+
 import pandas as pd
 from prophet import Prophet
 from matplotlib import pyplot
@@ -35,6 +37,7 @@ class PredictorManager:
 
         m.plot(fcst)
         ensure_directory_exists(PredictorManager.CHART_PATH)
-        pyplot.savefig('opt/forecasting.png')
+        img_path = f'{PredictorManager.CHART_PATH}{str(uuid.uuid4())[:8]}.png'
+        pyplot.savefig(img_path)
 
-        return fcst
+        return fcst, img_path

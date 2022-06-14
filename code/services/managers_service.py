@@ -27,8 +27,8 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
         GedadRepository('data/grupos_edad')
     )
     predictor = PredictorManager(c)
-    predictor.deaths_forecasting({'query': query}, group, summ, period)
-    return FileResponse(PredictorManager.CHART_PATH)
+    _, img_name = predictor.deaths_forecasting({'query': query}, group, summ, period)
+    return FileResponse(img_name)
 
 
 @managersRouter.post("/deaths-predictor", status_code=200)
@@ -40,7 +40,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
         GedadRepository('data/grupos_edad')
     )
     predictor = PredictorManager(c)
-    d = predictor.deaths_forecasting({'query': query}, group, summ, period)
+    d, _ = predictor.deaths_forecasting({'query': query}, group, summ, period)
     result = d.to_json(orient="split")
     return json.loads(result)
 
@@ -54,5 +54,5 @@ def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU')
         GedadRepository('data/grupos_edad')
     )
     gm = GraphicManager(c)
-    gm.get_chart_by_two_vars({'query': query}, group, summ)
-    return FileResponse(GraphicManager.CHART_PATH)
+    img_name = gm.get_chart_by_two_vars({'query': query}, group, summ)
+    return FileResponse(img_name)
