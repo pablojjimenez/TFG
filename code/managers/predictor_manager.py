@@ -1,14 +1,17 @@
+import uuid
+
 import pandas as pd
 from prophet import Prophet
 from matplotlib import pyplot
 
+from config.general_config import CHARTS_BASE_PATH
 from managers.utils import ensure_directory_exists
 from repositories.abstract_repository import ListParams
 from repositories.raziel_repository import RazielRepository
 
 
 class PredictorManager:
-    CHART_PATH = 'opt/forecasting.png'
+    CHART_PATH = CHARTS_BASE_PATH
 
     def __init__(self, raziel_repo: RazielRepository):
         self.raziel_repo = raziel_repo
@@ -33,7 +36,8 @@ class PredictorManager:
         fcst = m.predict(future)
 
         m.plot(fcst)
-        ensure_directory_exists('opt/')
-        pyplot.savefig('opt/forecasting.png')
+        ensure_directory_exists(PredictorManager.CHART_PATH)
+        img_path = f'{PredictorManager.CHART_PATH}{str(uuid.uuid4())[:8]}.png'
+        pyplot.savefig(img_path)
 
-        return fcst
+        return fcst, img_path
