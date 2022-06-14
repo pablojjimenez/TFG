@@ -83,3 +83,5 @@ cie
 AbstractRepository
 clusterizar
 satisfacibilidad
+mockeadas
+HTML
