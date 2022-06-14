@@ -81,3 +81,5 @@ URI
 YAML
 cie
 AbstractRepository
+clusterizar
+satisfacibilidad
