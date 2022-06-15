@@ -3,11 +3,8 @@ from typing import Dict
 
 from managers.utils import transform_params
 from models.exceptions import IncorrectQueryException, NoCorrectColumnsException
-from repositories.ccaa_repository import CcaaRepository
-from repositories.cie_repository import CieRepository
-from repositories.disease_repository import DiseaseRepository
-from repositories.gedad_repository import GedadRepository
-from repositories.raziel_repository import RazielRepository
+from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
+    RazielRepoCreator, DiseaseRepoCreator
 from repositories.vars_repository import VarsRepository
 
 dataRouter = APIRouter(
@@ -25,11 +22,9 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     - `page` numero de la pagina solicitada
     - `limit` limnite de elementos
     """
-    c = DiseaseRepository('data/diseases', CieRepository('data/cie'))
-
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam = DiseaseRepoCreator().get_all_operation(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -49,11 +44,9 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     - `page` numero de la pagina solicitada
     - `limit` limnite de elementos
     """
-    c = CcaaRepository('data/ccaas')
-
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam = CcaaRepoCreator().get_all_operation(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -73,11 +66,9 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     - `page` numero de la pagina solicitada
     - `limit` limnite de elementos
     """
-    c = CieRepository('data/cie')
-
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam = CieRepoCreator().get_all_operation(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -97,11 +88,9 @@ def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     - `page` numero de la pagina solicitada
     - `limit` limnite de elementos
     """
-    c = GedadRepository('data/grupos_edad')
-
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam = AgesGroupsRepoCreator().get_all_operation(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -121,16 +110,9 @@ def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = Non
     - `page` numero de la pagina solicitada
     - `limit` limnite de elementos
     """
-    c = RazielRepository(
-        'data/raziel',
-        DiseaseRepository('data/diseases', CieRepository('data/cie')),
-        CcaaRepository('data/ccaas'),
-        GedadRepository('data/grupos_edad')
-    )
-
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = c.get_all(p)
+        objs, tam = RazielRepoCreator().get_all_operation(p)
     except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
         raise HTTPException(status_code=400, detail=str(e))
 
