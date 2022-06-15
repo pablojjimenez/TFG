@@ -10,11 +10,10 @@ from services.managers_service import managersRouter
 
 class validation_exception_handler:
     def __call__(self, request: Request, ex: Exception) -> Response:
-        return JSONResponse(
-            {
-                "error_message": ex.detail,
-                "code": 400
-            }, status_code=400)
+        return JSONResponse({
+            "error_message": ex.detail,
+            "code": ex.status_code
+        }, status_code=ex.status_code)
 
 
 app = FastAPI()
