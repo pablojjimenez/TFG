@@ -22,7 +22,7 @@ managersRouter = APIRouter(
 )
 
 
-@managersRouter.post("/deaths-predictor-chart", status_code=200)
+@managersRouter.post("/deaths-predictor-chart", status_code=201)
 def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU',
                          period=2):
     try:
@@ -33,7 +33,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
             GedadRepository('data/grupos_edad')
         )
         predictor = PredictorManager(c)
-        predictor.deaths_forecasting({'query': query}, group, summ, period)
+        predictor.deaths_forecasting({'query': query}, group, summ, int(period))
         return FileResponse(PredictorManager.CHART_PATH)
     except NoCorrectColumnsException as e:
         raise HTTPException(status_code=422, detail=str(e))
@@ -53,7 +53,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
             GedadRepository('data/grupos_edad')
         )
         predictor = PredictorManager(c)
-        d = predictor.deaths_forecasting({'query': query}, group, summ, period)
+        d = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
         result = d.to_json(orient="split")
         return json.loads(result)
     except NoCorrectColumnsException as e:
@@ -64,7 +64,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
-@managersRouter.post("/chart")
+@managersRouter.post("/chart", status_code=201)
 def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU'):
     try:
         c = RazielRepository(
