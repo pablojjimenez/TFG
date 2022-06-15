@@ -86,3 +86,6 @@ satisfacibilidad
 mockeadas
 HTML
 html
+situ
+tipados
+creacional
