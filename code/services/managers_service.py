@@ -6,7 +6,8 @@ from starlette.responses import FileResponse
 
 from managers.graphic_manager import GraphicManager
 from managers.predictor_manager import PredictorManager
-from models.exceptions import NoCorrectColumnsException, NoCorrectTypeException, DataIsNotAvaible, NoAttributeException
+from models.exceptions import NoCorrectColumnsException, NoCorrectTypeException, \
+    DataIsNotAvaible, NoAttributeException
 from repositories.ccaa_repository import CcaaRepository
 from repositories.cie_repository import CieRepository
 from repositories.disease_repository import DiseaseRepository
@@ -39,7 +40,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible as _:
+    except DataIsNotAvaible:
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
@@ -60,7 +61,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible as _:
+    except DataIsNotAvaible:
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
@@ -80,5 +81,5 @@ def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU')
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible as _:
+    except DataIsNotAvaible:
         raise HTTPException(status_code=505, detail="Data source is not available")
