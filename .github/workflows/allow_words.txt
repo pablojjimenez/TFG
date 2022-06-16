@@ -90,3 +90,5 @@ situ
 tipados
 mock
 testing
+mockear
+clústeres
