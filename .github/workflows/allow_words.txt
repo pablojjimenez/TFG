@@ -92,3 +92,4 @@ mock
 testing
 mockear
 clústeres
+OpenAPI
