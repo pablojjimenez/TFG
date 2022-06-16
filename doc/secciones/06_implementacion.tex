@@ -1,5 +1,53 @@
 \chapter{Desarrollo de la solución}
-A la hora de empezar con la Implementación de la solución, se debe tener en cuenta los requisitos del sistema de acuerdo con los usuarios diana.
+A la hora de empezar con la implementación de la solución, debemos comenzar teniendo en cuenta la arquitectura software que satisface requisitos del sistema de acuerdo con los usuarios. Es decir, con las historias de usuario que han expresado.
+
+\section{Arquitectura software de la solución}
+Para el diseño del software se ha utilizado el diseño dirigido por el dominio, DDD \textit{Domain Driven Design}. Este tipo de arquitectura introducida por Eric Evans \cite{ddd_book} "Domain-Driven-Design - Tackling Complexity in the Hearth of Software, 2004" nos permite organizar el código de forma separada y organizada lo que nos permite poder realizar TDD correctamente ya que por tener las distintas capas separadas y débilmente acopladas unas de las otras. Gracias a este bien diseño es muy fácil hacer uso de la inversión de dependencias \footnote{https://jj.github.io/curso-tdd/temas/inversi\%C3\%B3n.html} para inyectar en los tests las clases \textit{mockeadas} \footnote{El término mockear en desarrollo de software se refiere a reemplazar o imitar a un objeto real. El propósito es que al probar el programa o hacer testing, podamos utilizar este mock para conocer su estado.} que necesitemos. 
+
+La arquitectura dirigida por el dominio nos permite fácilmente aislar la lógica de negocio en un único sitio y siempre lo más cerca del dominio posible lo que nos permite cumplir los principios SOLID fácilmente y conseguir un código abierto a su extensión pero cerrado a su modificación.  
+
+Un requisito fundamental expresado por los usuarios diana a utilizar este proyecto es poder desplegar fácilmente este proyecto en la nube, gracias a que se ha desarrollado utilizando capas desacopladas entre si, podemos distribuir en distintos clústeres \footnote{Nos referimos a la técnica por la cual podemos combinar un sistema para que trabaje paralelamente en un entorno cloud. Lo que conseguimos con esta operación es una mayor disponibilidad, más velocidad de despacho y escalabilidad del sistema. Como todo, a cambio tendremos un sistema más costoso de mantener económicamente y un mayor tiempo de implementación. } la implementación sin realizar prácticamente cambios en la implementación.  Es fundamental desacoplar al máximo todos los componentes y que cada uno tengo una única responsabilidad cuando se realiza un proyecto en la nube. La principal desventaja que podemos encontrar en este tipo de arquitecturas es la comunicación entre los distintos componentes.  Una solución a este problema podría ser la comunicación por eventos, potente pero compleja a nivel técnico y costosa económicamente. Otra solución es mediante inyección de dependencias, que es la que he empleado en este proyecto, podemos decir que la debilidad de esta solución reside en que una de las capas puede crecer en sobremedida y convertirse en un cuello de botella.
+
+
+
+\subsection{DDD}
+En este tipo de arquitectura donde diseñamos guiándonos por el dominio, podemos diferenciar tres elementos importantes.
+
+\subsubsection{Entidad}
+Las entidades son aquellas clases que representan una entidad del dominio. Estas clases deben tener una estructura de datos que represente la información de la entidad y unas responsabilidades concretas. Se caracterizan porque tienen que ser consideradas iguales a otros objetos aún cuando cuando sus atributos difieren. En las entidades se encuentran las restricciones del dominio, en ellas se realizan las validaciones de valor e integridad. Cualquier error o situación inválida hay que notificársela al sistema mediante una excepción. 
+
+Definir y diseñar los estados inválidos de las entidades y de la aplicación en general es un apartado fundamental que debemos de realizar con el mismo cuidado que con el que diseñamos las entidades.
+
+Este proyecto consta de dos entidades: \codeword{Disease} que representa a una enfermedad y \codeword{Raziel} que es sin lugar a duda el modelo más rico en información. Estas entidades poseen las restricciones de valor como puede ser el tipado de sus atributos o la satisfacibilidad solo de los valores que tienen sentido semántico. También restricciones de integridad como por ejemplo, que un objeto de tipo \codeword{Disease} puede tener el campo \codeword{cie}, nulo.
+
+\subsubsection{Value objects}
+Representan los conceptos que no tienen una entidad. Describen características por lo que solo nos interesan sus atributos.
+Los value object representan elementos del modelo que se describen por el \textbf{qué} son, y no por \textbf{quién} o \textbf{cuál} son. Estos elementos completan y/o forman parte de las entidades del sistema.
+
+En este proyecto la representación en código de las comunidades autónomas corresponde con un tipo de value object utilizado por la entidad \codeword{Raziel}
+
+\subsubsection{Servicios}
+No tienen significado propio suponen la capa que representa las operaciones que no pertenecen conceptualmente a ningún objeto del dominio concreto. 
+
+En este proyecto, los servicios son el punto de entrada de las peticiones que le hace el usuario al sistema. Son también los encargados de arrancar todo el proceso de obtención de los datos.
+
+\subsubsection{Repositorios}
+Representan al conjunto de modelos y entidades. Se utilizan para almacenar u ofrecer los conjuntos de objetos. Suelen suponer una capa de abstracción sobre el sistema de almacenaje, ya sea una base de datos, unos ficheros en disco o incluso la invocación de otros servicios externos como puede ser un API. Esta parte es fundamental para poder modular y preparar las aplicaciones para cambiar de infraestructura sin tener que modificar el código de programación.
+
+En este proyecto hemos implementado este concepto haciendo uso de un \codeword{AbstractRepository} representado por una clase abstracta. Debido a que, semánticamente no tiene sentido poder utilizar este tipo de repositorio en sí mismo. Sin embargo, es usado de clase padre para el resto de repositorios porque impone a las clases que lo heredan una interfaz uniforme de métodos y abstrae lógicas comunes a este tipo de concepto.
+
+El proyecto está compuesto por cinco repositorios que obtiene en forma sus modelos correspondientes. Al existir este tipo de jerarquía y compartir todos estos el mismo tipo de operación, resulta idónea la aplicación del patrón de diseño de creación \textit{Factory Method}. Si bien es cierto, que es en lenguajes tipados donde este tipo de soluciones suponen un cambio radical en cuanto a la comodidad y encaje en la creación de instancias a lo largo del programa. A nosotros también nos mejora la calidad del código, pudiendo hacer uso de cualquier repositorio con una sola importación, ya que en otro caso habría que construir el repositorio \textit{in situ} e inyectarle todas las dependencias que necesitara.
+
+
+\subsection{Diagrama arquitectónico de la solución}
+A continuación se puede ver un somero diagrama donde podemos observar la conexión entre los distintos componentes del sistema y la conexión con librerías y frameworks externos. 
+
+\begin{figure}[]
+	\centering	
+	\includegraphics[scale=0.5]{doc/logos/imgs/arquitectonico.png}
+	\caption{ \cite{rtve-cis} Modelo organizativo del código con sus dependencias externas. }
+    \label{fig:worst_f_value}
+\end{figure}
 
 
 

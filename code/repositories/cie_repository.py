@@ -12,5 +12,5 @@ class CieRepository(AbstractRepository):
         return objs, len(data)
 
     def get_one(self, id: str) -> object:
-        data = super().get_one('ID', id)
+        data = super().get_one(id)
         return Cie(id=data[0], description=data[1]) if data else None
