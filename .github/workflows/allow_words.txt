@@ -79,3 +79,16 @@ NodeJS
 OpenAPI
 URI
 YAML
+cie
+AbstractRepository
+clusterizar
+satisfacibilidad
+mockeadas
+HTML
+html
+situ
+tipados
+mock
+testing
+mockear
+clústeres
