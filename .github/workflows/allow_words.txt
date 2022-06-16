@@ -79,3 +79,10 @@ NodeJS
 OpenAPI
 URI
 YAML
+loc
+msg
+jsondecode
+ctx
+msg
+lineno
+colno
