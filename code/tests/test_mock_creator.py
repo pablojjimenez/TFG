@@ -1,5 +1,6 @@
 from tests.mocks.mock_cie_repository import MockCieRepository
-from tests.mocks.mock_creator import DiseaseRepoCreator, CieRepoCreator, RazielRepoCreator, AgesGroupsRepoCreator
+from tests.mocks.mock_creator import DiseaseRepoCreator, CieRepoCreator, \
+    RazielRepoCreator, AgesGroupsRepoCreator
 from tests.mocks.mock_disease_repository import MockDiseaseRepository
 from tests.mocks.mock_gedad_repository import MockGedadRepository
 from tests.mocks.mock_raziel_repository import MockRazielRepository
