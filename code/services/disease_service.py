@@ -3,6 +3,7 @@ from typing import Dict
 
 from managers.utils import transform_params
 from models.exceptions import IncorrectQueryException, NoCorrectColumnsException
+from models.openapi_models.models import Disease, Ccaa, Gedad, Raziel, MyReturnType, Cie
 from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
     RazielRepoCreator, DiseaseRepoCreator
 from repositories.vars_repository import VarsRepository
@@ -12,7 +13,7 @@ dataRouter = APIRouter(
 )
 
 
-@dataRouter.post("/diseases", status_code=200, response_model=Disease)
+@dataRouter.post("/diseases", status_code=200, response_model=MyReturnType[Disease])
 def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
                  page: int = 1, limit: int = 100):
     """
@@ -34,7 +35,7 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     }
 
 
-@dataRouter.post("/ccaas", response_model=Ccaa)
+@dataRouter.post("/ccaas", status_code=200, response_model=MyReturnType[Ccaa])
 def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
               page: int = 1, limit: int = 100):
     """
@@ -56,7 +57,7 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     }
 
 
-@dataRouter.post("/cie", response_model=Cie)
+@dataRouter.post("/cie", status_code=200, response_model=MyReturnType[Cie])
 def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
              page: int = 1, limit: int = 100):
     """
@@ -78,7 +79,7 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     }
 
 
-@dataRouter.post("/ages-groups", response_model=Gedad)
+@dataRouter.post("/ages-groups", status_code=200, response_model=MyReturnType[Gedad])
 def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
                     page: int = 1, limit: int = 100):
     """
@@ -100,7 +101,7 @@ def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     }
 
 
-@dataRouter.post("/raziel", response_model=Raziel)
+@dataRouter.post("/raziel", status_code=200, response_model=MyReturnType[Raziel])
 def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
                         page: int = 1, limit: int = 100):
     """
@@ -122,7 +123,7 @@ def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = Non
     }
 
 
-@dataRouter.get("/vars-meaning", response_model=MyReturnType)
+@dataRouter.get("/vars-meaning", status_code=200, response_model=MyReturnType)
 def get_vars_meaning():
     c = VarsRepository('data/vars')
     objs, tam = c.get_all()

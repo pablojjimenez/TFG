@@ -57,3 +57,111 @@ T = typing.TypeVar("T")
 class MyReturnType(BaseModel, Generic[T]):
     items: List[T] = Field(...)
     length: int = Field(...)
+
+
+def get_extra_models():
+    return [
+        {
+            "Cie": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "int",
+                    },
+                    "description": {
+                        "type": "str",
+                    }
+                }
+            }
+        },
+        {
+            "Ccaa": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "int",
+                    },
+                    "name": {
+                        "type": "str",
+                    }
+                }
+            }
+        },
+        {
+            "Gedad": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "int",
+                    },
+                    "description": {
+                        "type": "str",
+                    }
+                }
+            }
+        },
+        {
+            "Disease": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "int",
+                    },
+                    "name": {
+                        "type": "str",
+                    },
+                    "cie": {
+                        "type": "Cie object"
+                    }
+                }
+            }
+        },
+        {
+            "Raziel": {
+                "type": "object",
+                "properties": {
+                    "ano": {
+                        "type": "int",
+                    },
+                    "causa": {
+                        "type": "Disease object"
+                    },
+                    "sexo": {
+                        "type": "int",
+                    },
+                    "ccaa": {
+                        "type": "Ccaa object",
+                    },
+                    "gedad": {
+                        "type": "Gedad object",
+                    },
+                    "defu": {
+                        "type": "int",
+                    },
+                    "avp": {
+                        "type": "int",
+                    },"cruda": {
+                        "type": "float",
+                    },
+                    "tavp": {
+                        "type": "float",
+                    },
+                    "edad": {
+                        "type": "float",
+                    },
+                    "tasae": {
+                        "type": "float",
+                    },
+                    "tavpe": {
+                        "type": "float",
+                    },
+                    "tasaw": {
+                        "type": "float",
+                    },
+                    "tasavpw": {
+                        "type": "float",
+                    }
+                }
+            }
+        },
+    ]
