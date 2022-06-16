@@ -4,10 +4,10 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    host: str
-    port: int
-    debug_app: str
-    chart_base_app: str
+    host: str = ''
+    port: int = 0
+    debug_app: str = ''
+    chart_base_app: str = 'opt/'
 
     class Config:
         env_file = '.env'

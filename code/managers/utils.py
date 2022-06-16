@@ -2,7 +2,7 @@ import os
 from typing import Dict
 import arrow
 
-from config.general_config import CHARTS_BASE_PATH
+from config.general_config import get_config
 
 
 def ensure_directory_exists(directory: str):
@@ -18,8 +18,8 @@ def ensure_directory_exists(directory: str):
 
 def remove_pasts_images():
     deleteTime = arrow.now().shift(minutes=-5)
-    for f in os.listdir(CHARTS_BASE_PATH):
-        f = os.path.join(CHARTS_BASE_PATH, f)
+    for f in os.listdir(get_config().chart_base_app):
+        f = os.path.join(get_config().chart_base_app, f)
         itemTime = arrow.get(os.stat(f).st_mtime)
         if itemTime < deleteTime:
             if os.path.isfile(f):
