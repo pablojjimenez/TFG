@@ -5,7 +5,7 @@ from starlette.requests import Request
 from fastapi.exceptions import HTTPException
 from starlette.responses import Response, JSONResponse
 
-from models.openapi_models.models import Raziel, Ccaa, Disease, get_extra_models
+from models.openapi_models.models import get_extra_models
 from services.disease_service import dataRouter
 from services.managers_service import managersRouter
 

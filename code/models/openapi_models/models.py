@@ -140,7 +140,8 @@ def get_extra_models():
                     },
                     "avp": {
                         "type": "int",
-                    },"cruda": {
+                    },
+                    "cruda": {
                         "type": "float",
                     },
                     "tavp": {
