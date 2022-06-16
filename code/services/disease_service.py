@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from typing import Dict
-
 from managers.utils import transform_params
 from models.exceptions import IncorrectQueryException, NoCorrectColumnsException
+from models.openapi_models.models import Ccaa, Cie, Gedad, Raziel, MyReturnType
 from repositories.ccaa_repository import CcaaRepository
 from repositories.cie_repository import CieRepository
 from repositories.disease_repository import DiseaseRepository
@@ -39,7 +39,7 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     }
 
 
-@dataRouter.post("/ccaas")
+@dataRouter.post("/ccaas", response_model=Ccaa)
 def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
               page: int = 1, limit: int = 100):
     """
@@ -63,7 +63,7 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     }
 
 
-@dataRouter.post("/cie")
+@dataRouter.post("/cie", response_model=Cie)
 def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
              page: int = 1, limit: int = 100):
     """
@@ -87,7 +87,7 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     }
 
 
-@dataRouter.post("/ages-groups")
+@dataRouter.post("/ages-groups", response_model=Gedad)
 def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
                     page: int = 1, limit: int = 100):
     """
@@ -111,7 +111,7 @@ def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     }
 
 
-@dataRouter.post("/raziel")
+@dataRouter.post("/raziel", response_model=Raziel)
 def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
                         page: int = 1, limit: int = 100):
     """
@@ -140,7 +140,7 @@ def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = Non
     }
 
 
-@dataRouter.get("/vars-meaning")
+@dataRouter.get("/vars-meaning", response_model=MyReturnType)
 def get_vars_meaning():
     c = VarsRepository('data/vars')
     objs, tam = c.get_all()
