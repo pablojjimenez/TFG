@@ -7,7 +7,7 @@ A la hora de empezar con la Implementación de la solución, se debe tener en cu
 En esta sección voy a hablar de las decisiones técnicas tomadas en base a las distintas opciones que disponemos y considerando siempre como cumplen las distintas opciones a alcanzar los objetivos de nuestros usuarios.
 
 \subsection{Configuración}
-A la hora de crear un proyecto software, el primer paso que tenemos que hacer es llevar a cabo una configuración que nos permita arrancar la aplicación de la forma deseada. Este software está pensado para ejecutarse en la nube, por ello he tenido en cuenta que desde el principio que tiene que haber una forma de recuperar esta configuración. Para eso utilizamos un sistema de configuración distribuida. Este tipo de configuración me permiten establecer la configuración antes de ejecutar el software y me permite poder establecer distintos parámetros de ejecución según el entorno donde se vaya a ejecutar.
+A la hora de crear un proyecto software, el primer paso que tenemos que hacer es llevar a cabo una configuración que nos permita arrancar la aplicación de la forma deseada. Este software está pensado para ejecutarse en la nube, por ello he tenido en cuenta que desde el principio que tiene que haber una forma de recuperar esta configuración. La configuración se almacena en una clase y se carga del fichero de \textit{environment} una única vez ya que queda almacenada en caché. Este tipo de configuración me permite establecer los tipos antes de ejecutar el software y me permite poder establecer distintos parámetros de ejecución según el entorno donde se vaya a ejecutar.
 
 \subsection{Lenguaje de programación}
 El lenguaje elegido ha sido \textbf{Python} los motivos de esta decisión son variados, por los que procedo a enumerarlos:

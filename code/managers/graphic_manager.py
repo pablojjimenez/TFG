@@ -2,14 +2,14 @@ import uuid
 
 from matplotlib import pyplot
 
-from config.general_config import CHARTS_BASE_PATH
+from config.general_config import get_config
 from managers.utils import ensure_directory_exists
 from repositories.abstract_repository import ListParams
 from repositories.raziel_repository import RazielRepository
 
 
 class GraphicManager:
-    CHART_PATH = CHARTS_BASE_PATH
+    CHART_PATH = get_config().chart_base_app
 
     def __init__(self, raziel_repo: RazielRepository):
         self.raziel_repo = raziel_repo
