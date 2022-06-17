@@ -1,57 +1,41 @@
 \chapter{Estado del arte}
 
-En este apartado lo que pretende es mostrar como se encuentra el panorama en el cual vamos a llevar
-acabo este proyecto. Para ello, en primer lugar voy a analizar las soluciones parecidas ya existentes,
-donde se presentarán las principales alternativas a nuestra idea de proyecto, de forma que analicemos
-los requisitos de nuestro sistema comparándolo con los de aquellos que ya existen.
+En este apartado lo que pretende es mostrar como se encuentra el panorama en el cual vamos a llevar a cabo este proyecto. Para ello, en primer lugar voy a analizar soluciones similares ya existentes, de forma que analicemos los requisitos de nuestro sistema comparándolo con aquellos que ya existen para obtener nuestra propuesta de valor.
 
 \section{Análisis de mercado}
 
-Como he comentado ya con anterioridad, el acceso a los datos sobre las defunciones es de dominio público
-y por tanto accesible por cualquiera. Dado que este proyecto se centra en la obtención y tratamiento de
-estos datos. Es importante conocer si existen ya aplicaciones que presten funcionalidades parecidas a las que
-quiero implementar.
+Como he comentado ya con anterioridad, el acceso a los datos sobre las defunciones es de dominio público, se puede encontrar información al respecto en los sitios que voy a exponer a continuación. Cualquiera puede acceder a ellos y verlos, el principal problema surge cuando queremos hacernos preguntas en base a esos números que vemos. Hasta que nivel se adaptan los sistemas existentes a las necesidades de mis usuarios. Vamos a ver las principales fuentes que existen y lo que nos ofrecen para a continuación, saber que tipo de tratamiento informático necesitamos realizar para satisfacer las necesidades de estos.
 
 \subsection{Instituto Nacional de Estadística}
-Podemos ver la página del \cite{INE} Instituto Nacional de Estadística que es un referente a la hora de obtener
-y mostrar datos, además existen repositorios de datos de interés para este trabajo.
-Vamos a utilizar los datos publicados sobre defunciones según causa de muerte para investigar la interfaz que nos
-proponen desde el instituto. Voy a detallas las funcionalidades que he encontrado que creo que he de tener
-en cuanta para mejorar.
+Uno de los primeros sitios en los que consulté fue la página del Instituto Nacional de Estadística\footnote{https://www.ine.es/index.htm} que es un referente en España en cuanto a la coordinación de servicios estadístico.
+En este \hyperref[enlace]{https://www.ine.es/jaxiT3/Tabla.htm?t=6609} \footnote{https://www.ine.es/jaxiT3/Tabla.htm?t=6609} se pueden observar las defunciones según causa de muerte filtradas por causa, sexo, edad y periodo. 
+Enumero las principales desventajas encontradas desde el punto de vista de mis usuarios:
 \begin{itemize}
-    \item La vista de la página puede ser algo compleja para algunos usuarios.
-    \item No es totalmente responsive.
-    \item Cuando seleccionas las variables y queremos obtener dicha visualización de datos, la página se
-    recarga y nos muestra otra página donde no tenemos a mano las variables para realizar
-    otra consulta instantáneamente.
-    \item No tenemos visualización gráfica. Te redirige a descargar el programa PC-Axis únicamente disponible para
-    Windows si quieres ver mas detalles sobre los datos almacenados.
+    \item No permite realizar consultas a los datos.
+    \item No soporta ningún protocolo para obtener agnósticamente estos datos y poder usarlo en otros softwares/aplicaciones.
+    \item Poca precisión de filtrado por las pocas variables de las que disponemos.
+    \item No tenemos visualización gráfica. Te redirige a descargar el programa PC-Axis únicamente disponible para Windows si quieres ver mas detalles sobre los datos almacenados.
 \end{itemize}
 
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.5]{doc/logos/imgs/ine1.png}
-	\caption{ \cite{INE}  Vista principal para obtener datos en el INE }
+	\caption{  Vista principal para obtener datos en el INE }
     \label{fig:worst_f_value}
 \end{figure}
 
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.5]{doc/logos/imgs/ine2.png}
-	\caption{ \cite{INE} Vista resultado cuando se han filtrado los datos a obtener }
+	\caption{ Vista resultado cuando se han filtrado los datos a obtener }
     \label{fig:worst_f_value}
 \end{figure}
-Por otro lado no podemos perder de vista, la integridad con la que ofrece los datos, los distintos formatos
-de descarga que nos ofrece y las notas explicativas sobre como se ha procedido a la obtención de los mismos.
+
 
 \subsection{Instituto de Salud Carlos III}
-En la página del Instituto de Salud Carlos III \cite{isciii} podemos encontrar muchas entradas hablando sobre
-la mortalidad de la población y morbilidad apoyada de \cite{momo} gráficas MoMo que son gráficas de desviaciones de mortalidad
-diaria respecto a la esperada según las series históricas de mortalidad, estas constituyen un sistema de vigilancia
-que proporciona información sobre el impacto en mortalidad de la población. Estas son entregables en formato web y PDF.
+En la página del Instituto de Salud Carlos III \footnote{https://www.isciii.es/Paginas/Inicio.aspx} podemos encontrar muchas entradas  hablando sobre la mortalidad de la población y morbilidad apoyada de gráficas MoMo \footnote{Instituto de Salud Carlos III - Vigilancia de la Mortalidad Diaria: https://www.isciii.es/QueHacemos/Servicios/VigilanciaSaludPublicaRENAVE/EnfermedadesTransmisibles/MoMo/Paginas/default.aspx} que son gráficas de desviaciones de mortalidad diaria respecto a la esperada según las series históricas de mortalidad, estas constituyen un sistema de vigilancia que proporciona información sobre el impacto en mortalidad de la población. Estas son entregables en formato web y PDF.
 
-A pesar de la valiosísima información que estos informes pueden arrojar no es lo que persigue este trabajo que se
-centra en la obtención de datos crudos. El instituto pone a disposición de los ciudadanos tres servidores interactivos.
+A pesar de la valiosísima información que estos informes pueden arrojar, sobre todo desde el punto de vista sanitario. Esto no es lo que persigue satisfacer en este trabajo, que se centra en facilitar la obtención de datos crudos. El instituto pone a disposición de los ciudadanos dos servidores.
 
 \subsubsection{Servidor Arïadna}
 Nos permite consultar información sobre las causas de defunción atendiendo a cuatro variables:
@@ -64,7 +48,7 @@ Nos permite consultar información sobre las causas de defunción atendiendo a c
   \item Provincia.
 \end{enumerate}
 
-Los indicadores pueden ser:
+Y los indicadores pueden ser:
 \begin{enumerate}
   \item Tasa ajustada a la población europea.
   \item Tasa ajustada a la población mundial.
@@ -80,26 +64,23 @@ Los indicadores pueden ser:
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.5]{doc/logos/imgs/ariadna1.png}
-	\caption{ \cite{ariadna} Vista principal del servidor Arïadna }
+	\caption{ Vista principal del servidor Arïadna \footnote{http://ariadna.cne.isciii.es/} }
     \label{fig:worst_f_value}
 \end{figure}
 
 \begin{figure}[]
 	\centering
 	\includegraphics[scale=0.5]{doc/logos/imgs/ariadna2.png}
-	\caption{ \cite{ariadna} Vista por mortalidad provincial }
+	\caption{ Vista por mortalidad provincial del servidor Arïadna }
     \label{fig:worst_f_value}
 \end{figure}
 
-Los datos son ofrecidos mediante un mapa de España interactivo podemos observar también gráficas de todas las
-provincias y la media nacional así como una tabla con los datos. Esta página permite descargarse los datos pero
-únicamente en formato CSV y sólo de 10 tuplas en 10 tuplas sobre las variables filtradas. Lo que hizo que me pusiera en 
-contacto con el ISCIII si quería tener estos datos para trabajar.
+Los datos son ofrecidos mediante un mapa de España interactivo podemos observar también gráficas de todas las provincias y la media nacional así como una tabla con los datos. Es de obligado comentar la antigüedad manifiesta de la página y la poca agilidad con la que cargan los contenidos.
+Esta página permite descargarse los datos únicamente en formato CSV y sólo de 10 tuplas en 10 tuplas sobre las  variables filtradas. Lo que sigue dificultando el acceso completo a cualquier interesado.
 
 \subsubsection{Servidor Raziël}
-Es un servidor interactivo genera mapas y gráficas de España por comunidades autónomas, y tablas de datos que muestran 
-las diferencias en la mortalidad por diversas causas, desde el año 1980, de acuerdo con los criterios que de el usuario.
-Nos permite consultar información sobre las causas de defunción atendiendo a cuatro variables:
+Es un servidor interactivo \footnote{http://raziel.cne.isciii.es/index.php} que genera mapas y gráficas de España por comunidades autónomas, y tablas de datos que muestran las diferencias en la mortalidad por diversas causas. Ofrece datos desde el año 1980, de acuerdo con los criterios que de el usuario.
+La web nos permite consultar las gráficas citadas anteriormente atendiendo a cuatro variables:
 \begin{enumerate}
     \item Indicador.
     \item Causa.
@@ -107,24 +88,22 @@ Nos permite consultar información sobre las causas de defunción atendiendo a c
     \item Sexo.
     \item Grupo de edades.
     \item Comunidad Autónoma.
-  \end{enumerate}
+\end{enumerate}
+
+Esta web es prácticamente inaccesible e imposible de obtener los datos en tablas o en algún formato descargable por lo que no me quedó otra opción más que contactar con los servicios informáticos del instituto.
 
 
 \section{Mi propuesta ante el estado del arte}
-Sin perder de vista los \hyperref[sec:obj]{objetivos} objetivos y \hyperref[sec:usu]{usuarios} diana a utilizar este trabajo, contrastar las idea
-que tenía con las existentes ha sido muy útil. Para mejorar la accesibilidad de estos datos con las soluciones implementadas 
-ya por los organismos citados anteriormente he recogido someramente los siguientes puntos en los que ha de guiarse la 
-solución. Las principales deficiencias encontradas y objetivo a subsanar son:
-\begin{itemize}
-    \item Inexistencia de una API para que programadores y usuarios externos puedan obtener los datos
-    de forma uniforma y utilizando protocolos actuales.
-    \item La información es exportada en ficheros demasiados grandes y pesados para trabajar con ellos.
-    \item Aplicaciones basadas en el modelo C/S que a cada cambio hace que se recarguen las páginas y pierdas
-    la instantaneidad tan cómoda para consultar como varían los datos
-\end{itemize}
 
-De otra manera, si queremos consultar datos acerca de las provincias es necesario cambiarse de banco de datos o si quieres
-consultar las enfermdades clasificadas según CIE-10 \footnote{\cite{cie10}La CIE-10 es el acrónimo de la Clasificación internacional de enfermedades,
-10.ª edición correspondiente a la versión en español de la versión} con los grupos de edad es imposible pues estas informaciones
-se encuentran en servicios distintos. Voy a intentar unificar estas dos fuentes de forma que podamos obtener esta información
-desde un mismo servicio.
+Sin perder de vista los \hyperref[sec:obj]{objetivos} y \hyperref[sec:usu]{usuarios diana} a utilizar este trabajo.  ha sido una tarea útil y fundamental contrastar las "soluciones" existentes para darme cuenta de que los datos no son nada accesibles ni para científicos para que puedan desarrollar estudios ni prácticamente para usuarios observadores ya que la antigüedad de los sistemas, el tiempo de carga y lo nula inversión en accesibilidad hace imposible su uso.
+
+Tras ponerme en contacto con los servicios informáticos del instituto, no tuvieron problema alguno en pasarme todos los ficheros de los que se sirve el servidor, de hecho me llevé una grata sorpresa al ver que almacenaban más variables de las que ellos ofrecían, lo que me ha permitido hacer un trabajo más rico. En el capítulo 5: Análisis de los datos, lo analizaremos más en detalle.
+
+
+Para terminar con mi propuesta, he recogido someramente los siguientes puntos en los que ha de guiarse la solución. Las principales deficiencias encontradas y objetivo a subsanar son:
+\begin{itemize}
+    \item Inexistencia de una interfaz de consulta para que usuarios externos puedan obtener los datos de forma uniforme y utilizando protocolos actuales.
+    \item Los datos expuestios en la web no son completos, por razón que desconozco no se muetran todas las variables existentes.
+    \item No permite realizar consultas conjuntas a los datos.
+    \item La visualización gráfica no se consigue por todas las variables.
+\end{itemize}
