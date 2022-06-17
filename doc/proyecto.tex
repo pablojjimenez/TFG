@@ -21,6 +21,8 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{glossaries}
+
 
 \usepackage[table,xcdraw]{xcolor}
 \hypersetup{
@@ -69,6 +71,24 @@
 	% Si hay suficientes se incluirá dicho índice
 	\listoftables 
 	\newpage
+
+	\makeglossaries
+	\newglossaryentry{mortalidad}
+	{
+		name=Mortalidad,
+		description={La cantidad de personas que mueren en un lugar y período de tiempo concreto.}
+	}
+	\newglossaryentry{morbilidad}
+	{
+		name=Morbilidad,
+		description={La cantidad de personas que enferman en un lugar y período de tiempo concreto.}
+	}
+	\newglossaryentry{gráficas-MoMo}
+	{
+		name=gráficas MoMo,
+		description={Son un sistema de monitorización de la mortalidad diaria que permite observar gráficamente como la evolución del número de defunciones que se producen.}
+	}
+
 
 	% Introducción 
 	\input{doc/secciones/01_introduccion.tex}
