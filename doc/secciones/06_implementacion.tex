@@ -7,7 +7,7 @@ A la hora de empezar con la Implementación de la solución, se debe tener en cu
 \subsection{Lenguaje de programación}
 El lenguaje elegido ha sido \textbf{Python} los motivos de esta decisión son variados, por los que procedo a enumerarlos:
 \begin{itemize}
-    \item Es un lenguaje que se encuentra en las \cite{tiobe} primeras posiciones como lenguaje más utilizado a día de hoy. Además me encuentro muy cómodo programando en él.
+    \item Es un lenguaje que se encuentra en las primeras posiciones como lenguaje más utilizado a día de hoy según el índice TIOBE\footnote{https://www.tiobe.com/tiobe-index/}. Además me encuentro muy cómodo programando en él.
     \item Es un lenguaje que cuenta con muchísimas bibliotecas, muchas de estas especiales para trabajar con datos y ficheros (como \textbf{Pandas}). Abundan también los \textit{frameworks} que nos ayudan a construir APIs con él y la mayoría de PaaS \footnote{Platform as a Service} soportan este lenguaje.
     \item Es un lenguaje interpretado, débilmente tipado y con una capacidad introspectiva muy alta que nos permite metaprogramar.
 \end{itemize}
@@ -23,7 +23,7 @@ Desde el inicio del trabajo se ha estado trabajando con un sistema férreo de CI
 
 Para garantizar la \textbf{calidad de la memoria} se han implementado dos tipos de CI\footnote{Continuos Integration}: un revisor ortográfico y un revisor de estructura que compila el documento automáticamente y pública el PDF generado en las \href{https://github.com/pablojjimenez/TFG/releases}{\textit{releases} del repositorio.}
 
-Del mismo modo, para el \textbf{código} se han implementado otras dos CI que garantizan que cuando se introduce en la rama principal del repositorio código nuevo, éste garantiza unos estándares de calidad y que efectivamente el código es funcional por todas las versiones especificadas de Python. Por un lado, verificar el código fuente contra errores de programación (como "library imported but unused" y "Undefined name") y para verificar la complejidad ciclomática. Se ha utilizado la tecnología \cite{flake}\textbf{Flake8} por ser las más utilizada en el ecosistema.
+Del mismo modo, para el \textbf{código} se han implementado otras dos CI que garantizan que cuando se introduce en la rama principal del repositorio código nuevo, éste garantiza unos estándares de calidad y que efectivamente el código es funcional por todas las versiones especificadas de Python. Por un lado, verificar el código fuente contra errores de programación (como "library imported but unused" y "Undefined name") y para verificar la complejidad ciclomática. Se ha utilizado la tecnología \textbf{Flake8} por ser las más utilizada en el ecosistema.
 Por otro lado, se corre la \textit{suit} de tests de forma que se garantice que al añadir uno código no se rompe el existente. Se ha utilizado la librería \textit{Unittest} que se encuentra incluida en la biblioteca estándar de Python permite realizar aserciones, provee de muchas aserciones y permite organizar los tests de forma parecida a como lo hace jUnit en clases que llamamos \textit{suits} de tests.
 
 Todas estas comprobaciones se realizan para todas las versiones de Python en las que garantizamos que el software funciona.
