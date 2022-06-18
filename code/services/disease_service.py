@@ -3,8 +3,7 @@ from typing import Dict
 
 from managers.utils import transform_params
 from models.exceptions import IncorrectQueryException, NoCorrectColumnsException, \
-    DataIsNotAvaible, NoCorrectTypeException, NoAttributeException
-from models.exceptions import IncorrectQueryException, NoCorrectColumnsException
+    NoCorrectTypeException, DataIsNotAvaible, NoAttributeException
 from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
     RazielRepoCreator, DiseaseRepoCreator
 from repositories.vars_repository import VarsRepository
