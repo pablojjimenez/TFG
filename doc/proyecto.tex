@@ -21,6 +21,8 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{glossaries}
+\usepackage{placeins}
 
 \usepackage[table,xcdraw]{xcolor}
 \hypersetup{
@@ -51,13 +53,27 @@
 
 \usepackage{glossaries}
 
-\makeglossaries
-
+\newglossaryentry{mortalidad}
+{
+	name=Mortalidad,
+	description={La cantidad de personas que mueren en un lugar y período de tiempo concreto.}
+}
+\newglossaryentry{morbilidad}
+{
+	name=Morbilidad,
+	description={La cantidad de personas que enferman en un lugar y período de tiempo concreto.}
+}
+\newglossaryentry{momo}
+{
+	name=gráficas MoMo,
+	description={Son un sistema de monitorización de la mortalidad diaria que permite observar gráficamente como la evolución del número de defunciones que se producen.}
+}
 \newglossaryentry{CIE-10}
 {
     name=CIE-10,
     description={Es el acrónimo de la Clasificación internacional de enfermedades, 10.ª edición correspondiente.}
 }
+\makenoidxglossaries
 
 \begin{document}
 
@@ -78,6 +94,9 @@
 	% Si hay suficientes se incluirá dicho índice
 	\listoftables 
 	\newpage
+
+	\printnoidxglossaries
+
 
 	% Introducción 
 	\input{doc/secciones/01_introduccion.tex}

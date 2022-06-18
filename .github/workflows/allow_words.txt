@@ -72,3 +72,10 @@ dataframes
 bayesiana
 clustering
 scikit
+tuplas
+MoMo
+entregables
+agnósticamente
+TIOBE
+softwares
+descargable
