@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     host: str = ''
     port: int = 0
     debug_app: str = ''
-    chart_base_app: str = 'opt/'
+    chart_path_base: str = 'opt/'
 
     class Config:
         env_file = '.env'

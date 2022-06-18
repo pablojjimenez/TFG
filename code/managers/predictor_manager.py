@@ -11,7 +11,7 @@ from repositories.raziel_repository import RazielRepository
 
 
 class PredictorManager:
-    CHART_PATH = get_config().chart_base_app
+    CHART_PATH = get_config().chart_path_base
 
     def __init__(self, raziel_repo: RazielRepository):
         self.raziel_repo = raziel_repo

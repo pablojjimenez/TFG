@@ -17,14 +17,14 @@ managersRouter = APIRouter(
 def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU',
                          period=2):
     predictor = PredictorManager(RazielRepoCreator().factory_method())
-    predictor.deaths_forecasting({'query': query}, group, summ, int(period))
-    return FileResponse(PredictorManager.CHART_PATH)
+    _, img_path = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
+    return FileResponse(img_path)
 
 
 @managersRouter.post("/deaths-predictor", status_code=200)
 def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU', period=2):
     predictor = PredictorManager(RazielRepoCreator().factory_method())
-    d = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
+    d, _ = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
     result = d.to_json(orient="split")
     return json.loads(result)
 
@@ -32,5 +32,5 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
 @managersRouter.post("/chart")
 def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU'):
     gm = GraphicManager(RazielRepoCreator().factory_method())
-    gm.get_chart_by_two_vars({'query': query}, group, summ)
-    return FileResponse(GraphicManager.CHART_PATH)
+    img_path = gm.get_chart_by_two_vars({'query': query}, group, summ)
+    return FileResponse(img_path)

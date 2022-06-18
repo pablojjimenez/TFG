@@ -18,8 +18,8 @@ def ensure_directory_exists(directory: str):
 
 def remove_pasts_images():
     deleteTime = arrow.now().shift(minutes=-5)
-    for f in os.listdir(get_config().chart_base_app):
-        f = os.path.join(get_config().chart_base_app, f)
+    for f in os.listdir(get_config().chart_path_base):
+        f = os.path.join(get_config().chart_path_base, f)
         itemTime = arrow.get(os.stat(f).st_mtime)
         if itemTime < deleteTime:
             if os.path.isfile(f):
