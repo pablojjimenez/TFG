@@ -8,11 +8,7 @@ from managers.graphic_manager import GraphicManager
 from managers.predictor_manager import PredictorManager
 from models.exceptions import NoCorrectColumnsException, NoCorrectTypeException, \
     DataIsNotAvaible, NoAttributeException
-from repositories.ccaa_repository import CcaaRepository
-from repositories.cie_repository import CieRepository
-from repositories.disease_repository import DiseaseRepository
-from repositories.gedad_repository import GedadRepository
-from repositories.raziel_repository import RazielRepository
+from repositories.creator import RazielRepoCreator
 
 managersRouter = APIRouter(
     responses={
@@ -27,14 +23,8 @@ managersRouter = APIRouter(
 def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU',
                          period=2):
     try:
-        c = RazielRepository(
-            'data/raziel',
-            DiseaseRepository('data/diseases', CieRepository('data/cie')),
-            CcaaRepository('data/ccaas'),
-            GedadRepository('data/grupos_edad')
-        )
-        predictor = PredictorManager(c)
-        predictor.deaths_forecasting({'query': query}, group, summ, int(period))
+        predictor = PredictorManager(RazielRepoCreator().factory_method())
+        predictor.deaths_forecasting({'query': query}, group, summ, period)
         return FileResponse(PredictorManager.CHART_PATH)
     except NoCorrectColumnsException as e:
         raise HTTPException(status_code=422, detail=str(e))
@@ -47,14 +37,8 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
 @managersRouter.post("/deaths-predictor", status_code=200)
 def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU', period=2):
     try:
-        c = RazielRepository(
-            'data/raziel',
-            DiseaseRepository('data/diseases', CieRepository('data/cie')),
-            CcaaRepository('data/ccaas'),
-            GedadRepository('data/grupos_edad')
-        )
-        predictor = PredictorManager(c)
-        d = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
+        predictor = PredictorManager(RazielRepoCreator().factory_method())
+        d = predictor.deaths_forecasting({'query': query}, group, summ, period)
         result = d.to_json(orient="split")
         return json.loads(result)
     except NoCorrectColumnsException as e:
@@ -68,13 +52,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
 @managersRouter.post("/chart", status_code=201)
 def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU'):
     try:
-        c = RazielRepository(
-            'data/raziel',
-            DiseaseRepository('data/diseases', CieRepository('data/cie')),
-            CcaaRepository('data/ccaas'),
-            GedadRepository('data/grupos_edad')
-        )
-        gm = GraphicManager(c)
+        gm = GraphicManager(RazielRepoCreator().factory_method())
         gm.get_chart_by_two_vars({'query': query}, group, summ)
         return FileResponse(GraphicManager.CHART_PATH)
     except NoCorrectColumnsException as e:

@@ -1,14 +1,12 @@
 from fastapi import APIRouter, HTTPException
 from typing import Dict
 
-from managers.utils import call_repository_get_all
+from managers.utils import transform_params
 from models.exceptions import IncorrectQueryException, NoCorrectColumnsException, \
     DataIsNotAvaible, NoCorrectTypeException, NoAttributeException
-from repositories.ccaa_repository import CcaaRepository
-from repositories.cie_repository import CieRepository
-from repositories.disease_repository import DiseaseRepository
-from repositories.gedad_repository import GedadRepository
-from repositories.raziel_repository import RazielRepository
+from models.exceptions import IncorrectQueryException, NoCorrectColumnsException
+from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
+    RazielRepoCreator, DiseaseRepoCreator
 from repositories.vars_repository import VarsRepository
 
 dataRouter = APIRouter(
@@ -31,10 +29,12 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     - `limit` limnite de elementos
     """
     try:
-        return call_repository_get_all(
-            DiseaseRepository('data/diseases', CieRepository('data/cie')),
-            query, sort, page, limit
-        )
+        p = transform_params(query, sort, page, limit)
+        objs, tam = DiseaseRepoCreator().get_all_operation(p)
+        return {
+            'items': objs,
+            'length': tam
+        }
     except (NoCorrectColumnsException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
@@ -54,10 +54,12 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     - `limit` limnite de elementos
     """
     try:
-        return call_repository_get_all(
-            CcaaRepository('data/ccaas'),
-            query, sort, page, limit
-        )
+        p = transform_params(query, sort, page, limit)
+        objs, tam = CcaaRepoCreator().get_all_operation(p)
+        return {
+            'items': objs,
+            'length': tam
+        }
     except (NoCorrectColumnsException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
@@ -77,10 +79,12 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     - `limit` limnite de elementos
     """
     try:
-        return call_repository_get_all(
-            CieRepository('data/cie'),
-            query, sort, page, limit
-        )
+        p = transform_params(query, sort, page, limit)
+        objs, tam = CieRepoCreator().get_all_operation(p)
+        return {
+            'items': objs,
+            'length': tam
+        }
     except (NoCorrectColumnsException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
@@ -99,10 +103,12 @@ def get_ages_groups(page: int = 1, limit: int = 100):
     - `limit` limnite de elementos
     """
     try:
-        return call_repository_get_all(
-            GedadRepository('data/grupos_edad'),
-            None, None, page, limit
-        )
+        p = transform_params(None, None, page, limit)
+        objs, tam = AgesGroupsRepoCreator().get_all_operation(p)
+        return {
+            'items': objs,
+            'length': tam
+        }
     except (NoCorrectColumnsException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
@@ -122,15 +128,12 @@ def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = Non
     - `limit` limnite de elementos
     """
     try:
-        return call_repository_get_all(
-            RazielRepository(
-                'data/raziel',
-                DiseaseRepository('data/diseases', CieRepository('data/cie')),
-                CcaaRepository('data/ccaas'),
-                GedadRepository('data/grupos_edad')
-            ),
-            query, sort, page, limit
-        )
+        p = transform_params(query, sort, page, limit)
+        objs, tam = RazielRepoCreator().get_all_operation(p)
+        return {
+            'items': objs,
+            'length': tam
+        }
     except (NoCorrectColumnsException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
