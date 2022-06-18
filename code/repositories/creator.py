@@ -1,6 +1,7 @@
 import abc
 from abc import abstractmethod
 
+from config.general_config import get_config
 from repositories.ccaa_repository import CcaaRepository
 from repositories.cie_repository import CieRepository
 from repositories.disease_repository import DiseaseRepository
@@ -24,7 +25,7 @@ class CcaaRepoCreator(RepoCreator):
     """
 
     def factory_method(self):
-        return CcaaRepository('data/ccaas')
+        return CcaaRepository(get_config().ccaa_repo_path)
 
 
 class CieRepoCreator(RepoCreator):
@@ -33,7 +34,7 @@ class CieRepoCreator(RepoCreator):
     """
 
     def factory_method(self):
-        return CieRepository('data/cie')
+        return CieRepository(get_config().cie_repo_path)
 
 
 class AgesGroupsRepoCreator(RepoCreator):
@@ -42,7 +43,7 @@ class AgesGroupsRepoCreator(RepoCreator):
     """
 
     def factory_method(self):
-        return GedadRepository('data/grupos_edad')
+        return GedadRepository(get_config().gedad_repo_path)
 
 
 class DiseaseRepoCreator(RepoCreator):
@@ -51,7 +52,10 @@ class DiseaseRepoCreator(RepoCreator):
     """
 
     def factory_method(self):
-        return DiseaseRepository('data/diseases', CieRepoCreator().factory_method())
+        return DiseaseRepository(
+            get_config().disease_repo_path,
+            CieRepoCreator().factory_method()
+        )
 
 
 class RazielRepoCreator(RepoCreator):
@@ -61,7 +65,7 @@ class RazielRepoCreator(RepoCreator):
 
     def factory_method(self):
         return RazielRepository(
-            'data/raziel',
+            get_config().raziel_repo_path,
             DiseaseRepoCreator().factory_method(),
             CcaaRepoCreator().factory_method(),
             AgesGroupsRepoCreator().factory_method()
