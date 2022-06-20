@@ -1,29 +1,31 @@
 \chapter{Análisis de los datos disponibles}
 
-Los datos acerca de las defunciones son un componente fundamental en este trabajo sin
-el cual no podríamos construir nuestra solución. He necesitado obtener los datos recolectados
-durante años por distintas administraciones para usarlos.
+Los datos acerca de las defunciones son un componente fundamental en este trabajo sin el cual no podríamos construir nuestra solución. Si bien es cierto que no es difícil obtener estos datos del Instituto Nacional de Estadística, estos son demasiados pobres, no nos ofrecen información suficiente sobre para poder construir una solución con suficiente semántica.
 
-En primer lugar, me dirigí a la página sobre la iniciativa de \href{https://datos.gob.es/}{datos abiertos del Gobierno de España}
-la información que encontré relativa a las defunciones
-según causa de muerte son unas colecciones que recolecta anualmente el Instituto
-Nacional de Estadística. El formato disponible de descarga era CSV y las columnas de información
-proporcionadas eran escasas, además solo ofrecían el número crudo de defunciones. Nos interesa que existieran
-otras variables estadísticas como el número de defunciones por cada 100 000 habitantes. Además la clasificación de
-las enfermedades es escasa y genérica.
+Durante la documentación del capítulo anterior, descubrí que el Instituto Carlos III recolectaba e intentaba exponer estos datos con mucho más detalles que los anteriores. Tras conocer la existencia de los servidores Arïadna y Raziël me puse en contacto con el \textbf{Instituto de Salud Carlos III} por correo electrónico para que me compartieran estos datos de dominio público almacenado en sus servidores. Esta colección de datos si es muy completa nos ofrece muchos tipos de enfermedades y nos ofrece infiormación normalizada.
 
-Tras conocer la existencia de los servidores Arïadna y Raziël me puse en contacto con el \textbf{Instituto de Salud Carlos
-III} para obtener los datos de dominio público almacenado en esos servidores. Esta colección de datos si es muy completa
-nos ofrece muchos tipos de enfermedades y nos ofrece datos normalizados: la tasa por cada 100 000 habitantes, tasas truncadas y
-tasas ajustadas a la población europea entre otras.
+Estas son las columnas normalizadas:
+\end{itemize}
+\item \textbf{AVP}: Años potenciales de vida perdidos.
+\item \textbf{CRUDA}: Tasa bruta.
+\item \textbf{TAVP}: Tasa de años potenciales de vida perdidos.
+\item \textbf{EDAD}: Edad media a la defunción.
+\item \textbf{TASAE}: Tasa ajustada a la población europea.
+\item \textbf{TAVPE}: Tasa ajustada de años potenciales de vida perdidos.
+\item \textbf{TASAW}: Tasa ajustada a la población mundial.
+\item \textbf{TASAVPW}: Tasa ajustada de años potenciales de vida perdidos.
+\end{itemize}
 
-Las principales diferencias entre \textbf{Arïadna} y \textbf{Raziël} es que Arïadna no guarda información acerca
-de los grupos de edades, solo nos ofrece el cómputo de la edad media. Este cómputo podemos calcularlo nosotros conociendo
-los rangos de edad. Por tanto descarté Arïadna.
-Finalmente también queremos añadir un campo a las causas de Raziël para almacenar la clasificación de las
-enfermedades según el estándar \gls{CIE-10} que es algo que si posee Arïadna.
+El resto de columnas que forman los datos son:
+\end{itemize}
+\item \textbf{ANO}: Año de consulta (1980 a 2020).
+\item \textbf{CAUSA}: Código de la causa.
+\item \textbf{SX}: Sexo (1: hombres, 2: mujeres).
+\item \textbf{CCAA}: Comunidad Autónoma.
+\item \textbf{GEDAD}: Grupos de edad.
+\item \textbf{DEFU}: Número de defunciones.
+\end{itemize}
 
-\section{Modelización de los datos}
-Nuestro conjunto de datos queda modelizado bajo la entidad \textbf{Raziel} que es la que almacena todas las variables
-disponibles por las que filtrar. El resto de entidades que componen el dominio del problema son: grupos de edad,
-Comunidad Autónoma, Enfermedad.
+Esta entidad es la que he denominado \textbf{Raziel} que integra otro tipo de modelos como la cauas (motivo de la defunción) que es un objeto formado por el nombre de la causa y su equivalencia con el estándar \gls{CIE-10} que es el acrónimo de la "Clasificación Internacional de enfermedades en su 10.ª edición."
+
+La principal diferencia aparente que existe entre la información que sirve \textbf{Arïadna} y \textbf{Raziël} es que Arïadna no guarda información acerca de los grupos de edades, solo nos ofrece el cómputo de la edad media. Este cómputo podemos calcularlo nosotros conociendo los rangos de edad. Por tanto descarté Arïadna sospechando que es la misma fuente que Raziël pero con algunas columnas calculadas.
