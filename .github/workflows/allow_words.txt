@@ -89,3 +89,4 @@ SX
 CCAA
 GEDAD
 DEFU
+estadoArte
