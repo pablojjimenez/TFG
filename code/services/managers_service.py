@@ -13,7 +13,7 @@ managersRouter = APIRouter(
 )
 
 
-@managersRouter.post("/deaths-predictor-chart", status_code=200)
+@managersRouter.post("/deaths-predictor-chart", status_code=201)
 def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU',
                          period=2):
     predictor = PredictorManager(RazielRepoCreator().factory_method())
@@ -29,7 +29,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
     return json.loads(result)
 
 
-@managersRouter.post("/chart")
+@managersRouter.post("/chart", status_code=201)
 def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU'):
     gm = GraphicManager(RazielRepoCreator().factory_method())
     gm.get_chart_by_two_vars({'query': query}, group, summ)
