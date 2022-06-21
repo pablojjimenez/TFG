@@ -7,6 +7,28 @@ from models.small_models import Sex, Ccaa, Gedad
 
 
 class Raziel(object):
+    """
+    Description:
+        Raziel is the abstraction of the data stored in the raziel CSV. This class
+        represent the deaths associated with the population on a disease, also provides some
+        types and constraint validation. Its properties are all the data stored by the ISCIII
+    Properties:
+        ano: int - year of the data
+        causa: Disease - disease object
+        sx: int - gender of the person (1: man, 2: woman)
+        ccaa: Ccaa - Spanish state object
+        gedad: Gedad - age group at death
+        defu: int - number of deaths
+        avp: int - potential years of life lost
+        cruda: float - crude rate
+        tavp: float - rate of potential years of life lost
+        edad: float - average age at death
+        tasae: float - adjusted rate for the European population
+        tavpe: float - adjusted rate of years of potential life lost
+        tasaw: float - adjusted rate for the world population
+        tasavpw: float - adjusted rate of potential years of life lost
+        id: int - Internal row identification
+    """
     ALLOW_ATTRS = {
         'ano': int,
         'causa': Disease,
