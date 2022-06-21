@@ -8,7 +8,7 @@ from managers.graphic_manager import GraphicManager
 from managers.predictor_manager import PredictorManager
 from models.exceptions import IncorrectColumnNamesException, NoCorrectTypeException, \
     DataIsNotAvaible, NoAttributeException
-from repositories.creator import RazielRepoCreator
+from repositories.creator import DeceaseRepoCreator
 
 managersRouter = APIRouter(
     responses={
@@ -23,7 +23,7 @@ managersRouter = APIRouter(
 def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU',
                          period=2):
     try:
-        predictor = PredictorManager(RazielRepoCreator().factory_method())
+        predictor = PredictorManager(DeceaseRepoCreator().factory_method())
         predictor.deaths_forecasting({'query': query}, group, summ, period)
         return FileResponse(PredictorManager.CHART_PATH)
     except IncorrectColumnNamesException as e:
@@ -37,7 +37,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
 @managersRouter.post("/deaths-predictor", status_code=200)
 def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU', period=2):
     try:
-        predictor = PredictorManager(RazielRepoCreator().factory_method())
+        predictor = PredictorManager(DeceaseRepoCreator().factory_method())
         d = predictor.deaths_forecasting({'query': query}, group, summ, period)
         result = d.to_json(orient="split")
         return json.loads(result)
@@ -52,7 +52,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
 @managersRouter.post("/chart", status_code=201)
 def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU'):
     try:
-        gm = GraphicManager(RazielRepoCreator().factory_method())
+        gm = GraphicManager(DeceaseRepoCreator().factory_method())
         gm.get_chart_by_two_vars({'query': query}, group, summ)
         return FileResponse(GraphicManager.CHART_PATH)
     except IncorrectColumnNamesException as e:

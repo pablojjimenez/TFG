@@ -1,8 +1,8 @@
 from repositories.abstract_repository import ListParams
-from repositories.raziel_repository import RazielRepository
+from repositories.decease_repository import DeceaseRepository
 
 
-class MockRazielRepository(RazielRepository):
+class MockDeceaseRepository(DeceaseRepository):
     def __init__(self, disease_repo, ccaas_repo, gedades_repo):
         super().__init__('tests/mocks/data/razielM',
                          disease_repo, ccaas_repo, gedades_repo)

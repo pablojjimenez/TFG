@@ -5,7 +5,7 @@ from managers.utils import transform_params
 from models.exceptions import IncorrectQueryException, IncorrectColumnNamesException, \
     NoCorrectTypeException, DataIsNotAvaible, NoAttributeException
 from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
-    RazielRepoCreator, DiseaseRepoCreator
+    DeceaseRepoCreator, DiseaseRepoCreator
 from repositories.vars_repository import VarsRepository
 
 dataRouter = APIRouter(
@@ -116,9 +116,9 @@ def get_ages_groups(page: int = 1, limit: int = 100):
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
-@dataRouter.post("/raziel")
-def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
-                        page: int = 1, limit: int = 100):
+@dataRouter.post("/deceases")
+def get_decease_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+                         page: int = 1, limit: int = 100):
     """
     Grupos de edad disponibles para clasificar.
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
@@ -128,7 +128,7 @@ def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = Non
     """
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = RazielRepoCreator().get_all_operation(p)
+        objs, tam = DeceaseRepoCreator().get_all_operation(p)
         return {
             'items': objs,
             'length': tam
