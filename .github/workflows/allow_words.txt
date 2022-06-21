@@ -72,3 +72,5 @@ dataframes
 bayesiana
 clustering
 scikit
+OpenAPI
+GraphQL
