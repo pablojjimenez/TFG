@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from typing import Dict
 
 from managers.utils import transform_params
-from models.exceptions import IncorrectQueryException, NoCorrectColumnsException, \
+from models.exceptions import IncorrectQueryException, IncorrectColumnNamesException, \
     NoCorrectTypeException, DataIsNotAvaible, NoAttributeException
 from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
     RazielRepoCreator, DiseaseRepoCreator
@@ -34,7 +34,7 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
             'items': objs,
             'length': tam
         }
-    except (NoCorrectColumnsException, IncorrectQueryException) as e:
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
@@ -59,7 +59,7 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
             'items': objs,
             'length': tam
         }
-    except (NoCorrectColumnsException, IncorrectQueryException) as e:
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
@@ -84,7 +84,7 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
             'items': objs,
             'length': tam
         }
-    except (NoCorrectColumnsException, IncorrectQueryException) as e:
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
@@ -108,7 +108,7 @@ def get_ages_groups(page: int = 1, limit: int = 100):
             'items': objs,
             'length': tam
         }
-    except (NoCorrectColumnsException, IncorrectQueryException) as e:
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
@@ -133,7 +133,7 @@ def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = Non
             'items': objs,
             'length': tam
         }
-    except (NoCorrectColumnsException, IncorrectQueryException) as e:
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))

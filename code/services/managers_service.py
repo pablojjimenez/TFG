@@ -6,7 +6,7 @@ from starlette.responses import FileResponse
 
 from managers.graphic_manager import GraphicManager
 from managers.predictor_manager import PredictorManager
-from models.exceptions import NoCorrectColumnsException, NoCorrectTypeException, \
+from models.exceptions import IncorrectColumnNamesException, NoCorrectTypeException, \
     DataIsNotAvaible, NoAttributeException
 from repositories.creator import RazielRepoCreator
 
@@ -26,7 +26,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
         predictor = PredictorManager(RazielRepoCreator().factory_method())
         predictor.deaths_forecasting({'query': query}, group, summ, period)
         return FileResponse(PredictorManager.CHART_PATH)
-    except NoCorrectColumnsException as e:
+    except IncorrectColumnNamesException as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
@@ -41,7 +41,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
         d = predictor.deaths_forecasting({'query': query}, group, summ, period)
         result = d.to_json(orient="split")
         return json.loads(result)
-    except NoCorrectColumnsException as e:
+    except IncorrectColumnNamesException as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
@@ -55,7 +55,7 @@ def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU')
         gm = GraphicManager(RazielRepoCreator().factory_method())
         gm.get_chart_by_two_vars({'query': query}, group, summ)
         return FileResponse(GraphicManager.CHART_PATH)
-    except NoCorrectColumnsException as e:
+    except IncorrectColumnNamesException as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))

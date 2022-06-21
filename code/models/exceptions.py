@@ -13,7 +13,7 @@ class InvalidIDException(Exception):
         Exception.__init__(self, sms)
 
 
-class NoCorrectColumnsException(Exception):
+class IncorrectColumnNamesException(Exception):
     def __init__(self, sms):
         Exception.__init__(self, sms)
 

@@ -2,7 +2,7 @@ import pandas
 import pytest
 
 from models.disease_model import Disease
-from models.exceptions import NoCorrectColumnsException, IncorrectQueryException
+from models.exceptions import IncorrectColumnNamesException, IncorrectQueryException
 from models.raziel_model import Raziel
 from models.small_models import Ccaa, Gedad
 
@@ -99,7 +99,7 @@ class TestRazielRepo:
         list_param = {
             'query': {'def2u': {'>': 5}},
         }
-        with pytest.raises(NoCorrectColumnsException):
+        with pytest.raises(IncorrectColumnNamesException):
             mock_raziel_repo.get_all(list_param)
 
     def test_invalid_query_params2(self, mock_raziel_repo):
@@ -114,12 +114,12 @@ class TestRazielRepo:
         assert isinstance(obj, pandas.DataFrame)
 
     def test_invalid_vars(self, mock_raziel_repo):
-        with pytest.raises(NoCorrectColumnsException):
+        with pytest.raises(IncorrectColumnNamesException):
             mock_raziel_repo.prepare_and_grouping_dataframe({}, 'AAAA', 'B')
 
     def test_invalid_columns(self, mock_raziel_repo):
         list_param = {
             'query': {'fake': {'==': 5}},
         }
-        with pytest.raises(NoCorrectColumnsException):
+        with pytest.raises(IncorrectColumnNamesException):
             mock_raziel_repo.get_all(list_param)
