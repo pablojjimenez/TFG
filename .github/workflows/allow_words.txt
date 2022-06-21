@@ -72,6 +72,8 @@ dataframes
 bayesiana
 clustering
 scikit
+OpenAPI
+GraphQL
 tuplas
 MoMo
 entregables
