@@ -21,6 +21,8 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{booktabs}
+\usepackage{glossaries}
+\usepackage{placeins}
 
 \usepackage[table,xcdraw]{xcolor}
 \hypersetup{
@@ -51,13 +53,27 @@
 
 \usepackage{glossaries}
 
-\makeglossaries
-
+\newglossaryentry{mortalidad}
+{
+	name=Mortalidad,
+	description={La cantidad de personas que mueren en un lugar y período de tiempo concreto.}
+}
+\newglossaryentry{morbilidad}
+{
+	name=Morbilidad,
+	description={La cantidad de personas que enferman en un lugar y período de tiempo concreto.}
+}
+\newglossaryentry{momo}
+{
+	name=gráficas MoMo,
+	description={Son un sistema de monitorización de la mortalidad diaria que permite observar gráficamente como la evolución del número de defunciones que se producen.}
+}
 \newglossaryentry{CIE-10}
 {
     name=CIE-10,
     description={Es el acrónimo de la Clasificación internacional de enfermedades, 10.ª edición correspondiente.}
 }
+\makenoidxglossaries
 
 
 \NewDocumentCommand{\codeword}{v}{%
@@ -85,6 +101,9 @@
 	\listoftables 
 	\newpage
 
+	\printnoidxglossaries
+
+
 	% Introducción 
 	\input{doc/secciones/01_introduccion.tex}
 
@@ -92,8 +111,6 @@
 	% 	1. Crítica al estado del arte
 	% 	2. Propuesta
 	\input{doc/secciones/03_estado_del_arte.tex}
-	
-	\input{doc/secciones/04_planificacion.tex}
 
 	% Análisis del problema
 	% 1. Análisis de requisitos
@@ -101,6 +118,8 @@
 	% 3. Solucion propuesta
 	% 4. Análisis de seguridad
 	\input{doc/secciones/05_analisis.tex}
+	
+	\input{doc/secciones/04_planificacion.tex}
 
 	% Desarrollo bajo sprints: 
 	% 	1. Permitir registros y login de usuarios
