@@ -105,7 +105,7 @@ Por otro lado, tenemos Prophet una biblioteca open source para Python y R desarr
 
 En Prophet, los modelos se ajustan usando Stan, otra biblioteca de inferencia estadística bayesiana con estimación de verosimilitud penalizada.
 
-\subsubsection{FastAPI}
+\subsubsection{Interfaz REST}
 En aras de que el usuario pueda utilizar estos servicios de forma agnóstica sin tener que descargarse el código fuente e incluirlo en su proyecto a modo de biblioteca. Algo que por otra parte, supondría una gran restricción ya que el lenguaje de programación tendría que ser Python.
 
 Para ello, se ha implementado una interfaz de comunicación REST. Como bien es sabido, los servicios restful se apoyan del estándar HTTP y por tanto, hereda sus conocidas características. REST es \textit{stateless} cada vez que utilizamos un recurso necesitamos ofrecerle toda la información identificativa pues carece de memoria, utiliza el formato JSON para el intercambio de datos y expone una serie de recursos o \textit{endpoints} que son las operaciones disponibles a realizar.
@@ -113,7 +113,7 @@ Para ello, se ha implementado una interfaz de comunicación REST. Como bien es s
 En el universo Python existen dos grandes frameworks para construir servicios restful: Flask y FastAPI.
 Flask es un microframework, que dispone de multitud de complementos lo que te permite construir cualquier servicio configurando correctamente todos estos complementos. 
 
-FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según la documentación \footnote{https://fastapi.tiangolo.com} oficial se podría igual al rendimiento que ofrece NodeJS o Go. Además, nos permite por defecto programar de forma asíncrona (muy interesante cuando hay acceso a bases de datos) y nos proporciona de forma automática una documentación OpenAPI.
+FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según la documentación oficial \href{https://fastapi.tiangolo.com}, tanto que se podría igualar al rendimiento que ofrece NodeJS o Go. Además, nos permite por defecto programar de forma asíncrona (muy interesante cuando hay acceso a bases de datos) y nos proporciona de forma automática una documentación OpenAPI.
 
 La API de este software expone dos blueprints \footnote{Llamamos blueprint al conjunto de recursos que comparte el mismo prefijo de URI (Identificador de recursos uniforme)}
 
