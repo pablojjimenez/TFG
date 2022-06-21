@@ -5,16 +5,30 @@ A la hora de empezar con la Implementación de la solución, se debe tener en cu
 
 \section{Implementación}
 \subsection{Lenguaje de programación}
-El lenguaje elegido ha sido \textbf{Python} los motivos de esta decisión son variados, por los que procedo a enumerarlos:
+Llega una de las elecciones más importantes a la hora de desarrollar software, la elección del lenguaje de programación
+debe de realizarse en base a las necesidades que tengamos de forma que nos permita satisfacerlas de la mejor forma posible.
+Quiero un lenguaje que me permite modelar bien el dominio y me proporcione una buena experiencia de desarrollo. En este contexto,
+quiero utilizar un lenguaje que sea orientado a objetos pero que sea moderno y poco verboso que me permita comenzar a desarrollar
+sin una excesiva \textit{verbosidad}.
+
+Bajo estas premisas contemplé la posibilidad de emplear JavaScript con NodeJS o Python. A la hora de realizar un proyecto
+software siempre es necesario utilizar bibliotecas y código implementado por otras personas para poder llegar más lejos.
+Este es el principal motivo que me ha hecho decantarme por \textbf{Python} ya que dispone de una gran comunidad
+y de muchas bibliotecas sobre gestión de datos debido a que es muy utilizado en programación científica.
+
+Otras características a comentar sobre el lenguaje son:
 \begin{itemize}
-    \item Es un lenguaje que se encuentra en las primeras posiciones como lenguaje más utilizado a día de hoy según el índice TIOBE\footnote{https://www.tiobe.com/tiobe-index/}. Además me encuentro muy cómodo programando en él.
+    \item Es un lenguaje que se encuentra en las primeras posiciones como lenguaje más utilizado a día de hoy según el índice TIOBE\footnote{https://www.tiobe.com/tiobe-index/}. Además, me encuentro muy cómodo programando en él.
     \item Es un lenguaje que cuenta con muchísimas bibliotecas, muchas de estas especiales para trabajar con datos y ficheros (como \textbf{Pandas}). Abundan también los \textit{frameworks} que nos ayudan a construir APIs con él y la mayoría de PaaS \footnote{Platform as a Service} soportan este lenguaje.
     \item Es un lenguaje interpretado, débilmente tipado y con una capacidad introspectiva muy alta que nos permite metaprogramar.
 \end{itemize}
 
-A la hora de realizar un proyecto software siempre es necesario utilizar bibliotecas y código implementado por otras personas para poder llegar más lejos. Todo esto es lo que llamamos dependencias. Muchos entornos de programación tienen gestores de dependencias que nos permiten instalar y gestionar estas dependencias cómodamente. En el entorno JavaScript tenemos \textit{npm} o \textit{yarn} que nos permite instalar dependencias de forma sencilla. Para la JVM el tradicional \textit{maven} es una buena opción o la mas moderna y potente \textit{Gradle}.
-
-En Python se ha extendido el uso de \textbf{Poetry} que de forma muy parecida a \textit{npm} genera un fichero de configuración \textit{pyproject.toml} donde definimos las dependencias, las versiones y los paquetes de nuestro proyecto así como algunas tareas específicas para correr los tests o el lint fácilmente. Esto facilita enormemente la creación de entornos virtuales de prueba y de desarrollo tanto el local como por el CI.
+En cuanto a la gestión de dependencias, en el entorno JavaScript tenemos \textit{npm} o \textit{yarn} que nos permite
+instalar dependencias de forma sencilla. Para la JVM el tradicional \textit{maven} es una buena opción o la mas moderna
+y potente \textit{Gradle}. En Python se ha extendido el uso de \textbf{Poetry} que de forma muy parecida a \textit{npm}
+genera un fichero de configuración \textit{pyproject.toml} donde definimos las dependencias, las versiones y los paquetes
+de nuestro proyecto así como algunas tareas específicas para correr los tests o el lint fácilmente. Esto facilita
+enormemente la creación de entornos virtuales de prueba y de desarrollo tanto el local como por el CI.
 
 \subsection{Bibliotecas utilizadas}
 
