@@ -90,5 +90,11 @@ class AbstractRepository(abc.ABC):
 
     @abc.abstractmethod
     def get_one(self, id):
+        """
+        Get one item from the collection of objects
+        :param key: Key of the collection
+        :param id: key item
+        :return: The object
+        """
         list = self.dataframe[self.dataframe['ID'] == id].values.tolist()
         return None if len(list) == 0 else list[0]

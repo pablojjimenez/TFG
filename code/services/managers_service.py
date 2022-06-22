@@ -1,14 +1,11 @@
 import json
 from typing import Dict
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from starlette.responses import FileResponse
 
 from managers.graphic_manager import GraphicManager
 from managers.predictor_manager import PredictorManager
-from models.exceptions import IncorrectColumnNamesException, NoCorrectTypeException, \
-    DataIsNotAvaible, NoAttributeException
-from repositories.creator import DeceaseRepoCreator
 
 managersRouter = APIRouter(
     responses={
@@ -24,7 +21,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
                          period=2):
     try:
         predictor = PredictorManager(DeceaseRepoCreator().factory_method())
-        predictor.deaths_forecasting({'query': query}, group, summ, period)
+        predictor.deaths_forecasting({'query': query}, group, summ, int(period))
         return FileResponse(PredictorManager.CHART_PATH)
     except IncorrectColumnNamesException as e:
         raise HTTPException(status_code=422, detail=str(e))
@@ -38,7 +35,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
 def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU', period=2):
     try:
         predictor = PredictorManager(DeceaseRepoCreator().factory_method())
-        d = predictor.deaths_forecasting({'query': query}, group, summ, period)
+        d = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
         result = d.to_json(orient="split")
         return json.loads(result)
     except IncorrectColumnNamesException as e:

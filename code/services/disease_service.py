@@ -2,8 +2,7 @@ from fastapi import APIRouter, HTTPException
 from typing import Dict
 
 from managers.utils import transform_params
-from models.exceptions import IncorrectQueryException, IncorrectColumnNamesException, \
-    NoCorrectTypeException, DataIsNotAvaible, NoAttributeException
+from models.exceptions import IncorrectQueryException, NoCorrectColumnsException
 from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
     DeceaseRepoCreator, DiseaseRepoCreator
 from repositories.vars_repository import VarsRepository
@@ -17,7 +16,7 @@ dataRouter = APIRouter(
 )
 
 
-@dataRouter.post("/diseases", status_code=200)
+@dataRouter.post("/diseases", status_code=200, response_model=MyReturnType[Disease])
 def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
                  page: int = 1, limit: int = 100):
     """
@@ -42,7 +41,7 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
-@dataRouter.post("/ccaas")
+@dataRouter.post("/ccaas", status_code=200, response_model=MyReturnType[Ccaa])
 def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
               page: int = 1, limit: int = 100):
     """
@@ -67,7 +66,7 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
-@dataRouter.post("/cie")
+@dataRouter.post("/cie", status_code=200, response_model=MyReturnType[Cie])
 def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
              page: int = 1, limit: int = 100):
     """
@@ -92,8 +91,9 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
-@dataRouter.post("/ages-groups")
-def get_ages_groups(page: int = 1, limit: int = 100):
+@dataRouter.post("/ages-groups", status_code=200, response_model=MyReturnType[Gedad])
+def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+                    page: int = 1, limit: int = 100):
     """
     Grupos de edad disponibles para clasificar. Por defecto se devuelven 100 entradas.
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
@@ -116,7 +116,7 @@ def get_ages_groups(page: int = 1, limit: int = 100):
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
-@dataRouter.post("/deceases")
+@dataRouter.post("/deceases", response_model=MyReturnType[Decease])
 def get_decease_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
                          page: int = 1, limit: int = 100):
     """
@@ -141,7 +141,7 @@ def get_decease_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = No
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
-@dataRouter.get("/vars-meaning")
+@dataRouter.get("/vars-meaning", status_code=200, response_model=MyReturnType)
 def get_vars_meaning():
     try:
         c = VarsRepository('data/vars')

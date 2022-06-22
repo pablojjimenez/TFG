@@ -53,16 +53,30 @@ A continuación se puede ver un somero diagrama donde podemos observar la conexi
 
 \section{Implementación}
 \subsection{Lenguaje de programación}
-El lenguaje elegido ha sido \textbf{Python} los motivos de esta decisión son variados, por los que procedo a enumerarlos:
+Llega una de las elecciones más importantes a la hora de desarrollar software, la elección del lenguaje de programación
+debe de realizarse en base a las necesidades que tengamos de forma que nos permita satisfacerlas de la mejor forma posible.
+Quiero un lenguaje que me permite modelar bien el dominio y me proporcione una buena experiencia de desarrollo. En este contexto,
+quiero utilizar un lenguaje que sea orientado a objetos pero que sea moderno y poco verboso que me permita comenzar a desarrollar
+sin una excesiva \textit{verbosidad}.
+
+Bajo estas premisas contemplé la posibilidad de emplear JavaScript con NodeJS o Python. A la hora de realizar un proyecto
+software siempre es necesario utilizar bibliotecas y código implementado por otras personas para poder llegar más lejos.
+Este es el principal motivo que me ha hecho decantarme por \textbf{Python} ya que dispone de una gran comunidad
+y de muchas bibliotecas sobre gestión de datos debido a que es muy utilizado en programación científica.
+
+Otras características a comentar sobre el lenguaje son:
 \begin{itemize}
-    \item Es un lenguaje que se encuentra en las \cite{tiobe} primeras posiciones como lenguaje más utilizado a día de hoy. Además me encuentro muy cómodo programando en él.
+    \item Es un lenguaje que se encuentra en las primeras posiciones como lenguaje más utilizado a día de hoy según el índice TIOBE\footnote{https://www.tiobe.com/tiobe-index/}. Además, me encuentro muy cómodo programando en él.
     \item Es un lenguaje que cuenta con muchísimas bibliotecas, muchas de estas especiales para trabajar con datos y ficheros (como \textbf{Pandas}). Abundan también los \textit{frameworks} que nos ayudan a construir APIs con él y la mayoría de PaaS \footnote{Platform as a Service} soportan este lenguaje.
     \item Es un lenguaje interpretado, débilmente tipado y con una capacidad introspectiva muy alta que nos permite metaprogramar.
 \end{itemize}
 
-A la hora de realizar un proyecto software siempre es necesario utilizar bibliotecas y código implementado por otras personas para poder llegar más lejos. Todo esto es lo que llamamos dependencias. Muchos entornos de programación tienen gestores de dependencias que nos permiten instalar y gestionar estas dependencias cómodamente. En el entorno JavaScript tenemos \textit{npm} o \textit{yarn} que nos permite instalar dependencias de forma sencilla. Para la JVM el tradicional \textit{maven} es una buena opción o la mas moderna y potente \textit{Gradle}.
-
-En Python se ha extendido el uso de \textbf{Poetry} que de forma muy parecida a \textit{npm} genera un fichero de configuración \textit{pyproject.toml} donde definimos las dependencias, las versiones y los paquetes de nuestro proyecto así como algunas tareas específicas para correr los tests o el lint fácilmente. Esto facilita enormemente la creación de entornos virtuales de prueba y de desarrollo tanto el local como por el CI.
+En cuanto a la gestión de dependencias, en el entorno JavaScript tenemos \textit{npm} o \textit{yarn} que nos permite
+instalar dependencias de forma sencilla. Para la JVM el tradicional \textit{maven} es una buena opción o la mas moderna
+y potente \textit{Gradle}. En Python se ha extendido el uso de \textbf{Poetry} que de forma muy parecida a \textit{npm}
+genera un fichero de configuración \textit{pyproject.toml} donde definimos las dependencias, las versiones y los paquetes
+de nuestro proyecto así como algunas tareas específicas para correr los tests o el lint fácilmente. Esto facilita
+enormemente la creación de entornos virtuales de prueba y de desarrollo tanto el local como por el CI.
 
 \subsection{Bibliotecas utilizadas}
 
@@ -71,7 +85,7 @@ Desde el inicio del trabajo se ha estado trabajando con un sistema férreo de CI
 
 Para garantizar la \textbf{calidad de la memoria} se han implementado dos tipos de CI\footnote{Continuos Integration}: un revisor ortográfico y un revisor de estructura que compila el documento automáticamente y pública el PDF generado en las \href{https://github.com/pablojjimenez/TFG/releases}{\textit{releases} del repositorio.}
 
-Del mismo modo, para el \textbf{código} se han implementado otras dos CI que garantizan que cuando se introduce en la rama principal del repositorio código nuevo, éste garantiza unos estándares de calidad y que efectivamente el código es funcional por todas las versiones especificadas de Python. Por un lado, verificar el código fuente contra errores de programación (como "library imported but unused" y "Undefined name") y para verificar la complejidad ciclomática. Se ha utilizado la tecnología \cite{flake}\textbf{Flake8} por ser las más utilizada en el ecosistema.
+Del mismo modo, para el \textbf{código} se han implementado otras dos CI que garantizan que cuando se introduce en la rama principal del repositorio código nuevo, éste garantiza unos estándares de calidad y que efectivamente el código es funcional por todas las versiones especificadas de Python. Por un lado, verificar el código fuente contra errores de programación (como "library imported but unused" y "Undefined name") y para verificar la complejidad ciclomática. Se ha utilizado la tecnología \textbf{Flake8} por ser las más utilizada en el ecosistema.
 Por otro lado, se corre la \textit{suit} de tests de forma que se garantice que al añadir uno código no se rompe el existente. Se ha utilizado la librería \textit{Unittest} que se encuentra incluida en la biblioteca estándar de Python permite realizar aserciones, provee de muchas aserciones y permite organizar los tests de forma parecida a como lo hace jUnit en clases que llamamos \textit{suits} de tests.
 
 Todas estas comprobaciones se realizan para todas las versiones de Python en las que garantizamos que el software funciona.
@@ -91,7 +105,7 @@ Por otro lado, tenemos Prophet una biblioteca open source para Python y R desarr
 
 En Prophet, los modelos se ajustan usando Stan, otra biblioteca de inferencia estadística bayesiana con estimación de verosimilitud penalizada.
 
-\subsubsection{FastAPI}
+\subsubsection{Interfaz REST}
 En aras de que el usuario pueda utilizar estos servicios de forma agnóstica sin tener que descargarse el código fuente e incluirlo en su proyecto a modo de biblioteca. Algo que por otra parte, supondría una gran restricción ya que el lenguaje de programación tendría que ser Python.
 
 Para ello, se ha implementado una interfaz de comunicación REST. Como bien es sabido, los servicios restful se apoyan del estándar HTTP y por tanto, hereda sus conocidas características. REST es \textit{stateless} cada vez que utilizamos un recurso necesitamos ofrecerle toda la información identificativa pues carece de memoria, utiliza el formato JSON para el intercambio de datos y expone una serie de recursos o \textit{endpoints} que son las operaciones disponibles a realizar.
@@ -99,7 +113,7 @@ Para ello, se ha implementado una interfaz de comunicación REST. Como bien es s
 En el universo Python existen dos grandes frameworks para construir servicios restful: Flask y FastAPI.
 Flask es un microframework, que dispone de multitud de complementos lo que te permite construir cualquier servicio configurando correctamente todos estos complementos. 
 
-FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según la documentación \footnote{https://fastapi.tiangolo.com} oficial se podría igual al rendimiento que ofrece NodeJS o Go. Además, nos permite por defecto programar de forma asíncrona (muy interesante cuando hay acceso a bases de datos) y nos proporciona de forma automática una documentación OpenAPI.
+FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según la documentación oficial \href{https://fastapi.tiangolo.com}, tanto que se podría igualar al rendimiento que ofrece NodeJS o Go. Además, nos permite por defecto programar de forma asíncrona (muy interesante cuando hay acceso a bases de datos) y nos proporciona de forma automática una documentación OpenAPI.
 
 La API de este software expone dos blueprints \footnote{Llamamos blueprint al conjunto de recursos que comparte el mismo prefijo de URI (Identificador de recursos uniforme)}
 
@@ -173,4 +187,11 @@ En este API se hacen uso de las categorías 1, 3 y 4. Posibles respuestas de est
 \subsubsection{Documentación de la API}
 Con la ayuda de los recursos que pone a nuestra disposición FastAPI, se ha implementado una especificación OpenAPI. Esta especificación define una serie de propiedades en un formato legible por una máquina (suele usarse el formato JSON o YAML).
 
-Gracias a eso podemos generar una documentación basada en HTML que nos permite conocer los recursos epuestos de la API, los argumentos y las estructuras de las respuestas esperadas. 
+Gracias a eso podemos generar una documentación basada en HTML que nos permite conocer los recursos expuestos de la API, los argumentos y las estructuras de las respuestas esperadas. Los modelos están documentados en el código para los usuarios que decidan utilizar el software como biblioteca puedan ver dicha documentación en el IDE que utilicen. Para aquellos que utilicen la API, se ha añadido a la especificación OpenAPI
+
+\begin{figure}[]
+	\centering	
+	\includegraphics[scale=0.5]{doc/logos/imgs/openapi.png}
+	\caption{ \cite{rtve-cis} Documentación OpenAPI de la API. }
+    \label{fig:worst_f_value}
+\end{figure}
