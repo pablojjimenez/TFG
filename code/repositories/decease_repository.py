@@ -1,10 +1,10 @@
-from models.exceptions import NoCorrectColumnsException
+from models.exceptions import IncorrectColumnNamesException
 from models.small_models import Sex
 from repositories.abstract_repository import AbstractRepository, ListParams
-from models.raziel_model import Raziel
+from models.decease_model import Decease
 
 
-class RazielRepository(AbstractRepository):
+class DeceaseRepository(AbstractRepository):
     def __init__(self, name, disease_repo, ccaas_repo, gedades_repo):
         super().__init__(name)
         self.ccaas_repo = ccaas_repo
@@ -29,7 +29,7 @@ class RazielRepository(AbstractRepository):
             'tasavpw': tuple[13],
             'id': int(tuple[14]),
         }
-        return Raziel(params)
+        return Decease(params)
 
     def get_all(self, params: ListParams = None) -> (list, int):
         data = super().get_all(params)
@@ -54,4 +54,4 @@ class RazielRepository(AbstractRepository):
     def _check_params(dataframe, var1: str, var2: str):
         cols = dataframe.columns.tolist()
         if var1 not in cols or var2 not in cols:
-            raise NoCorrectColumnsException('This columns does not exist in dataframe')
+            raise IncorrectColumnNamesException('This columns does not exist in dataframe')

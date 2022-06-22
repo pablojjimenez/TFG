@@ -4,7 +4,8 @@ from typing import Optional
 
 from typing_extensions import TypedDict
 
-from models.exceptions import NoCorrectColumnsException, IncorrectQueryException, DataIsNotAvaible
+from models.exceptions import IncorrectColumnNamesException, IncorrectQueryException, \
+    DataIsNotAvaible
 
 
 class ListParams(TypedDict, total=False):
@@ -28,7 +29,7 @@ class AbstractRepository(abc.ABC):
         allow = self.dataframe.columns.tolist()
         for i in keys:
             if i.upper() not in allow:
-                raise NoCorrectColumnsException(f'no colum {i}')
+                raise IncorrectColumnNamesException(f'Incorrect query, column {i} does not exist')
 
         for _, value in query.items():
             for key, _ in value.items():

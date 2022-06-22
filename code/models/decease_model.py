@@ -6,7 +6,7 @@ from models.exceptions import NoAttributeException, NoCorrectTypeException, \
 from models.small_models import Sex, Ccaa, Gedad
 
 
-class Raziel(object):
+class Decease(object):
     """
     Description:
         Raziel is the abstraction of the data stored in the raziel CSV. This class
@@ -51,9 +51,9 @@ class Raziel(object):
         for key in data:
             if key not in self._get_allowed_attrs():
                 raise NoAttributeException('Attr is not allowed')
-            if not isinstance(data[key], Raziel.ALLOW_ATTRS.get(key)):
+            if not isinstance(data[key], Decease.ALLOW_ATTRS.get(key)):
                 raise NoCorrectTypeException(
-                    f'Type: {data[key]} is not {Raziel.ALLOW_ATTRS.get(key)} for {key}'
+                    f'Type: {data[key]} is not {Decease.ALLOW_ATTRS.get(key)} for {key}'
                 )
 
         self.__dict__.update(data)
@@ -63,7 +63,7 @@ class Raziel(object):
             raise InvalidIDException('ID not allowed for Raziel object')
 
     def _get_allowed_attrs(self):
-        return list(map(lambda x: x[0], Raziel.ALLOW_ATTRS.items()))
+        return list(map(lambda x: x[0], Decease.ALLOW_ATTRS.items()))
 
     def __str__(self) -> str:
         return str(vars(self))

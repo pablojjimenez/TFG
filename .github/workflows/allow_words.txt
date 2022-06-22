@@ -113,4 +113,10 @@ mock
 testing
 mockear
 clústeres
-OpenAPI
+loc
+msg
+jsondecode
+ctx
+msg
+lineno
+colno

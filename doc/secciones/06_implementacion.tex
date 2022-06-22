@@ -136,6 +136,54 @@ La API de este software expone dos blueprints \footnote{Llamamos blueprint al co
     \item \textit{/managers} Dispone de tres recursos. Uno para generar gráficos lineales (ver figura): requiere dos variables como parámetros en la cabecera, una para indicar la agrupación y otra para la suma, como cuerpo de la llamada podemos pasar una query con la estructura especificada anteriormente. Por último, tenemos dos recursos para obtener la predicción y la gráfica ajustada en el tiempo que indiquemos.
 \end{itemize}
 
+El API es la interfaz por la que el usuario se comunica. Por tanto, al igual que a nivel de código gestionamos los errores haciendo uso de excepciones es importante ofrecer al usuario estos mensajes para que en todo momento sepa que está ocurriendo y si el error es motivado por su uso, puedo modificarlo. El formato de error es el siguiente cuando estamos ante una situación inesperada por la lógica de negocio:
+\begin{verbatim}
+{
+    "error_message": "Incorrect query, column ALGO does not exist",
+    "code": 422
+}
+\end{verbatim}
+Y cuando se trata de un error de sintaxis con el protocolo. E.g: El JSON introducido como cuerpo de la petición es incorrecto, obtenemos:
+\begin{verbatim}
+    {
+        "detail": [
+          {
+            "loc": [
+              "body",
+              1
+            ],
+            "msg": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+            "type": "value_error.jsondecode",
+            "ctx": {
+              "msg": "Expecting property name enclosed in double quotes",
+              "doc": "{",
+              "pos": 1,
+              "lineno": 1,
+              "colno": 2
+            }
+          }
+        ]
+      }
+\end{verbatim}
+
+En un servicio restful hacemos uso de unos códigos de error que nos ofrece el protocolo HTTP, estos códigos se clasifican a continuación:
+\begin{itemize}
+    \item Respuestas informativas (100–199).
+    \item Respuestas satisfactorias (200–299).
+    \item Redirecciones (300–399).
+    \item Errores de los clientes (400–499).
+    \item Errores de los servidores (500–599).
+\end{itemize}
+
+En este API se hacen uso de las categorías 1, 3 y 4. Posibles respuestas de este interfaz:
+\begin{itemize}
+    \item \codeword{200} Ejecución satisfactoria en los endpoints de solicitud de datos.
+    \item \codeword{201} Ejecución satisfactoria en los endpoints que generan una imagen (gráfico).
+    \item \codeword{400} Error del cliente introduciendo un tipo de dato erróneo, estructura JSON incorrecta...
+    \item \codeword{422} Error del cliente al introducir una query mal formulada, con campos incomprensibles o proyecciones sobre campos que no existen en los modelos...
+    \item \codeword{500} Error del servidor que los usuarios van a ver por ejemplo cuando la fuente de datos esté corrupta y el software no sea capaz de obtenerlos.
+\end{itemize}
+
 \subsubsection{Documentación de la API}
 Con la ayuda de los recursos que pone a nuestra disposición FastAPI, se ha implementado una especificación OpenAPI. Esta especificación define una serie de propiedades en un formato legible por una máquina (suele usarse el formato JSON o YAML).
 

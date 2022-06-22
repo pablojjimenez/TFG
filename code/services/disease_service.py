@@ -2,14 +2,19 @@ from fastapi import APIRouter, HTTPException
 from typing import Dict
 
 from managers.utils import transform_params
-from models.exceptions import IncorrectQueryException, NoCorrectColumnsException
-from models.openapi_models.models import Disease, Ccaa, Gedad, Raziel, MyReturnType, Cie
+from models.exceptions import IncorrectQueryException, DataIsNotAvaible, \
+    NoCorrectTypeException, IncorrectColumnNamesException, NoAttributeException
+from models.openapi_models.models import MyReturnType, Cie, Gedad, Decease, Ccaa, Disease
 from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
-    RazielRepoCreator, DiseaseRepoCreator
+    DeceaseRepoCreator, DiseaseRepoCreator
 from repositories.vars_repository import VarsRepository
 
 dataRouter = APIRouter(
-    responses={404: {"description": "Not found"}}
+    responses={
+        422: {"description": "Unprocessable entity"},
+        400: {"description": "Type error in some model fields"},
+        500: {"description": "Server internal error"}
+    }
 )
 
 
@@ -26,13 +31,16 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     try:
         p = transform_params(query, sort, page, limit)
         objs, tam = DiseaseRepoCreator().get_all_operation(p)
-    except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    return {
-        'items': objs,
-        'length': tam
-    }
+        return {
+            'items': objs,
+            'length': tam
+        }
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
+        raise HTTPException(status_code=400, detail=str(e2))
+    except DataIsNotAvaible:
+        raise HTTPException(status_code=505, detail="Data source is not available")
 
 
 @dataRouter.post("/ccaas", status_code=200, response_model=MyReturnType[Ccaa])
@@ -48,13 +56,16 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     try:
         p = transform_params(query, sort, page, limit)
         objs, tam = CcaaRepoCreator().get_all_operation(p)
-    except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    return {
-        'items': objs,
-        'length': tam
-    }
+        return {
+            'items': objs,
+            'length': tam
+        }
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
+        raise HTTPException(status_code=400, detail=str(e2))
+    except DataIsNotAvaible:
+        raise HTTPException(status_code=505, detail="Data source is not available")
 
 
 @dataRouter.post("/cie", status_code=200, response_model=MyReturnType[Cie])
@@ -70,13 +81,16 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     try:
         p = transform_params(query, sort, page, limit)
         objs, tam = CieRepoCreator().get_all_operation(p)
-    except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    return {
-        'items': objs,
-        'length': tam
-    }
+        return {
+            'items': objs,
+            'length': tam
+        }
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
+        raise HTTPException(status_code=400, detail=str(e2))
+    except DataIsNotAvaible:
+        raise HTTPException(status_code=505, detail="Data source is not available")
 
 
 @dataRouter.post("/ages-groups", status_code=200, response_model=MyReturnType[Gedad])
@@ -90,20 +104,23 @@ def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
     - `limit` limnite de elementos
     """
     try:
-        p = transform_params(query, sort, page, limit)
+        p = transform_params(None, None, page, limit)
         objs, tam = AgesGroupsRepoCreator().get_all_operation(p)
-    except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        return {
+            'items': objs,
+            'length': tam
+        }
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
+        raise HTTPException(status_code=400, detail=str(e2))
+    except DataIsNotAvaible:
+        raise HTTPException(status_code=505, detail="Data source is not available")
 
-    return {
-        'items': objs,
-        'length': tam
-    }
 
-
-@dataRouter.post("/raziel", status_code=200, response_model=MyReturnType[Raziel])
-def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
-                        page: int = 1, limit: int = 100):
+@dataRouter.post("/deceases", response_model=MyReturnType[Decease])
+def get_decease_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+                         page: int = 1, limit: int = 100):
     """
     Grupos de edad disponibles para clasificar.
     - `sort` propiedad por la que ordenar `'-descripcion'` sentido descendiente
@@ -113,21 +130,29 @@ def get_raziel_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = Non
     """
     try:
         p = transform_params(query, sort, page, limit)
-        objs, tam = RazielRepoCreator().get_all_operation(p)
-    except (NoCorrectColumnsException, IncorrectQueryException, Exception) as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    return {
-        'items': objs,
-        'length': tam
-    }
+        objs, tam = DeceaseRepoCreator().get_all_operation(p)
+        return {
+            'items': objs,
+            'length': tam
+        }
+    except (IncorrectColumnNamesException, IncorrectQueryException) as e:
+        raise HTTPException(status_code=422, detail=str(e))
+    except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
+        raise HTTPException(status_code=400, detail=str(e2))
+    except DataIsNotAvaible:
+        raise HTTPException(status_code=505, detail="Data source is not available")
 
 
 @dataRouter.get("/vars-meaning", status_code=200, response_model=MyReturnType)
 def get_vars_meaning():
-    c = VarsRepository('data/vars')
-    objs, tam = c.get_all()
-    return {
-        'items': objs,
-        'length': tam
-    }
+    try:
+        c = VarsRepository('data/vars')
+        objs, tam = c.get_all()
+        return {
+            'items': objs,
+            'length': tam
+        }
+    except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
+        raise HTTPException(status_code=400, detail=str(e2))
+    except DataIsNotAvaible:
+        raise HTTPException(status_code=505, detail="Data source is not available")

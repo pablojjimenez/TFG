@@ -5,7 +5,7 @@ from repositories.ccaa_repository import CcaaRepository
 from repositories.cie_repository import CieRepository
 from repositories.disease_repository import DiseaseRepository
 from repositories.gedad_repository import GedadRepository
-from repositories.raziel_repository import RazielRepository
+from repositories.decease_repository import DeceaseRepository
 
 
 class RepoCreator(abc.ABC):
@@ -54,13 +54,13 @@ class DiseaseRepoCreator(RepoCreator):
         return DiseaseRepository('data/diseases', CieRepoCreator().factory_method())
 
 
-class RazielRepoCreator(RepoCreator):
+class DeceaseRepoCreator(RepoCreator):
     """
     Concrete CCAA repository creator
     """
 
     def factory_method(self):
-        return RazielRepository(
+        return DeceaseRepository(
             'data/raziel',
             DiseaseRepoCreator().factory_method(),
             CcaaRepoCreator().factory_method(),
