@@ -5,7 +5,6 @@ from prophet import Prophet
 from matplotlib import pyplot
 
 from config.general_config import get_config
-from managers.utils import ensure_directory_exists
 from repositories.abstract_repository import ListParams
 from repositories.decease_repository import DeceaseRepository
 
@@ -36,8 +35,7 @@ class PredictorManager:
         fcst = m.predict(future)
 
         m.plot(fcst)
-        ensure_directory_exists(PredictorManager.CHART_PATH)
-        img_path = f'{PredictorManager.CHART_PATH}{str(uuid.uuid4())[:8]}.png'
+        img_path = f'{PredictorManager.CHART_PATH}/{str(uuid.uuid4())[:8]}.png'
         pyplot.savefig(img_path)
 
         return fcst, img_path
