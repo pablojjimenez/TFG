@@ -1,5 +1,5 @@
 from repositories.abstract_repository import ListParams
-from repositories.disease_reopsitory import DiseaseRepository
+from repositories.disease_repository import DiseaseRepository
 
 
 class MockDiseaseRepository(DiseaseRepository):

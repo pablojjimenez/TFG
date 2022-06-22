@@ -15,5 +15,5 @@ class DiseaseRepository(AbstractRepository):
         return data_objs, len(data)
 
     def get_one(self, id: int) -> object:
-        data = super().get_one('id', id)
+        data = super().get_one(id)
         return Disease(data[0], data[1], self.cie_repo.get_one(data[2])) if data != [] else None

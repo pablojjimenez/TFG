@@ -12,5 +12,5 @@ class GedadRepository(AbstractRepository):
         return data_objs, len(data_objs)
 
     def get_one(self, id) -> list:
-        data = super().get_one('id', id)
+        data = super().get_one(id)
         return Gedad(id=data[0], description=data[1]) if data else None

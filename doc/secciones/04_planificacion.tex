@@ -111,27 +111,3 @@ para llevarlo a cabo podemos detallar los costes asociados que tendría la elabo
     \item Recursos software utilizados han sido gratuitos.
     \item Recursos de despliegues han sido gratuitos.
 \end{itemize}
-
-\section{Arquitectura software de la solución}
-Para el diseño del software se ha utilizado el diseño dirigido por el dominio, DDD \textit{Domain Driven Design}. Este tipo de arquitectura introducida por Eric Evans \cite{ddd_book}: "Domain-Driven-Design - Tackling Complexity in the Hearth of Software, 2004" nos permite organizar el código de forma separada y organizada lo que nos permite poder realizar TDD correctamente por tener las distintas capas separadas y débilmente acopladas unas de las otras. La lógica de negocio reside en un único sitio y siempre lo más cerca del dominio posible lo que nos permite cumplir los principios SOLID fácilmente y conseguimos un código abierto a su extensión pero cerrado a su modificación. 
-
-La arquitectura dirigida por el dominio (que se explica someramente en este capítulo) nos permite fácilmente poder llevar este proyecto a la nube, debido a que se desarrollando utilizando distintas capas desacopladas entre si. Es fundamental desacoplar al máximo todos los componentes y que cada uno tengo una única responsabilidad cuando se realiza un proyecto en la nube. La principal desventaja que podemos encontrar en este tipo de arquitecturas es la comunicación entre los distintos componentes. 
-
-Una solución podría ser la comunicación por eventos, potente pero compleja a nivel técnico y costosa económicamente. Otra solución es mediante inyección de dependencias, que es la que he empleado en este proyecto, podemos decir que la debilidad de esta solución reside en que una de las capas puede crecer en sobremedida y convertirse en un cuello de botella.
-
-\subsection{DDD}
-En este tipo de arquitectura podemos diferenciar 3 elementos.
-
-\subsubsection{Entidad}
-Las entidades son aquellas clases que representan una entidad del dominio. Estas clases deben tener una estructura de datos que represente la información de la entidad y unas responsabilidades concretas. Se caracterizan porque tienen que ser consideradas iguales a otros objetos aún cuando cuando sus atributos difieren.
-
-\subsubsection{Value objects}
-Representan los conceptos que no tienen una entidad. Describen características por lo que solo nos interesan sus atributos.
-Los value object representan elementos del modelo que se describen por el \textbf{qué} son, y no por \textbf{quién} o \textbf{cuál} son.
-
-\subsubsection{Servicios}
-No tienen significado propio suponen la capa que representa las operaciones que no pertenecen conceptualmente a ningún objeto del dominio concreto.
-
-\subsubsection{Repositorios}
-Representan al conjunto de modelos que se utilizan para almacenar los datos o tratar con ese volumen de datos. Supone una capa de abstracción sobre el sistema de almacenado, ya sea una base de datos, unos ficheros en disco o una API REST. Lo que permite modular y preparar las aplicaciones para cambiar de infraestructura sin tener que modificar el código de programación.
-

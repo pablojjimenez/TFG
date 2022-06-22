@@ -4,24 +4,37 @@ from enum import Enum
 
 @dataclass
 class Cie:
+    """
+    This is the acronym for the International
+    Classification of Diseases, 10th edition.
+    """
     id: int
     description: str
 
 
 @dataclass
 class Vars:
-    id_var: str
+    """
+    Generic classification variables
+    """
+    id: str
     description: str
 
 
 @dataclass
 class Ccaa:
+    """
+    Represents the states of Spain.
+    """
     id: str
     name: str
 
 
 @dataclass
 class Gedad:
+    """
+    Represents the age groups
+    """
     id: str
     description: str
 

@@ -11,6 +11,6 @@ class CcaaRepository(AbstractRepository):
         data_objs = list(map(lambda x: Ccaa(id=x[0], name=x[1]), data))
         return data_objs, len(data_objs)
 
-    def get_one(self, id: int) -> object:
-        data = super().get_one('id', id)
+    def get_one(self, id: int):
+        data = super().get_one(id)
         return Ccaa(id=data[0], name=data[1]) if data else None

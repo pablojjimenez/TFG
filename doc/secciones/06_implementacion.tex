@@ -1,9 +1,62 @@
 \chapter{Desarrollo de la solución}
-A la hora de empezar con la Implementación de la solución, se debe tener en cuenta los requisitos del sistema de acuerdo con los usuarios diana.
+A la hora de empezar con la implementación de la solución, debemos comenzar teniendo en cuenta la arquitectura software que satisface requisitos del sistema de acuerdo con los usuarios. Es decir, con las historias de usuario que han expresado.
+
+\section{Arquitectura software de la solución}
+Para el diseño del software se ha utilizado el diseño dirigido por el dominio, DDD \textit{Domain Driven Design}. Este tipo de arquitectura introducida por Eric Evans \cite{ddd_book} "Domain-Driven-Design - Tackling Complexity in the Hearth of Software, 2004" nos permite organizar el código de forma separada y organizada lo que nos permite poder realizar TDD correctamente ya que por tener las distintas capas separadas y débilmente acopladas unas de las otras. Gracias a este bien diseño es muy fácil hacer uso de la inversión de dependencias \footnote{https://jj.github.io/curso-tdd/temas/inversi\%C3\%B3n.html} para inyectar en los tests las clases \textit{mockeadas} \footnote{El término mockear en desarrollo de software se refiere a reemplazar o imitar a un objeto real. El propósito es que al probar el programa o hacer testing, podamos utilizar este mock para conocer su estado.} que necesitemos. 
+
+La arquitectura dirigida por el dominio nos permite fácilmente aislar la lógica de negocio en un único sitio y siempre lo más cerca del dominio posible lo que nos permite cumplir los principios SOLID fácilmente y conseguir un código abierto a su extensión pero cerrado a su modificación.  
+
+Un requisito fundamental expresado por los usuarios diana a utilizar este proyecto es poder desplegar fácilmente este proyecto en la nube, gracias a que se ha desarrollado utilizando capas desacopladas entre si, podemos distribuir en distintos clústeres \footnote{Nos referimos a la técnica por la cual podemos combinar un sistema para que trabaje paralelamente en un entorno cloud. Lo que conseguimos con esta operación es una mayor disponibilidad, más velocidad de despacho y escalabilidad del sistema. Como todo, a cambio tendremos un sistema más costoso de mantener económicamente y un mayor tiempo de implementación. } la implementación sin realizar prácticamente cambios en la implementación.  Es fundamental desacoplar al máximo todos los componentes y que cada uno tengo una única responsabilidad cuando se realiza un proyecto en la nube. La principal desventaja que podemos encontrar en este tipo de arquitecturas es la comunicación entre los distintos componentes.  Una solución a este problema podría ser la comunicación por eventos, potente pero compleja a nivel técnico y costosa económicamente. Otra solución es mediante inyección de dependencias, que es la que he empleado en este proyecto, podemos decir que la debilidad de esta solución reside en que una de las capas puede crecer en sobremedida y convertirse en un cuello de botella.
+
+
+
+\subsection{DDD}
+En este tipo de arquitectura donde diseñamos guiándonos por el dominio, podemos diferenciar tres elementos importantes.
+
+\subsubsection{Entidad}
+Las entidades son aquellas clases que representan una entidad del dominio. Estas clases deben tener una estructura de datos que represente la información de la entidad y unas responsabilidades concretas. Se caracterizan porque tienen que ser consideradas iguales a otros objetos aún cuando cuando sus atributos difieren. En las entidades se encuentran las restricciones del dominio, en ellas se realizan las validaciones de valor e integridad. Cualquier error o situación inválida hay que notificársela al sistema mediante una excepción. 
+
+Definir y diseñar los estados inválidos de las entidades y de la aplicación en general es un apartado fundamental que debemos de realizar con el mismo cuidado que con el que diseñamos las entidades.
+
+Este proyecto consta de dos entidades: \codeword{Disease} que representa a una enfermedad y \codeword{Raziel} que es sin lugar a duda el modelo más rico en información. Estas entidades poseen las restricciones de valor como puede ser el tipado de sus atributos o la satisfacibilidad solo de los valores que tienen sentido semántico. También restricciones de integridad como por ejemplo, que un objeto de tipo \codeword{Disease} puede tener el campo \codeword{cie}, nulo.
+
+\subsubsection{Value objects}
+Representan los conceptos que no tienen una entidad. Describen características por lo que solo nos interesan sus atributos.
+Los value object representan elementos del modelo que se describen por el \textbf{qué} son, y no por \textbf{quién} o \textbf{cuál} son. Estos elementos completan y/o forman parte de las entidades del sistema.
+
+En este proyecto la representación en código de las comunidades autónomas corresponde con un tipo de value object utilizado por la entidad \codeword{Raziel}
+
+\subsubsection{Servicios}
+No tienen significado propio suponen la capa que representa las operaciones que no pertenecen conceptualmente a ningún objeto del dominio concreto. 
+
+En este proyecto, los servicios son el punto de entrada de las peticiones que le hace el usuario al sistema. Son también los encargados de arrancar todo el proceso de obtención de los datos.
+
+\subsubsection{Repositorios}
+Representan al conjunto de modelos y entidades. Se utilizan para almacenar u ofrecer los conjuntos de objetos. Suelen suponer una capa de abstracción sobre el sistema de almacenaje, ya sea una base de datos, unos ficheros en disco o incluso la invocación de otros servicios externos como puede ser un API. Esta parte es fundamental para poder modular y preparar las aplicaciones para cambiar de infraestructura sin tener que modificar el código de programación.
+
+En este proyecto hemos implementado este concepto haciendo uso de un \codeword{AbstractRepository} representado por una clase abstracta. Debido a que, semánticamente no tiene sentido poder utilizar este tipo de repositorio en sí mismo. Sin embargo, es usado de clase padre para el resto de repositorios porque impone a las clases que lo heredan una interfaz uniforme de métodos y abstrae lógicas comunes a este tipo de concepto.
+
+El proyecto está compuesto por cinco repositorios que obtiene en forma sus modelos correspondientes. Al existir este tipo de jerarquía y compartir todos estos el mismo tipo de operación, resulta idónea la aplicación del patrón de diseño de creación \textit{Factory Method}. Si bien es cierto, que es en lenguajes tipados donde este tipo de soluciones suponen un cambio radical en cuanto a la comodidad y encaje en la creación de instancias a lo largo del programa. A nosotros también nos mejora la calidad del código, pudiendo hacer uso de cualquier repositorio con una sola importación, ya que en otro caso habría que construir el repositorio \textit{in situ} e inyectarle todas las dependencias que necesitara.
+
+
+\subsection{Diagrama arquitectónico de la solución}
+A continuación se puede ver un somero diagrama donde podemos observar la conexión entre los distintos componentes del sistema y la conexión con librerías y frameworks externos. 
+
+\begin{figure}[]
+	\centering	
+	\includegraphics[scale=0.5]{doc/logos/imgs/arquitectonico.png}
+	\caption{ \cite{rtve-cis} Modelo organizativo del código con sus dependencias externas. }
+    \label{fig:worst_f_value}
+\end{figure}
 
 
 
 \section{Implementación}
+En esta sección voy a hablar de las decisiones técnicas tomadas en base a las distintas opciones que disponemos y considerando siempre como cumplen las distintas opciones a alcanzar los objetivos de nuestros usuarios.
+
+\subsection{Configuración}
+A la hora de crear un proyecto software, el primer paso que tenemos que hacer es llevar a cabo una configuración que nos permita arrancar la aplicación de la forma deseada. Este software está pensado para ejecutarse en la nube, por ello he tenido en cuenta que desde el principio que tiene que haber una forma de recuperar esta configuración. Además, tengo que poder establecer distintos parámetros de ejecución según el entorno donde se vaya a ejecutar. Por tanto, la configuración la almaceno en una clase que se nutre del fichero de \textit{environment} una única vez ya que queda almacenada en caché. 
+
 \subsection{Lenguaje de programación}
 Llega una de las elecciones más importantes a la hora de desarrollar software, la elección del lenguaje de programación
 debe de realizarse en base a las necesidades que tengamos de forma que nos permita satisfacerlas de la mejor forma posible.
@@ -56,3 +109,94 @@ La primera opción y más famosa en el lenguaje Python es scikit-learn, una bibl
 Por otro lado, tenemos Prophet una biblioteca open source para Python y R desarrollada por Meta. Sus posibilidades son mas limitadas que las que nos ofrece scikit-learn pero por el contrario es muy básica y sencilla tanto de instalar como de usar. Además, su funcionalidad es justo la que buscamos, poder realizar predicciones sobre series temporales.
 
 En Prophet, los modelos se ajustan usando Stan, otra biblioteca de inferencia estadística bayesiana con estimación de verosimilitud penalizada.
+
+\subsubsection{Interfaz REST}
+En aras de que el usuario pueda utilizar estos servicios de forma agnóstica sin tener que descargarse el código fuente e incluirlo en su proyecto a modo de biblioteca. Algo que por otra parte, supondría una gran restricción ya que el lenguaje de programación tendría que ser Python.
+
+Para ello, se ha implementado una interfaz de comunicación REST. Como bien es sabido, los servicios restful se apoyan del estándar HTTP y por tanto, hereda sus conocidas características. REST es \textit{stateless} cada vez que utilizamos un recurso necesitamos ofrecerle toda la información identificativa pues carece de memoria, utiliza el formato JSON para el intercambio de datos y expone una serie de recursos o \textit{endpoints} que son las operaciones disponibles a realizar.
+
+En el universo Python existen dos grandes frameworks para construir servicios restful: Flask y FastAPI.
+Flask es un microframework, que dispone de multitud de complementos lo que te permite construir cualquier servicio configurando correctamente todos estos complementos. 
+
+FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según la documentación oficial \href{https://fastapi.tiangolo.com}, tanto que se podría igualar al rendimiento que ofrece NodeJS o Go. Además, nos permite por defecto programar de forma asíncrona (muy interesante cuando hay acceso a bases de datos) y nos proporciona de forma automática una documentación OpenAPI.
+
+La API de este software expone dos blueprints \footnote{Llamamos blueprint al conjunto de recursos que comparte el mismo prefijo de URI (Identificador de recursos uniforme)}
+
+\begin{itemize}
+    \item \textit{/data} Definido por el conjunto de recursos disponibles. Todos ellos aceptan los siguientes parámetros en la cabecera de las peticiones \codeword{sort} para ordenar los datos en base a algún campo, \codeword{limit} para limitar la cantidad de datos (por defecto se entregan limitados a 100 elementos), \codeword{page} para especificar la página.
+    Y la siguiente estructura JSON como cuerpo de la petición:
+    \begin{verbatim}
+        {
+            "ID": {
+                ">": 1,
+                "<": 3
+            },
+            "CIE": {
+                "==": ""
+            }
+        }
+    \end{verbatim}
+    En este caso estaríamos indicando que queremos los elementos cuyos IDs se encuentran en el rango ]1, 3[ y cuyo campo CIE es vacío. Los operadores válido son: \codeword{==}, \codeword{<}, \codeword{>}
+
+    \item \textit{/managers} Dispone de tres recursos. Uno para generar gráficos lineales (ver figura): requiere dos variables como parámetros en la cabecera, una para indicar la agrupación y otra para la suma, como cuerpo de la llamada podemos pasar una query con la estructura especificada anteriormente. Por último, tenemos dos recursos para obtener la predicción y la gráfica ajustada en el tiempo que indiquemos.
+\end{itemize}
+
+El API es la interfaz por la que el usuario se comunica. Por tanto, al igual que a nivel de código gestionamos los errores haciendo uso de excepciones es importante ofrecer al usuario estos mensajes para que en todo momento sepa que está ocurriendo y si el error es motivado por su uso, puedo modificarlo. El formato de error es el siguiente cuando estamos ante una situación inesperada por la lógica de negocio:
+\begin{verbatim}
+{
+    "error_message": "Incorrect query, column ALGO does not exist",
+    "code": 422
+}
+\end{verbatim}
+Y cuando se trata de un error de sintaxis con el protocolo. E.g: El JSON introducido como cuerpo de la petición es incorrecto, obtenemos:
+\begin{verbatim}
+    {
+        "detail": [
+          {
+            "loc": [
+              "body",
+              1
+            ],
+            "msg": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+            "type": "value_error.jsondecode",
+            "ctx": {
+              "msg": "Expecting property name enclosed in double quotes",
+              "doc": "{",
+              "pos": 1,
+              "lineno": 1,
+              "colno": 2
+            }
+          }
+        ]
+      }
+\end{verbatim}
+
+En un servicio restful hacemos uso de unos códigos de error que nos ofrece el protocolo HTTP, estos códigos se clasifican a continuación:
+\begin{itemize}
+    \item Respuestas informativas (100–199).
+    \item Respuestas satisfactorias (200–299).
+    \item Redirecciones (300–399).
+    \item Errores de los clientes (400–499).
+    \item Errores de los servidores (500–599).
+\end{itemize}
+
+En este API se hacen uso de las categorías 1, 3 y 4. Posibles respuestas de este interfaz:
+\begin{itemize}
+    \item \codeword{200} Ejecución satisfactoria en los endpoints de solicitud de datos.
+    \item \codeword{201} Ejecución satisfactoria en los endpoints que generan una imagen (gráfico).
+    \item \codeword{400} Error del cliente introduciendo un tipo de dato erróneo, estructura JSON incorrecta...
+    \item \codeword{422} Error del cliente al introducir una query mal formulada, con campos incomprensibles o proyecciones sobre campos que no existen en los modelos...
+    \item \codeword{500} Error del servidor que los usuarios van a ver por ejemplo cuando la fuente de datos esté corrupta y el software no sea capaz de obtenerlos.
+\end{itemize}
+
+\subsubsection{Documentación de la API}
+Con la ayuda de los recursos que pone a nuestra disposición FastAPI, se ha implementado una especificación OpenAPI. Esta especificación define una serie de propiedades en un formato legible por una máquina (suele usarse el formato JSON o YAML).
+
+Gracias a eso podemos generar una documentación basada en HTML que nos permite conocer los recursos expuestos de la API, los argumentos y las estructuras de las respuestas esperadas. Los modelos están documentados en el código para los usuarios que decidan utilizar el software como biblioteca puedan ver dicha documentación en el IDE que utilicen. Para aquellos que utilicen la API, se ha añadido a la especificación OpenAPI
+
+\begin{figure}[]
+	\centering	
+	\includegraphics[scale=0.5]{doc/logos/imgs/openapi.png}
+	\caption{ \cite{rtve-cis} Documentación OpenAPI de la API. }
+    \label{fig:worst_f_value}
+\end{figure}
