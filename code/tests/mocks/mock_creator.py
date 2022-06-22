@@ -3,7 +3,7 @@ from tests.mocks.mock_ccaa_repository import MockCcaaRepository
 from tests.mocks.mock_cie_repository import MockCieRepository
 from tests.mocks.mock_disease_repository import MockDiseaseRepository
 from tests.mocks.mock_gedad_repository import MockGedadRepository
-from tests.mocks.mock_raziel_repository import MockRazielRepository
+from tests.mocks.mock_decease_repository import MockDeceaseRepository
 
 
 class CcaaRepoCreator(RepoCreator):
@@ -26,9 +26,9 @@ class DiseaseRepoCreator(RepoCreator):
         return MockDiseaseRepository(CieRepoCreator().factory_method())
 
 
-class RazielRepoCreator(RepoCreator):
+class DeceaseRepoCreator(RepoCreator):
     def factory_method(self):
-        return MockRazielRepository(
+        return MockDeceaseRepository(
             DiseaseRepoCreator().factory_method(),
             CcaaRepoCreator().factory_method(),
             AgesGroupsRepoCreator().factory_method()

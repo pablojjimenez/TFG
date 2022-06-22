@@ -7,14 +7,14 @@ from matplotlib import pyplot
 from config.general_config import get_config
 from managers.utils import ensure_directory_exists
 from repositories.abstract_repository import ListParams
-from repositories.raziel_repository import RazielRepository
+from repositories.decease_repository import DeceaseRepository
 
 
 class PredictorManager:
     CHART_PATH = get_config().chart_path_base
 
-    def __init__(self, raziel_repo: RazielRepository):
-        self.raziel_repo = raziel_repo
+    def __init__(self, decease_repo: DeceaseRepository):
+        self.decease_repo = decease_repo
 
     def deaths_forecasting(self, params: ListParams, var1: str, var2: str, period: int):
         """
@@ -25,7 +25,7 @@ class PredictorManager:
         :param var2: projection value
         :return: forecast dataframe
         """
-        df = self.raziel_repo.prepare_and_grouping_dataframe(params, var1, var2)
+        df = self.decease_repo.prepare_and_grouping_dataframe(params, var1, var2)
         df = df.rename(columns={'DEFU': 'y', 'ANO': 'year'})
         df['y'][40] = df['y'].mean()  # to avoid the covid 19 peak
 
