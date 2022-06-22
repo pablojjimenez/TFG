@@ -55,7 +55,7 @@ A continuación se puede ver un somero diagrama donde podemos observar la conexi
 En esta sección voy a hablar de las decisiones técnicas tomadas en base a las distintas opciones que disponemos y considerando siempre como cumplen las distintas opciones a alcanzar los objetivos de nuestros usuarios.
 
 \subsection{Configuración}
-A la hora de crear un proyecto software, el primer paso que tenemos que hacer es llevar a cabo una configuración que nos permita arrancar la aplicación de la forma deseada. Este software está pensado para ejecutarse en la nube, por ello he tenido en cuenta que desde el principio que tiene que haber una forma de recuperar esta configuración. La configuración se almacena en una clase y se carga del fichero de \textit{environment} una única vez ya que queda almacenada en caché. Este tipo de configuración me permite establecer los tipos antes de ejecutar el software y me permite poder establecer distintos parámetros de ejecución según el entorno donde se vaya a ejecutar.
+A la hora de crear un proyecto software, el primer paso que tenemos que hacer es llevar a cabo una configuración que nos permita arrancar la aplicación de la forma deseada. Este software está pensado para ejecutarse en la nube, por ello he tenido en cuenta que desde el principio que tiene que haber una forma de recuperar esta configuración. Además, tengo que poder establecer distintos parámetros de ejecución según el entorno donde se vaya a ejecutar. Por tanto, la configuración la almaceno en una clase que se nutre del fichero de \textit{environment} una única vez ya que queda almacenada en caché. 
 
 \subsection{Lenguaje de programación}
 Llega una de las elecciones más importantes a la hora de desarrollar software, la elección del lenguaje de programación
