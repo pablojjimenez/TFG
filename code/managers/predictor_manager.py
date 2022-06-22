@@ -1,14 +1,16 @@
+import uuid
+
 import pandas as pd
 from prophet import Prophet
 from matplotlib import pyplot
 
-from managers.utils import ensure_directory_exists
+from config.general_config import get_config
 from repositories.abstract_repository import ListParams
 from repositories.decease_repository import DeceaseRepository
 
 
 class PredictorManager:
-    CHART_PATH = 'opt/forecasting.png'
+    CHART_PATH = get_config().chart_path_base
 
     def __init__(self, decease_repo: DeceaseRepository):
         self.decease_repo = decease_repo
@@ -33,7 +35,7 @@ class PredictorManager:
         fcst = m.predict(future)
 
         m.plot(fcst)
-        ensure_directory_exists('opt/')
-        pyplot.savefig('opt/forecasting.png')
+        img_path = f'{PredictorManager.CHART_PATH}/{str(uuid.uuid4())[:8]}.png'
+        pyplot.savefig(img_path)
 
-        return fcst
+        return fcst, img_path

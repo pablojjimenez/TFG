@@ -1,17 +1,6 @@
-import os
 from typing import Dict
 
 from repositories.abstract_repository import AbstractRepository
-
-
-def ensure_directory_exists(directory: str):
-    """
-    Create directory if not exists
-    :param directory: directory name
-    """
-    is_exist = os.path.exists(directory)
-    if not is_exist:
-        os.makedirs(directory, exist_ok=False)
 
 
 def transform_params(query: Dict[str, Dict[str, str]],

@@ -24,7 +24,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
                          period=2):
     try:
         predictor = PredictorManager(DeceaseRepoCreator().factory_method())
-        predictor.deaths_forecasting({'query': query}, group, summ, int(period))
+        _, img_path = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
         return FileResponse(PredictorManager.CHART_PATH)
     except IncorrectColumnNamesException as e:
         raise HTTPException(status_code=422, detail=str(e))
@@ -38,7 +38,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
 def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU', period=2):
     try:
         predictor = PredictorManager(DeceaseRepoCreator().factory_method())
-        d = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
+        d, _ = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
         result = d.to_json(orient="split")
         return json.loads(result)
     except IncorrectColumnNamesException as e:
@@ -53,8 +53,8 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
 def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU'):
     try:
         gm = GraphicManager(DeceaseRepoCreator().factory_method())
-        gm.get_chart_by_two_vars({'query': query}, group, summ)
-        return FileResponse(GraphicManager.CHART_PATH)
+        img = gm.get_chart_by_two_vars({'query': query}, group, summ)
+        return FileResponse(img)
     except IncorrectColumnNamesException as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
