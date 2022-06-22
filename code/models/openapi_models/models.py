@@ -33,7 +33,7 @@ class Disease(BaseModel):
     cie: Union[Cie, None] = Field(...)
 
 
-class Raziel(BaseModel):
+class Decease(BaseModel):
     ano: int = Field(description="año de consulta (1980-2020)")
     causa: Disease = Field(description="Causa")
     sexo: Sex = Field(description="Sexo")

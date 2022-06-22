@@ -1,11 +1,14 @@
 import json
 from typing import Dict
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from starlette.responses import FileResponse
 
 from managers.graphic_manager import GraphicManager
 from managers.predictor_manager import PredictorManager
+from models.exceptions import DataIsNotAvaible, NoAttributeException, \
+    IncorrectColumnNamesException, NoCorrectTypeException
+from repositories.creator import DeceaseRepoCreator
 
 managersRouter = APIRouter(
     responses={

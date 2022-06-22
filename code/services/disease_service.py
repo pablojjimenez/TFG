@@ -2,7 +2,9 @@ from fastapi import APIRouter, HTTPException
 from typing import Dict
 
 from managers.utils import transform_params
-from models.exceptions import IncorrectQueryException, NoCorrectColumnsException
+from models.exceptions import IncorrectQueryException, DataIsNotAvaible, \
+    NoCorrectTypeException, IncorrectColumnNamesException, NoAttributeException
+from models.openapi_models.models import MyReturnType, Cie, Gedad, Decease, Ccaa, Disease
 from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
     DeceaseRepoCreator, DiseaseRepoCreator
 from repositories.vars_repository import VarsRepository
