@@ -5,7 +5,8 @@ from pydantic import BaseSettings
 
 class Settings(BaseSettings):
     host: str = ''
-    port: int = 0
+    port: int = 5000
+    openapi_path: str = '/docs'
     debug_app: str = ''
     chart_path_base: str = '/tmp'
     ccaa_repo_path: str = ''
