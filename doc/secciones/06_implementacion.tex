@@ -200,3 +200,65 @@ Gracias a eso podemos generar una documentación basada en HTML que nos permite 
 	\caption{ \cite{rtve-cis} Documentación OpenAPI de la API. }
     \label{fig:worst_f_value}
 \end{figure}
+
+
+
+\chapter{Despliegue del software}
+En la etapa de despliegue es cuando el software queda disponible para el uso y disfrute de los usuarios. Supone una etapa fundamental para dar por finalizada la construcción del software. 
+
+Necesitamos que el despliegue nos provea para añadir y desplegar nueva funcionalidad con rápidez. Además, el coste tiene que ser lo más inteligente y adaptado posible. Estos requisitos hacen utilizar un entorno cloud como la opción más sensata.
+
+A la hora de elegir un entorno cloud tenemos distintos de cloud computing, dependiendo de las partes de la infraestructura local que puedas gestionar.
+
+\FloatBarrier
+\begin{figure}[]
+	\centering	
+	\includegraphics[scale=0.5]{doc/logos/imgs/iaas-paas.png}
+	\caption{ Distintos modelos de computación en la nube. \href{https://www.redhat.com/es/topics/cloud-computing/iaas-vs-paas-vs-saas#paas}{https://www.redhat.com/es/topics/cloud-computing/iaas-vs-paas-vs-saas#paas}}
+    \label{fig:tipos-de-cc}
+\end{figure}
+\FloatBarrier
+
+Busco una solución que me permita desarrollar, ejecutar y gestionar mis aplicación desplegada sin tener que mantener la infraestructura subyacente. Es decir, poder desplegar la aplicación sobre una infraestructura ya definida que se me ofrece ya que no va a cambiar. Con un PaaS, \textit{Platform as a service} tengo varias capas de servicios apilados.
+En el mercado existen distintas empresas que nos ofrecen este tipo de servicios, podemos destacar: \href{https://aws.amazon.com/es/elasticbeanstalk/}{AWS Elastic Beanstalk}, \href{https://dashboard.heroku.com/login}{Heroku} o \href{https://vercel.com/}{Vercel} entre otros.
+
+\section{Proceso de despliegue}
+Para poder desplegar una aplicación en Heroku, es necesario acceder al panel de 
+administración y crearnos una "app". Después, Heroku nos ofrece distintas formas de 
+desplegar el código, una forma es poner a la escucha una rama del repositorio de GitHub a cualqiuer tipo de cambio para autodesplegar. Sin embargo, este proyecto tiene muchos
+\textit{assets}, los ficheros con los datos de las defunciones que no están versionados por el control de versiones. Este motivo y el poco margen de personalización que provoca este método sobre con que configuración queremos arrancar el servidor me hizo desestimar esta forma.
+
+El método que he seguido ha sido crear un contenedor de la aplicación que luego publicamos en la "app" creada en Heroku. Los contenedores nos permite tener una portabilidad absoluta ya que podemos poner en marcha la aplicación en cualquier sistema operativo sin preocuparnos de las dependencias necesarias.
+
+El contenedor y su configuración se define como código en un archivo de texto plano llamado \codeword{Dockerfile} en él se define el software necesario a instalar, las dependencias del proyecto y se expone el host y el puerto.
+
+\FloatBarrier
+\begin{figure}[]
+	\centering	
+	\includegraphics[scale=0.5]{doc/logos/imgs/deployd.png}
+	\caption{ Arquitectura del despliegue. }
+    \label{fig:tipos-de-cc}
+\end{figure}
+\FloatBarrier
+
+\begin{itemize}
+    \item \textit{Dyno} es un contenedor liviano con Linux en los que Heroku ejecuta la aplicación.
+\end{itemize}
+
+Heroku CLI nos ofrece un sistema de registros (que tambien está disponible en el \textit{dashboard} web) con el que podemos monitorizar todas las peticiones que se realizan así como los reinicios de la máquina virtual y el estado del servidor.
+
+\FloatBarrier
+\begin{figure}[]
+	\centering	
+	\includegraphics[scale=0.5]{doc/logos/imgs/logs.jpg}
+	\caption{ \textit{Logs} de la aplicación desplegada. }
+    \label{fig:heroku-logs}
+\end{figure}
+\FloatBarrier
+
+\section{Coste del despliegue}
+\label{sec:desp}
+
+Durante el proceso de desarrollo y las primeras pruebas se ha utilizado la modalidad "Free & Hobby" que nos permite desplegar la aplicación de forma gratuita con una seria limitación: la máquina entra en estado de reposo tras 30 minutos de inactividad, lo que hace que cuando se reciba cualquier petición haya que encender el contenedor, además el número de procesos está limitado a 2 máquinas.
+
+Para la puesta en producción debería de contratar la tarifa "Standard 1X" que nos ofrece 512MB de RAM, con ilimitado número de procesos, sin estado de procesos y nos incluye un sistema de métricas y avisos que no está disponible en la versión gratuita.
