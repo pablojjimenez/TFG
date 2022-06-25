@@ -206,7 +206,7 @@ Gracias a eso podemos generar una documentación basada en HTML que nos permite 
 \chapter{Despliegue del software}
 En la etapa de despliegue es cuando el software queda disponible para el uso y disfrute de los usuarios. Supone una etapa fundamental para dar por finalizada la construcción del software. 
 
-Necesitamos que el despliegue nos provea para añadir y desplegar nueva funcionalidad con rápidez. Además, el coste tiene que ser lo más inteligente y adaptado posible. Estos requisitos hacen utilizar un entorno cloud como la opción más sensata.
+Necesitamos que el despliegue nos provea para añadir y desplegar nueva funcionalidad con rapidez. Además, el coste tiene que ser lo más inteligente y adaptado posible. Estos requisitos hacen utilizar un entorno cloud como la opción más sensata.
 
 A la hora de elegir un entorno cloud tenemos distintos de cloud computing, dependiendo de las partes de la infraestructura local que puedas gestionar.
 
@@ -225,7 +225,7 @@ En el mercado existen distintas empresas que nos ofrecen este tipo de servicios,
 \section{Proceso de despliegue}
 Para poder desplegar una aplicación en Heroku, es necesario acceder al panel de 
 administración y crearnos una "app". Después, Heroku nos ofrece distintas formas de 
-desplegar el código, una forma es poner a la escucha una rama del repositorio de GitHub a cualqiuer tipo de cambio para autodesplegar. Sin embargo, este proyecto tiene muchos
+desplegar el código, una forma es poner a la escucha una rama del repositorio de GitHub a cualquier tipo de cambio para auto-desplegar. Sin embargo, este proyecto tiene muchos
 \textit{assets}, los ficheros con los datos de las defunciones que no están versionados por el control de versiones. Este motivo y el poco margen de personalización que provoca este método sobre con que configuración queremos arrancar el servidor me hizo desestimar esta forma.
 
 El método que he seguido ha sido crear un contenedor de la aplicación que luego publicamos en la "app" creada en Heroku. Los contenedores nos permite tener una portabilidad absoluta ya que podemos poner en marcha la aplicación en cualquier sistema operativo sin preocuparnos de las dependencias necesarias.
@@ -245,7 +245,7 @@ El contenedor y su configuración se define como código en un archivo de texto 
     \item \textit{Dyno} es un contenedor liviano con Linux en los que Heroku ejecuta la aplicación.
 \end{itemize}
 
-Heroku CLI nos ofrece un sistema de registros (que tambien está disponible en el \textit{dashboard} web) con el que podemos monitorizar todas las peticiones que se realizan así como los reinicios de la máquina virtual y el estado del servidor.
+Heroku CLI nos ofrece un sistema de registros (que también está disponible en el \textit{dashboard} web) con el que podemos monitorizar todas las peticiones que se realizan así como los reinicios de la máquina virtual y el estado del servidor.
 
 \FloatBarrier
 \begin{figure}[]
@@ -257,7 +257,7 @@ Heroku CLI nos ofrece un sistema de registros (que tambien está disponible en e
 \FloatBarrier
 
 \section{Coste del despliegue}
-\label{sec:desp}
+\label{sec:despliegue}
 
 Durante el proceso de desarrollo y las primeras pruebas se ha utilizado la modalidad "Free & Hobby" que nos permite desplegar la aplicación de forma gratuita con una seria limitación: la máquina entra en estado de reposo tras 30 minutos de inactividad, lo que hace que cuando se reciba cualquier petición haya que encender el contenedor, además el número de procesos está limitado a 2 máquinas.
 
