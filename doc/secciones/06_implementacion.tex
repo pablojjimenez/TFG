@@ -136,7 +136,7 @@ La API de este software expone dos blueprints \footnote{Llamamos blueprint al co
             }
         }
     \end{verbatim}
-    En este caso estaríamos indicando que queremos los elementos cuyos IDs se encuentran en el rango ]1, 3[ y cuyo campo CIE es vacío. Los operadores válido son: \codeword{==}, \codeword{<}, \codeword{>}
+    En este caso estaríamos indicando que queremos los elementos cuyos IDs se encuentran en el rango \codework{]1, 3[} y cuyo campo CIE es vacío. Los operadores válido son: \codeword{==}, \codeword{<}, \codeword{>}
 
     \item \textit{/managers} Dispone de tres recursos. Uno para generar gráficos lineales (ver figura): requiere dos variables como parámetros en la cabecera, una para indicar la agrupación y otra para la suma, como cuerpo de la llamada podemos pasar una query con la estructura especificada anteriormente. Por último, tenemos dos recursos para obtener la predicción y la gráfica ajustada en el tiempo que indiquemos.
 \end{itemize}
@@ -151,25 +151,22 @@ El API es la interfaz por la que el usuario se comunica. Por tanto, al igual que
 Y cuando se trata de un error de sintaxis con el protocolo. E.g: El JSON introducido como cuerpo de la petición es incorrecto, obtenemos:
 \begin{verbatim}
     {
-        "detail": [
-          {
+        "detail": [{
             "loc": [
-              "body",
-              1
+                "body",
+                1
             ],
-            "msg": "Expecting property name enclosed in 
-            double quotes: line 1 column 2 (char 1)",
+            "msg": "Expecting property name enclosed in double quotes: line 1 column 2(char 1)",
             "type": "value_error.jsondecode",
             "ctx": {
-              "msg": "Expecting property name enclosed in double quotes",
-              "doc": "{",
-              "pos": 1,
-              "lineno": 1,
-              "colno": 2
+                "msg": "Expecting property name enclosed in double quotes",
+                "doc": "{",
+                "pos": 1,
+                "lineno": 1,
+                "colno": 2
             }
-          }
-        ]
-      }
+        }]
+    }
 \end{verbatim}
 
 En un servicio restful hacemos uso de unos códigos de error que nos ofrece el protocolo HTTP, estos códigos se clasifican a continuación:
