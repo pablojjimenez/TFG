@@ -42,9 +42,9 @@ El proyecto está compuesto por cinco repositorios que obtiene en forma sus mode
 \subsection{Diagrama arquitectónico de la solución}
 A continuación se puede ver un somero diagrama donde podemos observar la conexión entre los distintos componentes del sistema y la conexión con librerías y frameworks externos. 
 
-\begin{figure}[]
+\begin{figure}[h]
 	\centering	
-	\includegraphics[scale=0.5]{doc/logos/imgs/arquitectonico.png}
+	\includegraphics[width=\textwidth]{doc/logos/imgs/arquitectonico.png}
 	\caption{ Modelo organizativo del código con sus dependencias externas. }
     \label{fig:worst_f_value}
 \end{figure}
@@ -157,7 +157,8 @@ Y cuando se trata de un error de sintaxis con el protocolo. E.g: El JSON introdu
               "body",
               1
             ],
-            "msg": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+            "msg": "Expecting property name enclosed in 
+            double quotes: line 1 column 2 (char 1)",
             "type": "value_error.jsondecode",
             "ctx": {
               "msg": "Expecting property name enclosed in double quotes",
@@ -194,10 +195,10 @@ Con la ayuda de los recursos que pone a nuestra disposición FastAPI, se ha impl
 
 Gracias a eso podemos generar una documentación basada en HTML que nos permite conocer los recursos expuestos de la API, los argumentos y las estructuras de las respuestas esperadas. Los modelos están documentados en el código para los usuarios que decidan utilizar el software como biblioteca puedan ver dicha documentación en el IDE que utilicen. Para aquellos que utilicen la API, se ha añadido a la especificación OpenAPI
 
-\begin{figure}[]
+\begin{figure}[h]
 	\centering	
-	\includegraphics[scale=0.5]{doc/logos/imgs/openapi.png}
-	\caption{ \cite{rtve-cis} Documentación OpenAPI de la API. }
+	\includegraphics[[width=\textwidth]]{doc/logos/imgs/openapi.png}
+	\caption{ Documentación OpenAPI de la API. }
     \label{fig:worst_f_value}
 \end{figure}
 
@@ -211,10 +212,10 @@ Necesitamos que el despliegue nos provea para añadir y desplegar nueva funciona
 A la hora de elegir un entorno cloud tenemos distintos de cloud computing, dependiendo de las partes de la infraestructura local que puedas gestionar.
 
 \FloatBarrier
-\begin{figure}[]
+\begin{figure}[h]
 	\centering	
-	\includegraphics[scale=0.5]{doc/logos/imgs/iaas-paas.png}
-	\caption{ Distintos modelos de computación en la nube. \href{https://www.redhat.com/es/topics/cloud-computing/iaas-vs-paas-vs-saas#paas}{https://www.redhat.com/es/topics/cloud-computing/iaas-vs-paas-vs-saas#paas}}
+	\includegraphics[width=\textwidth]{doc/logos/imgs/iaas-paas.png}
+	\caption{ Distintos modelos de computación en la nube. \href{https://www.redhat.com/es/topics/cloud-computing/iaas-vs-paas-vs-saas#paas}{RedHat types of CC}}
     \label{fig:tipos-de-cc}
 \end{figure}
 \FloatBarrier
@@ -233,10 +234,10 @@ El método que he seguido ha sido crear un contenedor de la aplicación que lueg
 El contenedor y su configuración se define como código en un archivo de texto plano llamado \codeword{Dockerfile} en él se define el software necesario a instalar, las dependencias del proyecto y se expone el host y el puerto.
 
 \FloatBarrier
-\begin{figure}[]
+\begin{figure}[h]
 	\centering	
-	\includegraphics[scale=0.5]{doc/logos/imgs/deployd.png}
-	\caption{ Arquitectura del despliegue. }
+	\includegraphics[width=\textwidth]{doc/logos/imgs/iaas-paas.png}
+	\caption{ Distintos modelos de computación en la nube. \href{https://www.redhat.com/es/topics/cloud-computing/iaas-vs-paas-vs-saas#paas}{RedHat types of CC}}
     \label{fig:tipos-de-cc}
 \end{figure}
 \FloatBarrier
@@ -248,9 +249,9 @@ El contenedor y su configuración se define como código en un archivo de texto 
 Heroku CLI nos ofrece un sistema de registros (que también está disponible en el \textit{dashboard} web) con el que podemos monitorizar todas las peticiones que se realizan así como los reinicios de la máquina virtual y el estado del servidor.
 
 \FloatBarrier
-\begin{figure}[]
+\begin{figure}[h]
 	\centering	
-	\includegraphics[scale=0.5]{doc/logos/imgs/logs.jpg}
+	\includegraphics[width=\textwidth]{doc/logos/imgs/logs.jpg}
 	\caption{ \textit{Logs} de la aplicación desplegada. }
     \label{fig:heroku-logs}
 \end{figure}
