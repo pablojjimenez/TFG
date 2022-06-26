@@ -4,8 +4,8 @@ import typing
 from dataclasses import asdict
 
 from managers.utils import transform_params
-from models.small_models import Cie
-from repositories.creator import DiseaseRepoCreator, AgesGroupsRepoCreator, CieRepoCreator, CcaaRepoCreator
+from repositories.creator import DiseaseRepoCreator, AgesGroupsRepoCreator, \
+    CieRepoCreator, CcaaRepoCreator
 
 T = typing.TypeVar("T")
 
@@ -19,7 +19,7 @@ class CcaaDTO:
 @strawberry.type
 class CieDTO:
     id: str
-    description: str
+    name: str
 
 
 @strawberry.type
@@ -120,11 +120,14 @@ class CCAAFilter(Filter):
 class DiseasesFilter(Filter):
     id: typing.Optional[FilterOperators[int]] = None
     name: typing.Optional[FilterOperators[str]] = None
-    cie_id: typing.Optional[str] = None
-    cie_name: typing.Optional[str] = None
+    cie: typing.Optional[FilterOperators[str]] = None
 
-    def to_cie(self):
-        return Cie(id=self.cie_id, description=self.cie_name) if self.cie_name or self.cie_id else None
+
+@strawberry.input
+class DiseasesLookForFilter(Filter):
+    id: typing.Optional[str] = None
+    diseaseName: typing.Optional[str] = None
+    cieName: typing.Optional[str] = None
 
 
 @strawberry.input
