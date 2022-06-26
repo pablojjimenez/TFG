@@ -234,9 +234,9 @@ El contenedor y su configuración se define como código en un archivo de texto 
 \FloatBarrier
 \begin{figure}[h]
 	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/iaas-paas.png}
-	\caption{ Distintos modelos de computación en la nube. \href{https://www.redhat.com/es/topics/cloud-computing/iaas-vs-paas-vs-saas#paas}{RedHat types of CC}}
-    \label{fig:tipos-de-cc}
+	\includegraphics[width=\textwidth]{doc/logos/imgs/deployd.png}
+	\caption{ Arquitectura del despliegue. }
+    \label{fig:arq-deploy}
 \end{figure}
 \FloatBarrier
 
@@ -258,6 +258,6 @@ Heroku CLI nos ofrece un sistema de registros (que también está disponible en 
 \section{Coste del despliegue}
 \label{sec:despliegue}
 
-Durante el proceso de desarrollo y las primeras pruebas se ha utilizado la modalidad "Free & Hobby" que nos permite desplegar la aplicación de forma gratuita con una seria limitación: la máquina entra en estado de reposo tras 30 minutos de inactividad, lo que hace que cuando se reciba cualquier petición haya que encender el contenedor, además el número de procesos está limitado a 2 máquinas.
+Durante el proceso de desarrollo y las primeras pruebas se ha utilizado la modalidad "Free \& Hobby" que nos permite desplegar la aplicación de forma gratuita con una seria limitación: la máquina entra en estado de reposo tras 30 minutos de inactividad, lo que hace que cuando se reciba cualquier petición haya que encender el contenedor, además el número de procesos está limitado a 2 máquinas.
 
 Para la puesta en producción debería de contratar la tarifa "Standard 1X" que nos ofrece 512MB de RAM, con ilimitado número de procesos, sin estado de procesos y nos incluye un sistema de métricas y avisos que no está disponible en la versión gratuita.
