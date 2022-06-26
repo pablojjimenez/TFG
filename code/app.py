@@ -33,6 +33,7 @@ graphql_app = GraphQL(schema)
 
 app.add_route("/graphql", graphql_app)
 
+
 def custom_openapi():
     if app.openapi_schema:
         return app.openapi_schema
