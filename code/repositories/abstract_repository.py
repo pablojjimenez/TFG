@@ -33,8 +33,8 @@ class AbstractRepository(abc.ABC):
 
         for _, value in query.items():
             for key, _ in value.items():
-                if key not in ['<', '>', '==', '!=']:
-                    raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==']")
+                if key not in ['<', '>', '==', '!=', 'like']:
+                    raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==', '!=', 'like']")
 
     @abc.abstractmethod
     def get_all(self, params: ListParams = None) -> list:
@@ -57,7 +57,7 @@ class AbstractRepository(abc.ABC):
         if params.get('query') is not None:
             self._check_query(params['query'])
             query = self.generate_vector_query(params['query'])
-            out = self.dataframe.query(query)
+            out = self.dataframe.query(query, engine='python')
         if params.get('limit') is not None:
             page = 0 if params['page'] is None or params['page'] == 1 else params['page']
             ini = page * params['limit'] - params['limit'] if page != 0 else 0
@@ -77,16 +77,24 @@ class AbstractRepository(abc.ABC):
         :return: the query in str
         """
         out = []
+        operator = ' & '
         for k, v in list(query.items()):
             e = list(v.items())
             for element in e:
-                if element[1] == '' and element[0] == '==':
+                if element[0] == 'like':
+                    out.append(f'{k.upper()}.str.contains("{element[1]}", na=False)')
+                elif element[1] == '' and element[0] == '==':
                     out.append(f'{k.upper()}.isnull()')
                 elif element[1] == '' and element[0] == '!=':
                     out.append(f'{k.upper()}.notnull()')
                 else:
-                    out.append(f'{k.upper()}{element[0]}{element[1]}')
-        return ' & '.join(out)
+                    if isinstance(element[1], list):
+                        operator = ' | '
+                        for _e in element[1]:
+                            out.append(f'{k.upper()}{element[0]}"{_e}"')
+                    else:
+                        out.append(f'{k.upper()}{element[0]}{element[1]}')
+        return operator.join(out)
 
     @abc.abstractmethod
     def get_one(self, id):
