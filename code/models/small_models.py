@@ -9,7 +9,7 @@ class Cie:
     Classification of Diseases, 10th edition.
     """
     id: int
-    description: str
+    name: str
 
 
 @dataclass
