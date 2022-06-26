@@ -122,3 +122,10 @@ lineno
 colno
 caché
 environment
+Vercel
+auto-desplegar
+Dockerfile
+Dyno
+CLI
+reinicios
+personalización

@@ -6,16 +6,13 @@ authors = ["pablojjimenez <pablojjimenez0@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-pydantic = "^1.9.0"
 python-dotenv = "^0.20.0"
 pandas = "^1.4.2"
 matplotlib = "^3.5.1"
 prophet = "^1.0.1"
 fastapi = "^0.75.2"
 uvicorn = "^0.17.6"
-fastapi-utils = "^0.2.1"
 pytest = "^7.1.2"
-arrow = "^1.2.2"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.10.1"

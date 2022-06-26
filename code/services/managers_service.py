@@ -25,7 +25,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
     try:
         predictor = PredictorManager(DeceaseRepoCreator().factory_method())
         _, img_path = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
-        return FileResponse(PredictorManager.CHART_PATH)
+        return FileResponse(img_path)
     except IncorrectColumnNamesException as e:
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
