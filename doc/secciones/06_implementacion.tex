@@ -229,7 +229,7 @@ desplegar el código, una forma es poner a la escucha una rama del repositorio d
 
 El método que he seguido ha sido crear un contenedor de la aplicación que luego publicamos en la "app" creada en Heroku. Los contenedores nos permite tener una portabilidad absoluta ya que podemos poner en marcha la aplicación en cualquier sistema operativo sin preocuparnos de las dependencias necesarias.
 
-El contenedor y su configuración se define como código en un archivo de texto plano llamado \codeword{Dockerfile} en él se define el software necesario a instalar, las dependencias del proyecto y se expone el host y el puerto.
+El contenedor y su configuración se define como código en un archivo de texto plano llamado \codeword{Dockerfile} en él se define el software necesario a instalar, las dependencias del proyecto, se expone el host y el puerto como variables de entorno que serán utilizadas por Heroku. También se especifica en el comando que ejecuta el contenedor el número de procesos \footnote{la versión gratuita solo admite 2.} que va a ejecutar el dyno. 
 
 \FloatBarrier
 \begin{figure}[h]
