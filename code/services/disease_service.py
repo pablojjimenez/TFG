@@ -1,8 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from typing import Dict
-
-from pydantic import json
-from strawberry.scalars import JSON
+from typing import Dict, Any
 
 from managers.utils import transform_params
 from models.exceptions import IncorrectQueryException, DataIsNotAvaible, \
@@ -47,7 +44,7 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
 
 
 @dataRouter.post("/ccaas", status_code=200, response_model=MyReturnType[Ccaa])
-def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+def get_ccaas(query: Dict[str, Dict[str, Any]] = None, sort: str = None,
               page: int = 1, limit: int = 100):
     """
     Get all disease atendiendo al siguiente orden
@@ -72,7 +69,7 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
 
 
 @dataRouter.post("/cie", status_code=200, response_model=MyReturnType[Cie])
-def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+def get_cies(query: Dict[str, Dict[str, Any]] = None, sort: str = None,
              page: int = 1, limit: int = 100):
     """
     Get all CIE diseases clasification.
@@ -97,7 +94,7 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
 
 
 @dataRouter.post("/ages-groups", status_code=200, response_model=MyReturnType[Gedad])
-def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+def get_ages_groups(query: Dict[str, Dict[str, Any]] = None, sort: str = None,
                     page: int = 1, limit: int = 100):
     """
     Grupos de edad disponibles para clasificar. Por defecto se devuelven 100 entradas.
@@ -122,7 +119,7 @@ def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
 
 
 @dataRouter.post("/deceases", response_model=MyReturnType[Decease])
-def get_decease_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
+def get_decease_diseases(query: Dict[str, Dict[str, Any]] = None, sort: str = None,
                          page: int = 1, limit: int = 100):
     """
     Grupos de edad disponibles para clasificar.
