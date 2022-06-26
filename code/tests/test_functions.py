@@ -35,7 +35,7 @@ class TestAuxFunctions:
                 "==": ""
             }
         }
-        query_str = AbstractRepository.generate_vector_query(query)
+        query_str = AbstractRepository.generate_query(query)
         assert query_str == "ID>10 & ID<12 & CIE.isnull()"
 
     def test_generate_query2(self):
@@ -45,7 +45,7 @@ class TestAuxFunctions:
                 "<": 12
             }
         }
-        query_str = AbstractRepository.generate_vector_query(query)
+        query_str = AbstractRepository.generate_query(query)
         assert query_str == "ID>10 & ID<12"
 
     def test_generate_query3(self):
@@ -58,7 +58,7 @@ class TestAuxFunctions:
                 '!=': ""
             }
         }
-        query_str = AbstractRepository.generate_vector_query(query)
+        query_str = AbstractRepository.generate_query(query)
         assert query_str == "ID>10 & ID<12 & VAR.notnull()"
 
     def test_generate_query_like(self):
@@ -73,7 +73,7 @@ class TestAuxFunctions:
                 '!=': ""
             }
         }
-        query_str = AbstractRepository.generate_vector_query(query)
+        query_str = AbstractRepository.generate_query(query)
         assert query_str == 'ID>10 & VAR.str.contains("?lgo", na=False) & VAR2.notnull()'
 
     def test_generate_query_like_with_lists(self):
@@ -85,7 +85,7 @@ class TestAuxFunctions:
                 "==": [10, 11, 12]
             }
         }
-        query_str = AbstractRepository.generate_vector_query(query)
+        query_str = AbstractRepository.generate_query(query)
         assert query_str == 'VAR.str.contains("?lgo", na=False) & ID==10 | ID==11 | ID==12'
 
     def test_generate_query_like_with_lists_str(self):
@@ -94,7 +94,7 @@ class TestAuxFunctions:
                 "==": ["hola", "adios"]
             }
         }
-        query_str = AbstractRepository.generate_vector_query(query)
+        query_str = AbstractRepository.generate_query(query)
         assert query_str == "ID=='hola' | ID=='adios'"
 
     def test_remove_nulls_from_json1(self):
