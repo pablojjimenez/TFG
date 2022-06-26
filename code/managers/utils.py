@@ -31,6 +31,7 @@ def call_repository_get_all(repo: AbstractRepository, query: Dict[str, Dict[str,
         'length': tam
     }
 
+
 def remove_nulls_from_json(data: dict):
     dd = {}
     for k, v in data.items():
@@ -43,14 +44,7 @@ def remove_nulls_from_json(data: dict):
     return dd
 
 
-
-
 def change_key_operators(data: dict):
-    """
-
-    :param data:
-    :return:
-    """
     changes = {
         'eq': '==',
         'gt': '>',
