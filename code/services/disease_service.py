@@ -1,6 +1,9 @@
 from fastapi import APIRouter, HTTPException
 from typing import Dict
 
+from pydantic import json
+from strawberry.scalars import JSON
+
 from managers.utils import transform_params
 from models.exceptions import IncorrectQueryException, DataIsNotAvaible, \
     NoCorrectTypeException, IncorrectColumnNamesException, NoAttributeException
