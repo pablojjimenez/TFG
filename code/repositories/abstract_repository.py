@@ -5,7 +5,7 @@ from typing import Optional
 from typing_extensions import TypedDict
 
 from models.exceptions import IncorrectColumnNamesException, IncorrectQueryException, \
-    DataIsNotAvaible
+    DataIsNotAvailable
 
 
 class ListParams(TypedDict, total=False):
@@ -21,7 +21,7 @@ class AbstractRepository(abc.ABC):
         try:
             self.dataframe = pd.read_csv(f"{name}.csv")
         except FileNotFoundError:
-            raise DataIsNotAvaible(name)
+            raise DataIsNotAvailable(name)
 
     def _check_query(self, query):
         keys = query.keys()
