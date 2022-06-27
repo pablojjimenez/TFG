@@ -36,7 +36,7 @@ class GedadDTO:
 
 
 @strawberry.type
-class RazielDTO:
+class DeceaseDTO:
     ano: int
     causa: DiseaseDTO
     sx: int
@@ -59,43 +59,6 @@ class MyReturnType(typing.Generic[T]):
     items: typing.List[T]
     length: int
 
-
-p = transform_params(None, None, None, None)
-
-
-def get_ccaas():
-    rtado = CcaaRepoCreator().get_all_operation(p)
-    return MyReturnType[CcaaDTO](rtado[0], rtado[1])
-
-
-def get_cies():
-    rtado = CieRepoCreator().get_all_operation(p)
-    return MyReturnType[CieDTO](rtado[0], rtado[1])
-
-
-def get_diseases():
-    rtado = DiseaseRepoCreator().get_all_operation(p)
-    return MyReturnType[DiseaseDTO](rtado[0], rtado[1])
-
-
-def get_ages_groups():
-    rtado = AgesGroupsRepoCreator().get_all_operation(p)
-    return MyReturnType[GedadDTO](rtado[0], rtado[1])
-
-
-@strawberry.type
-class Query:
-    ccaas: MyReturnType[CcaaDTO] = strawberry.field(resolver=get_ccaas)
-    cies: MyReturnType[CieDTO] = strawberry.field(resolver=get_cies)
-    diseases: MyReturnType[DiseaseDTO] = strawberry.field(resolver=get_diseases)
-    ages_groups: MyReturnType[GedadDTO] = strawberry.field(resolver=get_ages_groups)
-
-
-@strawberry.type
-class MyQuery:
-    query: typing.Dict
-
-
 @strawberry.input
 class FilterOperators(typing.Generic[T]):
     eq: typing.Optional[T] = None
@@ -108,12 +71,6 @@ class FilterOperators(typing.Generic[T]):
 class Filter:
     def dict_repr(self) -> dict:
         return {k: v for k, v in asdict(self).items() if self.__dataclass_fields__[k].repr}
-
-
-@strawberry.input
-class CCAAFilter(Filter):
-    id: typing.Optional[FilterOperators[int]] = None
-    name: typing.Optional[FilterOperators[str]] = None
 
 
 @strawberry.input
@@ -131,10 +88,10 @@ class DiseasesLookForFilter(Filter):
 
 
 @strawberry.input
-class RazielFilter(Filter):
+class DeceaseFilter(Filter):
     id: typing.Optional[FilterOperators[int]] = None
     ano: typing.Optional[FilterOperators[int]] = None
-    causa: typing.Optional[DiseasesFilter] = None
+    causa: typing.Optional[FilterOperators[int]] = None
     sx: typing.Optional[FilterOperators[float]] = None
     ccaa: typing.Optional[FilterOperators[int]] = None
     gedad: typing.Optional[FilterOperators[int]] = None
