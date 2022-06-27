@@ -8,7 +8,7 @@ from starlette.responses import Response, JSONResponse
 from strawberry.asgi import GraphQL
 
 from graphql_services.graphql_mutations import Mutation
-from graphql_services.grapql_types import Query
+from graphql_services.graphql_resolver import Query
 from models.openapi_models.models import get_extra_models
 from services.disease_service import dataRouter
 from services.managers_service import managersRouter

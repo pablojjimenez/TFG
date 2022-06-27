@@ -52,3 +52,25 @@ class Mutation:
         params = Mutation.commpute_mutations_params(query, sort, page, limit)
         deceases = DeceaseRepoCreator().get_all_operation(params)
         return MyReturnType[DeceaseDTO](deceases[0], deceases[1])
+
+    @strawberry.mutation
+    def look_for_deceases(self, query: DiseasesLookForFilter = None, sort: str = None,
+                     page: int = None, limit: int = None) -> MyReturnType[DeceaseDTO]:
+        deceases = DeceaseRepoCreator().factory_method()
+        if query.cieName is not None:
+            cie_repo = CieRepoCreator().factory_method()
+            cies = cie_repo.get_all(transform_params({'description': {'like': query.cieName}}))
+            if query.diseaseName is not None:
+                disease_query = {'name': {'like': query.diseaseName}}
+            else:
+                cies_ids = list(map(lambda c: c.id, cies))
+                disease_query = {'cie': {'like': cies_ids}}
+            diseases_repo = DiseaseRepoCreator().factory_method()
+            diseases = diseases_repo.get_all(
+                transform_params(disease_query, sort, page, limit), cies
+            )
+            diseases_ids = list(map(lambda d: d.id, diseases))
+            deceases.get_all(
+                transform_params({'causa': {'like': diseases_ids}}, sort, page, limit)
+            )
+        return MyReturnType[DeceaseDTO](deceases[0], deceases[1])
