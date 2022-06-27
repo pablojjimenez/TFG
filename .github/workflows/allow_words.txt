@@ -122,3 +122,7 @@ lineno
 colno
 caché
 environment
+DevOps
+ubuntu
+Nótese
+pytest
