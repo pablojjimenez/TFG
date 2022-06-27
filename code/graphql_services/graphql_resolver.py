@@ -6,26 +6,26 @@ from repositories.creator import DiseaseRepoCreator, AgesGroupsRepoCreator, CieR
 
 
 class GraphQLResolver:
-    p = transform_params(None, None, None, None)
+    params = transform_params(None, None, None, None)
 
     @staticmethod
     def get_ccaas():
-        rtado = CcaaRepoCreator().get_all_operation(p)
+        rtado = CcaaRepoCreator().get_all_operation(GraphQLResolver.params)
         return MyReturnType[CcaaDTO](rtado[0], rtado[1])
 
     @staticmethod
     def get_cies():
-        rtado = CieRepoCreator().get_all_operation(p)
+        rtado = CieRepoCreator().get_all_operation(GraphQLResolver.params)
         return MyReturnType[CieDTO](rtado[0], rtado[1])
 
     @staticmethod
     def get_diseases():
-        rtado = DiseaseRepoCreator().get_all_operation(p)
+        rtado = DiseaseRepoCreator().get_all_operation(GraphQLResolver.params)
         return MyReturnType[DiseaseDTO](rtado[0], rtado[1])
 
     @staticmethod
     def get_ages_groups():
-        rtado = AgesGroupsRepoCreator().get_all_operation(p)
+        rtado = AgesGroupsRepoCreator().get_all_operation(GraphQLResolver.params)
         return MyReturnType[GedadDTO](rtado[0], rtado[1])
 
 
