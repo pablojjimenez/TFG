@@ -2,7 +2,7 @@ from fastapi import APIRouter, HTTPException
 from typing import Dict
 
 from managers.utils import transform_params
-from models.exceptions import IncorrectQueryException, DataIsNotAvaible, \
+from models.exceptions import IncorrectQueryException, DataIsNotAvailable, \
     NoCorrectTypeException, IncorrectColumnNamesException, NoAttributeException
 from models.openapi_models.models import MyReturnType, Cie, Gedad, Decease, Ccaa, Disease
 from repositories.creator import CcaaRepoCreator, CieRepoCreator, AgesGroupsRepoCreator, \
@@ -39,7 +39,7 @@ def get_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = None,
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible:
+    except DataIsNotAvailable: # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
@@ -64,7 +64,7 @@ def get_ccaas(query: Dict[str, Dict[str, str]] = None, sort: str = None,
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible:
+    except DataIsNotAvailable: # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
@@ -89,7 +89,7 @@ def get_cies(query: Dict[str, Dict[str, str]] = None, sort: str = None,
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible:
+    except DataIsNotAvailable: # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
@@ -114,7 +114,7 @@ def get_ages_groups(query: Dict[str, Dict[str, str]] = None, sort: str = None,
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible:
+    except DataIsNotAvailable: # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
@@ -139,12 +139,12 @@ def get_decease_diseases(query: Dict[str, Dict[str, str]] = None, sort: str = No
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible:
+    except DataIsNotAvailable: # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
 @dataRouter.get("/vars-meaning", status_code=200, response_model=MyReturnType)
-def get_vars_meaning():
+def get_vars_meaning(): # pragma: no cover
     try:
         c = VarsRepository('data/vars')
         objs, tam = c.get_all()
@@ -154,5 +154,5 @@ def get_vars_meaning():
         }
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible:
+    except DataIsNotAvailable:
         raise HTTPException(status_code=505, detail="Data source is not available")
