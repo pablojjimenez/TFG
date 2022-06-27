@@ -131,12 +131,12 @@ Por otro lado, se corre la \textit{suit} de tests de forma que se garantice que 
             run: poetry run task test
 \end{lstlisting}
 
-En el ejemploa anterior podemos ver como definimos en un fichero de formato YAML que es un formato de serialización de datos, las distintas etapas y órdenes que tiene que superar el código.
+En el ejemplo anterior podemos ver como definimos en un fichero de formato YAML que es un formato de serialización de datos, las distintas etapas y órdenes que tiene que superar el código.
 
 Nótese, como se indica el S.O. sobre el que se ejecuta, las versiones de Python compatibles ya que todas estas comprobaciones se realizan para todas las versiones de Python en las que garantizamos que el software funciona. Y finalmente, las distintas etapas: instalación de dependencias, lint y tests.
 
 \section{Desarrollo dirigido por Tests}
-TDD, \textit{Test Drive Development} es una práctica empleada en programación que coloca la realización de pruebas en el centro del desarrollo. Se caracteriza por escribir primero el código de prueba antes que la lógica. Este método de desarrollo encaja muy bien con lo que se ha especificado en el \hyperref[sec:planificacion]{capítulo de la planificación} ya que con cada tarea finalizada tenemos su cobertura de test, lo que hace que aumente la mantenibilidad del código y la capacidad de poder refactorizar.
+TDD, \textit{Test Drive Development} es una práctica empleada en programación que coloca la realización de pruebas en el centro del desarrollo. Se caracteriza por escribir primero el código de prueba antes que la lógica. Este método de desarrollo encaja muy bien con lo que se ha especificado en el \hyperref[sec:plani]{capítulo de la planificación} ya que con cada tarea finalizada tenemos su cobertura de test, lo que hace que aumente la mantenibilidad del código y la capacidad de poder refactorizar.
 
 
 \FloatBarrier
@@ -148,7 +148,7 @@ TDD, \textit{Test Drive Development} es una práctica empleada en programación 
 \end{figure}
 \FloatBarrier
 
-Los \textbf{tests unitarios} se encargan de comprobar de unidades individuales del código, para ello necesitamos una serie de funciones que nos permitan realizar aserciones sobre los resultados esperados. Además, cuando testeamos los repositorios no queremos cargar los datos originales que usamos en producción sino unos más livianos y controlados para ello se ha hecho uso de la herramienta \codework{pytest} que nos propociona una librería de aserciones y \textit{fixtures} para manejar estos recursos.
+Los \textbf{tests unitarios} se encargan de comprobar de unidades individuales del código, para ello necesitamos una serie de funciones que nos permitan realizar aserciones sobre los resultados esperados. Además, cuando testeamos los repositorios no queremos cargar los datos originales que usamos en producción sino unos más livianos y controlados para ello se ha hecho uso de la herramienta \codework{pytest} que nos proporciona una librería de aserciones y \textit{fixtures} para manejar estos recursos.
 
 Para realizar los \textbf{tests de integración} que son competentes de probar el conjunto y colaboración de las distintas piezas unitarias se ha necesitado arrancar el servidor en modo de test para probar los endpoints expuestos. 
 
