@@ -32,7 +32,7 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvailable: # pragma: no cover
+    except DataIsNotAvailable:  # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
@@ -49,7 +49,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvailable: # pragma: no cover
+    except DataIsNotAvailable:  # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
@@ -63,5 +63,5 @@ def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU')
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvailable: # pragma: no cover
+    except DataIsNotAvailable:  # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")

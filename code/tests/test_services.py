@@ -1,5 +1,3 @@
-import json
-
 from starlette.testclient import TestClient
 
 from app import app
@@ -75,9 +73,11 @@ class TestService:
         assert response.status_code == 404
 
     def test_service_chart_incorrect_column(self):
-        body = {"764": {
+        body = {
+            "764": {
                 "==": 999
-            }}
+            }
+        }
         response = client.post("/managers/chart", json=body)
         assert response.status_code == 422
 

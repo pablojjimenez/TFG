@@ -1,5 +1,6 @@
 from repositories.cie_repository import CieRepository
-from repositories.creator import DiseaseRepoCreator, CieRepoCreator, DeceaseRepoCreator, AgesGroupsRepoCreator
+from repositories.creator import DiseaseRepoCreator, CieRepoCreator, DeceaseRepoCreator, \
+    AgesGroupsRepoCreator
 from repositories.decease_repository import DeceaseRepository
 from repositories.disease_repository import DiseaseRepository
 from repositories.gedad_repository import GedadRepository
