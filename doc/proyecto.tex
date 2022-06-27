@@ -26,7 +26,13 @@
 
 \usepackage{listings}
 
-\usepackage{xcolor}
+\usepackage[table,xcdraw]{xcolor}
+\hypersetup{
+	colorlinks=true,	% false: boxed links; true: colored links
+	linkcolor=black,	% color of internal links
+	urlcolor=cyan		% color of external links
+}
+
 
 %New colors defined below
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -56,12 +62,6 @@
 %"mystyle" code listing set
 \lstset{style=mystyle}
 
-\usepackage[table,xcdraw]{xcolor}
-\hypersetup{
-	colorlinks=true,	% false: boxed links; true: colored links
-	linkcolor=black,	% color of internal links
-	urlcolor=cyan		% color of external links
-}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{fancyhdr} % Custom headers and footers
 \pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
