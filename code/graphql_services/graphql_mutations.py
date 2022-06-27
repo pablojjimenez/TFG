@@ -1,10 +1,10 @@
 import strawberry
 
 from graphql_services.grapql_types import MyReturnType, DiseasesFilter, \
-    DiseaseDTO, DiseasesLookForFilter
+    DiseaseDTO, DiseasesLookForFilter, DeceaseDTO, DeceaseFilter
 from managers.utils import transform_params, remove_nulls_from_json, \
     change_key_operators
-from repositories.creator import DiseaseRepoCreator, CieRepoCreator
+from repositories.creator import DiseaseRepoCreator, CieRepoCreator, DeceaseRepoCreator
 
 
 @strawberry.type
@@ -45,3 +45,10 @@ class Mutation:
             )
 
         return MyReturnType[DiseaseDTO](diseases[0], diseases[1])
+
+    @strawberry.mutation
+    def get_deceases(self, query: DeceaseFilter = None, sort: str = None,
+                     page: int = None, limit: int = None) -> MyReturnType[DeceaseDTO]:
+        params = Mutation.commpute_mutations_params(query, sort, page, limit)
+        deceases = DeceaseRepoCreator().get_all_operation(params)
+        return MyReturnType[DeceaseDTO](deceases[0], deceases[1])
