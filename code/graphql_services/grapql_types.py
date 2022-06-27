@@ -3,10 +3,6 @@ import typing
 
 from dataclasses import asdict
 
-from managers.utils import transform_params
-from repositories.creator import DiseaseRepoCreator, AgesGroupsRepoCreator, \
-    CieRepoCreator, CcaaRepoCreator
-
 T = typing.TypeVar("T")
 
 
@@ -58,6 +54,7 @@ class DeceaseDTO:
 class MyReturnType(typing.Generic[T]):
     items: typing.List[T]
     length: int
+
 
 @strawberry.input
 class FilterOperators(typing.Generic[T]):

@@ -2,7 +2,8 @@ import strawberry
 
 from graphql_services.grapql_types import MyReturnType, DiseaseDTO, GedadDTO, CcaaDTO, CieDTO
 from managers.utils import transform_params
-from repositories.creator import DiseaseRepoCreator, AgesGroupsRepoCreator, CieRepoCreator, CcaaRepoCreator
+from repositories.creator import DiseaseRepoCreator, AgesGroupsRepoCreator, \
+    CieRepoCreator, CcaaRepoCreator
 
 
 class GraphQLResolver:
