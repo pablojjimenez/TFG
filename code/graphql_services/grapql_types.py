@@ -78,7 +78,7 @@ class DiseasesFilter(Filter):
 
 
 @strawberry.input
-class DiseasesLookForFilter(Filter):
+class DiseasesSearchFilter(Filter):
     id: typing.Optional[str] = None
     diseaseName: typing.Optional[str] = None
     cieName: typing.Optional[str] = None

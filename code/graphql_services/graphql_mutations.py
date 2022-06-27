@@ -1,7 +1,7 @@
 import strawberry
 
 from graphql_services.grapql_types import MyReturnType, DiseasesFilter, \
-    DiseaseDTO, DiseasesLookForFilter, DeceaseDTO, DeceaseFilter
+    DiseaseDTO, DiseasesSearchFilter, DeceaseDTO, DeceaseFilter
 from managers.utils import transform_params, remove_nulls_from_json, \
     change_key_operators
 from repositories.creator import DiseaseRepoCreator, CieRepoCreator, DeceaseRepoCreator
@@ -27,7 +27,7 @@ class Mutation:
         return MyReturnType[DiseaseDTO](diseases[0], diseases[1])
 
     @strawberry.mutation
-    def look_for_diseases(self, query: DiseasesLookForFilter = None, sort: str = None,
+    def look_for_diseases(self, query: DiseasesSearchFilter = None, sort: str = None,
                           page: int = None, limit: int = None) -> MyReturnType[DiseaseDTO]:
         diseases_repo = DiseaseRepoCreator().factory_method()
         if query.cieName is not None:
@@ -54,23 +54,27 @@ class Mutation:
         return MyReturnType[DeceaseDTO](deceases[0], deceases[1])
 
     @strawberry.mutation
-    def look_for_deceases(self, query: DiseasesLookForFilter = None, sort: str = None,
-                     page: int = None, limit: int = None) -> MyReturnType[DeceaseDTO]:
+    def search_deceases(self, query: DiseasesSearchFilter = None, sort: str = None,
+                        page: int = None, limit: int = None) -> MyReturnType[DeceaseDTO]:
         deceases = DeceaseRepoCreator().factory_method()
+        cies = []
+
         if query.cieName is not None:
             cie_repo = CieRepoCreator().factory_method()
-            cies = cie_repo.get_all(transform_params({'description': {'like': query.cieName}}))
-            if query.diseaseName is not None:
-                disease_query = {'name': {'like': query.diseaseName}}
-            else:
-                cies_ids = list(map(lambda c: c.id, cies))
-                disease_query = {'cie': {'like': cies_ids}}
-            diseases_repo = DiseaseRepoCreator().factory_method()
-            diseases = diseases_repo.get_all(
-                transform_params(disease_query, sort, page, limit), cies
-            )
-            diseases_ids = list(map(lambda d: d.id, diseases))
-            deceases.get_all(
-                transform_params({'causa': {'like': diseases_ids}}, sort, page, limit)
-            )
-        return MyReturnType[DeceaseDTO](deceases[0], deceases[1])
+            cies = cie_repo.get_all(transform_params({'description': {'like': query.cieName}}))[0]
+
+        if query.diseaseName is not None:
+            disease_query = {'name': {'like': query.diseaseName}}
+        else:
+            cies_ids = list(map(lambda c: c.id, cies))
+            disease_query = {'cie': {'==': cies_ids}}
+
+        diseases_repo = DiseaseRepoCreator().factory_method()
+        diseases = diseases_repo.get_all(
+            transform_params(disease_query, sort, page, limit), cies
+        )[0]
+        diseases_ids = list(map(lambda d: d.id, diseases))
+        rtado = deceases.get_all(
+            transform_params({'causa': {'==': diseases_ids}}, sort, page, limit)
+        )
+        return MyReturnType[DeceaseDTO](rtado[0], rtado[1])

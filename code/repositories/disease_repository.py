@@ -12,9 +12,6 @@ class DiseaseRepository(AbstractRepository):
 
     def get_all(self, params: ListParams = None,
                 cies: Tuple[List[Cie], int] = None) -> Tuple[List[Disease], int]:
-        if cies is not None and cies[1] > 0:
-            cie_queries = list(map(lambda x: x.id, cies[0]))
-            params['query']['cie'] = {'==': cie_queries}
         data = super().get_all(params)
         data_objs = list(map(lambda x: Disease(x[0], x[1], self.cie_repo.get_one(x[2])), data))
         return data_objs, len(data)
