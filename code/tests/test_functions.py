@@ -141,3 +141,11 @@ class TestAuxFunctions:
         data = {'id': {'eq': 1}, 'bb': {'gt': 3}, 'cc': {'lt': 9}}
         rtado = change_key_operators(data)
         assert rtado == {'id': {'==': 1}, 'bb': {'>': 3}, 'cc': {'<': 9}}
+
+    '''
+    TODO: when the new tests changes are merged
+    def test_get_diseases_based_on_cies(self):
+        filter_obj = DiseasesSearchFilter(id=None, diseaseName='a', cieName='a')
+        diseases = Mutation.get_diseases_based_on_cies(filter_obj, None, 1, 10)
+        assert len(diseases) == 3
+    '''

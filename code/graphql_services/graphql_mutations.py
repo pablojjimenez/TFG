@@ -24,8 +24,8 @@ class Mutation:
             cies_ids = list(map(lambda c: c.id, cies))
             disease_query = {'cie': {'==': cies_ids}}
 
-        return DiseaseRepoCreator.get_all_operation(
-            transform_params(disease_query, sort, page, limit), cies
+        return DiseaseRepoCreator().get_all_operation(
+            transform_params(disease_query, sort, page, limit)
         )[0]
 
     @staticmethod
@@ -45,7 +45,7 @@ class Mutation:
         return MyReturnType[DiseaseDTO](diseases[0], diseases[1])
 
     @strawberry.mutation
-    def look_for_diseases(self, query: DiseasesSearchFilter = None, sort: str = None,
+    def search_diseases(self, query: DiseasesSearchFilter = None, sort: str = None,
                           page: int = None, limit: int = None) -> MyReturnType[DiseaseDTO]:
         diseases = Mutation.get_diseases_based_on_cies(query, sort, page, limit)
         return MyReturnType[DiseaseDTO](diseases[0], diseases[1])
@@ -60,10 +60,10 @@ class Mutation:
     @strawberry.mutation
     def search_deceases(self, query: DiseasesSearchFilter = None, sort: str = None,
                         page: int = None, limit: int = None) -> MyReturnType[DeceaseDTO]:
-
+        print(query)
         diseases = Mutation.get_diseases_based_on_cies(query, sort, page, limit)
         diseases_ids = list(map(lambda d: d.id, diseases))
-        rtado = DeceaseRepoCreator().get_all_operation(
+        deceases = DeceaseRepoCreator().get_all_operation(
             transform_params({'causa': {'==': diseases_ids}}, sort, page, limit)
         )
-        return MyReturnType[DeceaseDTO](rtado[0], rtado[1])
+        return MyReturnType[DeceaseDTO](deceases[0], deceases[1])

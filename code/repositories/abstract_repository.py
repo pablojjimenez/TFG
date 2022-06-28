@@ -95,7 +95,7 @@ class AbstractRepository(abc.ABC):
                             out += f'{k.upper()}{element[0]}{_e} | '
                     else:
                         out += f'{k.upper()}{element[0]}{element[1]} & '
-        return out[:-3]
+        return out[:-3] if out != '' else 'tuple()'
 
     @abc.abstractmethod
     def get_one(self, id):
