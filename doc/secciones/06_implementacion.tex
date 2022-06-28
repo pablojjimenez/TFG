@@ -148,7 +148,7 @@ TDD, \textit{Test Drive Development} es una práctica empleada en programación 
 \end{figure}
 \FloatBarrier
 
-Los \textbf{tests unitarios} se encargan de comprobar de unidades individuales del código, para ello necesitamos una serie de funciones que nos permitan realizar aserciones sobre los resultados esperados. Además, cuando testeamos los repositorios no queremos cargar los datos originales que usamos en producción sino unos más livianos y controlados para ello se ha hecho uso de la herramienta \codework{pytest} que nos proporciona una librería de aserciones y \textit{fixtures} para manejar estos recursos.
+Los \textbf{tests unitarios} se encargan de comprobar de unidades individuales del código, para ello necesitamos una serie de funciones que nos permitan realizar aserciones sobre los resultados esperados. Además, cuando testeamos los repositorios no queremos cargar los datos originales que usamos en producción sino unos más livianos y controlados para ello se ha hecho uso de la herramienta \codeword{pytest} que nos proporciona una librería de aserciones y \textit{fixtures} para manejar estos recursos.
 
 Para realizar los \textbf{tests de integración} que son competentes de probar el conjunto y colaboración de las distintas piezas unitarias se ha necesitado arrancar el servidor en modo de test, FastAPI se encarga de todo este mecanismo, para probar los endpoints expuestos. Para testear los repositorios se utiliza una fuente de datos falsa que imita la original pero que es restringida y conocida para que podamos hacer aserciones sobre ella. Aprovechando el sistema de configuración implementado en el proyecto podemos definir entornos y en función de ellos proporcionar unas rutas u otras a los repositorios.
 
