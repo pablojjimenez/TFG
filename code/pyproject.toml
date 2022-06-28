@@ -16,6 +16,7 @@ uvicorn = "^0.17.6"
 fastapi-utils = "^0.2.1"
 pytest = "^7.1.2"
 arrow = "^1.2.2"
+strawberry-graphql = "^0.114.5"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.10.1"
