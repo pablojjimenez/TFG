@@ -204,9 +204,17 @@ Gracias a eso podemos generar una documentación basada en HTML que nos permite 
 \chapter{Despliegue del software}
 En la etapa de despliegue es cuando el software queda disponible para el uso y disfrute de los usuarios. Supone una etapa fundamental para dar por finalizada la construcción del software. 
 
-Necesitamos que el despliegue nos provea para añadir y desplegar nueva funcionalidad con rapidez. Además, el coste tiene que ser lo más inteligente y adaptado posible. Estos requisitos hacen utilizar un entorno cloud como la opción más sensata.
+Necesito que el modelo de computación en la nube me provea de facilidad suficiente para
+añadir y desplegar nueva funcionalidad con rapidez. El coste tiene que ser lo más
+inteligente y adaptado posible. Y además, quiero un sistema que me prevea de una
+plataforma ya estructurada de forma que solo tenga que centrarme en la configuración
+correcta de mi servidor de acorde con los requisitos de la plataforma sin tener que
+configurar ninguna infraestructura de bajo nivel ni tan siquiera el sistema operativo.
 
-A la hora de elegir un entorno cloud tenemos distintos de cloud computing, dependiendo de las partes de la infraestructura local que puedas gestionar.
+Estos requisitos hacen utilizar un entorno cloud un PaaS, \textit{Platform as a service}
+donde tendré varias capas de servicios apilados lo que me va a permitir ejecutar y gestionar mis aplicación desplegada sin tener que mantener la infraestructura subyacente.
+
+A la hora de elegir un modelo de entorno cloud tenemos distintos modelos de cloud computing, dependiendo de las partes de la infraestructura local que queramos gestionar.
 
 \FloatBarrier
 \begin{figure}[h]
@@ -218,14 +226,25 @@ A la hora de elegir un entorno cloud tenemos distintos de cloud computing, depen
 \end{figure}
 \FloatBarrier
 
-Busco una solución que me permita desarrollar, ejecutar y gestionar mis aplicación desplegada sin tener que mantener la infraestructura subyacente. Es decir, poder desplegar la aplicación sobre una infraestructura ya definida que se me ofrece ya que no va a cambiar. Con un PaaS, \textit{Platform as a service} tengo varias capas de servicios apilados.
-En el mercado existen distintas empresas que nos ofrecen este tipo de servicios, podemos destacar: \href{https://aws.amazon.com/es/elasticbeanstalk/}{AWS Elastic Beanstalk}, \href{https://dashboard.heroku.com/login}{Heroku} o \href{https://vercel.com/}{Vercel} entre otros.
+En el mercado existen distintas empresas que nos ofrecen este tipo de servicios, podemos
+destacar: \href{https://aws.amazon.com/es/elasticbeanstalk/}{AWS Elastic Beanstalk},
+\href{https://dashboard.heroku.com/login}{Heroku} o \href{https://vercel.com/}{Vercel}
+entre otros.
+
+Mientras que Vercel no soporta (por el momento) despliegues basados en imágenes de docker,
+que es la \hyperref[sec:proceso-despliegue]{forma de despliegue que persigo}, y
+AWS solicita información bancaria, he utilizado Heroku.
 
 \section{Proceso de despliegue}
+\label{sec:proceso-despliegue}
 Para poder desplegar una aplicación en Heroku, es necesario acceder al panel de 
-administración y crearnos una "app". Después, Heroku nos ofrece distintas formas de 
-desplegar el código, una forma es poner a la escucha una rama del repositorio de GitHub a cualquier tipo de cambio para auto-desplegar. Sin embargo, este proyecto tiene muchos
-\textit{assets}, los ficheros con los datos de las defunciones que no están versionados por el control de versiones. Este motivo y el poco margen de personalización que provoca este método sobre con que configuración queremos arrancar el servidor me hizo desestimar esta forma.
+administración y crearnos una "app". Sin embargo, existe un CLI \footnote{Interfaz de
+línea de comandos} que se instala en nuestro sistema y nos permite realizar de forma más
+cómoda las configuraciones necesarias.
+
+A la hora de desplegar el código, Heroku nos ofrece distintas formas, una de ellas es
+poner a la escucha una rama del repositorio de GitHub a cualquier tipo de cambio para
+auto-desplegar. Sin embargo, este proyecto tiene muchos \textit{assets}, los ficheros con los datos de las defunciones que no están versionados por el control de versiones. Este motivo y el poco margen de personalización que provoca este método sobre con que configuración queremos arrancar el servidor me hizo desestimar esta forma.
 
 El método que he seguido ha sido crear un contenedor de la aplicación que luego publicamos en la "app" creada en Heroku. Los contenedores nos permite tener una portabilidad absoluta ya que podemos poner en marcha la aplicación en cualquier sistema operativo sin preocuparnos de las dependencias necesarias.
 
@@ -244,7 +263,7 @@ El contenedor y su configuración se define como código en un archivo de texto 
     \item \textit{Dyno} es un contenedor liviano con Linux en los que Heroku ejecuta la aplicación.
 \end{itemize}
 
-Heroku CLI nos ofrece un sistema de registros (que también está disponible en el \textit{dashboard} web) con el que podemos monitorizar todas las peticiones que se realizan así como los reinicios de la máquina virtual y el estado del servidor.
+Utilizando la CLI podemos ver el sistema de registros (que también está disponible en el \textit{dashboard} web) con el que podemos monitorizar todas las peticiones que se realizan así como los reinicios de la máquina virtual y el estado del servidor.
 
 \FloatBarrier
 \begin{figure}[h]
