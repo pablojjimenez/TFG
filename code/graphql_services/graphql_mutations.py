@@ -12,7 +12,7 @@ class Mutation:
 
     @classmethod
     def get_diseases_based_on_cies(cls, query: DiseasesSearchFilter = None, sort: str = None,
-                          page: int = None, limit: int = None):
+                                   page: int = None, limit: int = None):
         cies = []
         if query.cieName is not None:
             cie_repo = CieRepoCreator().factory_method()
@@ -46,7 +46,7 @@ class Mutation:
 
     @strawberry.mutation
     def search_diseases(self, query: DiseasesSearchFilter = None, sort: str = None,
-                          page: int = None, limit: int = None) -> MyReturnType[DiseaseDTO]:
+                        page: int = None, limit: int = None) -> MyReturnType[DiseaseDTO]:
         diseases = Mutation.get_diseases_based_on_cies(query, sort, page, limit)
         return MyReturnType[DiseaseDTO](diseases[0], diseases[1])
 
