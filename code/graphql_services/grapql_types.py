@@ -62,10 +62,13 @@ class FilterOperators(typing.Generic[T]):
     gt: typing.Optional[T] = None
     lt: typing.Optional[T] = None
     neq: typing.Optional[T] = None
-    like: typing.Optional[T] = None
 
 
 class Filter:
+    """
+    Base class to build the filters. Add functionality to
+    export objects to json.
+    """
     def dict_repr(self) -> dict:
         return {k: v for k, v in asdict(self).items() if self.__dataclass_fields__[k].repr}
 

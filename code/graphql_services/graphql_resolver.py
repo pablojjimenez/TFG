@@ -7,6 +7,9 @@ from repositories.creator import DiseaseRepoCreator, AgesGroupsRepoCreator, \
 
 
 class GraphQLResolver:
+    """
+    Class for abstracting information retrieval from different repositories
+    """
     params = transform_params(None, None, None, None)
 
     @staticmethod

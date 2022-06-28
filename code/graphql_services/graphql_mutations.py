@@ -9,7 +9,9 @@ from repositories.creator import DiseaseRepoCreator, CieRepoCreator, DeceaseRepo
 
 @strawberry.type
 class Mutation:
-
+    """
+    Class defining the different mutations that can be performed using the Graphql protocol.
+    """
     @classmethod
     def get_diseases_based_on_cies(cls, query: DiseasesSearchFilter = None, sort: str = None,
                                    page: int = None, limit: int = None):
