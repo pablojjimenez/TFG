@@ -25,7 +25,9 @@ class CcaaRepoCreator(RepoCreator):
     """
 
     def factory_method(self):
-        return CcaaRepository(get_config().ccaa_repo_path)
+        path = get_config().ccaa_repo_path if get_config().environment != 'T' \
+            else get_config().mock_ccaa_repo_path
+        return CcaaRepository(path)
 
 
 class CieRepoCreator(RepoCreator):
@@ -34,7 +36,9 @@ class CieRepoCreator(RepoCreator):
     """
 
     def factory_method(self):
-        return CieRepository(get_config().cie_repo_path)
+        path = get_config().cie_repo_path if get_config().environment != 'T' \
+            else get_config().mock_cie_repo_path
+        return CieRepository(path)
 
 
 class AgesGroupsRepoCreator(RepoCreator):
@@ -43,7 +47,9 @@ class AgesGroupsRepoCreator(RepoCreator):
     """
 
     def factory_method(self):
-        return GedadRepository(get_config().gedad_repo_path)
+        path = get_config().gedad_repo_path if get_config().environment != 'T' \
+            else get_config().mock_gedad_repo_path
+        return GedadRepository(path)
 
 
 class DiseaseRepoCreator(RepoCreator):
@@ -52,8 +58,10 @@ class DiseaseRepoCreator(RepoCreator):
     """
 
     def factory_method(self):
+        path = get_config().disease_repo_path if get_config().environment != 'T' \
+            else get_config().mock_disease_repo_path
         return DiseaseRepository(
-            get_config().disease_repo_path,
+            path,
             CieRepoCreator().factory_method()
         )
 
@@ -64,8 +72,10 @@ class DeceaseRepoCreator(RepoCreator):
     """
 
     def factory_method(self):
+        path = get_config().raziel_repo_path if get_config().environment != 'T' \
+            else get_config().mock_raziel_repo_path
         return DeceaseRepository(
-            get_config().raziel_repo_path,
+            path,
             DiseaseRepoCreator().factory_method(),
             CcaaRepoCreator().factory_method(),
             AgesGroupsRepoCreator().factory_method()
