@@ -52,7 +52,7 @@ A continuación se puede ver un somero diagrama donde podemos observar la conexi
 
 
 \section{Implementación}
-En esta sección voy a hablar de las decisiones técnicas tomadas en base a las distintas opciones que disponemos y considerando siempre como cumplen las distintas opciones a alcanzar los objetivos de nuestros usuarios.
+En esta sección se van a considerar las decisiones técnicas tomadas en base a los requisitos y ajuste a la metodología de trabajo expuesta, contemplando siempre como satisfacen las distintas opciones a alcanzar los objetivos de nuestros usuarios.
 
 \subsection{Configuración}
 A la hora de crear un proyecto software, el primer paso que tenemos que hacer es llevar a cabo una configuración que nos permita arrancar la aplicación de la forma deseada. Este software está pensado para ejecutarse en la nube, por ello he tenido en cuenta que desde el principio que tiene que haber una forma de recuperar esta configuración. Además, tengo que poder establecer distintos parámetros de ejecución según el entorno donde se vaya a ejecutar. Por tanto, la configuración la almaceno en una clase que se nutre del fichero de \textit{environment} una única vez ya que queda almacenada en caché. 
@@ -83,17 +83,86 @@ genera un fichero de configuración \textit{pyproject.toml} donde definimos las 
 de nuestro proyecto así como algunas tareas específicas para correr los tests o el lint fácilmente. Esto facilita
 enormemente la creación de entornos virtuales de prueba y de desarrollo tanto el local como por el CI.
 
-\subsection{Bibliotecas utilizadas}
 
-\section{Para Continuos Integration}
+\section{integración Continua}
+La integración continua o CI \textit{continuos integration} es uno de los pilares de la filosofía DevOps, se basa en realizar integraciones frecuentes con la máxima seguridad posible.
+
 Desde el inicio del trabajo se ha estado trabajando con un sistema férreo de CI de forma que no se ha mezclado nunca nada que no haya superado los requisitos de diseño especificados. En el entorno de desarrollo se ha utilizado \textit{Github Actions} que es una herramienta de CI que nos permite realizar una integración continua de la misma forma que \textit{Travis CI} la elección de Github sobre Travis es por la rapidez del elegido e integración con la forja utilizada que como se ha especificado anteriormente es Github.
 
-Para garantizar la \textbf{calidad de la memoria} se han implementado dos tipos de CI\footnote{Continuos Integration}: un revisor ortográfico y un revisor de estructura que compila el documento automáticamente y pública el PDF generado en las \href{https://github.com/pablojjimenez/TFG/releases}{\textit{releases} del repositorio.}
+Para garantizar la \textbf{calidad de la memoria} se han implementado dos tipos de CI: un revisor ortográfico y un revisor de estructura que compila el documento automáticamente y pública el PDF generado en las \href{https://github.com/pablojjimenez/TFG/releases}{\textit{releases} del repositorio.}
 
 Del mismo modo, para el \textbf{código} se han implementado otras dos CI que garantizan que cuando se introduce en la rama principal del repositorio código nuevo, éste garantiza unos estándares de calidad y que efectivamente el código es funcional por todas las versiones especificadas de Python. Por un lado, verificar el código fuente contra errores de programación (como "library imported but unused" y "Undefined name") y para verificar la complejidad ciclomática. Se ha utilizado la tecnología \textbf{Flake8} por ser las más utilizada en el ecosistema.
-Por otro lado, se corre la \textit{suit} de tests de forma que se garantice que al añadir uno código no se rompe el existente. Se ha utilizado la librería \textit{Unittest} que se encuentra incluida en la biblioteca estándar de Python permite realizar aserciones, provee de muchas aserciones y permite organizar los tests de forma parecida a como lo hace jUnit en clases que llamamos \textit{suits} de tests.
 
-Todas estas comprobaciones se realizan para todas las versiones de Python en las que garantizamos que el software funciona.
+Por otro lado, se corre la \textit{suit} de tests de forma que se garantice que al añadir uno código no se rompe el existente. 
+
+\FloatBarrier
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=\textwidth]{doc/logos/imgs/CI-pr.png}
+    \caption{Ejemplo de ejecución automática de la CI}
+    \label{fig:tipos-de-cc}
+\end{figure}
+\FloatBarrier
+
+\begin{lstlisting}[caption=Definición de las etapas de la CI del código del proyecto ]
+    name: Python CI
+    on: [push]
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            python-version: ["3.8","3.9"]
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/setup-python@v2
+            with:
+              python-version: "${{ matrix.python-version }}"
+          - name: Install poetry
+            run: pip install poetry
+          - name: Install poetry dependencies
+            working-directory: ./code
+            run: poetry install
+          - name: Run lint
+            working-directory: ./code
+            run: poetry run task lint
+          - name: Run tests
+            working-directory: ./code
+            run: poetry run task test
+\end{lstlisting}
+
+En el ejemplo anterior podemos ver como definimos en un fichero de formato YAML que es un formato de serialización de datos, las distintas etapas y órdenes que tiene que superar el código.
+
+Nótese, como se indica el S.O. sobre el que se ejecuta, las versiones de Python compatibles ya que todas estas comprobaciones se realizan para todas las versiones de Python en las que garantizamos que el software funciona. Y finalmente, las distintas etapas: instalación de dependencias, lint y tests.
+
+\section{Desarrollo dirigido por Tests}
+TDD, \textit{Test Drive Development} es una práctica empleada en programación que coloca la realización de pruebas en el centro del desarrollo. Se caracteriza por escribir primero el código de prueba antes que la lógica. Este método de desarrollo encaja muy bien con lo que se ha especificado en el \hyperref[sec:plani]{capítulo de la planificación} ya que con cada tarea finalizada tenemos su cobertura de test, lo que hace que aumente la mantenibilidad del código y la capacidad de poder refactorizar.
+
+
+\FloatBarrier
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=\textwidth]{doc/logos/imgs/unit-test.png}
+    \caption{ Tests unitarios. \href{https://martinfowler.com/bliki/images/unitTest/sketch.png}{Fuente}}
+    \label{fig:unit-tests}
+\end{figure}
+\FloatBarrier
+
+Los \textbf{tests unitarios} se encargan de comprobar de unidades individuales del código, para ello necesitamos una serie de funciones que nos permitan realizar aserciones sobre los resultados esperados. Además, cuando testeamos los repositorios no queremos cargar los datos originales que usamos en producción sino unos más livianos y controlados para ello se ha hecho uso de la herramienta \codeword{pytest} que nos proporciona una librería de aserciones y \textit{fixtures} para manejar estos recursos.
+
+Para realizar los \textbf{tests de integración} que son competentes de probar el conjunto y colaboración de las distintas piezas unitarias se ha necesitado arrancar el servidor en modo de test, FastAPI se encarga de todo este mecanismo, para probar los endpoints expuestos. Para testear los repositorios se utiliza una fuente de datos falsa que imita la original pero que es restringida y conocida para que podamos hacer aserciones sobre ella. Aprovechando el sistema de configuración implementado en el proyecto podemos definir entornos y en función de ellos proporcionar unas rutas u otras a los repositorios.
+
+Para conocer el nivel de confianza que tenemos se ha calculado el porcentaje de cobertura que tiene el código. Esto es, la cantidad de lineas que son ejecutadas por los tests para saber con que confianza podemos realizar cambios que nos garanticen que todo sigue funcionando. Con más de un 80\% de cobertura es generalmente aceptado que el código está suficientemente probado ya que algunas veces alcanzar una cobertura mayor tiene más costes que beneficios. \footnote{\href{https://www.atlassian.com/continuous-delivery/software-testing/code-coverage}{Code coverage}}
+
+\FloatBarrier
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=\textwidth]{doc/logos/imgs/cobertura.jpg}
+    \caption{ Informe de cobertura del proyecto.}
+    \label{fig:cobertura-tests}
+\end{figure}
+\FloatBarrier
+
 
 \subsubsection{Pandas}
 Como se ha descrito en anteriores capítulos de la memoria, los datos que manejamos están en ficheros CSV. Para poder trabajar con ellos es necesario utilizar una biblioteca que nos permite trabajar con estos ficheros. Es necesario poder manejar los datos de estos ficheros con cierta agilidad. El mayor fichero tiene 967360 líneas y ocupa unos 55 MB aunque no son cifras cercanas a lo que se considera \textit{big data} necesitamos de una herramienta que nos permita filtrar, ordenar y hacer cálculos eficientemente sobre estos conjuntos de datos. La elección de \textbf{Pandas} como biblioteca para trabajar con estos datos es debido a que es ampliamente utilizada en el mundo Python y encaja en los datos que tenemos.

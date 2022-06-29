@@ -16,6 +16,8 @@ uvicorn = "^0.17.6"
 fastapi-utils = "^0.2.1"
 pytest = "^7.1.2"
 arrow = "^1.2.2"
+pytest-cov = "^3.0.0"
+requests = "^2.28.0"
 
 [tool.poetry.dev-dependencies]
 taskipy = "^1.10.1"
@@ -30,3 +32,4 @@ build-backend = "poetry.core.masonry.api"
 test = "pytest"
 lint = "flake8 --statistics"
 serve = "uvicorn app:app --reload"
+test-cov = 'pytest --cov-report=html --cov=repositories --cov=services --cov=models --cov-config=.coveragerc'

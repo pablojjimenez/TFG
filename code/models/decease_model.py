@@ -60,10 +60,7 @@ class Decease(object):
         if data.get('id') is not None and data.get('id') > 0:
             self.id = data.get('id')
         else:
-            raise InvalidIDException('ID not allowed for Raziel object')
+            raise InvalidIDException('ID not allowed for Decease object')
 
     def _get_allowed_attrs(self):
         return list(map(lambda x: x[0], Decease.ALLOW_ATTRS.items()))
-
-    def __str__(self) -> str:
-        return str(vars(self))
