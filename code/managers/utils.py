@@ -10,6 +10,7 @@ def transform_params(query: Dict[str, Dict[str, str]],
         'page': page
     }
 
+
 def remove_nulls_from_json(data: dict):
     dd = {}
     for k, v in data.items():

@@ -24,7 +24,7 @@ class TestService:
         assert response.status_code == 422
 
         response = client.post("/data/ccaas", json={})
-        assert response.status_code == 400
+        assert response.status_code == 200
 
     def test_service_cie(self):
         response = client.post("/data/cie")
@@ -60,7 +60,7 @@ class TestService:
         assert response.json()['length'] == 3
 
         response = client.post("/data/diseases", json={})
-        assert response.status_code == 400
+        assert response.status_code == 200
 
         response = client.post("/data/diseases", json={'query': {'namee': {'==': 2}}})
         assert response.status_code == 422
