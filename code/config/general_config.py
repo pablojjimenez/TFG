@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     openapi_path: str = '/docs'
     debug_app: str = 'F'
     chart_path_base: str = '/tmp'
+    environment: str = 'T'
     ccaa_repo_path: str = 'data/ccaas'
     cie_repo_path: str = 'data/cie'
     gedad_repo_path: str = 'data/grupos_edad'

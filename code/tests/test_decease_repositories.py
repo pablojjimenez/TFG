@@ -123,3 +123,7 @@ class TestDeceaseRepo:
         }
         with pytest.raises(IncorrectColumnNamesException):
             mock_decease_repo.get_all(list_param)
+
+    def test_get_one_by_id(self, mock_decease_repo):
+        decease = mock_decease_repo.get_one(1)
+        assert decease.id == 1

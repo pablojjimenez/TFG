@@ -1,7 +1,7 @@
 import pytest
 
 from models.disease_model import Disease
-from models.exceptions import NoAttributeException, NoCorrectTypeException
+from models.exceptions import NoAttributeException, NoCorrectTypeException, InvalidIDException
 from models.decease_model import Decease
 from models.small_models import Cie, Sex, Ccaa, Gedad
 
@@ -35,5 +35,11 @@ class TestDecease:
 
     def test_create_incorrect_decease_object_from_json(self):
         with pytest.raises(NoCorrectTypeException):
-            TestDecease.JSON_DATA['gedad'] = 2
+            data = TestDecease.JSON_DATA.copy()
+            data['gedad'] = 2
+            Decease(data)
+
+    def test_create_incorrect_id(self):
+        with pytest.raises(InvalidIDException):
+            TestDecease.JSON_DATA['id'] = -1
             Decease(TestDecease.JSON_DATA)

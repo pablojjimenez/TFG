@@ -6,7 +6,7 @@ from starlette.responses import FileResponse
 
 from managers.graphic_manager import GraphicManager
 from managers.predictor_manager import PredictorManager
-from models.exceptions import DataIsNotAvaible, NoAttributeException, \
+from models.exceptions import DataIsNotAvailable, NoAttributeException, \
     IncorrectColumnNamesException, NoCorrectTypeException
 from repositories.creator import DeceaseRepoCreator
 
@@ -23,6 +23,8 @@ managersRouter = APIRouter(
 def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU',
                          period=2):
     try:
+        if query is None:
+            raise HTTPException(status_code=400, detail="Body param is mandatory")
         predictor = PredictorManager(DeceaseRepoCreator().factory_method())
         _, img_path = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
         return FileResponse(img_path)
@@ -30,13 +32,15 @@ def predict_chart_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', s
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible:
+    except DataIsNotAvailable:  # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
 @managersRouter.post("/deaths-predictor", status_code=200)
 def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU', period=2):
     try:
+        if query is None:
+            raise HTTPException(status_code=400, detail="Body param is mandatory")
         predictor = PredictorManager(DeceaseRepoCreator().factory_method())
         d, _ = predictor.deaths_forecasting({'query': query}, group, summ, int(period))
         result = d.to_json(orient="split")
@@ -45,7 +49,7 @@ def predict_deaths(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='D
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible:
+    except DataIsNotAvailable:  # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
 
 
@@ -59,5 +63,5 @@ def get_chart(query: Dict[str, Dict[str, str]] = None, group='ANO', summ='DEFU')
         raise HTTPException(status_code=422, detail=str(e))
     except (NoCorrectTypeException, NoAttributeException, ValueError) as e2:
         raise HTTPException(status_code=400, detail=str(e2))
-    except DataIsNotAvaible:
+    except DataIsNotAvailable:  # pragma: no cover
         raise HTTPException(status_code=505, detail="Data source is not available")
