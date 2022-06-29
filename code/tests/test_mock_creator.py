@@ -1,21 +1,21 @@
-from tests.mocks.mock_cie_repository import MockCieRepository
-from tests.mocks.mock_creator import DiseaseRepoCreator, CieRepoCreator, \
-    DeceaseRepoCreator, AgesGroupsRepoCreator
-from tests.mocks.mock_disease_repository import MockDiseaseRepository
-from tests.mocks.mock_gedad_repository import MockGedadRepository
-from tests.mocks.mock_decease_repository import MockDeceaseRepository
+from repositories.cie_repository import CieRepository
+from repositories.creator import DiseaseRepoCreator, CieRepoCreator, DeceaseRepoCreator, \
+    AgesGroupsRepoCreator
+from repositories.decease_repository import DeceaseRepository
+from repositories.disease_repository import DiseaseRepository
+from repositories.gedad_repository import GedadRepository
 
 
 class TestMockRepoCreator:
     def test_instances(self):
         obj = DiseaseRepoCreator().factory_method()
-        assert isinstance(obj, MockDiseaseRepository)
+        assert isinstance(obj, DiseaseRepository)
         obj = CieRepoCreator().factory_method()
-        assert isinstance(obj, MockCieRepository)
+        assert isinstance(obj, CieRepository)
         obj = DeceaseRepoCreator().factory_method()
-        assert isinstance(obj, MockDeceaseRepository)
+        assert isinstance(obj, DeceaseRepository)
         obj = AgesGroupsRepoCreator().factory_method()
-        assert isinstance(obj, MockGedadRepository)
+        assert isinstance(obj, GedadRepository)
 
     def test_creator_operation(self):
         obj = DiseaseRepoCreator().get_all_operation({})
@@ -39,3 +39,11 @@ class TestMockRepoCreator:
         assert obj[0].id == 15
         assert obj[1].id == 14
         assert obj[2].id == 9
+
+    def test_create_decease_repository(self):
+        deceases_repo = DeceaseRepoCreator().factory_method()
+        assert isinstance(deceases_repo, DeceaseRepository)
+
+    def test_create_disease_repository(self):
+        disease_repo = DiseaseRepoCreator().factory_method()
+        assert isinstance(disease_repo, DiseaseRepository)

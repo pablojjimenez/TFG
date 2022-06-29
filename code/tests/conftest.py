@@ -1,21 +1,18 @@
 import pytest
 
-from tests.mocks.mock_ccaa_repository import MockCcaaRepository
-from tests.mocks.mock_cie_repository import MockCieRepository
-from tests.mocks.mock_disease_repository import MockDiseaseRepository
-from tests.mocks.mock_gedad_repository import MockGedadRepository
-from tests.mocks.mock_decease_repository import MockDeceaseRepository
+from repositories.creator import DeceaseRepoCreator, DiseaseRepoCreator, CcaaRepoCreator
 
 
 @pytest.fixture
 def mock_decease_repo():
-    return MockDeceaseRepository(
-        disease_repo=MockDiseaseRepository(MockCieRepository()),
-        ccaas_repo=MockCcaaRepository(),
-        gedades_repo=MockGedadRepository()
-    )
+    return DeceaseRepoCreator().factory_method()
 
 
 @pytest.fixture
 def mock_disease():
-    return MockDiseaseRepository(MockCieRepository())
+    return DiseaseRepoCreator().factory_method()
+
+
+@pytest.fixture
+def mock_ccaas():
+    return CcaaRepoCreator().factory_method()
