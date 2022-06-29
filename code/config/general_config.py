@@ -4,9 +4,10 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    host: str = ''
-    port: int = 0
-    debug_app: str = ''
+    host: str = '0.0.0.0'
+    port: int = 5000
+    openapi_path: str = '/docs'
+    debug_app: str = 'F'
     chart_path_base: str = '/tmp'
     environment: str = 'T'
     ccaa_repo_path: str = ''
