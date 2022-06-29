@@ -3,8 +3,9 @@ from fastapi.openapi.utils import get_openapi
 
 from starlette.requests import Request
 from fastapi.exceptions import HTTPException
-from starlette.responses import Response, JSONResponse
+from starlette.responses import Response, JSONResponse, RedirectResponse
 
+from config.general_config import get_config
 from models.openapi_models.models import get_extra_models
 from services.disease_service import dataRouter
 from services.managers_service import managersRouter
@@ -19,6 +20,13 @@ class validation_exception_handler:
 
 
 app = FastAPI()
+
+
+@app.get('/', include_in_schema=False)
+def root():
+    return RedirectResponse(get_config().openapi_path)
+
+
 app.include_router(dataRouter, tags=["Api resources"], prefix="/data")
 app.include_router(managersRouter, tags=["Api managers"], prefix="/managers")
 app.add_exception_handler(HTTPException, validation_exception_handler())
