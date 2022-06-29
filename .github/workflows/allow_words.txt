@@ -151,6 +151,7 @@ mystyle
 plani
 serialización
 stringstyle
+fundamentación
 Vercel
 auto-desplegar
 Dockerfile
