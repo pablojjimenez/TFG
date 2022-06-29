@@ -1,8 +1,20 @@
 \chapter{Análisis de los datos disponibles}
 \label{cap:5}
-Los datos acerca de las defunciones son un componente fundamental en este trabajo sin el cual no podríamos construir nuestra solución. Si bien es cierto que no es difícil obtener estos datos del Instituto Nacional de Estadística, estos son demasiados pobres, no nos ofrecen información suficiente sobre para poder construir una solución con suficiente semántica.
+Los datos acerca de las defunciones son un componente fundamental en este trabajo sin el
+cual no podríamos construir nuestra solución. Si bien es cierto que no es difícil obtener
+estos datos del Instituto Nacional de Estadística, estos son demasiados pobres, no nos
+ofrecen información suficiente sobre para poder construir una solución con suficiente
+semántica.
 
-Durante la documentación del \hyperref[sec:estadoArte]{capítulo anterior}, descubrí que el Instituto Carlos III recolectaba e intentaba exponer estos datos con mucho más detalles que los anteriores. Tras conocer la existencia de los servidores Arïadna y Raziël me puse en contacto con el \textbf{Instituto de Salud Carlos III} por correo electrónico para que me compartieran estos datos de dominio público\footnote{Son los datos almacenados en el servidor interactivo Arïadna y Raziël comentados en el capítulo sobre el estado del arte. \hyperref[sec:estadoArte]{Enlace al capítulo}} almacenado en sus servidores. Esta colección de datos si es muy completa nos ofrece muchos tipos de enfermedades y nos ofrece información normalizada.
+Durante la documentación del \hyperref[sec:estadoArte]{capítulo anterior}, descubrí que el
+Instituto Carlos III recolectaba e intentaba exponer estos datos con mucho más detalles
+que los anteriores. Tras conocer la existencia de los servidores Arïadna y Raziël me puse
+en contacto con el \textbf{Instituto de Salud Carlos III} por correo electrónico para que
+me compartieran estos datos de dominio público\footnote{Son los datos almacenados en el
+servidor interactivo Arïadna y Raziël comentados en el capítulo sobre el estado del arte.
+\hyperref[sec:estadoArte]{Enlace al capítulo}} almacenado en sus servidores. Esta
+colección de datos si es muy completa nos ofrece muchos tipos de enfermedades y nos ofrece
+información normalizada.
 
 Estas son las columnas normalizadas:
 \begin{enumerate}
@@ -26,6 +38,13 @@ El resto de columnas que forman los datos son:
 \item \textbf{DEFU}: Número de defunciones.
 \end{enumerate}
 
-Esta entidad es la que he denominado \textbf{Raziel} que integra otro tipo de modelos como la causa (motivo de la defunción) que es un objeto formado por el nombre de la causa y su equivalencia con el estándar \gls{CIE-10} que es el acrónimo de la Clasificación Internacional de enfermedades en su 10.ª edición.
+Esta entidad es la que he denominado \textbf{Raziel} que integra otro tipo de modelos como
+la causa (motivo de la defunción) que es un objeto formado por el nombre de la causa y su
+equivalencia con el estándar \gls{CIE-10} que es el acrónimo de la Clasificación
+Internacional de enfermedades en su 10.ª edición.
 
-La principal diferencia aparente que existe entre la información que sirve \textbf{Arïadna} y \textbf{Raziël} es que Arïadna no guarda información acerca de los grupos de edades, solo nos ofrece el cómputo de la edad media. Este cómputo podemos calcularlo nosotros conociendo los rangos de edad. Por tanto descarté Arïadna sospechando que es la misma fuente que Raziël pero con algunas columnas calculadas.
+La principal diferencia aparente que existe entre la información que sirve
+\textbf{Arïadna} y \textbf{Raziël} es que Arïadna no guarda información acerca de los
+grupos de edades, solo nos ofrece el cómputo de la edad media. Este cómputo podemos
+calcularlo nosotros conociendo los rangos de edad. Por tanto descarté Arïadna sospechando
+que es la misma fuente que Raziël pero con algunas columnas calculadas.
