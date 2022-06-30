@@ -4,46 +4,55 @@ cuenta la arquitectura software que satisface requisitos del sistema de acuerdo 
 usuarios. Es decir, con las historias de usuario que han expresado.
 
 \section{Arquitectura software de la solución}
-Para el diseño del software se ha utilizado el diseño dirigido por el dominio, DDD
-\textit{Domain Driven Design}. Este tipo de arquitectura introducida por Eric Evans
-\cite{ddd_book} "Domain-Driven-Design - Tackling Complexity in the Hearth of Software,
-2004" nos permite organizar el código de forma separada y organizada lo que nos permite
-poder realizar TDD correctamente ya que por tener las distintas capas separadas y
-débilmente acopladas unas de las otras. Gracias a este bien diseño es muy fácil hacer uso
-de la inversión de dependencias
-\footnote{https://jj.github.io/curso-tdd/temas/inversi\%C3\%B3n.html} para inyectar en los
-tests las clases \textit{mockeadas} \footnote{El término mockear en desarrollo de software
-se refiere a reemplazar o imitar a un objeto real. El propósito es que al probar el
-programa o hacer testing, podamos utilizar este mock para conocer su estado.} que
-necesitemos. 
+En esta sección buscamos la mejor forma de que nuestro código quede lo más limpio posible
+de forma que nos permita desplegar la aplicación en un entorno cloud, llevar a cabo tests
+y poder introducir cambios con facilidad para que el código sea mantenible en el tiempo.
 
+Para ello se ha utilizado el diseño dirigido por el dominio, DDD \textit{Domain Driven
+Design}. Este tipo de arquitectura introducida por Eric Evans \cite{ddd_book}
+"Domain-Driven-Design - Tackling Complexity in the Hearth of Software, 2004" nos permite
+desacoplar el código entre capas, lo que nos permite poder testear escrupulosamente cada
+capa de forma independiento ya que no necesita de todo el contexto para su funcionamiento.
 La arquitectura dirigida por el dominio nos permite fácilmente aislar la lógica de negocio
 en un único sitio y siempre lo más cerca del dominio posible lo que nos permite cumplir
-los principios SOLID fácilmente y conseguir un código abierto a su extensión pero cerrado
-a su modificación.  
+los principios \Gls{SOLID} fácilmente y conseguir un código abierto a su extensión pero
+cerrado a su modificación.  
+
 
 Un requisito fundamental expresado por los usuarios diana a utilizar este proyecto es
 poder desplegar fácilmente este proyecto en la nube, gracias a que se ha desarrollado
-utilizando capas desacopladas entre si, podemos distribuir en distintos clústeres
-\footnote{Nos referimos a la técnica por la cual podemos combinar un sistema para que
-trabaje paralelamente en un entorno cloud. Lo que conseguimos con esta operación es una
-mayor disponibilidad, más velocidad de despacho y escalabilidad del sistema. Como todo, a
-cambio tendremos un sistema más costoso de mantener económicamente y un mayor tiempo de
-implementación. } la implementación sin realizar prácticamente cambios en la
-implementación.  Es fundamental desacoplar al máximo todos los componentes y que cada uno
-tengo una única responsabilidad cuando se realiza un proyecto en la nube. La principal
-desventaja que podemos encontrar en este tipo de arquitecturas es la comunicación entre
-los distintos componentes.  Una solución a este problema podría ser la comunicación por
+utilizando capas desacopladas entre si, podríamos distribuir estas capas en distintos
+clústeres \footnote{Nos referimos a la técnica por la cual podemos combinar un sistema
+para que trabaje paralelamente en un entorno cloud. Lo que conseguimos con esta operación
+es una mayor disponibilidad, más velocidad de despacho y escalabilidad del sistema. Como
+todo, a cambio tendremos un sistema más costoso de mantener económicamente y un mayor
+tiempo de implementación. } sin realizar prácticamente cambios en la implementación.  Es
+fundamental desacoplar al máximo todos los componentes y que cada uno tengo una única
+responsabilidad cuando se realiza un proyecto en la nube. La principal reto que nos
+encontrarremos en este tipo de arquitecturas es la comunicación entre los distintos
+componentes.  Sin embargo, una solución a este problema podría ser la comunicación por
 eventos, potente pero compleja a nivel técnico y costosa económicamente. Otra solución es
 mediante inyección de dependencias, que es la que he empleado en este proyecto, podemos
 decir que la debilidad de esta solución reside en que una de las capas puede crecer en
 sobremedida y convertirse en un cuello de botella.
 
+\FloatBarrier
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=\textwidth]{doc/logos/imgs/costeEvolucion.png}
+    \caption{Coste de los cambios en un proyecto dependienso del diseño.
+    \footnote{\textit{Active Record} es un patrón de diseño empleado por muchos frameworks
+    que unen al modelo las responsabilidades de obtención y creación propias de los
+    repositorios.} \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente}}
+    \label{fig:coste-repo-pattern}
+\end{figure}
+\FloatBarrier
 
 
-\subsection{DDD}
-En este tipo de arquitectura donde diseñamos guiándonos por el dominio, podemos
-diferenciar tres elementos importantes.
+\subsection{Diseño dirigido por el dominio}
+En esta sección voy a detallar y justificar el tipo de arquitectura diseñado, su
+comportamiento y responsabilidades. En DDD\footnote{Diseño guiado por el dominio, en
+inglés: Domain-driven design}, podemos diferenciar tres elementos importantes.
 
 \subsubsection{Entidad}
 Las entidades son aquellas clases que representan una entidad del dominio. Estas clases
@@ -59,7 +68,7 @@ un apartado fundamental que debemos de realizar con el mismo cuidado que con el 
 diseñamos las entidades.
 
 Este proyecto consta de dos entidades: \codeword{Disease} que representa a una enfermedad
-y \codeword{Raziel} que es sin lugar a duda el modelo más rico en información. Estas
+y \codeword{Decease} que es sin lugar a duda el modelo más rico en información. Estas
 entidades poseen las restricciones de valor como puede ser el tipado de sus atributos o la
 satisfacibilidad solo de los valores que tienen sentido semántico. También restricciones
 de integridad como por ejemplo, que un objeto de tipo \codeword{Disease} puede tener el
@@ -86,9 +95,19 @@ los datos.
 Representan al conjunto de modelos y entidades. Se utilizan para almacenar u ofrecer los
 conjuntos de objetos. Suelen suponer una capa de abstracción sobre el sistema de
 almacenaje, ya sea una base de datos, unos ficheros en disco o incluso la invocación de
-otros servicios externos como puede ser un API. Esta parte es fundamental para poder
+otros servicios externos como puede ser una API. Esta parte es fundamental para poder
 modular y preparar las aplicaciones para cambiar de infraestructura sin tener que
 modificar el código de programación.
+
+\FloatBarrier
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=\textwidth]{doc/logos/imgs/repopattern.png}
+    \caption{Colaboración de los repositorios.
+    \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente}}
+    \label{fig:repo-pattern}
+\end{figure}
+\FloatBarrier
 
 En este proyecto hemos implementado este concepto haciendo uso de un
 \codeword{AbstractRepository} representado por una clase abstracta. Debido a que,
@@ -136,15 +155,13 @@ ejecutar. Por tanto, la configuración la almaceno en una clase que se nutre del
 \textit{environment} una única vez ya que queda almacenada en caché. 
 
 \subsection{Lenguaje de programación}
-Llega una de las elecciones más importantes a la hora de desarrollar software, la elección
-del lenguaje de programación debe de realizarse en base a las necesidades que tengamos de
-forma que nos permita satisfacerlas de la mejor forma posible. Quiero un lenguaje que me
-permite modelar bien el dominio y me proporcione una buena experiencia de desarrollo. En
-este contexto, quiero utilizar un lenguaje que sea orientado a objetos pero que sea
-moderno y poco verboso que me permita comenzar a desarrollar sin una excesiva
-\textit{verbosidad}.
+La elección del lenguaje de programación debe de realizarse en base a las necesidades que
+tengamos de forma que nos permita satisfacerlas de la mejor forma posible. Quiero un
+lenguaje que me permite modelar bien el dominio y me proporcione una buena experiencia de
+desarrollo. En este contexto, quiero utilizar un lenguaje que sea orientado a objetos pero
+que sea moderno y poco verboso que me permita comenzar a desarrollar con cierta agilidad.
 
-Bajo estas premisas contemplé la posibilidad de emplear JavaScript con NodeJS o Python. A
+Bajo estas premisas contemplé la posibilidad de emplear JavaScript bajo NodeJS o Python. A
 la hora de realizar un proyecto software siempre es necesario utilizar bibliotecas y
 código implementado por otras personas para poder llegar más lejos. Este es el principal
 motivo que me ha hecho decantarme por \textbf{Python} ya que dispone de una gran comunidad
@@ -170,59 +187,195 @@ En cuanto a la gestión de dependencias, en el entorno JavaScript tenemos \texti
 tradicional \textit{maven} es una buena opción o la mas moderna y potente \textit{Gradle}.
 En Python se ha extendido el uso de \textbf{Poetry} que de forma muy parecida a
 \textit{npm} genera un fichero de configuración \textit{pyproject.toml} donde definimos
-las dependencias, las versiones y los paquetes de nuestro proyecto así como algunas tareas
-específicas para correr los tests o el lint fácilmente. Esto facilita enormemente la
-creación de entornos virtuales de prueba y de desarrollo tanto el local como por el CI.
+las dependencias, las versiones y los paquetes de nuestro proyecto. De el se genra el
+fichero \textit{poetry.lock} donde se especifican las versiones instaladas exactas de las
+bibliotecas, es necesario utilizar este fichero para realizar despliegues idempotentes.
+\footnote{Poder realizar despliegues con exactamente las mismas versiones y orden que se
+tienen en dev o en cualquier otro entorno de desarrollo.} así como algunas tareas
+
+En el fichero de configuración \textit{pyproject.toml} nos permite también gestionar las
+tareas y podemos especificar órdenes específicas para correr los tests o el lint
+fácilmente. Esto facilita enormemente la creación de entornos virtuales de prueba y de
+desarrollo tanto el local como por la CI \footnote{Integración continua.}.
 
 
-\section{integración Continua}
-La integración continua o CI \textit{continuos integration} es uno de los pilares de la
-filosofía DevOps, se basa en realizar integraciones frecuentes con la máxima seguridad
-posible.
+\subsubsection{BiBliotecas destacadas}
+Como se ha descrito en anteriores, los datos que manejamos están en ficheros CSV. Para
+poder trabajar con ellos es necesario utilizar una biblioteca que nos permite trabajar con
+estos ficheros. Es necesario poder manejar los datos de estos ficheros con cierta
+agilidad. El mayor fichero tiene 967360 líneas y ocupa unos 55 MB aunque no son cifras
+cercanas a lo que se considera \textit{big data} necesitamos de una herramienta que nos
+permita filtrar, ordenar y hacer cálculos eficientemente sobre estos conjuntos de datos.
+La elección de \textbf{Pandas} como biblioteca para trabajar con estos datos es debido a
+que es ampliamente utilizada en el mundo Python y encaja en los datos que tenemos. Para la
+generación de gráficos se ha utilizado \textbf{Matplotlib}  por su compatibilidad con
+\textit{Pandas} que permite realizar gráficas a partir de objetos Dataframe propios de la
+biblioteca.
 
-Desde el inicio del trabajo se ha estado trabajando con un sistema férreo de CI de forma
-que no se ha mezclado nunca nada que no haya superado los requisitos de diseño
-especificados. En el entorno de desarrollo se ha utilizado \textit{Github Actions} que es
-una herramienta de CI que nos permite realizar una integración continua de la misma forma
-que \textit{Travis CI} la elección de Github sobre Travis es por la rapidez del elegido e
-integración con la forja utilizada que como se ha especificado anteriormente es Github.
+Es necesario poder obtener predicciones basadas en series temporales. Busco que la
+predicción sea rápida y automática de forma que no haya que configurar muchos parámetros y
+que el pronóstico que ofrece sea ajustable; esto es, que permita modificar y ajustar los
+pronósticos agregando conocimiento del dominio.
 
-Para garantizar la \textbf{calidad de la memoria} se han implementado dos tipos de CI: un
-revisor ortográfico y un revisor de estructura que compila el documento automáticamente y
-pública el PDF generado en las
-\href{https://github.com/pablojjimenez/TFG/releases}{\textit{releases} del repositorio.}
+La primera opción y más famosa en el lenguaje Python es scikit-learn, una biblioteca open
+source de machine learning que ofrece infinidad de algoritmos: de clasificación,
+regresión, clustering, selección de modelos, preprocesado\ldots
 
-Del mismo modo, para el \textbf{código} se han implementado otras dos CI que garantizan
-que cuando se introduce en la rama principal del repositorio código nuevo, éste garantiza
-unos estándares de calidad y que efectivamente el código es funcional por todas las
-versiones especificadas de Python. Por un lado, verificar el código fuente contra errores
-de programación (como "library imported but unused" y "Undefined name") y para verificar
-la complejidad ciclomática. Se ha utilizado la tecnología \textbf{Flake8} por ser las más
-utilizada en el ecosistema.
+Por otro lado, tenemos \textbf{Prophet} una biblioteca open source para Python y R
+desarrollada por Meta\footnote{Anteriormente, Facebook.}. Sus posibilidades son mas
+limitadas que las que nos ofrece scikit-learn pero por el contrario es muy básica y
+sencilla tanto de instalar como de usar. Además, su funcionalidad es justo la que
+buscamos, poder realizar predicciones sobre series temporales. En Prophet, los modelos se
+ajustan usando Stan, otra biblioteca de inferencia estadística bayesiana con estimación de
+verosimilitud penalizada para Python.
 
-Por otro lado, se corre la \textit{suit} de tests de forma que se garantice que al añadir
-uno código no se rompe el existente. 
+\subsubsection{Interfaz REST}
+En aras de que el usuario pueda utilizar estos servicios de forma agnóstica sin tener que
+descargarse el código fuente e incluirlo en su proyecto a modo de biblioteca. Algo que por
+otra parte, supondría una gran restricción ya que el lenguaje de programación tendría que
+ser Python.
+
+Se ha implementado una interfaz de comunicación REST. Como bien es sabido, los servicios
+restful se apoyan del estándar HTTP y por tanto, hereda sus conocidas características.
+REST es \textit{stateless} cada vez que utilizamos un recurso necesitamos ofrecerle toda
+la información identificativa pues carece de memoria, utiliza el formato JSON para el
+intercambio de datos y expone una serie de recursos o \textit{endpoints} que son las
+operaciones disponibles a realizar utilizando verbos HTTP.
+
+En el universo Python existen dos grandes frameworks para construir servicios restful:
+Flask y FastAPI. Flask es un microframework, que dispone de multitud de complementos lo
+que te permite construir cualquier servicio configurando correctamente todos estos
+complementos. 
+
+FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según la
+ \href{https://fastapi.tiangolo.com}{documentación oficial}, tanto que se podría igualar
+ al rendimiento que ofrece NodeJS o Go. Además, nos permite por defecto programar de forma
+ asíncrona (muy interesante cuando hay acceso a bases de datos o recursos externos) y nos
+ genera de forma automática una documentación OpenAPI.
+
+La API de este software expone dos blueprints \footnote{Llamamos blueprint al conjunto de
+recursos que comparte el mismo prefijo de URI (Identificador de recursos uniforme)}
+
+\begin{itemize}
+    \item \textit{/data} Definido por el conjunto de recursos disponibles. Todos ellos
+    aceptan los siguientes parámetros en la cabecera de las peticiones \codeword{sort}
+    para ordenar los datos en base a algún campo, \codeword{limit} para limitar la
+    cantidad de datos (por defecto se entregan limitados a 100 elementos), \codeword{page}
+    para especificar la página. Y la siguiente estructura JSON como cuerpo de la petición:
+    \begin{lstlisting}[caption=Body de una posible petición a \codeword{POST /data/diceases}] 
+        { "ID": { "==": [1, 2, 3] }, "CIE": { "!=": "" } }
+    \end{lstlisting}
+    En este caso estaríamos indicando que queremos los elementos cuyos IDs se encuentran
+    en el rango [1, 3] y cuyo campo CIE no es nulo. Los operadores válido son:
+    \codeword{==}, \codeword{<}, \codeword{>}
+
+    \item \textit{/managers} Dispone de tres recursos. Uno para generar gráficos lineales
+    \ref{fig:graficos-api}: requiere dos variables como parámetros en la cabecera, una
+    para indicar la agrupación y otra para la suma, como cuerpo de la llamada podemos
+    pasar una query con la estructura especificada anteriormente. Por último, tenemos dos
+    recursos para obtener la predicción y la gráfica ajustada en el tiempo que indiquemos.
+\end{itemize}
 
 \FloatBarrier
 \begin{figure}[h]
 	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/CI-pr.png}
-    \caption{Ejemplo de ejecución automática de la CI}
-    \label{fig:tipos-de-cc}
+	\includegraphics[width=\textwidth]{doc/logos/imgs/api-managers.png}
+	\caption{ Llamada a \codeword{POST /managers/chart} desde
+	\href{https://www.postman.com/}{Postman}. Resultado es la gráfica sobre la evolución
+	de fallecimientos en toda España a causa del VIH. }
+    \label{fig:graficos-api}
 \end{figure}
 \FloatBarrier
 
-\begin{lstlisting}[caption=Definición de las etapas de la CI del código del proyecto ]
-    name: Python CI on: [push] jobs: build: runs-on: ubuntu-latest strategy: matrix:
-    python-version: ["3.8","3.9"] steps: - uses: actions/checkout@v2 - uses:
-    actions/setup-python@v2 with: python-version: "${{ matrix.python-version }}" - name:
-    Install poetry run: pip install poetry - name: Install poetry dependencies
-    working-directory: ./code run: poetry install - name: Run lint working-directory:
-    ./code run: poetry run task lint - name: Run tests working-directory: ./code run:
-    poetry run task test
+El API es la interfaz por la que el usuario se comunica. Por tanto, al igual que a nivel
+de código gestionamos los errores haciendo uso de excepciones, es importante ofrecer al
+usuario estos mensajes para que en todo momento sepa que está ocurriendo y si el error es
+motivado por su uso, puedo modificarlo. El formato de error es el siguiente cuando estamos
+ante una situación inesperada:
+\begin{verbatim}
+{
+    "error_message": "Incorrect query, column ALGO does not exist",
+    "code": 422
+}
+\end{verbatim}
+Y cuando se trata de un error de sintaxis con el protocolo. E.g: El JSON introducido como
+cuerpo de la petición es incorrecto, obtenemos:
+\begin{lstlisting}[caption=Error de sintaxis en el body.] 
+    { "detail": [{ "loc": [ "body", 1 ], "msg": "Expecting property name enclosed in
+        double quotes: line 1 column 2(char 1)", "type": "value_error.jsondecode", "ctx":
+        { "msg": "Expecting property name enclosed in double quotes", "doc": "{", "pos":
+        1, "lineno": 1, "colno": 2 } }] }
 \end{lstlisting}
 
-En el ejemplo anterior podemos ver como definimos en un fichero de formato YAML que es un
+En un servicio restful hacemos uso de unos códigos de error que nos ofrece el protocolo
+HTTP, estos códigos se clasifican como sigue a continuación:
+\begin{itemize}
+    \item Respuestas informativas (100–199).
+    \item Respuestas satisfactorias (200–299).
+    \item Redirecciones (300–399).
+    \item Errores de los clientes (400–499).
+    \item Errores de los servidores (500–599).
+\end{itemize}
+
+En este API se hacen uso de las categorías 1, 3 y 4. Posibles respuestas de este interfaz:
+\begin{itemize}
+    \item \codeword{200} Ejecución satisfactoria en los endpoints de solicitud de datos.
+    \item \codeword{201} Ejecución satisfactoria en los endpoints que generan una imagen
+    (gráfico).
+    \item \codeword{400} Error del cliente introduciendo un tipo de dato erróneo,
+    estructura JSON incorrecta\ldots
+    \item \codeword{422} Error del cliente al introducir una query mal formulada, con
+    campos incomprensibles o proyecciones sobre campos que no existen en los modelos...
+    \item \codeword{500} Error del servidor que los usuarios van a ver por ejemplo cuando
+    la fuente de datos esté corrupta y el software no sea capaz de obtenerlos.
+\end{itemize}
+
+\subsubsection{Documentación del servicio REST}
+Con la ayuda de los recursos que pone a nuestra disposición FastAPI, se ha implementado
+una especificación OpenAPI. Esta especificación define una serie de propiedades en un
+formato legible por una máquina (suele usarse el formato JSON o YAML).
+
+Gracias a eso podemos generar una documentación basada en HTML que nos permite conocer los
+recursos expuestos de la API, los argumentos y las estructuras de las respuestas
+esperadas. Además, podemos utilizar esta misma interfaz para probar los
+\codeword{endpoints} y realizar llamadas. Los modelos están documentados en el código para
+los usuarios que decidan utilizar el software como biblioteca puedan ver dicha
+documentación en el IDE que utilicen. Para aquellos que utilicen la API, se ha añadido a
+la especificación OpenAPI
+
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=\textwidth]{doc/logos/imgs/openapi.png}
+	\caption{ Documentación OpenAPI de la API. }
+    \label{fig:worst_f_value}
+\end{figure}
+
+\subsubsection{Interfaz de consultas}
+Al utilizar una servicio restful para exponer nuestros datos, los recursos retornan toda
+la información que conoce sobre el recurso aunque muchas veces solo estemos interesados en
+un campo específico, algo que no termina de ser lo que los usuarios han expresado en la
+\hyperref[sec:hu2]{historia de usuario 2}. Asimismo, cuando queremos consultar dos
+recursos distintos necesitamos realizar dos llamadas distintas. Lo que hace que los
+usuarios no tengan libertad absoluta sobre las consultas que realizan a los datos.
+
+Estas restricciones llevan a Meta a liberar publicamente su proyecto iniciado en 2012,
+GraphQL
+
+\section{Conjunto de tests}
+Como se ha explicado en la sección sobre \hyperref[sec:ci]{integración continua}, la
+batería de tests junto con otras comprobaciones se ejecutan en ese momento.
+
+\begin{lstlisting}[caption=Definición de las etapas de la CI del código del proyecto donde se puede apreciar que se especifican las versiones del lenguaje a comprobar. ]
+    name: Python CI on: [push] jobs: build: runs-on: ubuntu-latest strategy: matrix:
+python-version: ["3.8","3.9"] steps: - uses: actions/checkout@v2 - uses:
+actions/setup-python@v2 with: python-version: "${{ matrix.python-version }}" - name:
+Install poetry run: pip install poetry - name: Install poetry dependencies
+working-directory: ./code run: poetry install - name: Run lint working-directory: ./code
+run: poetry run task lint - name: Run tests working-directory: ./code run: poetry run task
+test
+\end{lstlisting}
+
+En el código anterior podemos ver como definimos en un fichero de formato YAML que es un
 formato de serialización de datos, las distintas etapas y órdenes que tiene que superar el
 código.
 
@@ -230,15 +383,6 @@ Nótese, como se indica el S.O. sobre el que se ejecuta, las versiones de Python
 compatibles ya que todas estas comprobaciones se realizan para todas las versiones de
 Python en las que garantizamos que el software funciona. Y finalmente, las distintas
 etapas: instalación de dependencias, lint y tests.
-
-\section{Desarrollo dirigido por Tests}
-TDD, \textit{Test Drive Development} es una práctica empleada en programación que coloca
-la realización de pruebas en el centro del desarrollo. Se caracteriza por escribir primero
-el código de prueba antes que la lógica. Este método de desarrollo encaja muy bien con lo
-que se ha especificado en el \hyperref[sec:plani]{capítulo de la planificación} ya que con
-cada tarea finalizada tenemos su cobertura de test, lo que hace que aumente la
-mantenibilidad del código y la capacidad de poder refactorizar.
-
 
 \FloatBarrier
 \begin{figure}[h]
@@ -283,274 +427,3 @@ coverage}}
 \end{figure}
 \FloatBarrier
 
-
-\subsubsection{Pandas}
-Como se ha descrito en anteriores capítulos de la memoria, los datos que manejamos están
-en ficheros CSV. Para poder trabajar con ellos es necesario utilizar una biblioteca que
-nos permite trabajar con estos ficheros. Es necesario poder manejar los datos de estos
-ficheros con cierta agilidad. El mayor fichero tiene 967360 líneas y ocupa unos 55 MB
-aunque no son cifras cercanas a lo que se considera \textit{big data} necesitamos de una
-herramienta que nos permita filtrar, ordenar y hacer cálculos eficientemente sobre estos
-conjuntos de datos. La elección de \textbf{Pandas} como biblioteca para trabajar con estos
-datos es debido a que es ampliamente utilizada en el mundo Python y encaja en los datos
-que tenemos.
-
-\subsubsection{Matplotlib}
-Es una biblioteca para crear todo tipo de gráficos, es muy utilizada en el ecosistema
-Python y además ha sido elegida por su compatibilidad con \textit{Pandas} que permite
-realizar gráficas a partir de objetos Dataframe propios de la biblioteca \textit{Pandas}
-
-\subsubsection{Prophet}
-Es necesario poder obtener predicciones basadas en series temporales. Busco que la
-predicción sea rápida. Sea automática de forma que no haya que configurar muchos
-parámetros y que el pronóstico que ofrece sea ajustable; esto es, que permita modificar y
-ajustar los pronósticos agregando conocimiento del dominio.
-
-La primera opción y más famosa en el lenguaje Python es scikit-learn, una biblioteca open
-source de machine learning que ofrece infinidad de algoritmos: de clasificación,
-regresión, clustering, selección de modelos, preprocesado...
-
-Por otro lado, tenemos Prophet una biblioteca open source para Python y R desarrollada por
-Meta. Sus posibilidades son mas limitadas que las que nos ofrece scikit-learn pero por el
-contrario es muy básica y sencilla tanto de instalar como de usar. Además, su
-funcionalidad es justo la que buscamos, poder realizar predicciones sobre series
-temporales.
-
-En Prophet, los modelos se ajustan usando Stan, otra biblioteca de inferencia estadística
-bayesiana con estimación de verosimilitud penalizada.
-
-\subsubsection{Interfaz REST}
-En aras de que el usuario pueda utilizar estos servicios de forma agnóstica sin tener que
-descargarse el código fuente e incluirlo en su proyecto a modo de biblioteca. Algo que por
-otra parte, supondría una gran restricción ya que el lenguaje de programación tendría que
-ser Python.
-
-Para ello, se ha implementado una interfaz de comunicación REST. Como bien es sabido, los
-servicios restful se apoyan del estándar HTTP y por tanto, hereda sus conocidas
-características. REST es \textit{stateless} cada vez que utilizamos un recurso necesitamos
-ofrecerle toda la información identificativa pues carece de memoria, utiliza el formato
-JSON para el intercambio de datos y expone una serie de recursos o \textit{endpoints} que
-son las operaciones disponibles a realizar.
-
-En el universo Python existen dos grandes frameworks para construir servicios restful:
-Flask y FastAPI. Flask es un microframework, que dispone de multitud de complementos lo
-que te permite construir cualquier servicio configurando correctamente todos estos
-complementos. 
-
-FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según la
-documentación oficial \href{https://fastapi.tiangolo.com}, tanto que se podría igualar al
-rendimiento que ofrece NodeJS o Go. Además, nos permite por defecto programar de forma
-asíncrona (muy interesante cuando hay acceso a bases de datos) y nos proporciona de forma
-automática una documentación OpenAPI.
-
-La API de este software expone dos blueprints \footnote{Llamamos blueprint al conjunto de
-recursos que comparte el mismo prefijo de URI (Identificador de recursos uniforme)}
-
-\begin{itemize}
-    \item \textit{/data} Definido por el conjunto de recursos disponibles. Todos ellos
-    aceptan los siguientes parámetros en la cabecera de las peticiones \codeword{sort}
-    para ordenar los datos en base a algún campo, \codeword{limit} para limitar la
-    cantidad de datos (por defecto se entregan limitados a 100 elementos), \codeword{page}
-    para especificar la página. Y la siguiente estructura JSON como cuerpo de la petición:
-    \begin{verbatim}
-        {
-            "ID": {
-                ">": 1,
-                "<": 3
-            },
-            "CIE": {
-                "==": ""
-            }
-        }
-    \end{verbatim}
-    En este caso estaríamos indicando que queremos los elementos cuyos IDs se encuentran
-    en el rango (1, 3) y cuyo campo CIE es vacío. Los operadores válido son:
-    \codeword{==}, \codeword{<}, \codeword{>}
-
-    \item \textit{/managers} Dispone de tres recursos. Uno para generar gráficos lineales
-    (ver figura): requiere dos variables como parámetros en la cabecera, una para indicar
-    la agrupación y otra para la suma, como cuerpo de la llamada podemos pasar una query
-    con la estructura especificada anteriormente. Por último, tenemos dos recursos para
-    obtener la predicción y la gráfica ajustada en el tiempo que indiquemos.
-\end{itemize}
-
-El API es la interfaz por la que el usuario se comunica. Por tanto, al igual que a nivel
-de código gestionamos los errores haciendo uso de excepciones es importante ofrecer al
-usuario estos mensajes para que en todo momento sepa que está ocurriendo y si el error es
-motivado por su uso, puedo modificarlo. El formato de error es el siguiente cuando estamos
-ante una situación inesperada por la lógica de negocio:
-\begin{verbatim}
-{
-    "error_message": "Incorrect query, column ALGO does not exist",
-    "code": 422
-}
-\end{verbatim}
-Y cuando se trata de un error de sintaxis con el protocolo. E.g: El JSON introducido como
-cuerpo de la petición es incorrecto, obtenemos:
-\begin{verbatim}
-    {
-        "detail": [{
-            "loc": [
-                "body",
-                1
-            ],
-            "msg": "Expecting property name enclosed in double quotes: line 1 column 2(char 1)",
-            "type": "value_error.jsondecode",
-            "ctx": {
-                "msg": "Expecting property name enclosed in double quotes",
-                "doc": "{",
-                "pos": 1,
-                "lineno": 1,
-                "colno": 2
-            }
-        }]
-    }
-\end{verbatim}
-
-En un servicio restful hacemos uso de unos códigos de error que nos ofrece el protocolo
-HTTP, estos códigos se clasifican a continuación:
-\begin{itemize}
-    \item Respuestas informativas (100–199).
-    \item Respuestas satisfactorias (200–299).
-    \item Redirecciones (300–399).
-    \item Errores de los clientes (400–499).
-    \item Errores de los servidores (500–599).
-\end{itemize}
-
-En este API se hacen uso de las categorías 1, 3 y 4. Posibles respuestas de este interfaz:
-\begin{itemize}
-    \item \codeword{200} Ejecución satisfactoria en los endpoints de solicitud de datos.
-    \item \codeword{201} Ejecución satisfactoria en los endpoints que generan una imagen
-    (gráfico).
-    \item \codeword{400} Error del cliente introduciendo un tipo de dato erróneo,
-    estructura JSON incorrecta...
-    \item \codeword{422} Error del cliente al introducir una query mal formulada, con
-    campos incomprensibles o proyecciones sobre campos que no existen en los modelos...
-    \item \codeword{500} Error del servidor que los usuarios van a ver por ejemplo cuando
-    la fuente de datos esté corrupta y el software no sea capaz de obtenerlos.
-\end{itemize}
-
-\subsubsection{Documentación de la API}
-Con la ayuda de los recursos que pone a nuestra disposición FastAPI, se ha implementado
-una especificación OpenAPI. Esta especificación define una serie de propiedades en un
-formato legible por una máquina (suele usarse el formato JSON o YAML).
-
-Gracias a eso podemos generar una documentación basada en HTML que nos permite conocer los
-recursos expuestos de la API, los argumentos y las estructuras de las respuestas
-esperadas. Los modelos están documentados en el código para los usuarios que decidan
-utilizar el software como biblioteca puedan ver dicha documentación en el IDE que
-utilicen. Para aquellos que utilicen la API, se ha añadido a la especificación OpenAPI
-
-\begin{figure}[h]
-	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/openapi.png}
-	\caption{ Documentación OpenAPI de la API. }
-    \label{fig:worst_f_value}
-\end{figure}
-
-
-
-\chapter{Despliegue del software}
-En la etapa de despliegue es cuando el software queda disponible para el uso y disfrute de
-los usuarios. Supone una etapa fundamental para dar por finalizada la construcción del
-software. 
-
-Necesito que el modelo de computación en la nube me provea de facilidad suficiente para
-añadir y desplegar nueva funcionalidad con rapidez. El coste tiene que ser lo más
-inteligente y adaptado posible. Y además, quiero un sistema que me prevea de una
-plataforma ya estructurada de forma que solo tenga que centrarme en la configuración
-correcta de mi servidor de acorde con los requisitos de la plataforma sin tener que
-configurar ninguna infraestructura de bajo nivel ni tan siquiera el sistema operativo.
-
-Estos requisitos hacen utilizar un entorno cloud un PaaS, \textit{Platform as a service}
-donde tendré varias capas de servicios apilados lo que me va a permitir ejecutar y
-gestionar mis aplicación desplegada sin tener que mantener la infraestructura subyacente.
-
-A la hora de elegir un modelo de entorno cloud tenemos distintos modelos de cloud
-computing, dependiendo de las partes de la infraestructura local que queramos gestionar.
-
-\FloatBarrier
-\begin{figure}[h]
-	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/iaas-paas.png}
-    \caption{ Distintos modelos de computación en la nube.
-	\href{https://www.redhat.com/es/topics/cloud-computing/iaas-vs-paas-vs-saas}{RedHat -
-	CC}}
-    \label{fig:tipos-de-cc}
-\end{figure}
-\FloatBarrier
-
-En el mercado existen distintas empresas que nos ofrecen este tipo de servicios, podemos
-destacar: \href{https://aws.amazon.com/es/elasticbeanstalk/}{AWS Elastic Beanstalk},
-\href{https://dashboard.heroku.com/login}{Heroku} o \href{https://vercel.com/}{Vercel}
-entre otros.
-
-Mientras que Vercel no soporta (por el momento) despliegues basados en imágenes de docker,
-que es la \hyperref[sec:proceso-despliegue]{forma de despliegue que persigo}, y AWS
-solicita información bancaria, he utilizado Heroku.
-
-\section{Proceso de despliegue}
-\label{sec:proceso-despliegue}
-Para poder desplegar una aplicación en Heroku, es necesario acceder al panel de
-administración y crearnos una "app". Sin embargo, existe un CLI \footnote{Interfaz de
-línea de comandos} que se instala en nuestro sistema y nos permite realizar de forma más
-cómoda las configuraciones necesarias.
-
-A la hora de desplegar el código, Heroku nos ofrece distintas formas, una de ellas es
-poner a la escucha una rama del repositorio de GitHub a cualquier tipo de cambio para
-auto-desplegar. Sin embargo, este proyecto tiene muchos \textit{assets}, los ficheros con
-los datos de las defunciones que no están versionados por el control de versiones. Este
-motivo y el poco margen de personalización que provoca este método sobre con que
-configuración queremos arrancar el servidor me hizo desestimar esta forma.
-
-El método que he seguido ha sido crear un contenedor de la aplicación que luego publicamos
-en la "app" creada en Heroku. Los contenedores nos permite tener una portabilidad absoluta
-ya que podemos poner en marcha la aplicación en cualquier sistema operativo sin
-preocuparnos de las dependencias necesarias.
-
-El contenedor y su configuración se define como código en un archivo de texto plano
-llamado \codeword{Dockerfile} en él se define el software necesario a instalar, las
-dependencias del proyecto, se expone el host y el puerto como variables de entorno que
-serán utilizadas por Heroku. También se especifica en el comando que ejecuta el contenedor
-el número de procesos \footnote{la versión gratuita solo admite 2.} que va a ejecutar el
-dyno. 
-
-\FloatBarrier
-\begin{figure}[h]
-	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/deployd.png}
-	\caption{ Arquitectura del despliegue. }
-    \label{fig:arq-deploy}
-\end{figure}
-\FloatBarrier
-
-\begin{itemize}
-    \item \textit{Dyno} es un contenedor liviano con Linux en los que Heroku ejecuta la
-    aplicación.
-\end{itemize}
-
-Utilizando la CLI podemos ver el sistema de registros (que también está disponible en el
-\textit{dashboard} web) con el que podemos monitorizar todas las peticiones que se
-realizan así como los reinicios de la máquina virtual y el estado del servidor.
-
-\FloatBarrier
-\begin{figure}[h]
-	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/logs.jpg}
-	\caption{ \textit{Logs} de la aplicación desplegada. }
-    \label{fig:heroku-logs}
-\end{figure}
-\FloatBarrier
-
-\section{Coste del despliegue}
-\label{sec:despliegue}
-
-Durante el proceso de desarrollo y las primeras pruebas se ha utilizado la modalidad "Free
-\& Hobby" que nos permite desplegar la aplicación de forma gratuita con una seria
-limitación: la máquina entra en estado de reposo tras 30 minutos de inactividad, lo que
-hace que cuando se reciba cualquier petición haya que encender el contenedor, además el
-número de procesos está limitado a 2 máquinas.
-
-Para la puesta en producción debería de contratar la tarifa "Standard 1X" que nos ofrece
-512MB de RAM, con ilimitado número de procesos, sin estado de procesos y nos incluye un
-sistema de métricas y avisos que no está disponible en la versión gratuita.
