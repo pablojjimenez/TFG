@@ -100,6 +100,7 @@ a las decisiones técnicas elegidas para implementar la solución.
 
 
 \subsection{Historias de usuario}
+\label{sec:hu2}
 Como estamos trabajando con una metodología de desarrollo ágil tenemos que expresar las
 necesidades reales del sistema para lograr la interacción del equipo de desarrollo con el
 usuario. Ello se consigue por medio de historias de usuario, en adelante HU. Las HUs
@@ -147,6 +148,7 @@ el \href{https://github.com/pablojjimenez/TFG/issues}{tablero de issues} de GitH
 
 
 \subsection{Integración continua}
+\label{sec:ci}
 Una buena forma de cumplir las características \hyperref[sec:meto]{citadas anteriormente}, es realizar el
 desarrollo guiado por pruebas, lo que se conoce por TDD, \textit{Test Driven Development}.
 Al emplear esta metodología garantizamos la calidad de lo programado, trasladamos los
@@ -191,33 +193,6 @@ uno código no se rompe el existente.
 \end{figure}
 \FloatBarrier
 
-\begin{lstlisting}[caption=Definición de las etapas de la CI del código del proyecto donde se puede apreciar que se especifican las versiones del lenguaje a comprobar. ]
-    name: Python CI
-on: [push]
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.8","3.9"]
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: "${{ matrix.python-version }}"
-      - name: Install poetry
-        run: pip install poetry
-      - name: Install poetry dependencies
-        working-directory: ./code
-        run: poetry install
-      - name: Run lint
-        working-directory: ./code
-        run: poetry run task lint
-      - name: Run tests
-        working-directory: ./code
-        run: poetry run task test
-\end{lstlisting}
-
 
 \section{Planificación y cuantización}
 La planificación temporal ha sido la siguiente \ref{fig:temporal}.
@@ -234,8 +209,8 @@ La planificación temporal ha sido la siguiente \ref{fig:temporal}.
 	    \textbf{1. Infraestructura} & 14 de marzo & 28 de marzo \\
 	    \textbf{2. Modelo de datos} & 29 de abril & 2 de mayo \\
 	    \textbf{3. Predicciones y gráficos} & 4 de mayo & 15 de mayo \\
-	    \textbf{4. Interfaz REST} & 17 de mayo & 5 de junio \\
-	    \textbf{5. Interfaz GraphQL} & 6 de junio & 26 de junio \\
+	    \textbf{4. Acceso a recursos y managers} & 17 de mayo & 5 de junio \\
+	    \textbf{5. Sistema avanzado de consultas} & 6 de junio & 26 de junio \\
 		\textbf{6. Despliegue y entrega} & 27 de junio & 8 de julio \\ \bottomrule
 	\end{tabular}}
 	\caption{Organización temporal del proyecto.}
