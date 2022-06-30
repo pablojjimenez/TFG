@@ -359,20 +359,41 @@ recursos distintos necesitamos realizar dos llamadas distintas. Lo que hace que 
 usuarios no tengan libertad absoluta sobre las consultas que realizan a los datos.
 
 Estas restricciones llevan a Meta a liberar publicamente su proyecto iniciado en 2012,
-\textbf{GraphQL} que modifica la forma con la que interaccionamos con servidores restful, éste requiere que se definan unos esquemas indicanto el tipo de los datos por los que están compuestos los modelos ya que este mecanismo es el que permite que a la hora de realizar consultas, GraphQL valide los tipos y rechace las consultas que violan esta aserción.
+\textbf{GraphQL} que modifica la forma con la que interaccionamos con servidores restful,
+éste requiere que se definan unos esquemas indicanto el tipo de los datos por los que
+están compuestos los modelos ya que este mecanismo es el que permite que a la hora de
+realizar consultas, GraphQL valide los tipos y rechace las consultas que violan esta
+aserción.
 
-Comparando GraphLQ desde el punto de vista del modelo CRUD que es el ampliamente usado por REST, podemos diferenciar tres tipos de operaciones:
+Comparando GraphLQ desde el punto de vista del modelo CRUD que es el ampliamente usado por
+REST, podemos diferenciar tres tipos de operaciones:
 \begin{enumerate}
-    \item \textbf{Consultas}: equivalen a la operación de lectura. Este tipo de operación es bastante más potente porque podemos obtener datos de varios recursos en la misma consulta lo que hace mucho más rápido y simple la obtención de datos. Además, no es necesario implementar objetos de transferencia con los atributos necesitados ya que podemos especificar los atributos que nos interesan en cada una de las consultas.
-    \item \textbf{Mutaciones}: equivalen a las operaciones crear, leer, actualizar y eliminar. Podemos invocar desde la interfaz GraphQL a una función con sus parámetros pertinentes y obtener un resultado en base a lo que haga esa mutación.
-    \item \textbf{Suscripciones}: permiten a los clientes obtener en tiempo real cualquier modificación que se produzca de los datos. Para conseguirlo es necesario que el servidor configure websockets o la interfaz ASGI. \footnote{Asynchronous Server Gateway Interface}
+    \item \textbf{Consultas}: equivalen a la operación de lectura. Este tipo de operación
+    es bastante más potente porque podemos obtener datos de varios recursos en la misma
+    consulta lo que hace mucho más rápido y simple la obtención de datos. Además, no es
+    necesario implementar objetos de transferencia con los atributos necesitados ya que
+    podemos especificar los atributos que nos interesan en cada una de las consultas.
+    \item \textbf{Mutaciones}: equivalen a las operaciones crear, leer, actualizar y
+    eliminar. Podemos invocar desde la interfaz GraphQL a una función con sus parámetros
+    pertinentes y obtener un resultado en base a lo que haga esa mutación.
+    \item \textbf{Suscripciones}: permiten a los clientes obtener en tiempo real cualquier
+    modificación que se produzca de los datos. Para conseguirlo es necesario que el
+    servidor configure websockets o la interfaz ASGI. \footnote{Asynchronous Server
+    Gateway Interface}
 \end{enumerate}
 
-GraphQL es un protocolo agnóstico del lenguaje de programaciíon, del sistema de persistencia que se decida usr y no depende de HTTP. Como podemos observar supone un cambio importante con respecto a REST donde cada uno de los recursos queda identificado por una URI que hay que invocar utilizando los verbos HTTP pertinentes. En GraphQL tenemos un sistema fuertemente tipado y una API que dispone de un único endpoint, todas las consultas, mutaciones y demás se realizan a traves de un único endpoint.
+GraphQL es un protocolo agnóstico del lenguaje de programaciíon, del sistema de
+persistencia que se decida usr y no depende de HTTP. Como podemos observar supone un
+cambio importante con respecto a REST donde cada uno de los recursos queda identificado
+por una URI que hay que invocar utilizando los verbos HTTP pertinentes. En GraphQL tenemos
+un sistema fuertemente tipado y una API que dispone de un único endpoint, todas las
+consultas, mutaciones y demás se realizan a traves de un único endpoint.
 
 \subsubsection{Documentación de GraphQL}
-Esta tecnología expone un explorador, editor online llamado \textit{GraphiQL} que puede ser encontrado bajo la ruta \codeword{/graphql} en nuestro servidor.
-En el se pueden apreciar las queries disponibles a hacer donde podemos ir desplegando interactivamente y seleccionando los atributos de los modelos a obtener.
+Esta tecnología expone un explorador, editor online llamado \textit{GraphiQL} que puede
+ser encontrado bajo la ruta \codeword{/graphql} en nuestro servidor. En el se pueden
+apreciar las queries disponibles a hacer donde podemos ir desplegando interactivamente y
+seleccionando los atributos de los modelos a obtener.
 
 \FloatBarrier
 \begin{figure}[h]
@@ -383,7 +404,8 @@ En el se pueden apreciar las queries disponibles a hacer donde podemos ir desple
 \end{figure}
 \FloatBarrier
 
-También se pueden observar las mutaciones disponibles con sus campos, podemos filtrar y buscar campos por coincidencias.
+También se pueden observar las mutaciones disponibles con sus campos, podemos filtrar y
+buscar campos por coincidencias.
 
 \FloatBarrier
 \begin{figure}[h]
