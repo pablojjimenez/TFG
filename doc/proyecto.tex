@@ -18,10 +18,6 @@
 \usepackage{cite} %para incluir citas del archivo <nombre>.bib
 \usepackage{enumerate}
 \usepackage{hyperref}
-\hypersetup{
-    colorlinks = true,
-    linkbordercolor = {white},
-}
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{booktabs}
@@ -32,12 +28,11 @@
 
 \usepackage[table,xcdraw]{xcolor}
 \hypersetup{
-	colorlinks=true,
-	linkcolor=blue,
-	filecolor=blue,
-	citecolor = black,      
-	urlcolor=cyan,
+	colorlinks=true,	% false: boxed links; true: colored links
+	linkcolor=black,	% color of internal links
+	allcolors = cyan
 }
+
 
 %New colors defined below
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -46,18 +41,23 @@
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 %Code listing style named "mystyle"
-\lstdefinestyle{mystyle}{ backgroundcolor=\color{backcolour},
-  commentstyle=\color{codegreen}, keywordstyle=\color{magenta},
-  numberstyle=\tiny\color{codegray}, stringstyle=\color{codepurple},
-  basicstyle=\ttfamily\footnotesize, breakatwhitespace=false,         
+\lstdefinestyle{mystyle}{
+  backgroundcolor=\color{backcolour}, commentstyle=\color{codegreen},
+  keywordstyle=\color{magenta},
+  numberstyle=\tiny\color{codegray},
+  stringstyle=\color{codepurple},
+  basicstyle=\ttfamily\footnotesize,
+  breakatwhitespace=false,         
   breaklines=true,                 
   captionpos=b,                    
   keepspaces=true,                 
   numbers=left,                    
   numbersep=5pt,                  
   showspaces=false,                
-  showstringspaces=false, showtabs=false,                  
-  tabsize=2 }
+  showstringspaces=false,
+  showtabs=false,                  
+  tabsize=2
+}
 
 %"mystyle" code listing set
 \lstset{style=mystyle}
@@ -81,7 +81,7 @@
 \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
 \setcounter{secnumdepth}{4}
 \usepackage[Lenny]{fncychap}
-\linespread{1.2}
+\linespread{1.25}
 
 \usepackage{glossaries}
 
@@ -125,14 +125,22 @@ Segregation Principle y Dependency Inversion Principle } }
 
 	% Índice de contenidos
 	\newpage
-	\tableofcontents
+    {\hypersetup{hidelinks}
+    \tableofcontents
+    }
 
 	% Índice de imágenes y tablas
 	\newpage
-	\listoffigures
+	{\hypersetup{hidelinks}
+    \listoffigures
+    }
+	
 
 	% Si hay suficientes se incluirá dicho índice
-	\listoftables 
+	
+	{\hypersetup{hidelinks}
+    \listoftables 
+    }
 	\newpage
 
 	\printnoidxglossaries

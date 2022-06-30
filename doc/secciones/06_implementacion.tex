@@ -40,10 +40,9 @@ sobremedida y convertirse en un cuello de botella.
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=\textwidth]{doc/logos/imgs/costeEvolucion.png}
-    \caption{Coste de los cambios en un proyecto dependienso del diseño.
-    \footnote{\textit{Active Record} es un patrón de diseño empleado por muchos frameworks
-    que unen al modelo las responsabilidades de obtención y creación propias de los
-    repositorios.} \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente}}
+    \caption{Coste de los cambios en un proyecto dependienso del diseño. \textit{Active Record} es un 
+    patrón de diseño empleado por muchos frameworks que unen al modelo las responsabilidades de 
+    obtención y creación propias de los repositorios. \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente de la imágen.}}
     \label{fig:coste-repo-pattern}
 \end{figure}
 \FloatBarrier
@@ -81,7 +80,7 @@ describen por el \textbf{qué} son, y no por \textbf{quién} o \textbf{cuál} so
 elementos completan y/o forman parte de las entidades del sistema.
 
 En este proyecto la representación en código de las comunidades autónomas corresponde con
-un tipo de value object utilizado por la entidad \codeword{Raziel}
+un tipo de value object utilizado por la entidad \codeword{Decease}
 
 \subsubsection{Servicios}
 No tienen significado propio suponen la capa que representa las operaciones que no
@@ -104,7 +103,7 @@ modificar el código de programación.
 	\centering	
 	\includegraphics[width=\textwidth]{doc/logos/imgs/repopattern.png}
     \caption{Colaboración de los repositorios.
-    \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente}}
+    \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente} }
     \label{fig:repo-pattern}
 \end{figure}
 \FloatBarrier
@@ -172,7 +171,7 @@ Otras características a comentar sobre el lenguaje son:
 \begin{itemize}
     \item Es un lenguaje que se encuentra en las primeras posiciones como lenguaje más
     utilizado a día de hoy según el índice
-    TIOBE\footnote{https://www.tiobe.com/tiobe-index/}. Además, me encuentro muy cómodo
+    TIOBE\footnote{\href{Enlace al índice TIOBE.}{https://www.tiobe.com/tiobe-index/}}. Además, me encuentro muy cómodo
     programando en él.
     \item Es un lenguaje que cuenta con muchísimas bibliotecas, muchas de estas especiales
     para trabajar con datos y ficheros (como \textbf{Pandas}). Abundan también los
@@ -199,7 +198,7 @@ fácilmente. Esto facilita enormemente la creación de entornos virtuales de pru
 desarrollo tanto el local como por la CI \footnote{Integración continua.}.
 
 
-\subsubsection{BiBliotecas destacadas}
+\subsubsection{Bibliotecas destacadas}
 Como se ha descrito en anteriores, los datos que manejamos están en ficheros CSV. Para
 poder trabajar con ellos es necesario utilizar una biblioteca que nos permite trabajar con
 estos ficheros. Es necesario poder manejar los datos de estos ficheros con cierta
@@ -263,11 +262,18 @@ recursos que comparte el mismo prefijo de URI (Identificador de recursos uniform
     cantidad de datos (por defecto se entregan limitados a 100 elementos), \codeword{page}
     para especificar la página. Y la siguiente estructura JSON como cuerpo de la petición:
     \begin{lstlisting}[caption=Body de una posible petición a \codeword{POST /data/diceases}] 
-        { "ID": { "==": [1, 2, 3] }, "CIE": { "!=": "" } }
+        { 
+            "ID": {  
+                "==": [1, 2, 3] 
+            }, 
+            "CIE": { 
+                "!=": "" 
+            } 
+        }
     \end{lstlisting}
     En este caso estaríamos indicando que queremos los elementos cuyos IDs se encuentran
     en el rango [1, 3] y cuyo campo CIE no es nulo. Los operadores válido son:
-    \codeword{==}, \codeword{<}, \codeword{>}
+    \codeword{==},\codeword{!=}, \codeword{<}, \codeword{>}
 
     \item \textit{/managers} Dispone de tres recursos. Uno para generar gráficos lineales
     \ref{fig:graficos-api}: requiere dos variables como parámetros en la cabecera, una
@@ -279,8 +285,8 @@ recursos que comparte el mismo prefijo de URI (Identificador de recursos uniform
 \FloatBarrier
 \begin{figure}[h]
 	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/api-managers.png}
-	\caption{ Llamada a \codeword{POST /managers/chart} desde
+	\includegraphics[width=\textwidth]{doc/logos/imgs/api-managers.jpg}
+	\caption{ Llamada a POST /managers/chart desde
 	\href{https://www.postman.com/}{Postman}. Resultado es la gráfica sobre la evolución
 	de fallecimientos en toda España a causa del VIH. }
     \label{fig:graficos-api}
@@ -301,10 +307,24 @@ ante una situación inesperada:
 Y cuando se trata de un error de sintaxis con el protocolo. E.g: El JSON introducido como
 cuerpo de la petición es incorrecto, obtenemos:
 \begin{lstlisting}[caption=Error de sintaxis en el body.] 
-    { "detail": [{ "loc": [ "body", 1 ], "msg": "Expecting property name enclosed in
-        double quotes: line 1 column 2(char 1)", "type": "value_error.jsondecode", "ctx":
-        { "msg": "Expecting property name enclosed in double quotes", "doc": "{", "pos":
-        1, "lineno": 1, "colno": 2 } }] }
+    {
+        "detail": [
+          {
+            "loc": [
+              "body",
+              1
+            ],
+            "msg": "Expecting property name enclosed in double quotes: line 1 column 2(char 1)",
+            "type": "value_error.jsondecode",
+            "ctx": {
+              "msg": "Expecting property name enclosed in double quotes",
+              "pos": 1,
+              "lineno": 1,
+              "colno": 2
+            }
+          }
+        ]
+    }
 \end{lstlisting}
 
 En un servicio restful hacemos uso de unos códigos de error que nos ofrece el protocolo
@@ -398,7 +418,7 @@ seleccionando los atributos de los modelos a obtener.
 \FloatBarrier
 \begin{figure}[h]
 	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/queris-graph.png}
+	\includegraphics[width=\textwidth]{doc/logos/imgs/queries-graph.jpg}
 	\caption{ Ejemplo de query en el explorador GraphiQL. }
     \label{fig:graficos-GraphiQL}
 \end{figure}
@@ -411,15 +431,25 @@ buscar campos por coincidencias.
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=\textwidth]{doc/logos/imgs/mutaciones-graph.png}
-	\caption{ Ejemplo de mutación desde el explorador GraphiQL. }
+	\caption{ Ejemplo de ejecución de una mutación desde el explorador GraphiQL. }
     \label{fig:graficos-GraphiQL}
 \end{figure}
 \FloatBarrier
 
-\begin{lstlisting}[caption=Mutación que obtiene nombre de la enfermedad, comiunidad autónoma y número de registros con límite 10 entradas en página 1 .] 
+\begin{lstlisting}[caption=Se están realizando dos operaciones. En primer lugar, buscando todas las enfermedades registradas que tienen la palabra "cancer". En segundo lugar se estan solicitando las 10 causas con más fallecimientos que tiene más de 10 casos, a nivel nacional, en todos los grupos de edad ocurridas durante 2008] 
     mutation MyMutation {
         __typename
-        getDeceases(query: {defu: {gt: 1}, ccaa: {neq: 99}, ano: {eq: 2008}}, limit: 10) {
+        searchDiseases(query: {diseaseName: "c?ncer"}) {
+            items {
+                name
+            }
+        }
+        getDeceases(query: {
+            defu: {gt: 100}, 
+            ccaa: {eq: 99}, 
+            ano: {eq: 2008}, 
+            gedad: {eq: 99}
+        }, limit: 10, sort: "defu") {
             length
             items {
                 defu
@@ -439,13 +469,30 @@ Como se ha explicado en la sección sobre \hyperref[sec:ci]{integración continu
 batería de tests junto con otras comprobaciones se ejecutan en ese momento.
 
 \begin{lstlisting}[caption=Definición de las etapas de la CI del código del proyecto donde se puede apreciar que se especifican las versiones del lenguaje a comprobar. ]
-    name: Python CI on: [push] jobs: build: runs-on: ubuntu-latest strategy: matrix:
-python-version: ["3.8","3.9"] steps: - uses: actions/checkout@v2 - uses:
-actions/setup-python@v2 with: python-version: "${{ matrix.python-version }}" - name:
-Install poetry run: pip install poetry - name: Install poetry dependencies
-working-directory: ./code run: poetry install - name: Run lint working-directory: ./code
-run: poetry run task lint - name: Run tests working-directory: ./code run: poetry run task
-test
+    name: Python CI
+    on: [push]
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        strategy:
+          matrix:
+            python-version: ["3.8","3.9"]
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/setup-python@v2
+            with:
+              python-version: "${{ matrix.python-version }}"
+          - name: Install poetry
+            run: pip install poetry
+          - name: Install poetry dependencies
+            working-directory: ./code
+            run: poetry install
+          - name: Run lint
+            working-directory: ./code
+            run: poetry run task lint
+          - name: Run tests
+            working-directory: ./code
+            run: poetry run task test
 \end{lstlisting}
 
 En el código anterior podemos ver como definimos en un fichero de formato YAML que es un
