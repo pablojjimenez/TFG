@@ -28,7 +28,7 @@ class Mutation:
 
         return DiseaseRepoCreator().get_all_operation(
             transform_params(disease_query, sort, page, limit)
-        )[0]
+        )
 
     @staticmethod
     def commpute_mutations_params(query, sort: str,
@@ -64,7 +64,7 @@ class Mutation:
                         page: int = None, limit: int = None) -> MyReturnType[DeceaseDTO]:
         print(query)
         diseases = Mutation.get_diseases_based_on_cies(query, sort, page, limit)
-        diseases_ids = list(map(lambda d: d.id, diseases))
+        diseases_ids = list(map(lambda d: d.id, diseases[0]))
         deceases = DeceaseRepoCreator().get_all_operation(
             transform_params({'causa': {'==': diseases_ids}}, sort, page, limit)
         )
