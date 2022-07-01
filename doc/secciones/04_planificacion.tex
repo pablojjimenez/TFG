@@ -12,7 +12,7 @@ herramienta hasta el momento. Fue la matemática Margaret Hamilton quien plante�
 primera vez que los sistemas informáticos tenían que integrar tres componentes: hardware,
 software y los usuarios que los iban a usar. Fue Margaret Hamiltonen, cuando se produce lo
 que conocemos como crisis del software en 1968 quien acuñó en la \textit{NATO Software
-Engineering Conference} el termino Ingeniería al proceso de creación de software. En ese
+Engineering Conference} el termino \textbf{Ingeniería} al proceso de creación de software. En ese
 momento donde parecía que crear software duradero y escalable en el tiempo era misión
 imposible hizo que se invirtiera en investigación y se construyera conocimiento. Este
 conocimiento es lo que hoy llamamos Ingeniería de Software: herramientas, técnicas de
@@ -34,7 +34,7 @@ desarrollo. Obliga a desarrollar guiándose de pruebas, a programar en parejas y
 la calidad del código en todas las etapas.
 
 Scrum en cambio se muestra más flexible. En el año 2001 que K. Schwaber y Mike Beedle
-publican el primer libro sobre Scrum\cite{agile_book}: Agile Software Development with
+publican el primer libro sobre Scrum \cite{agile_book}: Agile Software Development with
 Scrum esta metodología se ha convertido en la más utilizada para el desarrollo de
 software. Siendo precisos y prudentes tampoco es posible aplicar propiamente dicho Scrum
 en este proyecto\ldots fundamentalmente por ser una persona a cargo de todo el proceso.
@@ -68,7 +68,7 @@ tableros Kanban, integración continua con GitHub Actions\ldots
 Haciendo uso de esta herramienta, se han definido unas serie de milestones que agrupan
 historias de usuario e \textit{issues} o tareas a realizar. Los incrementos en el trabajo se han
 ido realizando por medio de \textit{Pull Request} y cada una de estas lleva enlazada una o varias
-issues. 
+issues. Se puede ver el panel de issues en \ref{fig:issues-HU}.
 
 \subsection{Milestones}
 Los milestones hacen referencia al conjunto de productos mínimamente viables que se van
@@ -102,9 +102,9 @@ a las decisiones técnicas elegidas para implementar la solución.
 \subsection{Historias de usuario}
 \label{sec:hu2}
 Como estamos trabajando con una metodología de desarrollo ágil tenemos que expresar las
-necesidades reales del sistema para lograr la interacción del equipo de desarrollo con el
-usuario. Ello se consigue por medio de historias de usuario, en adelante HU. Las HUs
-tienen que cumplir una serie de condiciones \cite{dddjj}:
+necesidades reales del sistema desde el punto de vista de los usuarios para lograr la
+interacción del equipo de desarrollo con el usuario. Ello se consigue por medio de
+historias de usuario, en adelante HU. Las HUs tienen que cumplir una serie de condiciones \cite{dddjj}:
 \begin{itemize}
     \item Se tiene que identificar para que usuario se va a desarrollar la historia.
     \item La HU siempre está en el dominio del problema y siempre es narrada desde el
@@ -113,22 +113,21 @@ tienen que cumplir una serie de condiciones \cite{dddjj}:
     \item La HU mayormente requiere la programación de cierta lógica de negocio. 
 \end{itemize}
 Todo lo que no cumpla estas características no son más que tareas enmarcadas en el proceso
-de desarrollo.
-
-De las siguientes historias de usuarios se han generarán tareas específicas que requieren
-un trabajo para avanza en la HU.
+de desarrollo. De las siguientes historias de usuarios se han generarán tareas específicas
+cuya realización avanza en la HU.
 \begin{itemize}
     \item \textbf{Como tribunal tengo que poder leer de forma ordenada y estructurada la
-    memoria.} Se enmarca en la naturaleza que tiene este trabajo de ser presentado y
+    memoria.} 
+    Se enmarca en la naturaleza que tiene este trabajo de ser presentado y
     evaluado como TFG. Cuyo criterio de aceptación es: la laboración de una memoria
     estructurada, detallada y ordenada que facilite el entendimiento del trabajo.
 
-    \item \textbf{Trabajar con los datos de mortandad}
+    \item \textbf{Trabajar con los datos de mortandad.}
     Como usuario programadora
     quiero poder acceder para trabajar a los datos de mortandad
     tal que pueda construir aplicaciones y servicios sin tener que preocuparme de montar cualquier infraestructura para obtener estos datos.
 
-    \item \textbf{Predicciones y gráficos basados en los datos}
+    \item \textbf{Predicciones y gráficos basados en los datos.}
     Como programadora quiero poder obtener predicciones sobre el incremento de defunciones
     tal que dada una enfermedad pueda obtener su predicción de defunciones en los próximos años.
 \end{itemize}
@@ -149,7 +148,8 @@ el \href{https://github.com/pablojjimenez/TFG/issues}{tablero de issues} de GitH
 
 \subsection{Integración continua}
 \label{sec:ci}
-Una buena forma de cumplir las características \hyperref[sec:meto]{citadas anteriormente}, es realizar el
+Una buena forma de seguir cumpliendo con las características \hyperref[sec:meto]{citadas
+anteriormente}, a nivel de transparencia y adaptación es adecuado realizar el
 desarrollo guiado por pruebas, lo que se conoce por TDD, \textit{Test Driven Development}.
 Al emplear esta metodología garantizamos la calidad de lo programado, trasladamos los
 requisitos a las pruebas de forma que se convierten en la más fiable documentación. Además
@@ -163,7 +163,7 @@ que estos deben de superar las \textit{pipelines} para terminar integrándose.
 
 Desde el inicio del trabajo se ha estado trabajando con un sistema férreo de CI de forma
 que no se ha mezclado nunca nada que no haya superado los requisitos de diseño
-especificados. En el entorno de desarrollo se ha utilizado \textit{Github Actions} que es
+especificados. La tecnología utilizada ha sido \textit{Github Actions} que es
 una herramienta de CI que nos permite realizar una integración continua de la misma forma
 que \textit{Travis CI} la elección de Github sobre Travis es por la rapidez del elegido e
 integración con la forja utilizada que como se ha especificado anteriormente es Github.
@@ -195,7 +195,7 @@ uno código no se rompe el existente.
 
 
 \section{Planificación y cuantización}
-La planificación temporal ha sido la siguiente.
+La planificación temporal realizada ha sido la siguiente.
 
 \renewcommand{\arraystretch}{1.5}
 \begin{table}[H]

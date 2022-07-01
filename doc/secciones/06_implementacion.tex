@@ -1,7 +1,7 @@
 \chapter{Desarrollo de la solución}
-A la hora de empezar con la implementación de la solución, debemos comenzar teniendo en
-cuenta la arquitectura software que satisface requisitos del sistema de acuerdo con los
-usuarios. Es decir, con las historias de usuario que han expresado.
+A la hora de comenzar con la implementación de la solución, debemos empezar teniendo en
+cuenta la arquitectura software que va a satisfacer los requisitos del sistema de acuerdo con los
+usuarios. Es decir, con las historias de usuario que se han expresado.
 
 \section{Arquitectura software de la solución}
 En esta sección buscamos la mejor forma de que nuestro código quede lo más limpio posible
@@ -26,10 +26,11 @@ clústeres \footnote{Nos referimos a la técnica por la cual podemos combinar un
 para que trabaje paralelamente en un entorno cloud. Lo que conseguimos con esta operación
 es una mayor disponibilidad, más velocidad de despacho y escalabilidad del sistema. Como
 todo, a cambio tendremos un sistema más costoso de mantener económicamente y un mayor
-tiempo de implementación. } sin realizar prácticamente cambios en la implementación.  Es
-fundamental desacoplar al máximo todos los componentes y que cada uno tengo una única
-responsabilidad cuando se realiza un proyecto en la nube. La principal reto que nos
-encontrarremos en este tipo de arquitecturas es la comunicación entre los distintos
+tiempo de implementación. } sin realizar prácticamente cambios en la implementación.  
+
+Es fundamental desacoplar al máximo todos los componentes y que cada uno tengo una única
+responsabilidad cuando se realiza para ser desplegado en la nube. El principal reto que nos
+encontramos en este tipo de arquitecturas es la comunicación entre los distintos
 componentes.  Sin embargo, una solución a este problema podría ser la comunicación por
 eventos, potente pero compleja a nivel técnico y costosa económicamente. Otra solución es
 mediante inyección de dependencias, que es la que he empleado en este proyecto, podemos
@@ -40,16 +41,16 @@ sobremedida y convertirse en un cuello de botella.
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=\textwidth]{doc/logos/imgs/costeEvolucion.png}
-    \caption{Coste de los cambios en un proyecto dependienso del diseño. \textit{Active Record} es un 
-    patrón de diseño empleado por muchos frameworks que unen al modelo las responsabilidades de 
-    obtención y creación propias de los repositorios. \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente de la imágen.}}
+    \caption{Coste del cambio en un proyecto con arquitectura desacoplada en comparación con una acoplada. \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente de la imágen.}}
     \label{fig:coste-repo-pattern}
 \end{figure}
 \FloatBarrier
-
+\textit{Active Record} es un 
+patrón de diseño empleado por muchos frameworks que unen al modelo las responsabilidades de 
+obtención y creación propias de los repositorios.
 
 \subsection{Diseño dirigido por el dominio}
-En esta sección voy a detallar y justificar el tipo de arquitectura diseñado, su
+En esta sección voy a detallar las partes que componen la arquitectura diseñado, su
 comportamiento y responsabilidades. En DDD\footnote{Diseño guiado por el dominio, en
 inglés: Domain-driven design}, podemos diferenciar tres elementos importantes.
 
@@ -128,15 +129,17 @@ que necesitara.
 
 \subsection{Diagrama arquitectónico de la solución}
 A continuación se puede ver un somero diagrama donde podemos observar la conexión entre
-los distintos componentes del sistema y la conexión con librerías y frameworks externos. 
+los distintos componentes del sistema, las clases que componen cada componente y su comunicación
+con las librerías y frameworks externos. 
 
+\FloatBarrier
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=\textwidth]{doc/logos/imgs/arquitectonico.png}
 	\caption{ Modelo organizativo del código con sus dependencias externas. }
     \label{fig:worst_f_value}
 \end{figure}
-
+\FloatBarrier
 
 
 \section{Implementación}
@@ -145,6 +148,7 @@ requisitos y ajuste a la metodología de trabajo expuesta, contemplando siempre 
 satisfacen las distintas opciones a alcanzar los objetivos de nuestros usuarios.
 
 \subsection{Configuración}
+\label{sec:config}
 A la hora de crear un proyecto software, el primer paso que tenemos que hacer es llevar a
 cabo una configuración que nos permita arrancar la aplicación de la forma deseada. Este
 software está pensado para ejecutarse en la nube, por ello he tenido en cuenta que desde
@@ -202,14 +206,17 @@ desarrollo tanto el local como por la CI \footnote{Integración continua.}.
 Como se ha descrito en anteriores, los datos que manejamos están en ficheros CSV. Para
 poder trabajar con ellos es necesario utilizar una biblioteca que nos permite trabajar con
 estos ficheros. Es necesario poder manejar los datos de estos ficheros con cierta
-agilidad. El mayor fichero tiene 967360 líneas y ocupa unos 55 MB aunque no son cifras
+agilidad. El mayor fichero tiene cerca de un millón de líneas y ocupa unos 105 MB aunque no son cifras
 cercanas a lo que se considera \textit{big data} necesitamos de una herramienta que nos
-permita filtrar, ordenar y hacer cálculos eficientemente sobre estos conjuntos de datos.
+permita filtrar, ordenar y hacer cálculos de forma eficiente sobre estos conjuntos de datos.
+
 La elección de \textbf{Pandas} como biblioteca para trabajar con estos datos es debido a
 que es ampliamente utilizada en el mundo Python y encaja en los datos que tenemos. Para la
 generación de gráficos se ha utilizado \textbf{Matplotlib}  por su compatibilidad con
 \textit{Pandas} que permite realizar gráficas a partir de objetos Dataframe propios de la
 biblioteca.
+
+\vskip 0.2in
 
 Es necesario poder obtener predicciones basadas en series temporales. Busco que la
 predicción sea rápida y automática de forma que no haya que configurar muchos parámetros y
@@ -361,24 +368,26 @@ esperadas. Además, podemos utilizar esta misma interfaz para probar los
 \codeword{endpoints} y realizar llamadas. Los modelos están documentados en el código para
 los usuarios que decidan utilizar el software como biblioteca puedan ver dicha
 documentación en el IDE que utilicen. Para aquellos que utilicen la API, se ha añadido a
-la especificación OpenAPI
+la especificación OpenAPI.
 
+\FloatBarrier
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=\textwidth]{doc/logos/imgs/openapi.png}
 	\caption{ Documentación OpenAPI de la API. }
     \label{fig:worst_f_value}
 \end{figure}
+\FloatBarrier
 
 \subsubsection{Interfaz de consultas}
-Al utilizar una servicio restful para exponer nuestros datos, los recursos retornan toda
+Al utilizar un servicio restful para exponer nuestros datos, los recursos retornan toda
 la información que conoce sobre el recurso aunque muchas veces solo estemos interesados en
 un campo específico, algo que no termina de ser lo que los usuarios han expresado en la
 \hyperref[sec:hu2]{historia de usuario 2}. Asimismo, cuando queremos consultar dos
 recursos distintos necesitamos realizar dos llamadas distintas. Lo que hace que los
 usuarios no tengan libertad absoluta sobre las consultas que realizan a los datos.
 
-Estas restricciones llevan a Meta a liberar publicamente su proyecto iniciado en 2012,
+Estas restricciones llevan a Meta a liberar publicamente en 2015 su proyecto iniciado en 2012,
 \textbf{GraphQL} que modifica la forma con la que interaccionamos con servidores restful,
 éste requiere que se definan unos esquemas indicanto el tipo de los datos por los que
 están compuestos los modelos ya que este mecanismo es el que permite que a la hora de
@@ -470,9 +479,11 @@ nacional, en todos los grupos de edad ocurridas durante 2008
 
 \section{Conjunto de tests}
 Como se ha explicado en la sección sobre \hyperref[sec:ci]{integración continua}, la
-batería de tests junto con otras comprobaciones se ejecutan en ese momento.
+batería de tests junto con otras comprobaciones se realizan en el momento que se ejecutan las \textit{pipelines}.
 
-\begin{lstlisting}[caption=Definición de las etapas de la CI del código del proyecto donde se puede apreciar que se especifican las versiones del lenguaje a comprobar. ]
+Se definen en un fichero con formato YAML todas las etapas y se comprueba que funcione para todas
+las versiones del lenguaje que soporta.
+\begin{lstlisting}[caption=Definición de las etapas que tiene la CI del código del proyecto. ]
     name: Python CI
     on: [push]
     jobs:
@@ -499,14 +510,7 @@ batería de tests junto con otras comprobaciones se ejecutan en ese momento.
             run: poetry run task test
 \end{lstlisting}
 
-En el código anterior podemos ver como definimos en un fichero de formato YAML que es un
-formato de serialización de datos, las distintas etapas y órdenes que tiene que superar el
-código.
-
-Nótese, como se indica el S.O. sobre el que se ejecuta, las versiones de Python
-compatibles ya que todas estas comprobaciones se realizan para todas las versiones de
-Python en las que garantizamos que el software funciona. Y finalmente, las distintas
-etapas: instalación de dependencias, lint y tests.
+\vskip 0.4in
 
 \FloatBarrier
 \begin{figure}[h]
@@ -520,20 +524,19 @@ etapas: instalación de dependencias, lint y tests.
 
 Los \textbf{tests unitarios} se encargan de comprobar de unidades individuales del código,
 para ello necesitamos una serie de funciones que nos permitan realizar aserciones sobre
-los resultados esperados. Además, cuando testeamos los repositorios no queremos cargar los
+los resultados esperados. Para testear los repositorios no queremos cargar los
 datos originales que usamos en producción sino unos más livianos y controlados para ello
 se ha hecho uso de la herramienta \codeword{pytest} que nos proporciona una librería de
-aserciones y \textit{fixtures} para manejar estos recursos.
+aserciones y \textit{fixtures} para manejar estos recursos que imitan a los originales.
 
-Para realizar los \textbf{tests de integración} que son competentes de probar el conjunto
-y colaboración de las distintas piezas unitarias se ha necesitado arrancar el servidor en
+Los \textbf{tests de integración} son los competentes de probar el funcionamiento conjunto
+y la colaboración de las distintas piezas unitarias. En este caso es necesario arrancar el servidor en
 modo de test, FastAPI se encarga de todo este mecanismo, para probar los endpoints
 expuestos. Para testear los repositorios se utiliza una fuente de datos falsa que imita la
-original pero que es restringida y conocida para que podamos hacer aserciones sobre ella.
-Aprovechando el sistema de configuración implementado en el proyecto podemos definir
-entornos y en función de ellos proporcionar unas rutas u otras a los repositorios.
+original pero que es restringida y conocida para que podamos hacer aserciones sobre ella. Se 
+sabe que datos cargar gracias al sistema de entornos que hemos especificado en la \hyperref[sec:config]{configuración.}
 
-Para conocer el nivel de confianza que tenemos se ha calculado el porcentaje de cobertura
+Para conocer el nivel de confianza que tenemos se ha calculado el \textbf{porcentaje de cobertura}
 que tiene el código. Esto es, la cantidad de lineas que son ejecutadas por los tests para
 saber con que confianza podemos realizar cambios que nos garanticen que todo sigue
 funcionando. Con más de un 80\% de cobertura es generalmente aceptado que el código está
