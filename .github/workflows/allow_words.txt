@@ -151,3 +151,11 @@ mystyle
 plani
 serialización
 stringstyle
+fundamentación
+Vercel
+auto-desplegar
+Dockerfile
+Dyno
+CLI
+reinicios
+personalización
