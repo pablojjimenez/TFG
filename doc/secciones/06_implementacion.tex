@@ -436,7 +436,11 @@ buscar campos por coincidencias.
 \end{figure}
 \FloatBarrier
 
-\begin{lstlisting}[caption=Se están realizando dos operaciones. En primer lugar, buscando todas las enfermedades registradas que tienen la palabra "cancer". En segundo lugar se estan solicitando las 10 causas con más fallecimientos que tiene más de 10 casos, a nivel nacional, en todos los grupos de edad ocurridas durante 2008] 
+En la siguiente mutación se están realizando dos operaciones. En primer lugar, buscando
+todas las enfermedades registradas que tienen la palabra 'cancer'. En segundo lugar se
+estan solicitando las 10 causas con más fallecimientos que tiene más de 10 casos, a nivel
+nacional, en todos los grupos de edad ocurridas durante 2008
+\begin{lstlisting}[caption=Ejemplo de mutación usando el protocolo GraphQL] 
     mutation MyMutation {
         __typename
         searchDiseases(query: {diseaseName: "c?ncer"}) {
