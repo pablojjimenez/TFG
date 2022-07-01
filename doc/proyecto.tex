@@ -114,7 +114,8 @@ Segregation Principle y Dependency Inversion Principle } }
 \texttt{{#1}}%
 }
 
-
+\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{4}
 \begin{document}
 
 	% Plantilla portada UGR
@@ -153,8 +154,6 @@ Segregation Principle y Dependency Inversion Principle } }
 	%   1. Crítica al estado del arte
 	%   2. Propuesta
 	\input{doc/secciones/03_estado_del_arte.tex}
-	
-	\input{doc/secciones/04_planificacion.tex}
 
 	% Análisis del problema
 	% 1. Análisis de requisitos
@@ -162,6 +161,10 @@ Segregation Principle y Dependency Inversion Principle } }
 	% 3. Solucion propuesta
 	% 4. Análisis de seguridad
 	\input{doc/secciones/05_analisis.tex}
+	
+	\input{doc/secciones/04_planificacion.tex}
+
+
 
 	% Desarrollo bajo sprints: 
 	%   1. Permitir registros y login de usuarios
@@ -175,8 +178,8 @@ Segregation Principle y Dependency Inversion Principle } }
 	\input{doc/secciones/07_conclusiones.tex}
 	
 	\newpage
-	\bibliography{bibliografia} 
-    \bibliographystyle{ieeetr}
+	\bibliography{bibliografia}
+	\bibliographystyle{plain}
 	
 \end{document}
 
