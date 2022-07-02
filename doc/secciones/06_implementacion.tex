@@ -12,7 +12,7 @@ Para ello se ha utilizado el diseño dirigido por el dominio, DDD \textit{Domain
 Design}. Este tipo de arquitectura introducida por Eric Evans \cite{ddd_book}
 "Domain-Driven-Design - Tackling Complexity in the Hearth of Software, 2004" nos permite
 desacoplar el código entre capas, lo que nos permite poder testear escrupulosamente cada
-capa de forma independiento ya que no necesita de todo el contexto para su funcionamiento.
+capa de forma independiente ya que no necesita de todo el contexto para su funcionamiento.
 La arquitectura dirigida por el dominio nos permite fácilmente aislar la lógica de negocio
 en un único sitio y siempre lo más cerca del dominio posible lo que nos permite cumplir
 los principios \Gls{SOLID} fácilmente y conseguir un código abierto a su extensión pero
@@ -41,7 +41,7 @@ sobremedida y convertirse en un cuello de botella.
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=\textwidth]{doc/logos/imgs/costeEvolucion.png}
-    \caption{Coste del cambio en un proyecto con arquitectura desacoplada en comparación con una acoplada. \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente de la imágen.}}
+    \caption{Coste del cambio en un proyecto con arquitectura desacoplada en comparación con una acoplada. \href{https://www.cosmicpython.com/book/images/apwp_0205.png}{Fuente de la imagen.}}
     \label{fig:coste-repo-pattern}
 \end{figure}
 \FloatBarrier
@@ -190,7 +190,7 @@ En cuanto a la gestión de dependencias, en el entorno JavaScript tenemos \texti
 tradicional \textit{maven} es una buena opción o la mas moderna y potente \textit{Gradle}.
 En Python se ha extendido el uso de \textbf{Poetry} que de forma muy parecida a
 \textit{npm} genera un fichero de configuración \textit{pyproject.toml} donde definimos
-las dependencias, las versiones y los paquetes de nuestro proyecto. De el se genra el
+las dependencias, las versiones y los paquetes de nuestro proyecto. De él se genera el
 fichero \textit{poetry.lock} donde se especifican las versiones instaladas exactas de las
 bibliotecas, es necesario utilizar este fichero para realizar despliegues idempotentes.
 \footnote{Poder realizar despliegues con exactamente las mismas versiones y orden que se
@@ -387,14 +387,14 @@ un campo específico, algo que no termina de ser lo que los usuarios han expresa
 recursos distintos necesitamos realizar dos llamadas distintas. Lo que hace que los
 usuarios no tengan libertad absoluta sobre las consultas que realizan a los datos.
 
-Estas restricciones llevan a Meta a liberar publicamente en 2015 su proyecto iniciado en 2012,
+Estas restricciones llevan a Meta a liberar públicamente en 2015 su proyecto iniciado en 2012,
 \textbf{GraphQL} que modifica la forma con la que interaccionamos con servidores restful,
-éste requiere que se definan unos esquemas indicanto el tipo de los datos por los que
+éste requiere que se definan unos esquemas indicando el tipo de los datos por los que
 están compuestos los modelos ya que este mecanismo es el que permite que a la hora de
 realizar consultas, GraphQL valide los tipos y rechace las consultas que violan esta
 aserción.
 
-Comparando GraphLQ desde el punto de vista del modelo CRUD que es el ampliamente usado por
+Comparando GraphQL desde el punto de vista del modelo CRUD que es el ampliamente usado por
 REST, podemos diferenciar tres tipos de operaciones:
 \begin{enumerate}
     \item \textbf{Consultas}: equivalen a la operación de lectura. Este tipo de operación
@@ -411,12 +411,12 @@ REST, podemos diferenciar tres tipos de operaciones:
     Gateway Interface}
 \end{enumerate}
 
-GraphQL es un protocolo agnóstico del lenguaje de programaciíon, del sistema de
-persistencia que se decida usr y no depende de HTTP. Como podemos observar supone un
+GraphQL es un protocolo agnóstico del lenguaje de programación, del sistema de
+persistencia que se decida usar y no depende de HTTP. Como podemos observar supone un
 cambio importante con respecto a REST donde cada uno de los recursos queda identificado
 por una URI que hay que invocar utilizando los verbos HTTP pertinentes. En GraphQL tenemos
 un sistema fuertemente tipado y una API que dispone de un único endpoint, todas las
-consultas, mutaciones y demás se realizan a traves de un único endpoint.
+consultas, mutaciones y demás se realizan a través de un único endpoint.
 
 \subsubsection{Documentación de GraphQL}
 Esta tecnología expone un explorador, editor online llamado \textit{GraphiQL} que puede
@@ -447,7 +447,7 @@ buscar campos por coincidencias.
 
 En la siguiente mutación se están realizando dos operaciones. En primer lugar, buscando
 todas las enfermedades registradas que tienen la palabra 'cancer'. En segundo lugar se
-estan solicitando las 10 causas con más fallecimientos que tiene más de 10 casos, a nivel
+están solicitando las 10 causas con más fallecimientos que tiene más de 10 casos, a nivel
 nacional, en todos los grupos de edad ocurridas durante 2008
 \begin{lstlisting}[caption=Ejemplo de mutación usando el protocolo GraphQL] 
     mutation MyMutation {
