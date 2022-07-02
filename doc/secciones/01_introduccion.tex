@@ -1,50 +1,87 @@
 \chapter{Introducción}
-Este proyecto es software libre, y está publicado con la licencia \cite{gplv3} General Public License v3.
-Se puede acceder a través de GitHub en este \href{https://github.com/pablojjimenez/TFG}{enlace} puedes sentirte libre de contribuir mediante una solicitud de fusión o \href{https://github.com/pablojjimenez/TFG/pulls}{Pull Request}. También forma parte de los \href{https://github.com/JJ/TF-libres-UGR}{trabajos liberados}\footnote{https://github.com/JJ/TF-libres-UGR} de la UGR.
+Este proyecto es software libre, y está publicado con la licencia \cite{gplv3} General
+Public License v3. Se puede acceder a través de GitHub en este
+\href{https://github.com/pablojjimenez/TFG}{enlace} puedes sentirte libre de contribuir
+mediante una solicitud de fusión o \href{https://github.com/pablojjimenez/TFG/pulls}{Pull
+Request}. También forma parte de los \href{https://github.com/JJ/TF-libres-UGR}{trabajos
+liberados} de la UGR.
 
 \section{Motivación} 
-El tratamiento automático de la información por medio de técnicas matemáticas procesadas por un ordenador ha cambiado la forma en la que nos organizamos, estudiamos y obtenemos conclusiones.
+El tratamiento automático de la información por medio de técnicas matemáticas procesadas
+por un ordenador ha cambiado la forma en la que nos organizamos, estudiamos y obtenemos
+conclusiones.
 
-En particular, los servicios sanitarios suponen un eje vertebrador cuando hablamos de mejorar la calidad de vida de las personas. Numerosos estudios sociológicos avalan que la sanidad es una preocupación incesante de los españoles, más aún si cabo tras la pandemia que hemos atravesado.
-Como podemos observar en la gráfica \ref{fig:problemascis}, entre las preocupaciones de los españoles la sanidad siempre se muestra con una tendencia al alta a pesar de no estar exenta de movimientos sinusoidales. Esta tendencia solo es superada por el paro y problemas relacionados de índole económico.
+En particular, los servicios sanitarios suponen un eje vertebrador cuando hablamos de
+mejorar la calidad de vida de las personas. Numerosos estudios sociológicos avalan que la
+sanidad es una preocupación incesante de los españoles, más aún si cabo tras la pandemia
+que hemos atravesado. Como podemos observar en la gráfica \ref{fig:problemascis}, entre
+las preocupaciones de los españoles la sanidad siempre se muestra con una tendencia al
+alta a pesar de no estar exenta de movimientos sinusoidales. Esta tendencia solo es
+superada por el paro y problemas relacionados de índole económico.
+
 \FloatBarrier
-\begin{figure}[]
+\begin{figure}[h]
 	\centering	
-	\includegraphics[scale=0.5]{doc/logos/imgs/CIS_1.png}
-	\caption{ 
-        Principales problemas de los españoles según el CIS. \href{https://www.rtve.es/noticias/20201015/crisis-economica-coronavirus-preocupan-ahora-mas-espanoles-paro/2045610.shtml}{Enlace al artículo}
-    }
+	\includegraphics[width=\textwidth]{doc/logos/imgs/CIS_1.png}
+	\caption{ Principales problemas de los españoles según el CIS.
+        \href{https://www.rtve.es/noticias/20201015/crisis-economica-coronavirus-preocupan-ahora-mas-espanoles-paro/2045610.shtml}{Enlace
+        al artículo} }
     \label{fig:problemascis}
 \end{figure}
 \FloatBarrier
 
-Vivimos una época donde el almacenamiento de datos es una actividad transversal incesante que se puede observar en todas las vertientes. Sin embargo, si está información no está publicada para que se pueda acceder de forma estructurada a ella no nos sirve de nada. 
+Vivimos una época donde el almacenamiento de datos es una actividad transversal incesante
+que se puede observar en todas las vertientes. Sin embargo, si está información no está
+publicada para que se pueda acceder de forma estructurada a ella no nos sirve de nada. 
 
-Los datos que ahora mismo almacena el Instituto de Salud Carlos III -institución de referencia científico-técnico para el Sistema Nacional de Salud- son inaccesibles.  Mi fundamentación es facilitar los estudios sobre la evolución de las defunciones según causa de muerte aprovechando los datos públicos que se publican anualmente para que programadores e investigadores puedan crear productos que mejoren el sistema sanitario.
+Los datos que ahora mismo almacena el Instituto de Salud Carlos III\footnote{institución de
+referencia científica para el Sistema Nacional de Salud} sobre las defunciones son inaccesibles.  Mi
+fundamentación es facilitar los estudios sobre la evolución de las defunciones según causa
+de muerte haciendo accesibles los datos públicos que se revelan anualmente para que
+programadores e investigadores puedan crear productos que mejoren la prevención del sistema sanitario.
 
-Ahora mismo es imposible poder consultar los datos mencionados para obtener información concreta y útil.  Si ni podemos consultar estos datos por variables, muy lejos estamos de poder realizar visualizaciones o tener aplicaciones que sean capaces de obtener valor a partir de estos datos.
+Ahora mismo es imposible poder consultar los datos mencionados para obtener información
+concreta y útil.  Si ni podemos consultar estos datos por variables, muy lejos estamos de
+poder realizar visualizaciones o tener aplicaciones que sean capaces de obtener valor a
+partir de estos datos.
 
 \section{Objetivos}
 \label{sec:obj}
-El objetivo principal de este proyecto es que el sistema sea capaz de darle a los programadores la capacidad de conocer la evolución de las causas de muerte. 
+El objetivo principal de este proyecto es que el sistema sea capaz de darle a los
+programadores e investigadores interesados la capacidad de conocer la evolución de las causas de muerte. 
 
-La finalidad es deparar de una interfaz uniforme que permita realizar consultas de forma sencilla sobre los datos almacenados. Y ofrecer pronósticos sobre la evolución de las defunciones. Las causas de muerte están clasificadas según la Clasificación Internacional de Enfermedades y se encuentran clasificadas en base a distintas variables. 
+La finalidad es deparar de una interfaz uniforme que permita realizar consultas
+sobre los datos almacenados utilizando un protocolo agnóstico actual. Además, la
+capacidad de generar gráficos con la evolución y someros pronósticos sobre la evolución 
+de las defunciones es un complemento que aporta un valor indispensable. Las causas de
+muerte se encuentran reservadas según la Clasificación Internacional
+de Enfermedades y se encuentran clasificadas en base a distintas variables. 
 
-El sistema debe de atender a las necesidades de los usuarios diana a utilizar la app, para identificarlos y poder trabajar con un desarrollo ágil se ha utilizado la herramienta de personas ficticias.
+El sistema debe de atender a las necesidades de los usuarios diana a utilizar el sistema, para
+identificarlos y poder trabajar con un desarrollo ágil se ha utilizado la
+\hyperref[sec:usu]{herramienta de personas ficticias.}
 
 \section{Usuarios}
 \label{sec:usu}
-Una de las herramientas que nos permiten definir el alcance y las necesidades de la aplicación es la creación de perfiles de personas ficticias, candidatos diana a utilizar el sistema en un futuro.
+Una de las herramientas que nos permiten definir el alcance y las necesidades de la
+aplicación es la creación de perfiles de personas ficticias, candidatos diana a utilizar
+el sistema en un futuro.
 
-De esta forma, podemos justificar las decisiones tomadas en aras de alcanzar el objetivo por parte de los usuarios interesados en el producto final. La función de estos usuarios es poder crear posteriormente historias de usuario que identifiquen los problemas y deseos de los usuarios para que posteriormente en equipo de desarrollo pueda proponer una solución.
+De esta forma, podemos justificar las decisiones tomadas en aras de alcanzar el objetivo
+por parte de los usuarios interesados en el producto final. La función de estos usuarios
+es poder crear posteriormente historias de usuario que identifiquen los problemas y deseos
+de los usuarios para que posteriormente en equipo de desarrollo pueda proponer una
+solución.
 
-He creado dos someras personalidades lo más variopintas posibles en aras de enfocarnos más aún en el usuario y dotar de mayor calidad el resultado final, de modo que podamos abarcar por completo las necesidades de estos.
+He creado dos someras personalidades lo más variopintas posibles en aras de enfocarnos más
+aún en el usuario y dotar de mayor calidad el resultado final, de modo que podamos abarcar
+por completo las necesidades de estos.
 
 \rowcolors{1}{gray!20}{gray!8}
 \begin{table}[H]
    \begin{center}
-      \begin{tabular}{| p{\dimexpr 0.25\linewidth-2\tabcolsep} |
-                   p{\dimexpr 0.8\linewidth-2\tabcolsep} |}
+      \begin{tabular}{| p{\dimexpr 0.25\linewidth-2\tabcolsep} | p{\dimexpr
+                   0.8\linewidth-2\tabcolsep} |}
          \hline
          Persona 1 &  \\ \hline
          \textbf{Nombre} & Raquel \\
@@ -53,21 +90,17 @@ He creado dos someras personalidades lo más variopintas posibles en aras de enf
          \textbf{Personalidad} & \begin{itemize}
                 \item Deportista.
                 \item Tímida.
-                \item Lógica.
-            \end{itemize} \\
+                \item Lógica. \end{itemize} \\
          \textbf{¿Cuál es su entorno?} & \begin{itemize}
                 \item Sus amigos.
                 \item Su gato.
-                \item Sus libros.
-            \end{itemize} \\
+                \item Sus libros. \end{itemize} \\
          \textbf{¿Qué dispositivos utiliza en su día a día?} & \begin{itemize}
                 \item Un portátil.
-                \item Un smartphone.
-            \end{itemize} \\
+                \item Un smartphone. \end{itemize} \\
             \textbf{¿Cuál es su actitud hacía la tecnología?} & \begin{itemize}
                 \item Perezosa.
-                \item Sabe programar.
-            \end{itemize} \\
+                \item Sabe programar. \end{itemize} \\
             \hline
       \end{tabular}
       \caption{Usuario ficticio 2}
@@ -77,8 +110,8 @@ He creado dos someras personalidades lo más variopintas posibles en aras de enf
 \rowcolors{1}{gray!20}{gray!8}
 \begin{table}[H]
    \begin{center}
-      \begin{tabular}{| p{\dimexpr 0.25\linewidth-2\tabcolsep} |
-                   p{\dimexpr 0.8\linewidth-2\tabcolsep} |}
+      \begin{tabular}{| p{\dimexpr 0.25\linewidth-2\tabcolsep} | p{\dimexpr
+                   0.8\linewidth-2\tabcolsep} |}
          \hline
          Persona 3 &  \\ \hline
          \textbf{Nombre} & Isabel \\
@@ -86,22 +119,18 @@ He creado dos someras personalidades lo más variopintas posibles en aras de enf
          \textbf{Formación} & Matemática \\
          \textbf{Personalidad} & \begin{itemize}
                 \item Aventurada.
-                \item Protagonista.
-            \end{itemize} \\
+                \item Protagonista. \end{itemize} \\
          \textbf{¿Cuál es su entorno?} & \begin{itemize}
                 \item Su familia.
                 \item Sus padres.
-                \item Su trabajo. Profesora en la UGR.
-            \end{itemize} \\
+                \item Su trabajo. Profesora en la UGR. \end{itemize} \\
          \textbf{¿Qué dispositivos utiliza en su día a día?} & \begin{itemize}
                 \item Un ordenador de sobremesa.
                 \item Un smartphone.
-                \item Un iPad que comparte con su marido.
-            \end{itemize} \\
+                \item Un iPad que comparte con su marido. \end{itemize} \\
             \textbf{¿Cuál es su actitud hacía la tecnología?} & \begin{itemize}
                 \item Valiente.
-                \item Proactiva.
-            \end{itemize} \\
+                \item Proactiva. \end{itemize} \\
             \hline
       \end{tabular}
       \caption{Usuario ficticio 2}

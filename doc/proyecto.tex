@@ -30,7 +30,7 @@
 \hypersetup{
 	colorlinks=true,	% false: boxed links; true: colored links
 	linkcolor=black,	% color of internal links
-	urlcolor=cyan		% color of external links
+	allcolors = cyan
 }
 
 
@@ -81,30 +81,32 @@
 \titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
 \setcounter{secnumdepth}{4}
 \usepackage[Lenny]{fncychap}
-\linespread{1.2}
+\linespread{1.25}
 
 \usepackage{glossaries}
 
 \newglossaryentry{mortalidad}
-{
-	name=Mortalidad,
-	description={La cantidad de personas que mueren en un lugar y período de tiempo concreto.}
-}
+{ name=Mortalidad, description={La cantidad de personas que mueren en un lugar y período
+	de tiempo concreto.} }
 \newglossaryentry{morbilidad}
-{
-	name=Morbilidad,
-	description={La cantidad de personas que enferman en un lugar y período de tiempo concreto.}
-}
+{ name=Morbilidad, description={La cantidad de personas que enferman en un lugar y período
+	de tiempo concreto.} }
 \newglossaryentry{momo}
-{
-	name=gráficas MoMo,
-	description={Son un sistema de monitorización de la mortalidad diaria que permite observar gráficamente como la evolución del número de defunciones que se producen.}
-}
+{ name=gráficas MoMo, description={Son un sistema de monitorización de la mortalidad
+	diaria que permite observar gráficamente como la evolución del número de defunciones
+	que se producen.} }
 \newglossaryentry{CIE-10}
-{
-    name=CIE-10,
-    description={Es el acrónimo de la Clasificación internacional de enfermedades, 10.ª edición correspondiente.}
-}
+{ name=CIE-10, description={Es el acrónimo de la Clasificación internacional de
+    enfermedades, 10.ª edición correspondiente.} }
+\newglossaryentry{SNS}
+{ name=SNS, description={El Sistema Nacional de Salud de España es el ente que engloba a
+    las prestaciones y servicios sanitarios de España.} }
+\newglossaryentry{SOLID}
+{ name=SOLID, description={Hace referencia a 5 principios de diseño de software. Single
+Responsibility Principle, Open/Closed Principle, Liskov Substitution Principle, Interface
+Segregation Principle y Dependency Inversion Principle } }
+	
+
 \makenoidxglossaries
 
 
@@ -112,7 +114,8 @@
 \texttt{{#1}}%
 }
 
-
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
 \begin{document}
 
 	% Plantilla portada UGR
@@ -123,14 +126,22 @@
 
 	% Índice de contenidos
 	\newpage
-	\tableofcontents
+    {\hypersetup{hidelinks}
+    \tableofcontents
+    }
 
 	% Índice de imágenes y tablas
 	\newpage
-	\listoffigures
+	{\hypersetup{hidelinks}
+    \listoffigures
+    }
+	
 
 	% Si hay suficientes se incluirá dicho índice
-	\listoftables 
+	
+	{\hypersetup{hidelinks}
+    \listoftables 
+    }
 	\newpage
 
 	\printnoidxglossaries
@@ -140,8 +151,8 @@
 	\input{doc/secciones/01_introduccion.tex}
 
 	% Estado del arte
-	% 	1. Crítica al estado del arte
-	% 	2. Propuesta
+	%   1. Crítica al estado del arte
+	%   2. Propuesta
 	\input{doc/secciones/03_estado_del_arte.tex}
 
 	% Análisis del problema
@@ -153,25 +164,24 @@
 	
 	\input{doc/secciones/04_planificacion.tex}
 
+
+
 	% Desarrollo bajo sprints: 
-	% 	1. Permitir registros y login de usuarios
-	% 	2. Desarrollo del sistema de incidencias
-	% 	3. Desarrollo del sistema de denuncias administrativas y accidentes
-	% 	4. Desarrollo del sistema de croquis
+	%   1. Permitir registros y login de usuarios
+	%   2. Desarrollo del sistema de incidencias
+	%   3. Desarrollo del sistema de denuncias administrativas y accidentes
+	%   4. Desarrollo del sistema de croquis
 	%   5. Instalación de la aplicación de manera automática
 	\input{doc/secciones/06_implementacion.tex}
 
-	% Presupuesto
+	\input{doc/secciones/07_despliegue.tex}
 
-	% Conclusiones
-	\input{doc/secciones/07_conclusiones.tex}
+	\input{doc/secciones/08_conclusiones.tex}
 
-	% Trabajos futuros
-
-
+	\input{doc/secciones/09_ejemplos.tex}
 	
 	\newpage
-	\bibliography{bibliografía}
+	\bibliography{doc/bibliografia}
 	\bibliographystyle{plain}
 	
 \end{document}
