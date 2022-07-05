@@ -9,7 +9,7 @@ funcionamiento.
 
 \section{Consultas REST}
 
-Voy a ilustrar distintas consultas utilizando el protocolo REST implementado. Algunas han sido realizadas desde la documentación OpenAPI y otras desde el programa \href{https://www.postman.com/}{Postman}\footnote{Es un apliación que nos permite realizar consultas a APIs.}.
+Voy a ilustrar distintas consultas utilizando el protocolo REST implementado. Algunas han sido realizadas desde la documentación OpenAPI y otras desde el programa \href{https://www.postman.com/}{Postman}\footnote{Es un aplicación que nos permite realizar consultas a APIs.}.
 
 \vskip 0.4in
 
@@ -51,7 +51,7 @@ de fallecimientos en toda España a causa del VIH. \ref{fig:3}
 
 \section{GraphiQL}
 Voy a ilustrar distintas consultas utilizando el lenguaje de consultas GraphQL. Se ha 
-utilizado el IDE GraphiQL que incluye el proyeto. A continuación se puede apreciar el 
+utilizado el IDE GraphiQL que incluye el proyecto. A continuación se puede apreciar el 
 potencial de este tipo de consultas donde podemos proyectar únicamente los campos que 
 son de nuestro interés y podemos obtener información de distintos recursos en una única llamada.
 
@@ -73,14 +73,14 @@ clasifica con los que trabaja el sistema. Con parámetros personalizados proyect
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{doc/logos/imgs/ejemplo4.png}
-	\caption{ Mutación que obtiene los cánceresn clasificados usando GraphiQL. }
+	\caption{ Mutación que obtiene los cánceres clasificados usando GraphiQL. }
 	\label{fig:5}
 \end{figure}
 \FloatBarrier
 
 
 En la siguiente mutación se están realizando dos operaciones. En primer lugar, buscando
-todas las enfermedades registradas que tienen la palabra 'ca|áncer'. En segundo lugar se
+todas las enfermedades registradas que tienen la palabra `ca|áncer'. En segundo lugar se
 están solicitando las 10 causas con más fallecimientos que tiene más de 10 casos, a nivel
 nacional, en todos los grupos de edad ocurridas durante 2008.
 \begin{lstlisting}[caption=Ejemplo de mutación usando el protocolo GraphQL] 
