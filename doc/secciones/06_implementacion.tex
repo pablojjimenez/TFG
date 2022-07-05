@@ -259,8 +259,9 @@ FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según
  asíncrona (muy interesante cuando hay acceso a bases de datos o recursos externos) y nos
  genera de forma automática una documentación OpenAPI.
 
-La API de este software expone dos blueprints \footnote{Llamamos blueprint al conjunto de
-recursos que comparte el mismo prefijo de URI (Identificador de recursos uniforme)}
+En el \hyperref[sec:ejemplos]{anexo} de este trabajo se puede apreciar ejemplos de llamadas.
+La API de este software expone dos \textit{blueprints} \footnote{Llamamos blueprint al conjunto de
+recursos que comparte el mismo prefijo de URI (Identificador de recursos uniforme)}:
 
 \begin{itemize}
     \item \textit{/data} Definido por el conjunto de recursos disponibles. Todos ellos
@@ -268,7 +269,7 @@ recursos que comparte el mismo prefijo de URI (Identificador de recursos uniform
     para ordenar los datos en base a algún campo, \codeword{limit} para limitar la
     cantidad de datos (por defecto se entregan limitados a 100 elementos), \codeword{page}
     para especificar la página. Y la siguiente estructura JSON como cuerpo de la petición:
-    \begin{lstlisting}[caption=Body de una posible petición a POST /data/diceases] 
+    \begin{lstlisting}[caption=Body de una posible petición.] 
         { 
             "ID": {  
                 "==": [1, 2, 3] 
@@ -289,16 +290,7 @@ recursos que comparte el mismo prefijo de URI (Identificador de recursos uniform
     recursos para obtener la predicción y la gráfica ajustada en el tiempo que indiquemos.
 \end{itemize}
 
-\FloatBarrier
-\begin{figure}[h]
-	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/api-managers.jpg}
-	\caption{ Llamada a POST /managers/chart desde
-	\href{https://www.postman.com/}{Postman}. Resultado es la gráfica sobre la evolución
-	de fallecimientos en toda España a causa del VIH. }
-    \label{fig:graficos-api}
-\end{figure}
-\FloatBarrier
+\paragraph{Tratamiento de los errores}\mbox{}\\
 
 El API es la interfaz por la que el usuario se comunica. Por tanto, al igual que a nivel
 de código gestionamos los errores haciendo uso de excepciones, es importante ofrecer al
@@ -357,7 +349,8 @@ En este API se hacen uso de las categorías 1, 3 y 4. Posibles respuestas de est
     la fuente de datos esté corrupta y el software no sea capaz de obtenerlos.
 \end{itemize}
 
-\subsubsection{Documentación del servicio REST}
+\paragraph{Documentación del servicio REST}\mbox{}\\
+
 Con la ayuda de los recursos que pone a nuestra disposición FastAPI, se ha implementado
 una especificación OpenAPI. Esta especificación define una serie de propiedades en un
 formato legible por una máquina (suele usarse el formato JSON o YAML).
@@ -411,14 +404,20 @@ REST, podemos diferenciar tres tipos de operaciones:
     Gateway Interface}
 \end{enumerate}
 
-GraphQL es un protocolo agnóstico del lenguaje de programación, del sistema de
-persistencia que se decida usar y no depende de HTTP. Como podemos observar supone un
+GraphQL es un protocolo agnóstico del lenguaje de programación, que además no depende 
+directamente de HTTP. Como podemos observar supone un
 cambio importante con respecto a REST donde cada uno de los recursos queda identificado
 por una URI que hay que invocar utilizando los verbos HTTP pertinentes. En GraphQL tenemos
 un sistema fuertemente tipado y una API que dispone de un único endpoint, todas las
 consultas, mutaciones y demás se realizan a través de un único endpoint.
 
-\subsubsection{Documentación de GraphQL}
+La implementación de este protocolo ha encajado muy bien con lo desarrollado hasta el
+momento ya que FastAPI tiene integración completa haciendo uso de \href{https://strawberry.rocks/docs/integrations/fastapi}{Strawberry}.
+En el \hyperref[sec:ejemplos]{anexo} de este trabajo podemos ver como hacer uso de este 
+protocolo.
+
+\paragraph{Documentación de GraphQL}\mbox{}\\
+
 Esta tecnología expone un explorador, editor online llamado \textit{GraphiQL} que puede
 ser encontrado bajo la ruta \codeword{/graphql} en nuestro servidor. En el se pueden
 apreciar las queries disponibles a hacer donde podemos ir desplegando interactivamente y
@@ -427,57 +426,25 @@ seleccionando los atributos de los modelos a obtener.
 \FloatBarrier
 \begin{figure}[h]
 	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/queries-graph.jpg}
-	\caption{ Ejemplo de query en el explorador GraphiQL. }
+	\includegraphics[width=\textwidth]{doc/logos/imgs/queries-explorer.png}
+	\caption{ Ejemplo del explorador de queries en GraphiQL. }
     \label{fig:graficos-GraphiQL}
 \end{figure}
 \FloatBarrier
 
-También se pueden observar las mutaciones disponibles con sus campos, podemos filtrar y
-buscar campos por coincidencias.
+También se pueden observar las mutaciones disponibles con sus campos, los filtros habilitados y
+la búsqueda de coincidencias por campos.
 
 \FloatBarrier
 \begin{figure}[h]
 	\centering	
-	\includegraphics[width=\textwidth]{doc/logos/imgs/mutaciones-graph.png}
-	\caption{ Ejemplo de ejecución de una mutación desde el explorador GraphiQL. }
+	\includegraphics[width=\textwidth]{doc/logos/imgs/mutaciones-explorer.png}
+	\caption{ Ejemplo del explorador de mutaciones en GraphiQL. }
     \label{fig:graficos-GraphiQL}
 \end{figure}
 \FloatBarrier
 
-En la siguiente mutación se están realizando dos operaciones. En primer lugar, buscando
-todas las enfermedades registradas que tienen la palabra 'cancer'. En segundo lugar se
-están solicitando las 10 causas con más fallecimientos que tiene más de 10 casos, a nivel
-nacional, en todos los grupos de edad ocurridas durante 2008
-\begin{lstlisting}[caption=Ejemplo de mutación usando el protocolo GraphQL] 
-    mutation MyMutation {
-        __typename
-        searchDiseases(query: {diseaseName: "c?ncer"}) {
-            items {
-                name
-            }
-        }
-        getDeceases(query: {
-            defu: {gt: 100}, 
-            ccaa: {eq: 99}, 
-            ano: {eq: 2008}, 
-            gedad: {eq: 99}
-        }, limit: 10, sort: "defu") {
-            length
-            items {
-                defu
-                causa {
-                    name
-                }
-                ccaa {
-                    name
-                }
-            }
-        }
-    }
-\end{lstlisting}
-
-En el \hyperref[sec:ejemplos]{anexo del trabajo} se pueden observar más llamadas de ejemplo.
+En el \hyperref[sec:ejemplos]{anexo del trabajo} se pueden observar queries y llamadas de ejemplo.
 
 \section{Conjunto de tests}
 Como se ha explicado en la sección sobre \hyperref[sec:ci]{integración continua}, la
@@ -486,30 +453,30 @@ batería de tests junto con otras comprobaciones se realizan en el momento que s
 Se definen en un fichero con formato YAML todas las etapas y se comprueba que funcione para todas
 las versiones del lenguaje que soporta.
 \begin{lstlisting}[caption=Definición de las etapas que tiene la CI del código del proyecto. ]
-    name: Python CI
-    on: [push]
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        strategy:
-          matrix:
-            python-version: ["3.8","3.9"]
-        steps:
-          - uses: actions/checkout@v2
-          - uses: actions/setup-python@v2
-            with:
-              python-version: "${{ matrix.python-version }}"
-          - name: Install poetry
-            run: pip install poetry
-          - name: Install poetry dependencies
-            working-directory: ./code
-            run: poetry install
-          - name: Run lint
-            working-directory: ./code
-            run: poetry run task lint
-          - name: Run tests
-            working-directory: ./code
-            run: poetry run task test
+name: Python CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8","3.9"]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: "${{ matrix.python-version }}"
+      - name: Install poetry
+        run: pip install poetry
+      - name: Install poetry dependencies
+        working-directory: ./code
+        run: poetry install
+      - name: Run lint
+        working-directory: ./code
+        run: poetry run task lint
+      - name: Run tests
+        working-directory: ./code
+        run: poetry run task test
 \end{lstlisting}
 
 \vskip 0.4in
@@ -551,7 +518,7 @@ coverage}}
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=\textwidth]{doc/logos/imgs/cobertura.jpg}
-    \caption{ Informe de cobertura del proyecto.}
+    \caption{ Informe de cobertura de tests del proyecto.}
     \label{fig:cobertura-tests}
 \end{figure}
 \FloatBarrier
