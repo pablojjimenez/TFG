@@ -11,9 +11,9 @@ y poder introducir cambios con facilidad para que el código sea mantenible en e
 Para ello se ha utilizado el diseño dirigido por el dominio, DDD \textit{Domain Driven
 Design}. Este tipo de arquitectura introducida por Eric Evans \cite{ddd_book}
 "Domain-Driven-Design - Tackling Complexity in the Hearth of Software, 2004" nos permite
-desacoplar el código entre capas, lo que nos permite poder testear escrupulosamente cada
+desacoplar el código entre capas, lo que nos posibilita testear escrupulosamente cada
 capa de forma independiente ya que no necesita de todo el contexto para su funcionamiento.
-La arquitectura dirigida por el dominio nos permite fácilmente aislar la lógica de negocio
+La arquitectura dirigida por el dominio nos consiente fácilmente aislar la lógica de negocio
 en un único sitio y siempre lo más cerca del dominio posible lo que nos permite cumplir
 los principios \Gls{SOLID} fácilmente y conseguir un código abierto a su extensión pero
 cerrado a su modificación.  
@@ -29,7 +29,7 @@ todo, a cambio tendremos un sistema más costoso de mantener económicamente y u
 tiempo de implementación. } sin realizar prácticamente cambios en la implementación.  
 
 Es fundamental desacoplar al máximo todos los componentes y que cada uno tengo una única
-responsabilidad cuando se realiza para ser desplegado en la nube. El principal reto que nos
+responsabilidad, más aún cuando queremos que el sistema sea fácilmente desplegado en la nube. El principal reto que nos
 encontramos en este tipo de arquitecturas es la comunicación entre los distintos
 componentes.  Sin embargo, una solución a este problema podría ser la comunicación por
 eventos, potente pero compleja a nivel técnico y costosa económicamente. Otra solución es
@@ -50,7 +50,7 @@ patrón de diseño empleado por muchos frameworks que unen al modelo las respons
 obtención y creación propias de los repositorios.
 
 \subsection{Diseño dirigido por el dominio}
-En esta sección voy a detallar las partes que componen la arquitectura diseñado, su
+En esta sección voy a detallar las partes que componen la arquitectura de diseño elegida, su
 comportamiento y responsabilidades. En DDD\footnote{Diseño guiado por el dominio, en
 inglés: Domain-driven design}, podemos diferenciar tres elementos importantes.
 
@@ -259,7 +259,6 @@ FastAPI es un proyecto de código libre mas moderno, de alto rendimiento, según
  asíncrona (muy interesante cuando hay acceso a bases de datos o recursos externos) y nos
  genera de forma automática una documentación OpenAPI.
 
-En el \hyperref[sec:ejemplos]{anexo} de este trabajo se puede apreciar ejemplos de llamadas.
 La API de este software expone dos \textit{blueprints} \footnote{Llamamos blueprint al conjunto de
 recursos que comparte el mismo prefijo de URI (Identificador de recursos uniforme)}:
 
@@ -289,6 +288,8 @@ recursos que comparte el mismo prefijo de URI (Identificador de recursos uniform
     pasar una query con la estructura especificada anteriormente. Por último, tenemos dos
     recursos para obtener la predicción y la gráfica ajustada en el tiempo que indiquemos.
 \end{itemize}
+En el \hyperref[sec:ejemplos]{anexo} de este trabajo se puede apreciar ejemplos de
+llamadas utilizando este protocolo.
 
 \paragraph{Tratamiento de los errores}\mbox{}\\
 
