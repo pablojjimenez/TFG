@@ -10,7 +10,7 @@ siempre ha sido minguneada y considerada bastante lejos de una actividad cientí
 empezó a cambiar cuando los scripts permitían realizar cálculos como ninguna otra
 herramienta hasta el momento. Fue la matemática Margaret Hamilton quien planteó por
 primera vez que los sistemas informáticos tenían que integrar tres componentes: hardware,
-software y los usuarios que los iban a usar. Fue Margaret Hamiltonen, cuando se produce lo
+software y los usuarios que los iban a usar. Fue Margaret Hamilton, cuando se produce lo
 que conocemos como crisis del software en 1968 quien acuñó en la \textit{NATO Software
 Engineering Conference} el termino \textbf{Ingeniería} al proceso de creación de software. En ese
 momento donde parecía que crear software duradero y escalable en el tiempo era misión
@@ -19,7 +19,7 @@ conocimiento es lo que hoy llamamos Ingeniería de Software: herramientas, técn
 especificación y diseño que nos permiten especificar, desarrollar, validar y evolucionar
 como en cualquier otra disciplina ingenieril.
 
-Las desarrollo ágiles presentan una forma distinta de trabajar y organizarse, adaptándose
+El desarrollo ágil presenta una forma distinta de trabajar y organizarse, adaptándose
 a las condiciones cambiantes que puedan surgir, aprovechando estos cambios para obtener
 ventajas. Con este tipo de metodologías podemos dividir el trabajo en pequeñas piezas de
 manera que podemos ir realizándolos de forma iterativa añadiendo valor concreto al
@@ -29,8 +29,8 @@ Se ha barajado utilizar una de las dos metodologías más empleadas en la indust
 eXtreme Programming. eXtreme programming ha sido descartada por la imposibilidad de
 aplicación en términos de tiempo y recursos humanos. Los roles y artefactos exigidos por
 esta metodología son indiscutiblemente para un equipo de desarrollo segmentado. Sin
-embargo y en comparación con Scrum es una metodología muy enfocada en el proceso de
-desarrollo. Obliga a desarrollar guiándose de pruebas, a programar en parejas y asegurar
+embargo y en comparación con Scrum, eXtreme programming es una metodología muy enfocada al proceso de
+desarrollo. Además, obliga a desarrollar guiándose de pruebas, a programar en parejas y asegurar
 la calidad del código en todas las etapas.
 
 Scrum en cambio se muestra más flexible. En el año 2001 que K. Schwaber y Mike Beedle
@@ -78,7 +78,7 @@ los issues asociados. Los milestones creados se pueden observar en el repositori
 GitHub y son los siguientes:
 \begin{enumerate}
     \item \textbf{Infraestructura}: Puesta en marcha de la integración continua, creación
-    de las primeras historias de usuario y tareas.
+    de las primeras historias de usuario, tareas e investigaciones iniciales.
     \item \textbf{Modelo de datos}: definición de las clases que conforman el dominio del
     problema, atendiendo al estado del arte y primeras excepciones. 
     \item \textbf{Predicción y gráficos}: podemos comenzar a trabajar con el modelo de
@@ -87,16 +87,14 @@ GitHub y son los siguientes:
     realiza esta funcionalidad.
     \item \textbf{Acceso a recursos y a los managers}: supone la interfaz de comunicación
     agnóstica con la que podemos acceder a los datos y realizar las operaciones descritas
-    en el milestone anterior de forma agnóstica utilizando el protocolo REST que pueda ser
-    utilizada por otros desarrolladores para construir aplicaciones con distintos
-    objetivos.
+    en el milestone anterior de forma agnóstica utilizando el protocolo REST.
     \item \textbf{Sistema avanzado de consultas}: implementación del lenguaje de consulta
     y manipulación de datos para API GraphQL que permita consumir la API satisfaciendo las
     necesidades de los usuarios ficticios.
 \end{enumerate}
 
-Todas las etapas han incluido los pertinentes de los capítulos de la memoria y el pretexto
-a las decisiones técnicas elegidas para implementar la solución.
+La elaboración de la memoria y el pretexto de las decisiones técnicas elegidas 
+se ha ido realizando de forma progresiva durante la realización de los milestones.
 
 
 \subsection{Historias de usuario}
@@ -153,7 +151,7 @@ anteriormente}, a nivel de transparencia y adaptación es adecuado realizar el
 desarrollo guiado por pruebas, lo que se conoce por TDD, \textit{Test Driven Development}.
 Al emplear esta metodología garantizamos la calidad de lo programado, trasladamos los
 requisitos a las pruebas de forma que se convierten en la más fiable documentación. Además
-tener una gran cobertura de código testeado nos permite poder refactorizar con asiduedad y
+tener una gran cobertura de código testeado nos permite poder refactorizar con asiduidad y
 garantizarnos no generar deuda técnica. 
 
 La integración continua o CI \textit{continuos integration} es uno de los pilares de la
@@ -173,7 +171,7 @@ revisor ortográfico y un revisor de estructura que compila el documento automá
 pública el PDF generado en las
 \href{https://github.com/pablojjimenez/TFG/releases}{\textit{releases} del repositorio.}
 
-Del mismo modo, para el \textbf{código} se han implementado otras dos CI que garantizan
+Del mismo modo, para el \textbf{código} se han implementado otras dos \textit{pipelines} que garantizan
 que cuando se introduce en la rama principal del repositorio código nuevo, éste garantiza
 unos estándares de calidad y que efectivamente el código es funcional por todas las
 versiones especificadas de Python. Por un lado, para ausentar de errores el código fuente
@@ -182,7 +180,7 @@ y para comprobar la complejidad ciclomática. \footnote{Se ha utilizado la tecno
 pueden ser del tipo: \textit{library imported but unused} y \textit{Undefined name} } 
 
 Por otro lado, se corre la \textit{suit} de tests de forma que se garantice que al añadir
-uno código no se rompe el existente. 
+una nueva parte de código no se rompe el existente. 
 
 \FloatBarrier
 \begin{figure}[h]
