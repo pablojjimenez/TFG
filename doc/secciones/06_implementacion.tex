@@ -180,7 +180,7 @@ Otras características a comentar sobre el lenguaje son:
     \item Es un lenguaje que cuenta con muchísimas bibliotecas, muchas de estas especiales
     para trabajar con datos y ficheros (como \textbf{Pandas}). Abundan también los
     \textit{frameworks} que nos ayudan a construir APIs con él y la mayoría de PaaS
-    \footnote{Platform as a Service} soportan este lenguaje.
+    \footnote{Platform as a Service. ¿Por qué un PaaS?\hyperref[sec:cap6]{Capítulo 6}} soportan este lenguaje.
     \item Es un lenguaje interpretado, débilmente tipado y con una capacidad introspectiva
     muy alta que nos permite metaprogramar.
 \end{itemize}
@@ -244,8 +244,10 @@ ser Python.
 Se ha implementado una interfaz de comunicación REST. Como bien es sabido, los servicios
 restful se apoyan del estándar HTTP y por tanto, hereda sus conocidas características.
 REST es \textit{stateless} cada vez que utilizamos un recurso necesitamos ofrecerle toda
-la información identificativa pues carece de memoria, utiliza el formato JSON para el
-intercambio de datos y expone una serie de recursos o \textit{endpoints} que son las
+la información identificativa pues carece de memoria, es de tipo \textit{pull} la
+interacción se inicia desde el cliente, utiliza el formato JSON para el
+intercambio de datos, se hace uso de los verbos HTTP para iniciar la interacción y
+ expone una serie de recursos o \textit{endpoints} que son las
 operaciones disponibles a realizar utilizando verbos HTTP.
 
 En el universo Python existen dos grandes frameworks para construir servicios restful:
@@ -329,24 +331,24 @@ cuerpo de la petición es incorrecto, obtenemos:
 
 En un servicio restful hacemos uso de unos códigos de error que nos ofrece el protocolo
 HTTP, estos códigos se clasifican como sigue a continuación:
-\begin{itemize}
+\begin{enumerate}
     \item Respuestas informativas (100–199).
     \item Respuestas satisfactorias (200–299).
     \item Redirecciones (300–399).
-    \item Errores de los clientes (400–499).
-    \item Errores de los servidores (500–599).
-\end{itemize}
+    \item Errores del cliente (400–499).
+    \item Errores del servidor (500–599).
+\end{enumerate}
 
 En este API se hacen uso de las categorías 1, 3 y 4. Posibles respuestas de este interfaz:
 \begin{itemize}
-    \item \codeword{200} Ejecución satisfactoria en los endpoints de solicitud de datos.
-    \item \codeword{201} Ejecución satisfactoria en los endpoints que generan una imagen
+    \item \codeword{200}: Ejecución satisfactoria en los endpoints de solicitud de datos.
+    \item \codeword{201}: Ejecución satisfactoria en los endpoints que generan una imagen
     (gráfico).
-    \item \codeword{400} Error del cliente introduciendo un tipo de dato erróneo,
+    \item \codeword{400}: Error del cliente introduciendo un tipo de dato erróneo,
     estructura JSON incorrecta\ldots
-    \item \codeword{422} Error del cliente al introducir una query mal formulada, con
+    \item \codeword{422}: Error del cliente al introducir una query mal formulada, con
     campos incomprensibles o proyecciones sobre campos que no existen en los modelos...
-    \item \codeword{500} Error del servidor que los usuarios van a ver por ejemplo cuando
+    \item \codeword{500}: Error del servidor que los usuarios van a ver por ejemplo cuando
     la fuente de datos esté corrupta y el software no sea capaz de obtenerlos.
 \end{itemize}
 
