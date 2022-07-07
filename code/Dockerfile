@@ -13,6 +13,7 @@ RUN apt update && \
 RUN pip install poetry
 
 COPY config/*.py ./config/
+COPY graphql_services/*.py ./graphql_services/
 COPY data/*.csv ./data/
 COPY managers/*.py  ./managers/
 COPY models/*.py ./models/

@@ -33,8 +33,9 @@ class AbstractRepository(abc.ABC):
 
         for _, value in query.items():
             for key, _ in value.items():
-                if key not in ['<', '>', '==', '!=']:
-                    raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==']")
+                if key not in ['<', '>', '==', '!=', 'like']:
+                    raise IncorrectQueryException("bad formed argument: allow = ['<', '>', '==', "
+                                                  "'!=', 'like']")
 
     @abc.abstractmethod
     def get_all(self, params: ListParams = None) -> list:
@@ -56,8 +57,8 @@ class AbstractRepository(abc.ABC):
         params = params if params is not None else {}
         if params.get('query') is not None:
             self._check_query(params['query'])
-            query = self.generate_vector_query(params['query'])
-            out = self.dataframe.query(query)
+            query = self.generate_query(params['query'])
+            out = self.dataframe.query(query, engine='python')
         if params.get('limit') is not None:
             page = 0 if params['page'] is None or params['page'] == 1 else params['page']
             ini = page * params['limit'] - params['limit'] if page != 0 else 0
@@ -70,23 +71,31 @@ class AbstractRepository(abc.ABC):
         return out
 
     @staticmethod
-    def generate_vector_query(query):
+    def generate_query(query):
         """
         Generate str query to pandas
         :param query: json  with the constraints
         :return: the query in str
         """
-        out = []
+        out = ''
         for k, v in list(query.items()):
             e = list(v.items())
             for element in e:
-                if element[1] == '' and element[0] == '==':
-                    out.append(f'{k.upper()}.isnull()')
+                if element[0] == 'like':
+                    out += f'{k.upper()}.str.contains("{element[1]}", na=False) & '
+                elif element[1] == '' and element[0] == '==':
+                    out += f'{k.upper()}.isnull() & '
                 elif element[1] == '' and element[0] == '!=':
-                    out.append(f'{k.upper()}.notnull()')
+                    out += f'{k.upper()}.notnull() & '
                 else:
-                    out.append(f'{k.upper()}{element[0]}{element[1]}')
-        return ' & '.join(out)
+                    if isinstance(element[1], list):
+                        for _e in element[1]:
+                            if type(_e) == str:
+                                _e = f"'{_e}'"
+                            out += f'{k.upper()}{element[0]}{_e} | '
+                    else:
+                        out += f'{k.upper()}{element[0]}{element[1]} & '
+        return out[:-3] if out != '' else 'tuple()'
 
     @abc.abstractmethod
     def get_one(self, id):

@@ -1,10 +1,15 @@
+import strawberry
 from fastapi import FastAPI
 from fastapi.openapi.utils import get_openapi
 
 from starlette.requests import Request
 from fastapi.exceptions import HTTPException
+
+from strawberry.asgi import GraphQL
 from starlette.responses import Response, JSONResponse, RedirectResponse
 
+from graphql_services.graphql_mutations import Mutation
+from graphql_services.graphql_resolver import Query
 from config.general_config import get_config
 from models.openapi_models.models import get_extra_models
 from services.disease_service import dataRouter
@@ -30,6 +35,12 @@ def root():
 app.include_router(dataRouter, tags=["Api resources"], prefix="/data")
 app.include_router(managersRouter, tags=["Api managers"], prefix="/managers")
 app.add_exception_handler(HTTPException, validation_exception_handler())
+
+# Add GraphQL to server app
+schema = strawberry.Schema(query=Query, mutation=Mutation)
+graphql_app = GraphQL(schema)
+
+app.add_route("/graphql", graphql_app)
 
 
 def custom_openapi():
