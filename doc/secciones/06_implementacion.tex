@@ -54,7 +54,7 @@ En esta sección voy a detallar las partes que componen la arquitectura de dise�
 comportamiento y responsabilidades. En DDD\footnote{Diseño guiado por el dominio, en
 inglés: Domain-driven design}, podemos diferenciar tres elementos importantes.
 
-\subsubsection{Entidad}
+\subsubsection{Entidades}
 Las entidades son aquellas clases que representan una entidad del dominio. Estas clases
 deben tener una estructura de datos que represente la información de la entidad y unas
 responsabilidades concretas. Se caracterizan porque tienen que ser consideradas iguales a
@@ -449,9 +449,10 @@ la búsqueda de coincidencias por campos.
 
 En el \hyperref[sec:ejemplos]{anexo del trabajo} se pueden observar queries y llamadas de ejemplo.
 
-\section{Conjunto de tests}
-Como se ha explicado en la sección sobre \hyperref[sec:ci]{integración continua}, la
-batería de tests junto con otras comprobaciones se realizan en el momento que se ejecutan las \textit{pipelines}.
+\section{Batería de tests}
+Como se ha explicado en la sección sobre \hyperref[sec:ci]{integración continua}, el
+conjunto de tests a la par que otras comprobaciones se realizan en el momento de ejecución
+de las \textit{pipelines}.
 
 Se definen en un fichero con formato YAML todas las etapas y se comprueba que funcione para todas
 las versiones del lenguaje que soporta.
