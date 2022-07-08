@@ -4,8 +4,6 @@ from typing import Generic
 import typing
 from pydantic import BaseModel, Field
 
-from models.small_models import Sex
-
 
 class Cie(BaseModel):
     id: int = Field(...)

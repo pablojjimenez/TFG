@@ -1,5 +1,4 @@
 from models.exceptions import IncorrectColumnNamesException
-from models.small_models import Sex
 from repositories.abstract_repository import AbstractRepository, ListParams
 from models.decease_model import Decease
 
