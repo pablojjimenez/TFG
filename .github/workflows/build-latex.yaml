@@ -16,13 +16,16 @@ jobs:
         with:
           root_file: doc/proyecto.tex
 
+      - name: Set date
+        run: echo "datetime=$(date +"%Y%m%d-%H%M%S")" >> $GITHUB_ENV
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
+          tag_name: ${{ github.ref }}${{ env.datetime }}
           release_name: Release ${{ github.ref }}
           draft: false
           prerelease: false
