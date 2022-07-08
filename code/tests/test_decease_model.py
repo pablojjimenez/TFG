@@ -10,7 +10,7 @@ class TestDecease:
     JSON_DATA = {
         'ano': 2020,
         'causa': Disease(2, 'reason', Cie(1, '')),
-        'sexo': Sex.FEMALE,
+        'sx': int(Sex.FEMALE.value),
         'ccaa': Ccaa(1, ''),
         'gedad': Gedad(1, ''),
         'defu': 0,

@@ -33,6 +33,7 @@ class Mutation:
     @staticmethod
     def commpute_mutations_params(query, sort: str,
                                   page: int, limit: int):
+        limit = limit if limit <= 1000 else 1000
         if query is not None:
             query = remove_nulls_from_json(query.dict_repr())
             query = change_key_operators(query)

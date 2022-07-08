@@ -15,7 +15,7 @@ class DeceaseRepository(AbstractRepository):
         params = {
             'ano': int(tuple[0]),
             'causa': self.disease_repo.get_one(tuple[1]),
-            'sexo': Sex.MALE if tuple[2] == 1 else Sex.FEMALE,
+            'sx': int(tuple[2]),
             'ccaa': self.ccaas_repo.get_one(tuple[3]),
             'gedad': self.gedades_repo.get_one(tuple[4]),
             'defu': int(tuple[5]),

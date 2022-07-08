@@ -32,7 +32,7 @@ class Decease(object):
     ALLOW_ATTRS = {
         'ano': int,
         'causa': Disease,
-        'sexo': Sex,
+        'sx': int,
         'ccaa': Ccaa,
         'gedad': Gedad,
         'defu': int,
@@ -50,7 +50,7 @@ class Decease(object):
     def __init__(self, data: Dict):
         for key in data:
             if key not in self._get_allowed_attrs():
-                raise NoAttributeException('Attr is not allowed')
+                raise NoAttributeException(f'{key} Attr is not allowed')
             if not isinstance(data[key], Decease.ALLOW_ATTRS.get(key)):
                 raise NoCorrectTypeException(
                     f'Type: {data[key]} is not {Decease.ALLOW_ATTRS.get(key)} for {key}'

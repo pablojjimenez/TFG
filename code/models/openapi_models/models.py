@@ -36,7 +36,7 @@ class Disease(BaseModel):
 class Decease(BaseModel):
     ano: int = Field(description="año de consulta (1980-2020)")
     causa: Disease = Field(description="Causa")
-    sexo: Sex = Field(description="Sexo")
+    sx: int = Field(description="Sexo")
     ccaa: Ccaa = Field(description="Comunidad Autónoma")
     gedad: Gedad = Field(description="Grupos de edad")
     defu: int = Field(description="Número de defunciones")
@@ -117,7 +117,7 @@ def get_extra_models():
             }
         },
         {
-            "Raziel": {
+            "Decease": {
                 "type": "object",
                 "properties": {
                     "ano": {
@@ -126,8 +126,8 @@ def get_extra_models():
                     "causa": {
                         "type": "Disease object"
                     },
-                    "sexo": {
-                        "type": "int",
+                    "sx": {
+                        "type": "int in [1, 2]",
                     },
                     "ccaa": {
                         "type": "Ccaa object",

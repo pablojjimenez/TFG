@@ -128,6 +128,7 @@ def get_decease_diseases(query: Dict[str, Dict[str, Any]] = None, sort: str = No
     - `page` numero de la pagina solicitada
     - `limit` limnite de elementos
     """
+    limit = limit if limit <= 100 else 100
     try:
         p = transform_params(query, sort, page, limit)
         objs, tam = DeceaseRepoCreator().get_all_operation(p)
