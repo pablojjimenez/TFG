@@ -1,8 +1,8 @@
 # TFG: *Computación y optimización en la nube: implementación de aplicaciones de datos abiertos en la nube*
 
-![Python CI](https://github.com/pablojjimenez/TFG/blob/main/.github/workflows/python_ci.yaml/badge.svg)
-![check spelling](https://github.com/pablojjimenez/TFG/blob/main/.github/workflows/check-spelling.yaml/badge.svg)
-![build latex](https://github.com/pablojjimenez/TFG/blob/main/.github/workflows/build-latex.yaml/badge.svg)
+![Python CI](https://github.com/pablojjimenez/TFG/actions/workflows/python_ci.yaml/badge.svg)
+![check spelling](https://github.com/pablojjimenez/TFG/actions/workflows/check-spelling.yaml/badge.svg)
+![build latex](https://github.com/pablojjimenez/TFG/actions/workflows/build-latex.yaml/badge.svg)
 
 | Autor | Tutor |
 |:---:|:---:|
