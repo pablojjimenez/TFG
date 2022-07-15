@@ -1,5 +1,8 @@
-# Trabajo de Fin de Grado: *Computación y optimización en la nube: implementación de aplicaciones de datos abiertos en la nube*
+# TFG: *Computación y optimización en la nube: implementación de aplicaciones de datos abiertos en la nube*
 
+![Python CI](https://github.com/pablojjimenez/TFG/actions/workflows/python_ci.yaml/badge.svg)
+![check spelling](https://github.com/pablojjimenez/TFG/actions/workflows/check-spelling.yaml/badge.svg)
+![build latex](https://github.com/pablojjimenez/TFG/actions/workflows/build-latex.yaml/badge.svg)
 
 | Autor | Tutor |
 |:---:|:---:|
@@ -9,7 +12,7 @@
 La motivación es facilitar los estudios sobre la evolución de las defunciones según causa de muerte aprovechando los datos públicos que se publican anualmente.
 
 ## Objetivos
-El objetivo es que el sistema sea capaz de darle al usuario la capacidad de conocer la evolución de las causas de muerte. De forma que se pueda consultar de forma sencilla los datos almacenados. Las causas de muerte están clasificadas según la Clasificación Internacional de Enfermedades y atendiendo a distintas variables. El sistema debe de atender a los usuarios diana de la app (candidatos a utilizar este software en un futuro), para identificarlos se ha utilizado la herramienta de personas ficticias.
+El objetivo es que el sistema sea capaz de darle a los usuarios la capacidad de conocer la evolución de las causas de muerte. De forma que se pueda consultar de forma sencilla los datos almacenados. Las causas de muerte están clasificadas según la Clasificación Internacional de Enfermedades y atendiendo a distintas variables. El sistema debe de atender a los usuarios diana de la app (candidatos a utilizar este software en un futuro), para identificarlos se ha utilizado la herramienta de personas ficticias.
 
 ## Personas
 De esta forma, tanto por la parte del desarrollo como por la del interesado en el producto final, pueden no solo hacerse una mejor idea de los objetivos del mismo, sino también justificar su creación.
